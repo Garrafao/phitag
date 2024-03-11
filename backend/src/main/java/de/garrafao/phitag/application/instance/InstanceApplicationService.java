@@ -435,7 +435,7 @@ public class InstanceApplicationService {
      *                            The name of the project
      * @param phase
      *                            The name of the phase
-     * @param additional
+
      *                            Additional Data (e.g. WSSIM -> sense)
      * @param file
      *                            The instancedata to add
@@ -498,5 +498,20 @@ public class InstanceApplicationService {
                 .findByPhaseAndLemma(this.commonService.getPhase(owner, project, phase), lemma)
                 .stream().map(WSSIMTagDto::from).collect(Collectors.toList());
     }
+
+    // Getter
+
+    public int  countALlocatedInstance(final String authenticationToken, final String owner,
+                                              final String project, final String phase) {
+        final User requester = this.commonService.getUserByAuthenticationToken(authenticationToken);
+        final Phase phaseEntity = this.commonService.getPhase(owner, project, phase);
+        final  Annotator annotator = this.commonService.getAnnotator(owner, project, requester.getUsername());
+
+        this.validationService.projectAccess(requester, phaseEntity.getProject());
+
+        return this.commonService.countAllocatedInstance(annotator, phaseEntity);
+
+    }
+
 
 }

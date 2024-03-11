@@ -1,9 +1,7 @@
 package de.garrafao.phitag;
 
-import java.util.Arrays;
-
-import javax.servlet.http.HttpServletResponse;
-
+import de.garrafao.phitag.infrastructure.authentication.filter.PhitagAuthenticationFilter;
+import de.garrafao.phitag.infrastructure.authentication.service.AuthenticationTokenAuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,8 +22,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import de.garrafao.phitag.infrastructure.authentication.filter.PhitagAuthenticationFilter;
-import de.garrafao.phitag.infrastructure.authentication.service.AuthenticationTokenAuthenticationService;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
@@ -63,6 +61,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/v1/authentication").permitAll().antMatchers("/api/v1/authentication/**").permitAll()
                 .antMatchers("/api/v1/language").permitAll().antMatchers("/api/v1/language/**").permitAll()
                 .antMatchers("/api/v1/usecase").permitAll().antMatchers("/api/v1/usecase/**").permitAll()
+                .antMatchers("/api/v1/computationalannotator/**").permitAll()
                 // Private endpoints
                 .anyRequest().authenticated();
 

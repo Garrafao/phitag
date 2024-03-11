@@ -3,14 +3,11 @@ import { useState } from "react";
 
 // toast
 import { toast } from "react-toastify";
-import { MdOutlineTune } from "react-icons/md";
-
 // icons
-import { FiFileText, FiKey, FiMonitor, FiServer } from "react-icons/fi";
+import { FiBook, FiMonitor } from "react-icons/fi";
 import { SiOpenai } from "react-icons/si";
 import { RiShieldKeyholeFill } from "react-icons/ri";
 import { TbPrompt } from "react-icons/tb";
-import { VscCalendar, VscSymbolKeyword } from "react-icons/vsc";
 
 
 // hooks
@@ -26,47 +23,53 @@ import StartComputationalAnnotationCommand from "../../../lib/model/phase/comman
 
 // components
 import DropdownSelect from "../../generic/dropdown/dropdownselect";
-import { startComputationalAnnotation } from "../../../lib/service/phase/PhaseResource";
+import { startComputationalAnnotation, useFetchPhases } from "../../../lib/service/phase/PhaseResource";
 import OpenAIModel from "../../../lib/model/computationalannotator/openaimodel/model/OpenAIModel";
-import { chatGptLexsubAnnotation, chatGptUsePairAnnotation, chatLexSubTutorialAnnotation, chatUsePairTutorialAnnotation, chatWSSIMAnnotation, chatWSSIMTutorialAnnotation, useFetchAllOpenAIMode } from "../../../lib/service/computationalAnnotator/ComputationalAnnotatorResource";
-import UsePairComputationalAnnotatorCommand from "../../../lib/model/computationalannotator/ComputationalAnnotatorCommand";
+import { chatGptLexsubAnnotation, chatGptUsePairAnnotation, chatLexSubTutorialAnnotation, chatUsePairTutorialAnnotation, chatWSSIMAnnotation, chatWSSIMTutorialAnnotation, useFetchAllOpenAIModel, useFetchPagedUsePairJudgementsTutorials } from "../../../lib/service/computationalAnnotator/ComputationalAnnotatorResource";
 import BasicCheckbox from "../../generic/checkbox/basiccheckbox";
-import { Router, useRouter } from "next/router";
+import router, { Router, useRouter } from "next/router";
 import ANNOTATIONTYPES from "../../../lib/AnnotationTypes";
-import AnnotationType from "../../../lib/model/annotationtype/model/AnnotationType";
 import ComputationalAnnotatorCommand from "../../../lib/model/computationalannotator/ComputationalAnnotatorCommand";
-import { useFetchPagedUsePairInstance } from "../../../lib/service/instance/InstanceResource";
 import IconButtonOnClick from "../../generic/button/iconbuttononclick";
+import { useFetchGuideline, useFetchGuidelines } from "../../../lib/service/guideline/GuidelineResource";
+import { useFetchProject } from "../../../lib/service/project/ProjectResource";
+import { useFetchPagedUsePairJudgements } from "../../../lib/service/judgement/JudgementResource";
+import { MdOutlineAutoDelete } from "react-icons/md";
+
 
 
 const ComputationalAnnotationModal: React.FC<{
     isOpen: boolean, closeModalCallback: Function, phase: Phase,
-    onClickFineTuning: Function,
     mutateCallback: Function, setTutorialHistory: Function,
     openProcessingModal: Function, setLoadingStatus: Function
-}> = ({ isOpen, closeModalCallback, phase, onClickFineTuning,
+}> = ({ isOpen, closeModalCallback, phase,
     mutateCallback, setTutorialHistory, openProcessingModal, setLoadingStatus }) => {
 
         // hooks
         const storage = useStorage();
 
         const Router = useRouter();
-      
+
         const eligibleAnnotators = useFetchComputationAnnotatorsOfPhase(phase?.getId().getOwner(), phase?.getId().getProject(), phase?.getId().getPhase(), isOpen && !!phase);
 
-        const openaimodels = useFetchAllOpenAIMode();
+        const usepairjudgements = useFetchPagedUsePairJudgements(phase?.getId().getOwner(), phase?.getId().getProject(), phase?.getId().getPhase(), 0, !!phase);
+
+        const guidelines = useFetchGuidelines(phase?.getId()?.getOwner(), phase?.getId()?.getProject(), !!phase);
+
+        const tutorials = useFetchPhases(phase?.getId().getOwner(), phase?.getId().getProject(), phase?.getAnnotationType().getName(), true, isOpen && !!phase);
+
+        const openaimodels = useFetchAllOpenAIModel();
+
         openaimodels.openaimodels.sort((a, b) => a.getName().localeCompare(b.getName()));
-
-
         // modal
         const [modalState, setModalState] = useState({
             selectedAnnotator: [] as Annotator[]
         });
 
-        const [selectedFile, setSelectedFile] = useState(null as File | null);
-
         const [showApiKey, setShowApiKey] = useState(false);
         const [tutorial, setTutorial] = useState(false);
+        const [guideline, setGuideline] = useState(false);
+        const [guidelineAndTutorial, setGuidelineAndTutorial] = useState(false);
 
         const [chatGptModalState, setChatGptModalState] = useState({
             apiKey: "",
@@ -75,31 +78,49 @@ const ComputationalAnnotationModal: React.FC<{
             prompt: "",
             lemma: ""
         });
-   
-        const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-            const file = event.target.files && event.target.files[0];
-            if (file) {
-                // Check file extension
-                if (!file.name.toLowerCase().endsWith('.md')) {
-                    toast.warning('Please select a Markdown (.md) file.');
-                    return;
-                }
-                setSelectedFile(file);
 
-                // Read file contents
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    const fileContent = e.target?.result as string;
-                    // Set state with the file content
-                    setChatGptModalState({
-                        ...chatGptModalState,
-                        prompt: fileContent,
-                    });
-                };
-                reader.readAsText(file);
+
+        const useGuidelineAsPrpmopt = (prompt: string, name: string) => {
+
+            if (guideline || guidelineAndTutorial) {
+
+                setChatGptModalState({
+                    ...chatGptModalState,
+                    prompt: prompt
+                })
+                toast.info(`Guideline: ${name} set as a prompt sucessfully!`)
             }
-        };
+        }
 
+        const [tutPrompt, setTutPrompt] = useState("");
+
+        const useTutorialAsPrompts = async (phase: Phase) => {
+
+            if (guidelineAndTutorial) {
+                try {
+                    const usepairjudgements = await useFetchPagedUsePairJudgementsTutorials(phase?.getId().getOwner(), phase?.getId().getProject(), phase?.getId().getPhase(), 0, !!phase);
+
+                    const prompt = chatGptModalState.prompt;
+
+                    if (usepairjudgements && usepairjudgements.length > 0) {
+                        const stringData = usepairjudgements.map(item =>
+                            `Sentence 1: ${item.firstUsage}\nSentence 2: ${item.secondUsage}\nTarget word: ${item.lemma}\nJudgement: ${item.judgement}`
+                        ).join('\n\n');
+
+                        setTutPrompt(stringData);
+
+                       setChatGptModalState({
+                            ...chatGptModalState,
+                            prompt: prompt + "\n\n" + "Here are the few examples:" + "\n\n" + tutPrompt
+                        })
+                        toast.info("Tutorial set as prompt sucessfully")
+                    }
+                } catch (error) {
+                    console.error("Error fetching data:", error);
+                }
+            }
+
+        }
         const resetChatGptModalState = () => {
             setChatGptModalState({
                 ...chatGptModalState,
@@ -170,13 +191,13 @@ const ComputationalAnnotationModal: React.FC<{
                 closeModalCallback();
                 setLoadingStatus(true);
                 chatGptLexsubAnnotation(command, storage.get)
-                .then(() => {
-                    setLoadingStatus(false);
-                    resetChatGptModalState();
-                })
-                .then(() => {
-                    Router.push(`/phi/${phase.getId().getOwner()}/${phase.getId().getProject()}/${phase.getId().getPhase()}/judgement`);
-                })
+                    .then(() => {
+                        setLoadingStatus(false);
+                        resetChatGptModalState();
+                    })
+                    .then(() => {
+                        Router.push(`/phi/${phase.getId().getOwner()}/${phase.getId().getProject()}/${phase.getId().getPhase()}/judgement`);
+                    })
                     .catch((error) => {
                         if (error?.response?.status === 500) {
                             toast.error(error.response.data.message + "!");
@@ -192,13 +213,13 @@ const ComputationalAnnotationModal: React.FC<{
                 closeModalCallback();
                 setLoadingStatus(true);
                 chatWSSIMAnnotation(command, storage.get)
-                .then(() => {
-                    setLoadingStatus(false);
-                    resetChatGptModalState();
-                })
-                .then(() => {
-                    Router.push(`/phi/${phase.getId().getOwner()}/${phase.getId().getProject()}/${phase.getId().getPhase()}/judgement`);
-                })
+                    .then(() => {
+                        setLoadingStatus(false);
+                        resetChatGptModalState();
+                    })
+                    .then(() => {
+                        Router.push(`/phi/${phase.getId().getOwner()}/${phase.getId().getProject()}/${phase.getId().getPhase()}/judgement`);
+                    })
                     .catch((error) => {
                         if (error?.response?.status === 500) {
                             toast.error(error.response.data.message + "!");
@@ -239,7 +260,7 @@ const ComputationalAnnotationModal: React.FC<{
 
 
         const onConfirmTutorial = () => {
-            
+
             const command = verifyComputationalAnnotation(chatGptModalState, phase)
             if (command == null) {
                 return;
@@ -318,13 +339,6 @@ const ComputationalAnnotationModal: React.FC<{
                         }
                     });
             }
-
-        }
-
-        const openFineTune = () => {
-            const isOpen = true;
-            const key = chatGptModalState.apiKey;
-            onClickFineTuning(isOpen, key);
 
         }
 
@@ -412,7 +426,7 @@ const ComputationalAnnotationModal: React.FC<{
 
                                                     <div className="flex justify-between items-center">
                                                         <div className="font-bold-mono text-m">Choose Model</div>
-                                                       {/* y */}
+                                                        {/* y */}
                                                     </div>
                                                     <div className="flex items-center border-b-2 py-2 px-3 mt-2">
                                                         <DropdownSelect
@@ -430,7 +444,7 @@ const ComputationalAnnotationModal: React.FC<{
                                                         {chatGptModalState.model &&
                                                             chatGptModalState.model.getVisiblename() === "others" && (
                                                                 <div>
-                                                                   
+
                                                                     <input
                                                                         id="model"
                                                                         name="model"
@@ -452,16 +466,130 @@ const ComputationalAnnotationModal: React.FC<{
                                                     <div className="py-2 px-3 text-sm">
                                                         <BasicCheckbox
                                                             selected={tutorial}
-                                                            description={"Test Model With Tutorial"}
-                                                            onClick={() => setTutorial(!tutorial)}
+                                                            description={"Test Model With Tutorial Phase"}
+                                                            onClick={() => {
+                                                                setTutorial(!tutorial);
+                                                            }}
+
                                                         />
                                                     </div>
 
-                                                    <div className="font-bold-mono text-m">Upload {tutorial && (<span>Tutorial</span>)} Prompt</div>
+                                                    <div className="flex items-center justify-between">
+                                                        <div className="font-bold-mono text-m">
+                                                            Upload {tutorial && (<span>Tutorial</span>)} Prompt
+                                                        </div>
+                                                        <IconButtonOnClick
+                                                            icon={<MdOutlineAutoDelete className="basic-svg" />}
+                                                            tooltip={"clear prompt"}
+                                                            onClick={() => {
+                                                                setChatGptModalState({
+                                                                    ...chatGptModalState,
+                                                                    prompt: ""
+                                                                })
+                                                            }}
+                                                        />
+                                                    </div>
+
                                                     <div className="py-2 px-3 flex items-center border-b-2 mt-2">
                                                         <TbPrompt className="basic-svg" />
-                                                        <input type="file" className="hide-upload-button pl-3 flex flex-auto outline-none border-none text-sm" onChange={handleFileChange} />
+                                                        <textarea
+                                                            className="w-full h-full  pl-3 flex flex-auto outline-none border-none"
+                                                            name="prompt"
+                                                            placeholder="prompt"
+                                                            value={chatGptModalState.prompt}
+                                                            onChange={(e: any) => setChatGptModalState({
+                                                                ...chatGptModalState,
+                                                                prompt: e.target.value
+                                                            })} />
                                                     </div>
+
+
+                                                    <div className="py-2 px-3 text-sm">
+                                                        <BasicCheckbox
+                                                            selected={guideline}
+                                                            description={"Use guideline as a prompt"}
+                                                            onClick={() => {
+                                                                setGuideline(!guideline);
+                                                                setGuidelineAndTutorial(false);
+
+                                                            }}
+
+                                                        />
+                                                    </div>
+                                                    <div className="py-2 px-3 text-sm">
+                                                        <BasicCheckbox
+                                                            selected={guidelineAndTutorial}
+                                                            description={"Use guideline and tutorial as a prompt"}
+                                                            onClick={() => {
+                                                                setGuideline(false);
+                                                                setGuidelineAndTutorial(!guidelineAndTutorial);
+
+                                                            }}
+                                                        />
+                                                    </div>
+                                                    {(guideline || guidelineAndTutorial) && (
+                                                        <div className="flex flex-col mt-2">
+                                                            {!guidelines.guidelines || guidelines.guidelines.length === 0 ? (
+                                                                <div className="flex flex-row items-center">
+                                                                    <div className="font-dm-mono-medium text-base mr-auto">
+                                                                        No Guidelines
+                                                                    </div>
+                                                                </div>
+                                                            ) : (
+                                                                guidelines.guidelines.map((item, index) => (
+                                                                    <div className="flex flex-row justify-between items-center space-x-12" key={index}>
+                                                                        <div className="font-dm-mono-mdeium text-base mr-auto">
+                                                                            {/* {item.getTutorialName()}: */}
+                                                                            {item.getId().getName()}
+                                                                        </div>
+                                                                        <div className="flex space-x-2 ml-2">
+                                                                            <IconButtonOnClick
+                                                                                icon={<FiBook className="basic-svg" />}
+                                                                                tooltip={`Use guideline:${item.getId().getName()}  as a prompt`}
+                                                                                onClick={() => { useGuidelineAsPrpmopt(item.getContent(), item.getId().getName()) }}
+                                                                            />
+                                                                        </div>
+                                                                    </div>
+
+                                                                ))
+                                                            )}
+                                                        </div>
+                                                    )}
+
+                                                    {(guidelineAndTutorial) && (
+                                                        <div className="flex flex-col mt-2">
+                                                            <br />
+                                                            {!tutorials.phases || tutorials.phases.length === 0 ? (
+                                                                <div className="flex flex-row items-center">
+                                                                    <div className="font-dm-mono-medium text-base mr-auto">
+                                                                        No Tutorials
+                                                                    </div>
+                                                                </div>
+                                                            ) : (
+
+                                                                tutorials.phases.map((item, index) => (
+
+                                                                    <div className="flex flex-row justify-between items-center space-x-12" key={index}>
+
+                                                                        <div className="font-dm-mono-mdeium text-base mr-auto">
+                                                                            {/* {item.getTutorialName()}: */}
+                                                                            {item.getName()}
+                                                                        </div>
+                                                                        <div className="flex space-x-2 ml-2">
+                                                                            <IconButtonOnClick
+                                                                                icon={<FiBook className="basic-svg" />}
+                                                                                tooltip={`Use tutorial: ${item.getName()} as a prompt`}
+                                                                                onClick={() => { useTutorialAsPrompts(item) }}
+                                                                            />
+                                                                        </div>
+                                                                    </div>
+
+                                                                ))
+                                                            )}
+                                                        </div>
+                                                    )}
+
+
                                                 </div>
                                             )
                                         }

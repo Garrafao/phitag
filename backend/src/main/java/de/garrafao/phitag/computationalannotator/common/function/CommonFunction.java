@@ -2,7 +2,6 @@ package de.garrafao.phitag.computationalannotator.common.function;
 
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -26,7 +25,4 @@ public class CommonFunction {
         }
     }
 
-    public int sumList(List<Integer> list) {
-        return list.stream().mapToInt(Integer::intValue).sum();
-    }
 }

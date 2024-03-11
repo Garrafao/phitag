@@ -8,14 +8,16 @@ import com.theokanning.openai.service.OpenAiService;
 import de.garrafao.phitag.computationalannotator.common.error.WrongApiKeyException;
 import de.garrafao.phitag.computationalannotator.common.error.WrongModelException;
 import de.garrafao.phitag.computationalannotator.common.function.CommonFunction;
-import de.garrafao.phitag.computationalannotator.common.model.application.data.OpenAPIResponseDto;
 import de.garrafao.phitag.computationalannotator.usepair.data.UsePairPrompt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class UsePairOpenAIService {
+
+
     private final UsePairPrompt usePairPrompt;
 
     private final CommonFunction commonFunction;
@@ -26,8 +28,8 @@ public class UsePairOpenAIService {
         this.commonFunction = commonFunction;
     }
 
-    public OpenAPIResponseDto chat(final String apiKey, final String model, final String prompt, final String firstUsage,
-                                   final String secondUsage, final String lemma) {
+    public String chat(final String apiKey, final String model, final String prompt, final String firstUsage,
+                    final String secondUsage, final String lemma) {
         try {
             List<ChatMessage> messages = this.usePairPrompt.getChatMessages(prompt, firstUsage, secondUsage, lemma);
 
@@ -35,33 +37,37 @@ public class UsePairOpenAIService {
             ChatCompletionRequest completionRequest = ChatCompletionRequest.builder()
                     .messages(messages)
                     .model(model)
-                    .temperature(0.1)
-                    .topP(0.2)
-                    .n(5)
+                    .temperature(0.9)
+                    .topP(0.9)
+                    .n(1)
                     .build();
-
             List<ChatCompletionChoice> choices = service.createChatCompletion(completionRequest).getChoices();
             StringBuilder returnString = new StringBuilder();
-            for (ChatCompletionChoice choice : choices) {
-                returnString.append("response: ").append(choice.getMessage().getContent()).append(System.lineSeparator());
-            }
+
+                for (ChatCompletionChoice choice : choices) {
+                    ChatMessage message = choice.getMessage();
+                    if (message != null) {
+                        System.out.println(message.getContent());
+                        returnString.append(message.getContent()).append(System.lineSeparator());
+                    }
+                }
+
+            System.out.println("response "+ returnString);
 
             int result = this.commonFunction.extractInteger(returnString.toString());
 
-            return new OpenAPIResponseDto(String.valueOf(result));
+            System.out.println("integer " + result);
+            return String.valueOf(result);
 
 
-        } catch (OpenAiHttpException e) {
+        }catch (OpenAiHttpException e) {
             if (e.getMessage().contains("The model")) {
                 throw new WrongModelException(model);
             }
             if (e.getMessage().contains("Incorrect API key provided")) {
                 throw new WrongApiKeyException();
             }
+            throw e;
         }
-
-        return null;
     }
-
-
 }

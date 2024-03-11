@@ -242,25 +242,11 @@ public class PhaseApplicationService {
     public void deletePhase(final String authenticationToken, final String owner,
                             final String project, final String phase) {
 
-
         final User user = this.commonService.getUserByAuthenticationToken(authenticationToken);
         final Project projectEntity = this.commonService.getProject(owner, project);
         this.validationService.projectAdminAccess(user, projectEntity);
 
         final Phase phaseEntity = this.commonService.getPhase(owner, project, phase);
-
-
-        //possibilities of bugs, check later
-      /**  final  List<IJudgement> judgements = this.commonService.getJudgementsOfPhase(phaseEntity);
-        final  List<IInstance> instances = this.commonService.getInstancesOfPhase(phaseEntity, false);
-
-        if (!phaseEntity.getDisplayname().isEmpty()) {
-            if (!judgements.isEmpty()) {
-                this.commonService.deleteAllJudgementOfPhase(phaseEntity);
-            }
-            if (!instances.isEmpty()) {
-                this.commonService.deleteAllInstancesOfPhase(phaseEntity);
-            }*/
         this.phaseRepository.delete(phaseEntity);
 
 

@@ -9,7 +9,6 @@ import de.garrafao.phitag.application.judgement.usepairjudgement.data.AddUsePair
 import de.garrafao.phitag.application.phase.data.TutorialHistoryDto;
 import de.garrafao.phitag.computationalannotator.common.command.ComputationalAnnotatorCommand;
 import de.garrafao.phitag.computationalannotator.common.function.CommonFunction;
-import de.garrafao.phitag.computationalannotator.common.model.application.data.OpenAPIResponseDto;
 import de.garrafao.phitag.computationalannotator.usepair.data.UsePairComputationalAnnotatotInstanceDto;
 import de.garrafao.phitag.domain.annotator.Annotator;
 import de.garrafao.phitag.domain.phase.Phase;
@@ -20,9 +19,13 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @Service
 public class UsePairComputationalAnnotatorService {
+
+    private final ExecutorService executorService = Executors.newFixedThreadPool(4); // Adjust the number of threads as needed
 
     private final UsePairInstanceApplicationService usePairInstanceApplicationService;
 
@@ -73,7 +76,7 @@ public class UsePairComputationalAnnotatorService {
                 String secondUsage = usePairDto.getSecondusage().getContext();
                 String lemma = usePairDto.getSecondusage().getLemma();
 
-                final OpenAPIResponseDto response = this.usePairOpenAIService.chat(
+                final String response = this.usePairOpenAIService.chat(
                         command.getApiKey(),
                         command.getModel(),
                         command.getPrompt(),
@@ -87,7 +90,7 @@ public class UsePairComputationalAnnotatorService {
                 AddUsePairJudgementCommand usePairJudgementCommand = new AddUsePairJudgementCommand(
                         command.getOwner(), command.getProject(),
                         command.getPhase(), usePairDto.getId().getInstanceId(),
-                        response.getJudgement(),
+                        response,
                         ""
                 );
                 this.usePairJudgementApplicationService.annotate(phaseEntity, annotator, usePairJudgementCommand);
@@ -111,22 +114,19 @@ public class UsePairComputationalAnnotatorService {
         return tutorialHistoryDtos;
     }
 
-    public TutorialHistoryDto annotate(final Phase phase,
-                                             final ComputationalAnnotatorCommand command) {
-        List<IInstanceDto> instanceDtos = new ArrayList<>();
+    public TutorialHistoryDto annotate(final Phase phase, final ComputationalAnnotatorCommand command) {
+        List<IInstanceDto> annotatableInstances = new ArrayList<>();
 
         if (phase.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_USEPAIR.name())) {
             this.usePairInstanceApplicationService.findByPhase(phase)
-                    .forEach(usePairInstance -> instanceDtos
+                    .forEach(usePairInstance -> annotatableInstances
                             .add(UsePairComputationalAnnotatotInstanceDto.from(usePairInstance)));
         }
 
-        Annotator annotator = this.commonService.getAnnotator(command.getOwner(),
-                command.getProject(),
-                "ChatGpt");
+        Annotator annotator = this.commonService.getAnnotator(command.getOwner(), command.getProject(), "ChatGpt");
         List<AddUsePairJudgementCommand> usePairJudgementCommands = new ArrayList<>();
 
-        for (IInstanceDto instanceDto : instanceDtos) {
+        for (IInstanceDto instanceDto : annotatableInstances) {
             if (instanceDto instanceof UsePairComputationalAnnotatotInstanceDto) {
                 UsePairComputationalAnnotatotInstanceDto usePairDto = (UsePairComputationalAnnotatotInstanceDto) instanceDto;
 
@@ -134,31 +134,36 @@ public class UsePairComputationalAnnotatorService {
                 String secondUsage = usePairDto.getSecondusage().getContext();
                 String lemma = usePairDto.getSecondusage().getLemma();
 
+                try {
+                    final String response = this.usePairOpenAIService.chat(
+                            command.getApiKey(),
+                            command.getModel(),
+                            command.getPrompt(),
+                            firstUsage,
+                            secondUsage,
+                            lemma
+                    );
 
-                final OpenAPIResponseDto response = this.usePairOpenAIService.chat(
-                        command.getApiKey(),
-                        command.getModel(),
-                        command.getPrompt(),
-                        firstUsage,
-                        secondUsage,
-                        lemma
-                );
-                AddUsePairJudgementCommand usePairJudgementCommand = new AddUsePairJudgementCommand(
-                        command.getOwner(),
-                        command.getProject(),
-                        command.getPhase(),
-                        usePairDto.getId().getInstanceId(),
-                        response.getJudgement(),
-                        ""
-                );
+                    AddUsePairJudgementCommand usePairJudgementCommand = new AddUsePairJudgementCommand(
+                            command.getOwner(),
+                            command.getProject(),
+                            command.getPhase(),
+                            usePairDto.getId().getInstanceId(),
+                            response,
+                            ""
+                    );
+                    usePairJudgementCommands.add(usePairJudgementCommand);
 
-                usePairJudgementCommands.add(usePairJudgementCommand);
+                } catch (Exception e) {
+                    throw new RuntimeException("Interrupted while waiting to make API call", e);
+                }
             }
         }
+
         this.usePairJudgementApplicationService.annotateBulk(phase, annotator, usePairJudgementCommands);
 
         final List<TutorialHistoryDto> tutorialHistoryDtos = this.getTutorialMeasureHistory(phase);
-       return this.getLatestTutorialHistory(tutorialHistoryDtos);
+        return this.getLatestTutorialHistory(tutorialHistoryDtos);
     }
 
     private List<TutorialHistoryDto> getTutorialMeasureHistory(final Phase phase) {

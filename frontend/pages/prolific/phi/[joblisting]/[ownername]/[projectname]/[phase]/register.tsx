@@ -13,15 +13,13 @@ import Router, { useRouter } from 'next/router';
 import Link from "next/link";
 // Custom Controllers
 import { useFetchAllLanguages } from "../../../../../../../lib/service/language/LanguageResource";
-import { createUser } from "../../../../../../../lib/service/user/UserResource";
+import { createProlificUser, createUser } from "../../../../../../../lib/service/user/UserResource";
 
 //Resources
-import Joblisting from "../../../../../../../lib/model/joblisting/model/Joblisting";
 import { joinJoblisting } from "../../../../../../../lib/service/joblisting/JoblistingResource";
 
 // Custom Models
 import Language from "../../../../../../../lib/model/language/model/Language";
-import CreateUserCommand from "../../../../../../../lib/model/user/command/CreateUserCommand";
 import JoinJoblistingCommand from "../../../../../../../lib/model/joblisting/command/JoinJoblistingCommand";
 
 // React Icons
@@ -34,16 +32,14 @@ import useStorage from "../../../../../../../lib/hook/useStorage";
 // Layout
 import BasicLayout from "../../../../../../../components/generic/layout/basiclayout";
 import CenteredLayout from "../../../../../../../components/generic/layout/centeredlayout";
-import useAuthenticated from "../../../../../../../lib/hook/useAuthenticated";
-import BasicDropdownMenu from "../../../../../../../components/generic/dropdown/basicdropdownmenu";
 import { useFetchAllUsecase } from "../../../../../../../lib/service/usecase/UsecaseResource";
 import Usecase from "../../../../../../../lib/model/usecase/model/Usecase";
 import BasicDropdownSelect from "../../../../../../../components/generic/dropdown/basicdropdownselect";
 import { login } from "../../../../../../../lib/service/auth/AuthenticationController";
+import CreateProlificUserCommand from "../../../../../../../lib/model/user/command/CreateProlificUserCommnad";
 
 const Index = () => {
   const storage = useStorage();
-  const authenticated = useAuthenticated();
   const language = useFetchAllLanguages();
   const usecase = useFetchAllUsecase();
   language.languages.sort((a, b) => a.getName().localeCompare(b.getName()));
@@ -81,9 +77,9 @@ const Index = () => {
     });
   }
   const handleSignUp = () => {
-    const user: CreateUserCommand | null = verifySignUp(registerState);
+    const user: CreateProlificUserCommand | null = verifySignUp(registerState);
     if (user == null) return;
-    createUser(user).then(async () => {
+    createProlificUser(user).then(async () => {
       toast.success("Successfully registered");
       // triggerd login  
       const res = await login(registerState.username, registerState.password);
@@ -281,7 +277,7 @@ function verifySignUp(registerState: {
   prolific_id: string;
   terms: boolean;
   age: boolean;
-}): null | CreateUserCommand {
+}): null | CreateProlificUserCommand {
   if (!registerState.prolific_id || !registerState.username || !registerState.email || !registerState.password || !registerState.passwordConfirm) {
     toast.error("Please fill out all the fields");
     return null;
@@ -307,7 +303,7 @@ function verifySignUp(registerState: {
     return null;
   }
 
-  return new CreateUserCommand(
+  return new CreateProlificUserCommand(
     registerState.username,
     registerState.email,
     registerState.password,

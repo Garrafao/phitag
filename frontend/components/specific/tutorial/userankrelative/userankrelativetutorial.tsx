@@ -183,7 +183,7 @@ const UseRankRelativeTutorial: React.FC<{ phase: Phase }> = ({ phase }) => {
 
 
                 <div className="mt-2 xl:mt-10">
-                        <UseRankRelativeTutorialAnnotation instance={instances.data[tutorialAnnotation.currentAnnotation] as UseRankRelativeInstance} handleSubmitAnnotation={handleSubmitAnnotation} /> 
+                        <UseRankRelativeTutorialAnnotation instance={instances.data[tutorialAnnotation.currentAnnotation] as UseRankRelativeInstance} handleSubmitAnnotation={handleSubmitAnnotation} phase={phase} /> 
                 </div>
 
             </SingleContentLayout>

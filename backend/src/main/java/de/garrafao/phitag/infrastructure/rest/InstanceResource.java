@@ -1,27 +1,21 @@
 package de.garrafao.phitag.infrastructure.rest;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
+import de.garrafao.phitag.application.instance.InstanceApplicationService;
+import de.garrafao.phitag.application.instance.data.IInstanceDto;
+import de.garrafao.phitag.application.instance.data.PagedInstanceDto;
+import de.garrafao.phitag.application.instance.wssimtag.data.WSSIMTagDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import de.garrafao.phitag.application.instance.InstanceApplicationService;
-import de.garrafao.phitag.application.instance.data.IInstanceDto;
-import de.garrafao.phitag.application.instance.data.PagedInstanceDto;
-import de.garrafao.phitag.application.instance.wssimtag.data.WSSIMTagDto;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/api/v1/instance")
@@ -267,6 +261,16 @@ public class InstanceResource {
             @RequestParam(value = "phase") final String phase,
             @RequestParam(value = "lemma") final String lemma) {
         return this.instanceApplicationService.getWssimTagsByLemma(authenticationToken, owner, project, phase, lemma);
+    }
+
+
+    @GetMapping(value = "/count-allocated-instance")
+    public int countAllocatedInstance(
+            @RequestHeader("Authorization") String authenticationToken,
+            @RequestParam(value = "owner") final String owner,
+            @RequestParam(value = "project") final String project,
+            @RequestParam(value = "phase") final String phase){
+        return this.instanceApplicationService.countALlocatedInstance(authenticationToken, owner, project, phase);
     }
 
 }

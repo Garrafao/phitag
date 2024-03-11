@@ -181,7 +181,7 @@ const UseRankTutorial: React.FC<{ phase: Phase }> = ({ phase }) => {
 
 
                 <div className="mt-2 xl:mt-10">
-                        <UseRankTutorialAnnotation instance={instances.data[tutorialAnnotation.currentAnnotation] as UseRankInstance} handleSubmitAnnotation={handleSubmitAnnotation} /> 
+                        <UseRankTutorialAnnotation instance={instances.data[tutorialAnnotation.currentAnnotation] as UseRankInstance} handleSubmitAnnotation={handleSubmitAnnotation} phase={phase} /> 
                 </div>
 
             </SingleContentLayout>

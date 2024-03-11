@@ -5,6 +5,8 @@ import { useEffect, useRef, useState } from "react";
 
 // React Icons
 import { FiArrowLeft, FiArrowRight, FiEdit2, FiLayers } from "react-icons/fi";
+import { SiOpenai } from "react-icons/si";
+
 
 // services
 import { useFetchAllAnnotationTypes } from "../../../lib/service/annotationtype/AnnotationTypeResource";
@@ -28,6 +30,11 @@ import Phase from "../../../lib/model/phase/model/Phase";
 import Project from "../../../lib/model/project/model/Project";
 import ENTITLEMENTS from "../../../lib/model/entitlement/Entitlements";
 import Togglebox from "../../generic/checkbox/togglebox";
+import ChatGptProcssingModal from "../modal/chatgptprocessingmodal";
+import { data } from "autoprefixer";
+import LoadingComponentCard from "../../generic/loadinganimation/loadingcomponent";
+import TutorialHistory from "../../../lib/model/tutorialhistory/model/TutorialHistory";
+import FineTunigModal from "../modal/finetuningmodal";
 
 
 
@@ -57,6 +64,14 @@ const PhaseCarousel: React.FC<{ project: Project }> = ({ project }) => {
         isOpenAddRequirementsModal: false,
         isOpenComputationModal: false,
         phase: null as unknown as Phase,
+    });
+
+    const [chatGptProcessingModal, setChatGptProcessingModalState] = useState({
+        isOpen: false,
+        tutorialHistory : [] as any[]
+    })
+    const [loadingStatus, setLoadingStatus] = useState({
+        isOpen: false
     });
 
     const [createPhaseModalState, setCreatePhaseModalState] = useState({
@@ -196,15 +211,43 @@ const PhaseCarousel: React.FC<{ project: Project }> = ({ project }) => {
             }} phase={modalState.phase} mutateCallback={phases.mutate} />
 
 
-            <ComputationalAnnotationModal isOpen={modalState.isOpenComputationModal} closeModalCallback={
-                () => {
-                    setModalState({
-                        ...modalState,
-                        isOpenComputationModal: false,
-                        phase: null as unknown as Phase,
-                    });
-                }
-            } phase={modalState.phase} mutateCallback={() => { }} />
+            <ComputationalAnnotationModal isOpen={modalState.isOpenComputationModal} closeModalCallback={() => {
+                setModalState({
+                    ...modalState,
+                    isOpenComputationModal: false,
+                    phase: null as unknown as Phase,
+                });
+            } } phase={modalState.phase} mutateCallback={() => { } } 
+            setTutorialHistory={(data: any[]) => {
+                setChatGptProcessingModalState(prevState => ({
+                    ...prevState,
+                    tutorialHistory: data
+                }));
+            }} 
+            openProcessingModal={(data: boolean) => {
+                setChatGptProcessingModalState(prevState => ({
+                    ...prevState,
+                    isOpen: data
+                }));
+            }} 
+            setLoadingStatus={(data: boolean) => {
+                setLoadingStatus(prevState => ({
+                    ...prevState,
+                    isOpen: data
+                }));
+            }}  /> 
+            
+             <ChatGptProcssingModal phase={modalState.phase} isOpen={chatGptProcessingModal.isOpen} closeModalCallBack={()=>{
+                setChatGptProcessingModalState({
+                    ...chatGptProcessingModal,
+                    isOpen:false
+                })
+
+             }} tutorialHistory={chatGptProcessingModal.tutorialHistory} />
+            <LoadingComponentCard text={"Please wait annotating"} icon={<SiOpenai  className="text-7xl animate-spin"/> } isOpen={loadingStatus.isOpen} />
+            <FineTunigModal key={""} isOpen={false} closeFineTuneModal={()=>{
+            
+            }} />
         </div>
 
     );

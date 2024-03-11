@@ -1,18 +1,20 @@
 import { useEffect, useState } from "react";
-import { FiAlignLeft, FiFeather } from "react-icons/fi";
+import { FiAlignLeft, FiBookmark, FiFeather } from "react-icons/fi";
 import UseRankInstance from "../../../../lib/model/instance/userankinstance/model/UseRankInstance";
 import DraggableUsage from "../../annotation/usage/userank/dragabbleusage";
 import UseRankRelativeInstance from "../../../../lib/model/instance/userankreltiveinstance/model/UseRankRelativeInstance";
 import Usage from "../../../../lib/model/phitagdata/usage/model/Usage";
 import DraggableUsageTutorial from "../userank/dragabbleusagetutorial";
+import Phase from "../../../../lib/model/phase/model/Phase";
 
 interface IUseRankAnnotationInstance {
     instance: UseRankRelativeInstance;
+    phase: Phase
 
     handleSubmitAnnotation: (judgement: string, comment: string) => void;
 }
 
-const UseRankRelativeTutorialAnnotation: React.FC<IUseRankAnnotationInstance> = ({ instance, handleSubmitAnnotation }) => {
+const UseRankRelativeTutorialAnnotation: React.FC<IUseRankAnnotationInstance> = ({ instance, phase, handleSubmitAnnotation }) => {
 
     const [judgement, setJudgement] = useState({
         comment: "",
@@ -106,6 +108,20 @@ const UseRankRelativeTutorialAnnotation: React.FC<IUseRankAnnotationInstance> = 
     return (
         <div className="w-auto flex flex-col 2xl:flex-row justify-between 2xl:px-2">
             <div className="w-full flex flex-col justify-center space-y-2 ">
+            {(phase.getTaskHead() ?? "") !== "" && (
+                <div className="w-half shadow-md ">
+                    <div className="m-8 flex flex-row">
+                        <div className="my-4">
+                            <FiBookmark className="basic-svg" />
+                        </div>
+                        <div className="border-r-2 mx-4" />
+                        <div className="my-4 font-dm-mono-light text-lg overflow-auto">
+                            {phase.getTaskHead()}
+                        </div>
+
+                    </div>
+                </div>
+            )}
             <div className="w-full bg-gray-600 shadow-md text-white">
                 <div className="px-10 m-0 flex flex-row">
                     <div className="my-4">

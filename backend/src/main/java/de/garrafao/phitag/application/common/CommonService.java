@@ -500,7 +500,6 @@ public class CommonService {
         if (annotatorInformations.size() != 1) {
             throw new AnnotationProcessInformationException("Annotation process information not found.");
         }
-
         return annotatorInformations.get(0);
     }
 
@@ -516,11 +515,8 @@ public class CommonService {
     }
 
     /**
-     * Update annotation process information.
-     * 
-     * @param Phase         The phase.
-     * @param Annotator     The annotator.
-     * 
+     * Update annotation process information..
+     *
      * @param samplingorder The sampling order.
      * @param samplingindex The sampling index.
      * 
@@ -874,7 +870,6 @@ public class CommonService {
      * Get all judgements for a given phase.
      * 
      * @param phase The phase.
-     * @return A list of all {@link Judgement} for the given phase.
      */
     public List<IJudgement> getJudgementsOfPhase(final Phase phase) {
         if (phase.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_USEPAIR.name())) {
@@ -937,7 +932,6 @@ public class CommonService {
      * Get number of judgements for a given phase.
      * 
      * @param phase The phase.
-     * @return The number of {@link Judgement} for the given phase.
      */
     public long countJudgementsOfPhase(final Phase phase) {
         if (phase.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_USEPAIR.name())) {
@@ -1074,4 +1068,24 @@ public class CommonService {
         return this.statisticAnnotationMeasureRepository.findById(statisticAnnotationMeasure)
                 .orElseThrow(() -> new StatisticException("Statistic annotation measure not found"));
     }
+
+
+    public int countAllocatedInstance(final Annotator annotator, final Phase phase) {
+        final Query query = new AnnotationProcessInformationQueryBuilder()
+                .withOwner(phase.getId().getProjectid().getOwnername())
+                .withProject(phase.getId().getProjectid().getName())
+                .withPhase(phase.getId().getName())
+                .withAnnotator(annotator.getId().getUsername())
+                .build();
+
+        final List<AnnotationProcessInformation> annotatorInformations = this.annotationProcessInformationRepository
+                .findByQuery(query);
+
+        if (annotatorInformations.size() != 1) {
+            throw new AnnotationProcessInformationException("Annotation process information not found.");
+        }
+        return annotatorInformations.get(0).getOrder().size();
+    }
 }
+
+

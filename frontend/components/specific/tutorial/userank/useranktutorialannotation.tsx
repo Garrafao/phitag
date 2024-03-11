@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
-import { FiFeather } from "react-icons/fi";
+import { FiBookmark, FiFeather } from "react-icons/fi";
 import UseRankInstance from "../../../../lib/model/instance/userankinstance/model/UseRankInstance";
 import DraggableUsage from "../../annotation/usage/userank/dragabbleusage";
 import Usage from "../../../../lib/model/phitagdata/usage/model/Usage";
+import Phase from "../../../../lib/model/phase/model/Phase";
 
 interface IUseRankAnnotationInstance {
     instance: UseRankInstance;
+    phase: Phase
 
     handleSubmitAnnotation: (judgement: string, comment: string) => void;
 }
 
-const UseRankTutorialAnnotation: React.FC<IUseRankAnnotationInstance> = ({ instance, handleSubmitAnnotation }) => {
+const UseRankTutorialAnnotation: React.FC<IUseRankAnnotationInstance> = ({ instance,phase,  handleSubmitAnnotation }) => {
 
     const [judgement, setJudgement] = useState({
         comment: "",
@@ -115,6 +117,20 @@ const UseRankTutorialAnnotation: React.FC<IUseRankAnnotationInstance> = ({ insta
     return (
         <div className="w-full flex flex-col 2xl:flex-row justify-between 2xl:px-2">
             <div className="w-full flex flex-col justify-center space-y-2">
+            {(phase.getTaskHead() ?? "") !== "" && (
+                <div className="w-half shadow-md ">
+                    <div className="m-8 flex flex-row">
+                        <div className="my-4">
+                            <FiBookmark className="basic-svg" />
+                        </div>
+                        <div className="border-r-2 mx-4" />
+                        <div className="my-4 font-dm-mono-light text-lg overflow-auto">
+                            {phase.getTaskHead()}
+                        </div>
+
+                    </div>
+                </div>
+            )}
             <DraggableUsage usages={filteredUsages} handleUsagesReordered={handleUsagesReordered} containerSize={600} />
             </div>
 

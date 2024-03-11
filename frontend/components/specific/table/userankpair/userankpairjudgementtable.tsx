@@ -34,7 +34,6 @@ const UseRankPairJudgementTable: React.FC<{ phase: Phase, modalState: { open: bo
     const router = useRouter();
     const [page, setPage] = useState(0);
     const userankpairjudgements = useFetchPagedUseRankPairJudgements(phase?.getId().getOwner(), phase?.getId().getProject(), phase?.getId().getPhase(), page, !!phase);
-
     const username = useStorage().get("USER");
 
     const [editModal, setEditModal] = useState({

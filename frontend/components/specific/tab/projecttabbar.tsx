@@ -13,6 +13,7 @@ import { deleteProject, useFetchProject } from "../../../lib/service/project/Pro
 import useStorage from "../../../lib/hook/useStorage";
 import { toast } from "react-toastify";
 import EditProjectModal from "../modal/editprojectmodal";
+import DeleteProjectModal from "../modal/deleteprojectmodal";
 
 interface IPropsTab {
     href: string;
@@ -44,6 +45,10 @@ const ProjectTabBar: React.FC<{}> = ({}) => {
 
         // modals
         const [showEditProjectModal, setShowEditProjectModal] = useState(false);
+
+        const [deleteProjectModal, setDeleteProjectModal] = useState({
+            isOpen: false
+        })
 
     const deleteProjectFn = () => {
         deleteProject(projectname, storage.get)
@@ -80,7 +85,10 @@ const ProjectTabBar: React.FC<{}> = ({}) => {
                     <IconButtonOnClick
                         tooltip="Delete Project"
                         icon={<FiTrash2 className="basic-svg" />}
-                        onClick={deleteProjectFn}
+                        onClick={()=>{setDeleteProjectModal({
+                            ...deleteProjectModal,
+                            isOpen: true
+                        })}}
                     />
                 }
 
@@ -104,6 +112,11 @@ const ProjectTabBar: React.FC<{}> = ({}) => {
          <EditProjectModal  isOpen={showEditProjectModal} closeModalCallback={() => {
                 setShowEditProjectModal(false);
             }}  mutateCallback={project.mutate}/>
+        <DeleteProjectModal isOpen={deleteProjectModal.isOpen} closeModalCallBack={()=>{setDeleteProjectModal({
+            ...deleteProjectModal,
+            isOpen: false
+        })}} project={project.project} deleteProject={deleteProjectFn} />
+
         </div>
 
     );

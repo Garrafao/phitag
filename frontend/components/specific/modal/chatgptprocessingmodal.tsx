@@ -15,27 +15,14 @@ import useStorage from "../../../lib/hook/useStorage";
 
 
 const ChatGptProcssingModal: React.FC<{
-    phase: Phase, isOpen: boolean, closeModalCallBack: Function, tutorialHistory: any
+    phase: Phase, isOpen: boolean, closeModalCallBack: Function, tutorialHistory: any []
 }> = ({ phase, isOpen, closeModalCallBack, tutorialHistory }) => {
 
     // hooks
     const storage = useStorage();
-
- 
-
-
-
-
-
-    // Now, latestMeasurement contains the measurement with the latest timestamp
-
-
     const onClose = () => {
         closeModalCallBack();
     }
-
-
-
     const convertDate = (timestamp: number) => {
         if (timestamp === 0) {
             return 'No deadline';
@@ -84,47 +71,9 @@ const ChatGptProcssingModal: React.FC<{
                                     </th>
                                 </tr>
                             </thead>
-                            {/*                             <tbody className=" text-base16-gray-700">
-
-                                <tr >
-
-                                    <td className="px-6 py-4 whitespace-nowrap">
-                                        {latestMeasurement ? convertDate(Number.parseInt(latestMeasurement.getTimestamp())) : 'N/A'}
-                                    </td>
-
-
-                                    <td className="px-6 py-4 whitespace-nowrap">
-                                        {latestMeasurement?.getAnnotatorId().getUser()}
-                                    </td>
-
-                                    <td className="px-6 py-4 whitespace-nowrap">
-                                        {latestMeasurement?.getMeasure()}
-
-                                    </td>
-                                    <td className="px-8 py-6 whitespace-nowrap flex justify-end">
-                                        {latestMeasurement?.isPassed() ? (
-                                            <>
-                                                <span style={{ color: 'blue' }}>Passed</span>
-                                                <span className="ml-4 py-1">
-                                                    <RiEmotionHappyLine />
-                                                </span>
-                                            </>
-                                        ) : (
-                                            <>
-                                                <span style={{ color: 'red' }}>Failed</span>
-                                                <span className="ml-4 py-1">
-                                                    <TfiFaceSad />
-                                                </span>
-                                            </>
-                                        )}
-                                    </td>
-
-
-                                </tr>
-
-                            </tbody> */}
+                    
                             <tbody className="text-base16-gray-700">
-                                {tutorialHistory.map((measurement:any, index: any) => (
+                                {tutorialHistory?.map((measurement:any, index: any) => (
                                     <tr key={index}>
                                         <td className="px-6 py-4 whitespace-nowrap">
                                             {convertDate(Number.parseInt(measurement.timestamp))}

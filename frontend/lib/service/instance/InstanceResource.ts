@@ -53,7 +53,6 @@ export function useFetchInstances<G extends IInstance, T extends IInstanceConstr
     }).then(res => res.data)
 
     const { data, error, mutate } = useSWR(fetch ? `${BACKENDROUTES.INSTANCE}?owner=${owner}&project=${project}&phase=${phase}&additional=${additional}` : null, queryPhaseDataFetcher)
-
     return {
         data: data ? data.map(constructor.fromDto) : [].map(constructor.fromDto) as G[],
         isLoading: !error && !data,
@@ -458,3 +457,32 @@ export function useFetchWSSIMTagsOfLemma(owner: string, project: string, phase: 
         mutate: mutate
     }
 }
+
+    /**
+ * Returns all allacated instance to the given annoator
+ * 
+ * @param owner owner of the project
+ * @param project project name
+ * @param phase phase name in the project
+ * 
+ * @param fetch if data should be fetched
+ */
+    export function useFetchAllocatedInstanceNumber(owner: string, project: string, phase: string, fetch: boolean = true) {
+        const { get } = useStorage();
+        const token = get('JWT') ?? '';
+    
+        const queryPhaseDataFetcher = (url: string) => axios.get(url, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        }).then(res => res.data)
+    
+        const { data, error, mutate } = useSWR(fetch ? `${BACKENDROUTES.INSTANCE}/count-allocated-instance?owner=${owner}&project=${project}&phase=${phase}` : null, queryPhaseDataFetcher)
+    
+        return {
+            data: data ,
+            isLoading: !error && !data,
+            isError: error,
+            mutate: mutate
+        }
+    }

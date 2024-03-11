@@ -844,7 +844,6 @@ public class JudgementApplicationService {
      * completed.
      *
      * @param authenticationToken the authentication token of the requesting user
-     * @param commands            list of commands containing the judgement
      */
     public int  countAttemptedJudgements(final String authenticationToken,
                                          final String owner,

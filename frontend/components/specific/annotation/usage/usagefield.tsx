@@ -44,19 +44,19 @@ export default UsageField;
  */
 function usageContextBuilder(usage: Usage): { sentence: string, highlight: "none" | "bold" | "color" }[] {
 
-    const context = usage.getContext();
+    const context = usage?.getContext();
 
     const contextArray: { sentence: string, highlight: "none" | "bold" | "color" }[] = [];
 
     // Add the first sentence
     contextArray.push({
-        sentence: context.substring(0, usage.getIndexTargetSentenceStart()),
+        sentence: context?.substring(0, usage.getIndexTargetSentenceStart()),
         highlight: "none"
     });
 
     let lastTargetTokenEnd = 0;
 
-    usage.getIndexTargetSentence().forEach((sentence, index) => {
+    usage?.getIndexTargetSentence().forEach((sentence, index) => {
         lastTargetTokenEnd = sentence.left;
         usage.getIndexTargetToken().forEach((token, index) => {
             if (token.left >= sentence.left && token.right <= sentence.right) {
@@ -82,7 +82,7 @@ function usageContextBuilder(usage: Usage): { sentence: string, highlight: "none
 
     // Add the last sentence
     contextArray.push({
-        sentence: context.substring(usage.getIndexTargetSentenceEnd()),
+        sentence: context?.substring(usage.getIndexTargetSentenceEnd()),
         highlight: "none"
     });
 

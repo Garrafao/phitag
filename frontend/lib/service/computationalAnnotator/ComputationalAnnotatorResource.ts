@@ -5,6 +5,8 @@ import useSWR from "swr";
 import OpenAIModelDto from "../../model/computationalannotator/openaimodel/dto/OpenAIModelDto";
 import OpenAIModel from "../../model/computationalannotator/openaimodel/model/OpenAIModel";
 import ComputationalAnnotatorCommand from "../../model/computationalannotator/ComputationalAnnotatorCommand";
+import { data } from "autoprefixer";
+import UsePairTutorialData from "../../model/computationalannotator/UsePairTutorailData";
 
 
 export async function chatGptUsePairAnnotation(command: ComputationalAnnotatorCommand, get: Function = () => {}) {
@@ -88,14 +90,6 @@ export async function chatLexSubTutorialAnnotation(command: ComputationalAnnotat
 
 
 
-
-
-
-
-
-
-
-
 // Custom hooks for fetching openai model
 
 /**
@@ -104,7 +98,7 @@ export async function chatLexSubTutorialAnnotation(command: ComputationalAnnotat
  * @param fetch if data should be fetched
  * @returns list of all openai model
  */
-export function useFetchAllOpenAIMode(fetch: boolean = true) {
+export function useFetchAllOpenAIModel(fetch: boolean = true) {
 
     const fetcher = (url: string) => axios.get<OpenAIModelDto[]>(url).then(res => res.data)
 
@@ -116,4 +110,24 @@ export function useFetchAllOpenAIMode(fetch: boolean = true) {
         isError: error
     }
 
+}
+
+export async function useFetchPagedUsePairJudgementsTutorials(owner: string, project: string, phase: string, page: number, fetch: boolean = true): Promise<UsePairTutorialData[] | null> {
+    if (!fetch) {
+        return null;
+    }
+
+    const token = localStorage.getItem('JWT') ?? '';
+
+    try {
+        const response = await axios.get<UsePairTutorialData[]>(`${BACKENDROUTES.COMPUTATIONALANNOTATOR}/usepair-tutorial-data?owner=${owner}&project=${project}&phase=${phase}`, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        return null;
+    }
 }

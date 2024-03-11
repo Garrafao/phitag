@@ -217,7 +217,7 @@ const JudgementPage: NextPage = () => {
                         </div>
                     </div>
 
-                    <div className="m-8">
+                                      <div className="m-8">
                         {/* @ts-ignore */}
                         <UseRankJudgementTable phase={phase.phase} modalState={
                             {

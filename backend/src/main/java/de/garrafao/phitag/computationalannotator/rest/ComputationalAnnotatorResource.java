@@ -2,6 +2,8 @@ package de.garrafao.phitag.computationalannotator.rest;
 
 import de.garrafao.phitag.application.phase.data.TutorialHistoryDto;
 import de.garrafao.phitag.computationalannotator.common.command.ComputationalAnnotatorCommand;
+import de.garrafao.phitag.computationalannotator.common.command.UsePairTutorialData;
+import de.garrafao.phitag.computationalannotator.common.function.GetTutorialData;
 import de.garrafao.phitag.computationalannotator.lexsub.service.LexsubComputationalAnnotatorService;
 import de.garrafao.phitag.computationalannotator.usepair.service.UsePairComputationalAnnotatorService;
 import de.garrafao.phitag.computationalannotator.wssim.service.WSSIMComputationalAnnotatorService;
@@ -19,11 +21,14 @@ public class ComputationalAnnotatorResource {
 
     private final WSSIMComputationalAnnotatorService wssimComputationalAnnotatorService;
 
+    private final GetTutorialData getTutorialData;
+
     @Autowired
-    public ComputationalAnnotatorResource(final UsePairComputationalAnnotatorService usePairComputationalAnnotatorService, LexsubComputationalAnnotatorService lexsubComputationalAnnotatorService, WSSIMComputationalAnnotatorService wssimComputationalAnnotatorService) {
+    public ComputationalAnnotatorResource(final UsePairComputationalAnnotatorService usePairComputationalAnnotatorService, LexsubComputationalAnnotatorService lexsubComputationalAnnotatorService, WSSIMComputationalAnnotatorService wssimComputationalAnnotatorService, GetTutorialData getTutorialData) {
         this.usePairComputationalAnnotatorService = usePairComputationalAnnotatorService;
         this.lexsubComputationalAnnotatorService = lexsubComputationalAnnotatorService;
         this.wssimComputationalAnnotatorService = wssimComputationalAnnotatorService;
+        this.getTutorialData = getTutorialData;
     }
 
     @PostMapping("/use-pair-annotate")
@@ -71,4 +76,12 @@ public class ComputationalAnnotatorResource {
         return this.lexsubComputationalAnnotatorService.lexsubChatGptTutorial(authenticationToken, command);
     }
 
+    @GetMapping("/usepair-tutorial-data")
+    public List<UsePairTutorialData> usePairTutorialData(
+            @RequestParam(value = "owner") final String owner,
+            @RequestParam(value = "project") final String project,
+            @RequestParam(value = "phase") final String phase){
+
+    return this.getTutorialData.getTutorial(owner, project, phase);
+    }
 }

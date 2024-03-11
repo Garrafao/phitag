@@ -942,22 +942,23 @@ export function bulkAnnotateLexSub(commands: IAddJudgementCommand[], get: Functi
  * @param fetch if data should be fetched
  * @returns l
  */
-export function countAttemptedJudgements(owner: string, project: string, phase: string, fetch: boolean = true) {
-    const { get } = useStorage();
-    const token = get('JWT') ?? '';
-
-    const queryPhaseDataFetcher = (url: string) => axios.get(url, {
-        headers: {
-            "Authorization": `Bearer ${token}`
+export function useFetchAttemptedJudgement(owner: string, project: string, phase: string, fetch: boolean = true) {
+    const queryPhaseDataFetcher = async (url: string) => {
+        try {
+            const token = localStorage.getItem('JWT') ?? '';
+            const response = await axios.get(url, {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+            return response.data;
+        } catch (error) {
+            console.error("Error fetching data:", error);
+            throw error;
         }
-    })
-    .then(res => res.data)
-    .catch(error => {
-        console.error("Error fetching data:", error);
-        throw error;
-    });
+    };
 
-    const { data, error, mutate } = useSWR(fetch  ? `${BACKENDROUTES.JUDGEMENT}/count?owner=${owner}&project=${project}&phase=${phase}` : null, queryPhaseDataFetcher);
+    const { data, error, mutate } = useSWR(fetch ? `${BACKENDROUTES.JUDGEMENT}/count?owner=${owner}&project=${project}&phase=${phase}` : null, queryPhaseDataFetcher);
 
     return {
         data: data,
@@ -966,7 +967,6 @@ export function countAttemptedJudgements(owner: string, project: string, phase: 
         mutate: mutate
     };
 }
-
 
 //Tutorials 
 
@@ -1029,8 +1029,6 @@ export function useFetchPagedUsePairTutorialJudgements(owner: string, project: s
         mutate: mutate
     }
 }
-
-
 
 
 

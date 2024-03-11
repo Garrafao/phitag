@@ -1,15 +1,17 @@
 import { useState } from "react";
-import { FiFeather } from "react-icons/fi";
+import { FiAlignLeft, FiBookmark, FiFeather } from "react-icons/fi";
 import UsePairInstance from "../../../../lib/model/instance/usepairinstance/model/UsePairInstance";
 import UsageField from "../../annotation/usage/usagefield";
+import Phase from "../../../../lib/model/phase/model/Phase";
 
 interface IUsePairAnnotationInstance {
     instance: UsePairInstance;
+    phase: Phase
 
     handleSubmitAnnotation: (judgement: string, comment: string) => void;
 }
 
-const UsePairTutorialAnnotation: React.FC<IUsePairAnnotationInstance> = ({ instance, handleSubmitAnnotation }) => {
+const UsePairTutorialAnnotation: React.FC<IUsePairAnnotationInstance> = ({ instance, handleSubmitAnnotation, phase }) => {
 
     const [judgement, setJudgement] = useState({
         comment: "",
@@ -18,12 +20,28 @@ const UsePairTutorialAnnotation: React.FC<IUsePairAnnotationInstance> = ({ insta
 
     return (
         <div className="w-full flex flex-col 2xl:flex-row justify-between 2xl:px-32">
+
             <div className="w-full flex flex-col justify-center space-y-2 ">
+            {(phase.getTaskHead() ?? "") !== "" && (
+                <div className="w-half shadow-md ">
+                    <div className="m-8 flex flex-row">
+                        <div className="my-4">
+                            <FiBookmark className="basic-svg" />
+                        </div>
+                        <div className="border-r-2 mx-4" />
+                        <div className="my-4 font-dm-mono-light text-lg overflow-auto">
+                            {phase.getTaskHead()}
+                        </div>
+
+                    </div>
+                </div>
+            )}
+
                 <UsageField key={0} usage={instance.getFirstusage()} />
                 <UsageField key={1} usage={instance.getSecondusage()} />
             </div>
 
-          
+
             <div className="w-full 2xl:w-fit flex flex-row 2xl:flex-col 2xl:mx-16 my-8 items-center justify-between 2xl:justify-center 2xl:space-y-2">
                 {instance.getLabelSet().concat(instance.getNonLabel()).map((label) => {
                     return (

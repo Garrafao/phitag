@@ -177,7 +177,7 @@ const UsePairTutorial: React.FC<{ phase: Phase }> = ({ phase }) => {
 
                 <div className="mt-2 xl:mt-10">
                     {/* @ts-ignore, fix later */}
-                    <UsePairTutorialAnnotation instance={instances.data[tutorialAnnotation.currentAnnotation]} handleSubmitAnnotation={handleSubmitAnnotation} />
+                    <UsePairTutorialAnnotation instance={instances.data[tutorialAnnotation.currentAnnotation]} handleSubmitAnnotation={handleSubmitAnnotation} phase={phase} />
                 </div>
 
             </SingleContentLayout>

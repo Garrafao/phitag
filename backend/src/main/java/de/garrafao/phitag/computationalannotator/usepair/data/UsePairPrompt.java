@@ -29,7 +29,7 @@ public class UsePairPrompt {
         messages.add(instructionMessage);
 
         // First usage message
-        ChatMessage firstUsageMessage = new ChatMessage("user", "Sentence 1: " + firstUsage);
+        ChatMessage firstUsageMessage = new ChatMessage("user", "Sentence 1: "+ firstUsage );
         messages.add(firstUsageMessage);
 
         // Second usage message
@@ -41,9 +41,9 @@ public class UsePairPrompt {
         messages.add(targetWord);
 
         // Return type instruction message
-        ChatMessage returnType = new ChatMessage("user", "Please provide a '''Judgment''' as a '''single integer'''. " +
-                "For example, if your judgment is 'Identical', then provide '4'. If your judgment is 'Unrelated', provide '1'.");
-        messages.add(returnType);
+        ChatMessage returnType = new ChatMessage("user", "Please provide a  judgment as a single integer." +
+         "For example, if your judgment is Identical, then provide 4. If your judgment is Unrelated, provide 1.");
+           messages.add(returnType);
 
         return messages;
     }

@@ -23,7 +23,7 @@ import WSSIMInstance, { WSSIMInstanceConstructor } from "../../../../lib/model/i
 import UsageField from "../usage/usagefield";
 import LoadingComponent from "../../../generic/loadingcomponent";
 
-import { annotateWSSIM, CountAttemptedJudgements, useFetchPagedWSSIMJudgements } from "../../../../lib/service/judgement/JudgementResource";
+import { annotateWSSIM,  useFetchPagedWSSIMJudgements } from "../../../../lib/service/judgement/JudgementResource";
 import WSSIMTagField from "../wssimtag/wssimtagfield";
 import AddWSSIMJudmentCommand from "../../../../lib/model/judgement/wssimjudgement/command/AddWSSIMJudgementCommand";
 import WSSIMTagLemmasField from "../wssimtag/wssimtaglemmasfield";
@@ -54,28 +54,14 @@ const WSSIMAnnotation: React.FC<{ phase: Phase }> = ({ phase }) => {
         page,
         !!phase
     );
-    const { data: useFetchPagedWSSIMJudgementsData, mutate: mutateUseFetchWSSIMJudgement } = useFetchPagedWSSIMJudgements(
-        phase?.getId().getOwner(),
-        phase?.getId().getProject(),
-        phase?.getId().getPhase(),
-        page,
-        !!phase
-    );
-
-    const { data: userAnnotationCount, mutate: mutateCountJudgements } = CountAttemptedJudgements(phase?.getId().getOwner(), phase?.getId().getProject(), phase?.getId().getPhase(), !!phase);
 
 
 
     // Handlers
 
     const handleSubmitAnnotation = (judgement: string) => {
-        mutateCountJudgements();
 
-        if(userAnnotationCount===useFetchPagedWSSIMInstanceData.getTotalElements()){
-            toast.success("Congrats!!! You finished it all");
-            Router.push(`/phi/${phase.getId().getOwner()}/${phase.getId().getProject()}/${phase.getName()}/done`);
-            return;
-        }
+
      
         if (annotation.instance === null) {
             toast.warning("This should not happen. Please try again.");
@@ -163,7 +149,7 @@ const WSSIMAnnotation: React.FC<{ phase: Phase }> = ({ phase }) => {
 
     return (
         <div className="w-full flex flex-col justify-between ">
-            <ProgressBar minValue={0} maxValue={useFetchPagedWSSIMInstanceData.getTotalElements()} currentValue={userAnnotationCount } />
+
             {(phase.getTaskHead() ?? "") !== "" && (
                 <div className="w-half shadow-md ">
                     <div className="m-8 flex flex-row">

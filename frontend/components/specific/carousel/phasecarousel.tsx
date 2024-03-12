@@ -35,6 +35,7 @@ import { data } from "autoprefixer";
 import LoadingComponentCard from "../../generic/loadinganimation/loadingcomponent";
 import TutorialHistory from "../../../lib/model/tutorialhistory/model/TutorialHistory";
 import FineTunigModal from "../modal/finetuningmodal";
+import { useFetchGuidelines } from "../../../lib/service/guideline/GuidelineResource";
 
 
 
@@ -47,10 +48,16 @@ const PhaseCarousel: React.FC<{ project: Project }> = ({ project }) => {
     });
 
 
+            const guidelines = useFetchGuidelines(project?.getId()?.getOwner(), project?.getId()?.getName(), !!project);
+
+      //  const tutorials = useFetchPhases(phase?.getId().getOwner(), phase?.getId().getProject(), phase?.getAnnotationType().getName(), true, isOpen && !!phase);
+
     // data
     const phases = useFetchPhases(project?.getId().getOwner(), project?.getId().getName(), searchFilter.annotationType?.getName(), searchFilter.tutorial, !!project);
     const entitlement = useFetchSelfEntitlement(project?.getId().getOwner(), project?.getId().getName(), !!project);
     const annotationTypes = useFetchAllAnnotationTypes();
+
+    //console.log(phases.phases)
 
     const refreshCallback = async() =>{
         
@@ -217,25 +224,25 @@ const PhaseCarousel: React.FC<{ project: Project }> = ({ project }) => {
                     isOpenComputationModal: false,
                     phase: null as unknown as Phase,
                 });
-            } } phase={modalState.phase} mutateCallback={() => { } } 
+            } } phase={modalState.phase} mutateCallback={() => { } }
             setTutorialHistory={(data: any[]) => {
                 setChatGptProcessingModalState(prevState => ({
                     ...prevState,
                     tutorialHistory: data
                 }));
-            }} 
+            } }
             openProcessingModal={(data: boolean) => {
                 setChatGptProcessingModalState(prevState => ({
                     ...prevState,
                     isOpen: data
                 }));
-            }} 
+            } }
             setLoadingStatus={(data: boolean) => {
                 setLoadingStatus(prevState => ({
                     ...prevState,
                     isOpen: data
                 }));
-            }}  /> 
+            } } guidelines={guidelines.guidelines} /* tutorials={[]} */  /> 
             
              <ChatGptProcssingModal phase={modalState.phase} isOpen={chatGptProcessingModal.isOpen} closeModalCallBack={()=>{
                 setChatGptProcessingModalState({
@@ -245,9 +252,7 @@ const PhaseCarousel: React.FC<{ project: Project }> = ({ project }) => {
 
              }} tutorialHistory={chatGptProcessingModal.tutorialHistory} />
             <LoadingComponentCard text={"Please wait annotating"} icon={<SiOpenai  className="text-7xl animate-spin"/> } isOpen={loadingStatus.isOpen} />
-            <FineTunigModal key={""} isOpen={false} closeFineTuneModal={()=>{
-            
-            }} />
+           
         </div>
 
     );

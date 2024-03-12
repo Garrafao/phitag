@@ -17,7 +17,7 @@ const SubmitStudyComponent: React.FC<{ phase: Phase }> = ({ phase }) => {
     const handleSubmit = () => {
 
         if (checkUser?.user?.getProlificId()) {
-            const code = phase.phase?.getCode();
+            const code = phase.getCode();
             const url = "https://app.prolific.com/submissions/complete?cc=";
             if (!code) {
                 toast.error("There is an error in submitting the study. Please contact the researcher")

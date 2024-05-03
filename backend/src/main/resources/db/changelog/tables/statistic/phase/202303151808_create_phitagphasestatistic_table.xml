@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="202303151808" author="serge">
+
+        <createTable tableName="phitagphasestatistic">
+            <column name="ownername" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitagphasestatistic" />
+            </column>
+
+            <column name="projectname" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitagphasestatistic" />
+            </column>
+
+            <column name="phasename" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitagphasestatistic" />
+            </column>
+
+            <column name="annotations" type="int">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="krippendorffalpha" type="double">
+                <constraints nullable="false" />
+            </column>
+
+        </createTable>
+
+    </changeSet>
+</databaseChangeLog>

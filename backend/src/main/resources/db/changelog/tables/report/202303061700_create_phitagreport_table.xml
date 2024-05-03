@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="202303061700" author="serge">
+
+        <createTable tableName="phitagreport">
+
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" unique="true" nullable="false" />
+            </column>
+
+            <column name="report_user" type="varchar">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="report_description" type="varchar">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="report_status" type="varchar">
+                <constraints nullable="false" />
+            </column>
+
+        </createTable>
+
+        <addForeignKeyConstraint
+            baseTableName="phitagreport"
+            baseColumnNames="report_user"
+            constraintName="FK_phitagreport_user"
+            referencedTableName="phitaguser"
+            referencedColumnNames="username"
+        />
+
+        <addForeignKeyConstraint
+            baseTableName="phitagreport"
+            baseColumnNames="report_status"
+            constraintName="FK_phitagreport_status"
+            referencedTableName="phitagstatus"
+            referencedColumnNames="name"
+        />
+    </changeSet>
+</databaseChangeLog>

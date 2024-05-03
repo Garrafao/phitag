@@ -1,0 +1,32 @@
+# Backend
+
+## Resources
+
+### Properties
+**/resources/application.properties
+
+### Database
+**/resources/db/changelog/db.changelog-master.xml
+**/resources/db/changelog/computational-annotator-seeds
+**/resources/db/changelog/corpus-seeds
+**/resources/db/changelog/seeds/admin
+
+## Other
+
+### Build
+
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+mvnw*
+
+
+### STS
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="202301301752" author="serge">
+
+        <createTable tableName="phitagannotationprocessinformation">
+            <column name="annotator_username" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitagannotationprocessinformation" />
+            </column>
+
+            <column name="annotator_projectname" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitagannotationprocessinformation" />
+            </column>
+
+            <column name="annotator_ownername" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitagannotationprocessinformation" />
+            </column>
+
+            <column name="phase_name" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitagannotationprocessinformation" />
+            </column>
+
+            <column name="phase_projectname" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitagannotationprocessinformation" />
+            </column>
+
+            <column name="phase_ownername" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitagannotationprocessinformation" />
+            </column>
+
+            <column name="instanceorder" type="varchar"></column>
+
+            <column name="instanceindex" type="int"></column>
+
+        </createTable>
+
+        <addForeignKeyConstraint
+            baseTableName="phitagannotationprocessinformation"
+            baseColumnNames="annotator_username, annotator_projectname, annotator_ownername"
+            constraintName="FK_phitagannotationprocessinformation_phitagannotator"
+            referencedTableName="phitagannotator"
+            referencedColumnNames="username, projectname, ownername" />
+
+        <addForeignKeyConstraint
+            baseTableName="phitagannotationprocessinformation"
+            baseColumnNames="phase_name, phase_projectname, phase_ownername"
+            constraintName="FK_phitagannotationprocessinformation_phitagphase"
+            referencedTableName="phitagphase"
+            referencedColumnNames="name, projectname, ownername" />
+
+    </changeSet>
+
+</databaseChangeLog>

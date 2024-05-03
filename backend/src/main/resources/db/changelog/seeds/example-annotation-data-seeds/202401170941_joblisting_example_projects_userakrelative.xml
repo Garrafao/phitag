@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+
+    <changeSet id="202401170941" author="sachin">
+
+        <insert tableName="phitagjoblisting">
+            <column name="name" value="Example-Use-Rank-Relative-Annotation-Joblisting"/>
+            <column name="projectname" value="Example-Project-Use-Rank-Relative"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="displayname" value="Example-Use-Rank-Relative-Annotation-Joblisting"/>
+            <column name="phasename" value="Example-Use-Rank-Relative-Annotation-Joblisting"/>
+            <column name="open" value="true"/>
+            <column name="active" value="true"/>
+            <column name="description" value="This is an example job listing for Use Rank Relative Annotation. It is used to show how the job listing feature works."/>
+        </insert>
+
+    </changeSet>
+
+</databaseChangeLog>

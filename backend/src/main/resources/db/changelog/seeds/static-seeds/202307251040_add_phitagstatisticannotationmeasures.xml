@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="202307251040" author="serge">
+
+        <insert tableName="phitagstatisticannotationmeasures">
+            <column name="id" value="PERCENTAGE_AGREEMENT" />
+            <column name="name" value="Percentage Agreement" />
+        </insert>
+
+        <insert tableName="phitagstatisticannotationmeasures">
+            <column name="id" value="SCOTT_PI" />
+            <column name="name" value="Scott's Pi" />
+        </insert>
+
+        <insert tableName="phitagstatisticannotationmeasures">
+            <column name="id" value="COHEN_KAPPA" />
+            <column name="name" value="Cohen's Kappa" />
+        </insert>
+
+        <insert tableName="phitagstatisticannotationmeasures">
+            <column name="id" value="RANDOLPH_KAPPA" />
+            <column name="name" value="Randolph's Kappa" />
+        </insert>
+
+        <insert tableName="phitagstatisticannotationmeasures">
+            <column name="id" value="FLEISS_KAPPA" />
+            <column name="name" value="Fleiss' Kappa" />
+        </insert>
+
+        <insert tableName="phitagstatisticannotationmeasures">
+            <column name="id" value="HUBERT_KAPPA" />
+            <column name="name" value="Hubert's Kappa" />
+        </insert>
+
+        <insert tableName="phitagstatisticannotationmeasures">
+            <column name="id" value="KRIPPENDORFF_ALPHA_INTERVAL" />
+            <column name="name" value="Krippendorff's Alpha - Interval" />
+        </insert>
+
+        <insert tableName="phitagstatisticannotationmeasures">
+            <column name="id" value="KRIPPENDORFF_ALPHA_NOMINAL" />
+            <column name="name" value="Krippendorff's Alpha - Nominal" />
+        </insert>
+
+        <insert tableName="phitagstatisticannotationmeasures">
+            <column name="id" value="KRIPPENDORFF_ALPHA_ORDINAL" />
+            <column name="name" value="Krippendorff's Alpha - Ordinal" />
+        </insert>
+
+        <insert tableName="phitagstatisticannotationmeasures">
+            <column name="id" value="KRIPPENDORFF_ALPHA_RATIO" />
+            <column name="name" value="Krippendorff's Alpha - Ratio" />
+        </insert>
+
+    </changeSet>
+</databaseChangeLog>

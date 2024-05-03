@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="202305231714" author="serge">
+
+        <createTable tableName="phitagdictionaryentrysense">
+
+            <column name="uname" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitagdictionaryentrysense" />
+            </column>
+
+            <column name="dname" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitagdictionaryentrysense" />
+            </column>
+
+            <column name="entryid" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitagdictionaryentrysense" />
+            </column>
+
+            <column name="senseid" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitagdictionaryentrysense" />
+            </column>
+
+            <column name="definition" type="varchar">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="senseorder" type="int">
+                <constraints nullable="false" />
+            </column>
+
+        </createTable>
+
+        <addForeignKeyConstraint
+            baseTableName="phitagdictionaryentrysense"
+            baseColumnNames="uname,dname,entryid"
+            constraintName="FK_phitagdictionaryentrysense_phitagdictionaryentry"
+            referencedTableName="phitagdictionaryentry"
+            referencedColumnNames="uname,dname,entryid"
+            onDelete="CASCADE"
+            onUpdate="CASCADE"
+        />
+
+    </changeSet>
+
+</databaseChangeLog>

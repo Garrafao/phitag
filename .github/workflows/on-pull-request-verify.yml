@@ -1,0 +1,20 @@
+name: verify-backend-on-pull
+run-name: Verify Back-End on Pull Request to Main or Development 
+on:
+  pull_request:
+    branches:
+      - main
+      - development
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: "17"
+          distribution: "temurin"
+      - name: Verify
+        run: cd backend && mvn verify

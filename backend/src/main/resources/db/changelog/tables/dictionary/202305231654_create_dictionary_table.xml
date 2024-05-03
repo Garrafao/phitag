@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="202305231654" author="serge">
+
+        <createTable tableName="phitagdictionary">
+            <column name="dname" type="varchar">
+                <constraints primaryKey="true" nullable="false" primaryKeyName="PK_phitagdictionary" />
+            </column>
+
+            <column name="uname" type="varchar">
+                <constraints primaryKey="true" nullable="false" primaryKeyName="PK_phitagdictionary" />
+            </column>
+
+            <column name="description" type="varchar"/>
+
+        </createTable>
+
+        <addForeignKeyConstraint
+            baseTableName="phitagdictionary"
+            baseColumnNames="uname"
+            constraintName="FK_phitagdictionary_phitaguser"
+            referencedTableName="phitaguser"
+            referencedColumnNames="username" />
+
+
+    </changeSet>
+
+</databaseChangeLog>

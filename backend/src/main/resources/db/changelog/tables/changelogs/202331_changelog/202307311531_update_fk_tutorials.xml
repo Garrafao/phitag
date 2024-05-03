@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="202307311533" author="serge">
+
+        <preConditions>
+            <foreignKeyConstraintExists foreignKeyName="FK_phitagphase_phitagtutorial_phitagphase" />
+            <foreignKeyConstraintExists
+                foreignKeyName="FK_phitagphase_phitagtutorial_phitagtutorial" />
+        </preConditions>
+
+        <dropForeignKeyConstraint
+            baseTableName="phitagphase_phitagtutorial"
+            constraintName="FK_phitagphase_phitagtutorial_phitagphase" />
+
+        <dropForeignKeyConstraint
+            baseTableName="phitagphase_phitagtutorial"
+            constraintName="FK_phitagphase_phitagtutorial_phitagtutorial" />
+
+        <addForeignKeyConstraint
+            baseTableName="phitagphase_phitagtutorial"
+            baseColumnNames="phitagphase_phasename, phitagphase_projectname, phitagphase_ownername"
+            constraintName="FK_phitagphase_phitagtutorial_phitagphase"
+            referencedTableName="phitagphase"
+            referencedColumnNames="name, projectname, ownername"
+            onDelete="CASCADE"
+        />
+
+        <addForeignKeyConstraint
+            baseTableName="phitagphase_phitagtutorial"
+            baseColumnNames="phitagtutorial_phasename, phitagtutorial_projectname, phitagtutorial_ownername"
+            constraintName="FK_phitagphase_phitagtutorial_phitagtutorial"
+            referencedTableName="phitagphase"
+            referencedColumnNames="name, projectname, ownername"
+            onDelete="CASCADE"
+        />
+
+    </changeSet>
+
+</databaseChangeLog>

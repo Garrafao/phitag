@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="7" author="serge">
+
+        <!-- Dictionary -->
+        <insert tableName="phitagdictionary">
+            <column name="dname" value="dictionary-0" />
+            <column name="uname" value="user-0" />
+            <column name="description" value="description-0" />
+        </insert>
+
+        <!-- Dictionary Entry -->
+        <insert tableName="phitagdictionaryentry">
+            <column name="uname" value="user-0" />
+            <column name="dname" value="dictionary-0" />
+            <column name="entryid" value="entry-0" />
+            <column name="headword" value="headword-0" />
+            <column name="partofspeech" value="pos-0" />
+        </insert>
+
+        <insert tableName="phitagdictionaryentry">
+            <column name="uname" value="user-0" />
+            <column name="dname" value="dictionary-0" />
+            <column name="entryid" value="entry-1" />
+            <column name="headword" value="headword-1" />
+            <column name="partofspeech" value="pos-1" />
+        </insert>
+
+        <!-- Dictionary Entry Sense -->
+
+        <insert tableName="phitagdictionaryentrysense">
+            <column name="uname" value="user-0" />
+            <column name="dname" value="dictionary-0" />
+            <column name="entryid" value="entry-0" />
+            <column name="senseid" value="sense-0" />
+            <column name="definition" value="definition-0" />
+            <column name="senseorder" value="0" />
+        </insert>
+
+        <insert tableName="phitagdictionaryentrysense">
+            <column name="uname" value="user-0" />
+            <column name="dname" value="dictionary-0" />
+            <column name="entryid" value="entry-0" />
+            <column name="senseid" value="sense-1" />
+            <column name="definition" value="definition-1" />
+            <column name="senseorder" value="1" />
+        </insert>
+
+        <!-- Dictionary Entry Sense Example -->
+
+        <insert tableName="phitagdictionaryentrysenseexample">
+            <column name="uname" value="user-0" />
+            <column name="dname" value="dictionary-0" />
+            <column name="entryid" value="entry-0" />
+            <column name="senseid" value="sense-0" />
+            <column name="exampleid" value="example-0" />
+            <column name="example" value="example-0" />
+            <column name="exampleorder" value="0" />
+        </insert>
+        
+        <insert tableName="phitagdictionaryentrysenseexample">
+            <column name="uname" value="user-0" />
+            <column name="dname" value="dictionary-0" />
+            <column name="entryid" value="entry-0" />
+            <column name="senseid" value="sense-0" />
+            <column name="exampleid" value="example-1" />
+            <column name="example" value="example-1" />
+            <column name="exampleorder" value="1" />
+        </insert>
+
+    </changeSet>
+</databaseChangeLog>

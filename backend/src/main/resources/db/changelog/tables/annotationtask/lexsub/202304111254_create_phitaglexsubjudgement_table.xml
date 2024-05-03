@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="202304111254" author="serge">
+
+        <createTable tableName="phitaglexsubjudgement">
+            <column name="uuid" type="varchar">
+                <constraints primaryKey="true" primaryKeyName="PK_phitaglexsubjudgement" />
+            </column>
+
+            <column name="instance_instanceid" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitaglexsubjudgement" />
+            </column>
+
+            <column name="instance_phasename" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitaglexsubjudgement" />
+            </column>
+
+            <column name="instance_projectname" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitaglexsubjudgement" />
+            </column>
+
+            <column name="instance_ownername" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitaglexsubjudgement" />
+            </column>
+
+            <column name="annotator_username" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitaglexsubjudgement" />
+            </column>
+
+            <column name="annotator_projectname" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitaglexsubjudgement" />
+            </column>
+
+            <column name="annotator_ownername" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitaglexsubjudgement" />
+            </column>
+
+            <column name="label" type="varchar">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="comment" type="varchar">
+                <constraints nullable="false" />
+            </column>
+
+        </createTable>
+
+        <addForeignKeyConstraint
+            baseTableName="phitaglexsubjudgement"
+            baseColumnNames="instance_instanceid, instance_phasename, instance_projectname, instance_ownername"
+            constraintName="FK_phitaglexsubjudgement_phitaglexsubinstance"
+            referencedTableName="phitaglexsubinstance"
+            referencedColumnNames="instanceid, phasename, projectname, ownername" />
+
+        <addForeignKeyConstraint
+            baseTableName="phitaglexsubjudgement"
+            baseColumnNames="annotator_username, annotator_projectname, annotator_ownername"
+            constraintName="FK_phitaglexsubjudgement_phitagannotator"
+            referencedTableName="phitagannotator"
+            referencedColumnNames="username, projectname, ownername" />
+
+    </changeSet>
+</databaseChangeLog>

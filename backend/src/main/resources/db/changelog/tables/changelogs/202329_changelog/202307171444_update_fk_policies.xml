@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="202307171444" author="serge">
+
+        <preConditions>
+            <foreignKeyConstraintExists foreignKeyName="FK_phitagannotator_phitaguser" />
+            <foreignKeyConstraintExists foreignKeyName="FK_phitagannotator_phitagproject" />
+
+            <foreignKeyConstraintExists foreignKeyName="FK_phitagphase_phitagproject" />
+
+            <foreignKeyConstraintExists
+                foreignKeyName="FK_phitagannotator_phitagtutorial_phitagannotator" />
+            <foreignKeyConstraintExists
+                foreignKeyName="FK_phitagannotator_phitagtutorial_phitagtutorial" />
+
+            <foreignKeyConstraintExists foreignKeyName="PK_phitagjoblisting_phitagproject" />
+
+            <foreignKeyConstraintExists foreignKeyName="FK_phitagusage_phitagproject" />
+
+            <foreignKeyConstraintExists foreignKeyName="FK_phitaglexsubinstance_phitagphase" />
+            <foreignKeyConstraintExists foreignKeyName="FK_phitaglexsubinstance_usage" />
+            <foreignKeyConstraintExists
+                foreignKeyName="FK_phitaglexsubjudgement_phitaglexsubinstance" />
+            <foreignKeyConstraintExists foreignKeyName="FK_phitaglexsubjudgement_phitagannotator" />
+
+            <foreignKeyConstraintExists foreignKeyName="FK_phitagusepairinstance_phitagphase" />
+            <foreignKeyConstraintExists foreignKeyName="FK_phitagusepairinstance_firstusage" />
+            <foreignKeyConstraintExists foreignKeyName="FK_phitagusepairinstance_secondusage" />
+            <foreignKeyConstraintExists
+                foreignKeyName="FK_phitagusepairjudgement_phitagusepairinstance" />
+            <foreignKeyConstraintExists foreignKeyName="FK_phitagusepairjudgement_phitagannotator" />
+
+            <foreignKeyConstraintExists foreignKeyName="FK_phitagwssimtag_phitagphase" />
+            <foreignKeyConstraintExists foreignKeyName="FK_phitagwssiminstance_phitagphase" />
+            <foreignKeyConstraintExists foreignKeyName="FK_phitagwssiminstance_usage" />
+            <foreignKeyConstraintExists foreignKeyName="FK_phitagwssiminstance_tag" />
+            <foreignKeyConstraintExists
+                foreignKeyName="FK_phitagwssimjudgement_phitagwssiminstance" />
+            <foreignKeyConstraintExists foreignKeyName="FK_phitagwssimjudgement_phitagannotator" />
+
+            <foreignKeyConstraintExists
+                foreignKeyName="FK_phitagannotationprocessinformation_phitagannotator" />
+            <foreignKeyConstraintExists
+                foreignKeyName="FK_phitagannotationprocessinformation_phitagphase" />
+            
+            <foreignKeyConstraintExists foreignKeyName="PK_phitaguideline_phitagproject" />
+
+            <foreignKeyConstraintExists foreignKeyName="FK_phitagtask_target" />
+            
+
+        </preConditions>
+
+        <!-- Annotators -->
+
+        <dropForeignKeyConstraint
+            baseTableName="phitagannotator"
+            constraintName="FK_phitagannotator_phitaguser" />
+
+        <addForeignKeyConstraint
+            baseTableName="phitagannotator"
+            baseColumnNames="username"
+            constraintName="FK_phitagannotator_phitaguser"
+            referencedTableName="phitaguser"
+            referencedColumnNames="username"
+            onDelete="CASCADE"
+        />
+
+        <dropForeignKeyConstraint
+            baseTableName="phitagannotator"
+            constraintName="FK_phitagannotator_phitagproject" />
+
+        <addForeignKeyConstraint
+            baseTableName="phitagannotator"
+            baseColumnNames="projectname, ownername"
+            constraintName="FK_phitagannotator_phitagproject"
+            referencedTableName="phitagproject"
+            referencedColumnNames="name, ownername"
+            onDelete="CASCADE"
+        />
+
+        <!-- Phase -->
+
+        <dropForeignKeyConstraint
+            baseTableName="phitagphase"
+            constraintName="FK_phitagphase_phitagproject" />
+
+        <addForeignKeyConstraint
+            baseTableName="phitagphase"
+            baseColumnNames="projectname, ownername"
+            constraintName="FK_phitagphase_phitagproject"
+            referencedTableName="phitagproject"
+            referencedColumnNames="name, ownername"
+            onDelete="CASCADE"
+        />
+
+        <dropForeignKeyConstraint
+            baseTableName="phitagannotator_phitagtutorial"
+            constraintName="FK_phitagannotator_phitagtutorial_phitagannotator" />
+
+        <addForeignKeyConstraint
+            baseTableName="phitagannotator_phitagtutorial"
+            baseColumnNames="phitagannotator_username, phitagannotator_projectname, phitagannotator_ownername"
+            constraintName="FK_phitagannotator_phitagtutorial_phitagannotator"
+            referencedTableName="phitagannotator"
+            referencedColumnNames="username, projectname, ownername"
+            onDelete="CASCADE"
+        />
+
+        <dropForeignKeyConstraint
+            baseTableName="phitagannotator_phitagtutorial"
+            constraintName="FK_phitagannotator_phitagtutorial_phitagtutorial" />
+
+        <addForeignKeyConstraint
+            baseTableName="phitagannotator_phitagtutorial"
+            baseColumnNames="phitagtutorial_phasename, phitagtutorial_projectname, phitagtutorial_ownername"
+            constraintName="FK_phitagannotator_phitagtutorial_phitagtutorial"
+            referencedTableName="phitagphase"
+            referencedColumnNames="name, projectname, ownername"
+            onDelete="CASCADE"
+        />
+
+        <!-- Joblisting -->
+
+        <dropForeignKeyConstraint
+            baseTableName="phitagjoblisting"
+            constraintName="PK_phitagjoblisting_phitagproject" />
+
+        <addForeignKeyConstraint
+            baseTableName="phitagjoblisting"
+            baseColumnNames="projectname, ownername"
+            constraintName="PK_phitagjoblisting_phitagproject"
+            referencedTableName="phitagproject"
+            referencedColumnNames="name, ownername"
+            onDelete="CASCADE"
+        />
+
+        <!-- Usage -->
+
+        <dropForeignKeyConstraint
+            baseTableName="phitagusage"
+            constraintName="FK_phitagusage_phitagproject" />
+
+        <addForeignKeyConstraint
+            baseTableName="phitagusage"
+            baseColumnNames="projectname, ownername"
+            constraintName="FK_phitagusage_phitagproject"
+            referencedTableName="phitagproject"
+            referencedColumnNames="name, ownername"
+            onDelete="CASCADE"
+        />
+
+        <!-- LEXSUB Instance -->
+
+        <dropForeignKeyConstraint
+            baseTableName="phitaglexsubinstance"
+            constraintName="FK_phitaglexsubinstance_phitagphase" />
+
+        <addForeignKeyConstraint
+            baseTableName="phitaglexsubinstance"
+            baseColumnNames="phasename, projectname, ownername"
+            constraintName="FK_phitaglexsubinstance_phitagphase"
+            referencedTableName="phitagphase"
+            referencedColumnNames="name, projectname, ownername"
+            onDelete="CASCADE"
+        />
+
+        <dropForeignKeyConstraint
+            baseTableName="phitaglexsubinstance"
+            constraintName="FK_phitaglexsubinstance_usage" />
+
+        <addForeignKeyConstraint
+            baseTableName="phitaglexsubinstance"
+            baseColumnNames="phitagusage_dataid, phitagusage_projectname, phitagusage_ownername"
+            constraintName="FK_phitaglexsubinstance_usage"
+            referencedTableName="phitagusage"
+            referencedColumnNames="dataid, projectname, ownername"
+            onDelete="CASCADE"
+        />
+
+        <!-- LEXSUB Judgement -->
+
+        <dropForeignKeyConstraint
+            baseTableName="phitaglexsubjudgement"
+            constraintName="FK_phitaglexsubjudgement_phitaglexsubinstance" />
+
+        <addForeignKeyConstraint
+            baseTableName="phitaglexsubjudgement"
+            baseColumnNames="instance_instanceid, instance_phasename, instance_projectname, instance_ownername"
+            constraintName="FK_phitaglexsubjudgement_phitaglexsubinstance"
+            referencedTableName="phitaglexsubinstance"
+            referencedColumnNames="instanceid, phasename, projectname, ownername"
+            onDelete="CASCADE"
+        />
+
+        <dropForeignKeyConstraint
+            baseTableName="phitaglexsubjudgement"
+            constraintName="FK_phitaglexsubjudgement_phitagannotator" />
+
+        <addForeignKeyConstraint
+            baseTableName="phitaglexsubjudgement"
+            baseColumnNames="annotator_username, annotator_projectname, annotator_ownername"
+            constraintName="FK_phitaglexsubjudgement_phitagannotator"
+            referencedTableName="phitagannotator"
+            referencedColumnNames="username, projectname, ownername"
+            onDelete="CASCADE"
+        />
+
+
+        <!-- Usepair Instance -->
+
+        <dropForeignKeyConstraint
+            baseTableName="phitagusepairinstance"
+            constraintName="FK_phitagusepairinstance_phitagphase" />
+
+        <addForeignKeyConstraint
+            baseTableName="phitagusepairinstance"
+            baseColumnNames="phasename, projectname, ownername"
+            constraintName="FK_phitagusepairinstance_phitagphase"
+            referencedTableName="phitagphase"
+            referencedColumnNames="name, projectname, ownername"
+            onDelete="CASCADE"
+        />
+
+        <dropForeignKeyConstraint
+            baseTableName="phitagusepairinstance"
+            constraintName="FK_phitagusepairinstance_firstusage" />
+
+        <addForeignKeyConstraint
+            baseTableName="phitagusepairinstance"
+            baseColumnNames="phitagusage_first_dataid, phitagusage_first_projectname, phitagusage_first_ownername"
+            constraintName="FK_phitagusepairinstance_firstusage"
+            referencedTableName="phitagusage"
+            referencedColumnNames="dataid, projectname, ownername"
+            onDelete="CASCADE"
+        />
+
+        <dropForeignKeyConstraint
+            baseTableName="phitagusepairinstance"
+            constraintName="FK_phitagusepairinstance_secondusage" />
+
+        <addForeignKeyConstraint
+            baseTableName="phitagusepairinstance"
+            baseColumnNames="phitagusage_second_dataid, phitagusage_second_projectname, phitagusage_second_ownername"
+            constraintName="FK_phitagusepairinstance_secondusage"
+            referencedTableName="phitagusage"
+            referencedColumnNames="dataid, projectname, ownername"
+            onDelete="CASCADE"
+        />
+
+        <!-- Usepair Judgements -->
+
+        <dropForeignKeyConstraint
+            baseTableName="phitagusepairjudgement"
+            constraintName="FK_phitagusepairjudgement_phitagusepairinstance" />
+
+        <addForeignKeyConstraint
+            baseTableName="phitagusepairjudgement"
+            baseColumnNames="instance_instanceid, instance_phasename, instance_projectname, instance_ownername"
+            constraintName="FK_phitagusepairjudgement_phitagusepairinstance"
+            referencedTableName="phitagusepairinstance"
+            referencedColumnNames="instanceid, phasename, projectname, ownername"
+            onDelete="CASCADE"
+        />
+
+        <dropForeignKeyConstraint
+            baseTableName="phitagusepairjudgement"
+            constraintName="FK_phitagusepairjudgement_phitagannotator" />
+
+        <addForeignKeyConstraint
+            baseTableName="phitagusepairjudgement"
+            baseColumnNames="annotator_username, annotator_projectname, annotator_ownername"
+            constraintName="FK_phitagusepairjudgement_phitagannotator"
+            referencedTableName="phitagannotator"
+            referencedColumnNames="username, projectname, ownername"
+            onDelete="CASCADE"
+        />
+
+        <!-- WSSIM Tag -->
+
+        <dropForeignKeyConstraint
+            baseTableName="phitagwssimtag"
+            constraintName="FK_phitagwssimtag_phitagphase" />
+
+        <addForeignKeyConstraint
+            baseTableName="phitagwssimtag"
+            baseColumnNames="phasename, projectname, ownername"
+            constraintName="FK_phitagwssimtag_phitagphase"
+            referencedTableName="phitagphase"
+            referencedColumnNames="name, projectname, ownername" 
+            onDelete="CASCADE"
+        />
+
+        <!-- WSSIM Instance -->
+
+        <dropForeignKeyConstraint
+            baseTableName="phitagwssiminstance"
+            constraintName="FK_phitagwssiminstance_phitagphase" />
+
+        <addForeignKeyConstraint
+            baseTableName="phitagwssiminstance"
+            baseColumnNames="phasename, projectname, ownername"
+            constraintName="FK_phitagwssiminstance_phitagphase"
+            referencedTableName="phitagphase"
+            referencedColumnNames="name, projectname, ownername"
+            onDelete="CASCADE"
+        />
+
+        <dropForeignKeyConstraint
+            baseTableName="phitagwssiminstance"
+            constraintName="FK_phitagwssiminstance_usage" />
+
+        <addForeignKeyConstraint
+            baseTableName="phitagwssiminstance"
+            baseColumnNames="phitagusage_dataid, phitagusage_projectname, phitagusage_ownername"
+            constraintName="FK_phitagwssiminstance_usage"
+            referencedTableName="phitagusage"
+            referencedColumnNames="dataid, projectname, ownername"
+            onDelete="CASCADE"
+        />
+
+        <dropForeignKeyConstraint
+            baseTableName="phitagwssiminstance"
+            constraintName="FK_phitagwssiminstance_tag" />
+
+        <addForeignKeyConstraint
+            baseTableName="phitagwssiminstance"
+            baseColumnNames="phitagwssimtag_tagid, phitagwssimtag_phasename, phitagwssimtag_projectname, phitagwssimtag_ownername"
+            constraintName="FK_phitagwssiminstance_tag"
+            referencedTableName="phitagwssimtag"
+            referencedColumnNames="tagid, phasename, projectname, ownername"
+            onDelete="CASCADE"
+        />
+
+        <!-- WSSIM Judgement -->
+
+        <dropForeignKeyConstraint
+            baseTableName="phitagwssimjudgement"
+            constraintName="FK_phitagwssimjudgement_phitagwssiminstance" />
+
+        <addForeignKeyConstraint
+            baseTableName="phitagwssimjudgement"
+            baseColumnNames="instance_instanceid, instance_phasename, instance_projectname, instance_ownername"
+            constraintName="FK_phitagwssimjudgement_phitagwssiminstance"
+            referencedTableName="phitagwssiminstance"
+            referencedColumnNames="instanceid, phasename, projectname, ownername"
+            onDelete="CASCADE"
+        />
+
+        <dropForeignKeyConstraint
+            baseTableName="phitagwssimjudgement"
+            constraintName="FK_phitagwssimjudgement_phitagannotator" />
+
+        <addForeignKeyConstraint
+            baseTableName="phitagwssimjudgement"
+            baseColumnNames="annotator_username, annotator_projectname, annotator_ownername"
+            constraintName="FK_phitagwssimjudgement_phitagannotator"
+            referencedTableName="phitagannotator"
+            referencedColumnNames="username, projectname, ownername"
+            onDelete="CASCADE"
+        />
+
+        <!-- Annotation Process -->
+
+        <dropForeignKeyConstraint
+            baseTableName="phitagannotationprocessinformation"
+            constraintName="FK_phitagannotationprocessinformation_phitagannotator" />
+
+        <addForeignKeyConstraint
+            baseTableName="phitagannotationprocessinformation"
+            baseColumnNames="annotator_username, annotator_projectname, annotator_ownername"
+            constraintName="FK_phitagannotationprocessinformation_phitagannotator"
+            referencedTableName="phitagannotator"
+            referencedColumnNames="username, projectname, ownername" 
+            onDelete="CASCADE"
+        />
+
+        <dropForeignKeyConstraint
+            baseTableName="phitagannotationprocessinformation"
+            constraintName="FK_phitagannotationprocessinformation_phitagphase" />
+
+        <addForeignKeyConstraint
+            baseTableName="phitagannotationprocessinformation"
+            baseColumnNames="phase_name, phase_projectname, phase_ownername"
+            constraintName="FK_phitagannotationprocessinformation_phitagphase"
+            referencedTableName="phitagphase"
+            referencedColumnNames="name, projectname, ownername" 
+            onDelete="CASCADE"
+        />
+            
+
+        <!-- Guidelines -->
+
+        <dropForeignKeyConstraint
+            baseTableName="phitaguideline"
+            constraintName="PK_phitaguideline_phitagproject" />
+
+        <addForeignKeyConstraint
+            baseTableName="phitaguideline"
+            baseColumnNames="projectname, ownername"
+            constraintName="PK_phitaguideline_phitagproject"
+            referencedTableName="phitagproject"
+            referencedColumnNames="name, ownername" 
+            onDelete="CASCADE"
+        />
+
+        <!-- Tasks -->
+
+        <dropForeignKeyConstraint
+            baseTableName="phitagtask"
+            constraintName="FK_phitagtask_target" />
+
+
+        <addForeignKeyConstraint
+            baseTableName="phitagtask"
+            baseColumnNames="target_phasename, target_projectname, target_ownername"
+            constraintName="FK_phitagtask_target"
+            referencedTableName="phitagphase"
+            referencedColumnNames="name, projectname, ownername"
+            onDelete="CASCADE"
+        />
+
+
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,920 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+
+    <changeSet id="202304041549" author="serge">
+        <!-- User Statistic -->
+        <insert tableName="phitaguserstatistic">
+            <column name="username" value="Example-User" />
+            <column name="projectcount" value="2" />
+        </insert>
+
+        <insert tableName="phitag_projectlanguage_count">
+            <column name="username" value="Example-User" />
+            <column name="language" value="English" />
+            <column name="count" value="2" />
+        </insert>
+
+        <insert tableName="phitag_annotationtype_count">
+            <column name="username" value="Example-User" />
+            <column name="annotationtype" value="ANNOTATIONTYPE_USEPAIR" />
+            <column name="count" value="1" />
+        </insert>
+        <insert tableName="phitag_annotationtype_count">
+            <column name="username" value="Example-User" />
+            <column name="annotationtype" value="ANNOTATIONTYPE_USERANK" />
+            <column name="count" value="1" />
+        </insert>
+
+        <insert tableName="phitag_annotationtype_count">
+            <column name="username" value="Example-User" />
+            <column name="annotationtype" value="ANNOTATIONTYPE_WSSIM" />
+            <column name="count" value="1" />
+        </insert>
+
+        <!-- Project Statistic -->
+        <!-- Use Pair -->
+        <insert tableName="phitagprojectstatistic">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemmacount" value="46" />
+            <column name="usagecount" value="9107" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="afternoon_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="attack_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="bag_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="ball_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="bar_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="bit_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="chairman_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="chef_nn" />
+            <column name="count" value="165" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="circle_vb" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="contemplation_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="donkey_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="edge_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="face_nn" />
+            <column name="count" value="165" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="fiction_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="gas_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="graft_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="grain_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="head_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="heel_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="include_vb" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="land_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="lane_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="lass_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="maxim_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="multitude_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="ounce_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="part_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="pick_vb" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="pin_vb" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="plane_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="player_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="quilt_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="rag_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="rally_nn" />
+            <column name="count" value="161" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="record_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="relationship_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="risk_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="savage_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="stab_nn" />
+            <column name="count" value="192" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="stroke_vb" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="thump_nn" />
+            <column name="count" value="189" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="tip_vb" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="tree_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="twist_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="lemma" value="word_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <!-- Use Rank -->
+        <insert tableName="phitagprojectstatistic">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemmacount" value="46" />
+            <column name="usagecount" value="9107" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="afternoon_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="attack_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="bag_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="ball_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="bar_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="bit_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="chairman_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="chef_nn" />
+            <column name="count" value="165" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="circle_vb" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="contemplation_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="donkey_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="edge_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="face_nn" />
+            <column name="count" value="165" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="fiction_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="gas_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="graft_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="grain_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="head_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="heel_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="include_vb" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="land_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="lane_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="lass_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="maxim_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="multitude_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="ounce_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="part_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="pick_vb" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="pin_vb" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="plane_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="player_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="quilt_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="rag_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="rally_nn" />
+            <column name="count" value="161" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="record_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="relationship_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="risk_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="savage_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="stab_nn" />
+            <column name="count" value="192" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="stroke_vb" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="thump_nn" />
+            <column name="count" value="189" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="tip_vb" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="tree_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="twist_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="lemma" value="word_nn" />
+            <column name="count" value="200" />
+        </insert>
+
+
+
+
+        <!-- WSSIM  -->
+        <insert tableName="phitagprojectstatistic">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSSIM" />
+            <column name="lemmacount" value="26" />
+            <column name="usagecount" value="260" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSSIM" />
+            <column name="lemma" value="account.n" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSSIM" />
+            <column name="lemma" value="bright.a" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSSIM" />
+            <column name="lemma" value="coach.n" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSSIM" />
+            <column name="lemma" value="dismiss.v" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSSIM" />
+            <column name="lemma" value="fire.v" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSSIM" />
+            <column name="lemma" value="fix.v" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSSIM" />
+            <column name="lemma" value="function.n" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSSIM" />
+            <column name="lemma" value="hold.v" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSSIM" />
+            <column name="lemma" value="investigator.n" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSSIM" />
+            <column name="lemma" value="lead.n" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSSIM" />
+            <column name="lemma" value="neat.a" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSSIM" />
+            <column name="lemma" value="new.a" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSSIM" />
+            <column name="lemma" value="order.v" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSSIM" />
+            <column name="lemma" value="range.n" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSSIM" />
+            <column name="lemma" value="rich.a" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSSIM" />
+            <column name="lemma" value="ring.n" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSSIM" />
+            <column name="lemma" value="rough.a" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSSIM" />
+            <column name="lemma" value="scrap.n" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSSIM" />
+            <column name="lemma" value="severely.r" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSSIM" />
+            <column name="lemma" value="shade.n" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSSIM" />
+            <column name="lemma" value="shed.v" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSSIM" />
+            <column name="lemma" value="skip.v" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSSIM" />
+            <column name="lemma" value="soft.a" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSSIM" />
+            <column name="lemma" value="stiff.a" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSSIM" />
+            <column name="lemma" value="suffer.v" />
+            <column name="count" value="10" />
+        </insert>
+
+        <!-- Phase Statistic -->
+        <insert tableName="phitagphasestatistic">
+            <column name="ownername" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="phasename" value="ALL" />
+            <column name="annotations" value="0" />
+            <column name="krippendorffalpha" value="0.0" />
+        </insert>
+        <insert tableName="phitagphasestatistic">
+            <column name="ownername" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="phasename" value="ALL" />
+            <column name="annotations" value="0" />
+            <column name="krippendorffalpha" value="0.0" />
+        </insert>
+
+
+        <insert tableName="phitagphasestatistic">
+            <column name="ownername" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSSIM" />
+            <column name="phasename" value="ALL" />
+            <column name="annotations" value="0" />
+            <column name="krippendorffalpha" value="0.0" />
+        </insert>
+
+        <!-- Annotator -->
+        <insert tableName="phitagannotatorstatistic">
+            <column name="annotatorname" value="Example-User" />
+            <column name="ownername" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Pair" />
+            <column name="annotations" value="0" />
+            <column name="krippendorffalpha" value="0.0" />
+        </insert>
+
+        <insert tableName="phitagannotatorstatistic">
+            <column name="annotatorname" value="Example-User" />
+            <column name="ownername" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSSIM" />
+            <column name="annotations" value="0" />
+            <column name="krippendorffalpha" value="0.0" />
+        </insert>
+        <insert tableName="phitagannotatorstatistic">
+            <column name="annotatorname" value="Example-User" />
+            <column name="ownername" value="Example-User" />
+            <column name="projectname" value="Example-Project-Use-Rank" />
+            <column name="annotations" value="0" />
+            <column name="krippendorffalpha" value="0.0" />
+        </insert>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="202211161722" author="serge">
+
+        <createTable tableName="phitagannotator_phitagtutorial">
+            <column name="phitagannotator_username" type="varchar">
+                <constraints nullable="false" primaryKey="true" />
+            </column>
+
+            <column name="phitagannotator_projectname" type="varchar">
+                <constraints nullable="false" primaryKey="true" />
+            </column>
+
+            <column name="phitagannotator_ownername" type="varchar">
+                <constraints nullable="false" primaryKey="true" />
+            </column>
+
+            <column name="phitagtutorial_phasename" type="varchar">
+                <constraints nullable="false" primaryKey="true" />
+            </column>
+
+            <column name="phitagtutorial_projectname" type="varchar">
+                <constraints nullable="false" primaryKey="true" />
+            </column>
+
+            <column name="phitagtutorial_ownername" type="varchar">
+                <constraints nullable="false" primaryKey="true" />
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint
+            baseTableName="phitagannotator_phitagtutorial"
+            baseColumnNames="phitagannotator_username, phitagannotator_projectname, phitagannotator_ownername"
+            constraintName="FK_phitagannotator_phitagtutorial_phitagannotator"
+            referencedTableName="phitagannotator"
+            referencedColumnNames="username, projectname, ownername" />
+
+        <addForeignKeyConstraint
+            baseTableName="phitagannotator_phitagtutorial"
+            baseColumnNames="phitagtutorial_phasename, phitagtutorial_projectname, phitagtutorial_ownername"
+            constraintName="FK_phitagannotator_phitagtutorial_phitagtutorial"
+            referencedTableName="phitagphase"
+            referencedColumnNames="name, projectname, ownername" />
+
+    </changeSet>
+</databaseChangeLog>

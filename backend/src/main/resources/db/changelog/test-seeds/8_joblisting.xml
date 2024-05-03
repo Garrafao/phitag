@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="8" author="serge">
+
+        <!-- Joblisting -->
+
+        <insert tableName="phitagjoblisting">
+            <column name="name" value="joblisting-0" />
+            <column name="projectname" value="project-0" />
+            <column name="ownername" value="user-0" />
+            <column name="displayname" value="displayname-0" />
+            <column name="open" value="false" />
+            <column name="active" value="true" />
+            <column name="description" value="description-0" />
+            <column name="phasename" value="phase-0" />
+        </insert>
+
+
+        <insert tableName="phitagjoblisting">
+            <column name="name" value="joblisting-1" />
+            <column name="projectname" value="project-0" />
+            <column name="ownername" value="user-0" />
+            <column name="displayname" value="displayname-0" />
+            <column name="open" value="true" />
+            <column name="active" value="true" />
+            <column name="description" value="description-0" />
+            <column name="phasename" value="phase-1" />
+        </insert>
+
+        <!-- Joblisting Join Table -->
+
+        <insert tableName="phitagjoblisting_phitaguser">
+            <column name="phitagjoblisting_name" value="joblisting-0" />
+            <column name="phitagjoblisting_projectname" value="project-0" />
+            <column name="phitagjoblisting_ownername" value="user-0" />
+            <column name="phitaguser_username" value="user-2" />
+        </insert>
+
+    </changeSet>
+</databaseChangeLog>

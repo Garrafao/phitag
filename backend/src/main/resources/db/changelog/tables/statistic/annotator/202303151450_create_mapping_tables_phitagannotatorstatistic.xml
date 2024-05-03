@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="202303141732" author="serge">
+
+        <createTable tableName="phitag_annotatorstatistic_interannotator_krippendorffalpha">
+            <column name="annotatorname" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitag_annotatorstatistic_interannotator_krippendorffalpha" />
+            </column>
+
+            <column name="ownername" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitag_annotatorstatistic_interannotator_krippendorffalpha" />
+            </column>
+
+            <column name="projectname" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitag_annotatorstatistic_interannotator_krippendorffalpha" />
+            </column>
+
+            <column name="interannotator_name" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitag_annotatorstatistic_interannotator_krippendorffalpha" />
+            </column>
+
+            <column name="krippendorffalpha" type="double">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+
+
+        <addForeignKeyConstraint
+            baseTableName="phitag_annotatorstatistic_interannotator_krippendorffalpha"
+            baseColumnNames="annotatorname, ownername, projectname"
+            constraintName="FK_phitag_annotatorstatistic_interannotator_krippendorffalpha"
+            referencedTableName="phitagannotatorstatistic"
+            referencedColumnNames="annotatorname, ownername, projectname" />
+
+        <createTable tableName="phitag_annotatorstatistic_phase_annotation">
+            <column name="annotatorname" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitag_annotatorstatistic_phase_annotation" />
+            </column>
+
+            <column name="ownername" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitag_annotatorstatistic_phase_annotation" />
+            </column>
+
+            <column name="projectname" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitag_annotatorstatistic_phase_annotation" />
+            </column>
+
+            <column name="phase" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitag_annotatorstatistic_phase_annotation" />
+            </column>
+
+            <column name="annotations" type="int">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+
+
+        <addForeignKeyConstraint
+            baseTableName="phitag_annotatorstatistic_phase_annotation"
+            baseColumnNames="annotatorname, ownername, projectname"
+            constraintName="FK_phitag_annotatorstatistic_phase_annotation"
+            referencedTableName="phitagannotatorstatistic"
+            referencedColumnNames="annotatorname, ownername, projectname" />
+
+
+    </changeSet>
+</databaseChangeLog>

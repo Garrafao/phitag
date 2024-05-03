@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+
+    <changeSet id="1" author="serge">
+
+
+        <!-- Add example projects -->
+        <insert tableName="phitagproject">
+            <column name="name" value="project-0" />
+            <column name="ownername" value="user-0" />
+            <column name="displayname" value="project-0" />
+            <column name="active" value="true" />
+            <column name="phitagvisibility_name" value="VISIBILITY_PUBLIC" />
+            <column name="phitaglanguage_name" value="English" />
+            <column name="description" value="" />
+        </insert>
+
+        <insert tableName="phitagproject">
+            <column name="name" value="project-1" />
+            <column name="ownername" value="user-0" />
+            <column name="displayname" value="project-1" />
+            <column name="active" value="true" />
+            <column name="phitagvisibility_name" value="VISIBILITY_PRIVATE" />
+            <column name="phitaglanguage_name" value="English" />
+            <column name="description" value="" />
+        </insert>
+
+        <!-- Add users as annotator -->
+
+        <insert tableName="phitagannotator">
+            <column name="username" value="user-0" />
+            <column name="projectname" value="project-0" />
+            <column name="ownername" value="user-0" />
+            <column name="phitagentitlement_name" value="ENTITLEMENT_ADMIN" />
+        </insert>
+
+
+        <insert tableName="phitagannotator">
+            <column name="username" value="user-1" />
+            <column name="projectname" value="project-0" />
+            <column name="ownername" value="user-0" />
+            <column name="phitagentitlement_name" value="ENTITLEMENT_USER" />
+        </insert>
+
+        <insert tableName="phitagannotator">
+            <column name="username" value="user-0" />
+            <column name="projectname" value="project-1" />
+            <column name="ownername" value="user-0" />
+            <column name="phitagentitlement_name" value="ENTITLEMENT_ADMIN" />
+        </insert>
+
+        <!-- Add statics -->
+
+        <insert tableName="phitaguserstatistic">
+            <column name="username" value="user-0" />
+            <column name="projectcount" value="2" />
+        </insert>
+
+        <insert tableName="phitag_projectlanguage_count">
+            <column name="username" value="user-0" />
+            <column name="language" value="English" />
+            <column name="count" value="2" />
+        </insert>
+
+        <insert tableName="phitagprojectstatistic">
+            <column name="username" value="user-0" />
+            <column name="projectname" value="project-0" />
+            <column name="lemmacount" value="1" />
+            <column name="usagecount" value="3" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="user-0" />
+            <column name="projectname" value="project-0" />
+            <column name="lemma" value="ball_nn" />
+            <column name="count" value="3" />
+        </insert>
+
+        <insert tableName="phitagprojectstatistic">
+            <column name="username" value="user-0" />
+            <column name="projectname" value="project-1" />
+            <column name="lemmacount" value="1" />
+            <column name="usagecount" value="2" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="user-0" />
+            <column name="projectname" value="project-1" />
+            <column name="lemma" value="ball_nn" />
+            <column name="count" value="2" />
+        </insert>
+
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+
+    <changeSet id="202304041549" author="serge">
+        <insert tableName="phitagjoblisting">
+            <column name="name" value="Example-Use-Pair-Annotation-Joblisting"/>
+            <column name="projectname" value="Example-Project-Use-Pair"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="displayname" value="Example-Use-Pair-Annotation-Joblisting"/>
+            <column name="phasename" value="Example-Use-Pair-Annotation-Joblisting"/>
+            <column name="open" value="true"/>
+            <column name="active" value="true"/>
+            <column name="description" value="This is an example job listing for Use Pair Annotation. It is used to show how the job listing feature works."/>
+        </insert>
+        
+        <insert tableName="phitagjoblisting">
+            <column name="name" value="Example-WSSIM-Annotation-Joblisting"/>
+            <column name="projectname" value="Example-Project-WSSIM"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="displayname" value="Example-WSSIM-Annotation-Joblisting"/>
+            <column name="phasename" value="Example-Project-WSSIM"/>
+            <column name="open" value="true"/>
+            <column name="active" value="true"/>
+            <column name="description" value="This is an example job listing for WSSIM Annotation. It is used to show how the job listing feature works."/>
+        </insert>
+        <insert tableName="phitagjoblisting">
+            <column name="name" value="Example-Use-Rank-Annotation-Joblisting"/>
+            <column name="projectname" value="Example-Project-Use-Rank"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="displayname" value="Example-Use-Rank-Annotation-Joblisting"/>
+            <column name="phasename" value="Example-Use-Rank-Annotation-Joblisting"/>
+            <column name="open" value="true"/>
+            <column name="active" value="true"/>
+            <column name="description" value="This is an example job listing for Use Rank Annotation. It is used to show how the job listing feature works."/>
+        </insert>
+        
+
+    </changeSet>
+
+</databaseChangeLog>

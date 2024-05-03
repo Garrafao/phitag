@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="202211161712" author="serge">
+
+        <createTable tableName="phitagannotator">
+
+            <column name="username" type="varchar">
+                <constraints primaryKey="true" nullable="false" primaryKeyName="PK_phitagannotator" />
+            </column>
+
+            <column name="projectname" type="varchar">
+                <constraints primaryKey="true" nullable="false" primaryKeyName="PK_phitagannotator" />
+            </column>
+
+            <column name="ownername" type="varchar">
+                <constraints primaryKey="true" nullable="false" primaryKeyName="PK_phitagannotator" />
+            </column>
+
+            <column name="phitagentitlement_name" type="varchar">
+                <constraints nullable="false" references="phitagentitlement(name)"
+                    foreignKeyName="FK_phitagannotator_phitagentitlement" />
+            </column>
+
+        </createTable>
+
+        <addForeignKeyConstraint
+            baseTableName="phitagannotator"
+            baseColumnNames="username"
+            constraintName="FK_phitagannotator_phitaguser"
+            referencedTableName="phitaguser"
+            referencedColumnNames="username" />
+
+        <addForeignKeyConstraint
+            baseTableName="phitagannotator"
+            baseColumnNames="projectname, ownername"
+            constraintName="FK_phitagannotator_phitagproject"
+            referencedTableName="phitagproject"
+            referencedColumnNames="name, ownername" />
+
+    </changeSet>
+</databaseChangeLog>

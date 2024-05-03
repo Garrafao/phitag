@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+
+    <changeSet id="202304041405" author="serge">
+
+        
+        <!-- Add "Example" Projects -->
+        <insert tableName="phitagproject">
+            <column name="name" value="Example-Project-LEXSUB"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="displayname" value="Example-Project-LEXSUB"/>
+            <column name="active" value="true"/>
+            <column name="phitagvisibility_name" value="VISIBILITY_PUBLIC"/>
+            <column name="phitaglanguage_name" value="English"/>
+            <column name="description" value="An example project showing the lexical substitution annotation task, with data from the annotation standardization repository: https://github.com/ChangeIsKey/annotation_standardization"/>
+        </insert>
+
+        <insert tableName="phitagproject">
+            <column name="name" value="Example-Project-WSBEST"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="displayname" value="Example-Project-WSBEST"/>
+            <column name="active" value="true"/>
+            <column name="phitagvisibility_name" value="VISIBILITY_PUBLIC"/>
+            <column name="phitaglanguage_name" value="English"/>
+            <column name="description" value="An example project showing the WSBEST annotation task, with data from the annotation standardization repository: https://github.com/ChangeIsKey/annotation_standardization"/>
+        </insert>
+
+        <!-- Add user as annotator -->
+
+        <insert tableName="phitagannotator">
+            <column name="username" value="Example-User"/>
+            <column name="projectname" value="Example-Project-LEXSUB"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="phitagentitlement_name" value="ENTITLEMENT_ADMIN"/>
+        </insert>
+
+
+        <insert tableName="phitagannotator">
+            <column name="username" value="Example-User"/>
+            <column name="projectname" value="Example-Project-WSBEST"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="phitagentitlement_name" value="ENTITLEMENT_ADMIN"/>
+        </insert>
+
+        <!-- Phase -->
+
+        <insert tableName="phitagphase">
+            <column name="name" value="ALL"/>
+            <column name="projectname" value="Example-Project-LEXSUB"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="displayname" value="ALL"/>
+            <column name="phitagannotationtype_name" value="ANNOTATIONTYPE_LEXSUB"/>
+            <column name="phitagsamplingstrategy_name" value="SAMPLING_RANDOM_WITH_REPLACEMENT"/>
+            <column name="description" value="Phase, where all lemmas are considered"/>
+            <column name="is_tutorial" value="false"/>
+            <column name="status" value="OPEN"/>
+        </insert>
+
+
+        <insert tableName="phitagphase">
+            <column name="name" value="ALL"/>
+            <column name="projectname" value="Example-Project-WSBEST"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="displayname" value="ALL"/>
+            <column name="phitagannotationtype_name" value="ANNOTATIONTYPE_WSSIM"/>
+            <column name="phitagsamplingstrategy_name" value="SAMPLING_RANDOM_WITH_REPLACEMENT"/>
+            <column name="description" value="Phase, where all lemmas are considered"/>
+            <column name="is_tutorial" value="false"/>
+            <column name="status" value="OPEN"/>
+        </insert>
+
+        <!-- Joblisting -->
+
+        <insert tableName="phitagjoblisting">
+            <column name="name" value="Example-LEXSUB-Annotation-Joblisting"/>
+            <column name="projectname" value="Example-Project-LEXSUB"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="displayname" value="Example-LEXSUB-Annotation-Joblisting"/>
+            <column name="phasename" value="Example-LEXSUB-Annotation-Joblisting"/>
+            <column name="open" value="true"/>
+            <column name="active" value="true"/>
+            <column name="description" value="This is an example job listing for lexical substitution annotation. It is used to show how the job listing feature works."/>
+        </insert>
+        
+        <insert tableName="phitagjoblisting">
+            <column name="name" value="Example-WSBEST-Annotation-Joblisting"/>
+            <column name="projectname" value="Example-Project-WSBEST"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="displayname" value="Example-WSBEST-Annotation-Joblisting"/>
+            <column name="phasename" value="Example-LEXSUB-Annotation-Joblisting"/>
+            <column name="open" value="true"/>
+            <column name="active" value="true"/>
+            <column name="description" value="This is an example job listing for WSBEST annotation. It is used to show how the job listing feature works."/>
+        </insert>
+
+    </changeSet>
+</databaseChangeLog>

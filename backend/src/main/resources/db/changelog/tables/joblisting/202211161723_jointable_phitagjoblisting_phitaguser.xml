@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="202211161723" author="serge">
+
+        <createTable tableName="phitagjoblisting_phitaguser">
+
+
+            <column name="phitagjoblisting_name" type="varchar">
+                <constraints nullable="false" primaryKey="true" />
+            </column>
+
+            <column name="phitagjoblisting_projectname" type="varchar">
+                <constraints nullable="false" primaryKey="true" />
+            </column>
+
+            <column name="phitagjoblisting_ownername" type="varchar">
+                <constraints nullable="false" primaryKey="true" />
+            </column>
+
+            <column name="phitaguser_username" type="varchar">
+                <constraints nullable="false" primaryKey="true" />
+            </column>
+
+        </createTable>
+
+        <addForeignKeyConstraint
+            baseTableName="phitagjoblisting_phitaguser"
+            baseColumnNames="phitagjoblisting_name, phitagjoblisting_projectname, phitagjoblisting_ownername"
+            constraintName="FK_phitaguser_phitagjoblisting_phitagjoblisting"
+            referencedTableName="phitagjoblisting"
+            referencedColumnNames="name, projectname, ownername" />
+
+        <addForeignKeyConstraint
+            baseTableName="phitagjoblisting_phitaguser"
+            baseColumnNames="phitaguser_username"
+            constraintName="FK_phitaguser_phitagjoblisting_phitaguser"
+            referencedTableName="phitaguser"
+            referencedColumnNames="username" />
+    </changeSet>
+</databaseChangeLog>

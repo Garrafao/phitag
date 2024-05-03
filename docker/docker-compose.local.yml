@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  phitag-postgres:
+    image: docker.io/postgres:11.5
+    container_name: phitag-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: dev
+      POSTGRES_PASSWORD: dev
+      POSTGRES_DB: phitag
+    networks:
+      - spinfo-net
+
+  phitag-backend:
+    build:
+      context: ../backend/
+    hostname: phitag-backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - phitag-postgres
+    networks:
+      - spinfo-net
+    environment:
+      - spring.datasource.url=jdbc:postgresql://phitag-postgres:5432/phitag
+    command: [ "mvn", "spring-boot:run" ]
+
+  phitag-frontend:
+    build:
+      context: ../frontend/
+    hostname: phitag-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - phitag-backend
+    networks:
+      - spinfo-net
+
+networks:
+  spinfo-net:

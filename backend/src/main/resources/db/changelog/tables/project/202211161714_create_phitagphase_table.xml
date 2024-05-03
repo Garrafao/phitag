@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="202211161714" author="serge">
+
+        <createTable tableName="phitagphase">
+            <column name="name" type="varchar">
+                <constraints primaryKey="true" nullable="false" primaryKeyName="PK_phitagphase" />
+            </column>
+
+            <column name="projectname" type="varchar">
+                <constraints primaryKey="true" nullable="false" primaryKeyName="PK_phitagphase" />
+            </column>
+
+            <column name="ownername" type="varchar">
+                <constraints primaryKey="true" nullable="false" primaryKeyName="PK_phitagphase" />
+            </column>
+
+            <column name="displayname" type="varchar">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="phitagannotationtype_name" type="varchar">
+                <constraints nullable="false" references="phitagannotationtype(name)"
+                    foreignKeyName="FK_phitagphase_phitagannotationtype" />
+            </column>
+
+            <column name="phitagsamplingstrategy_name" type="varchar">
+                <constraints nullable="false" references="phitagsamplingstrategy(name)"
+                    foreignKeyName="FK_phitagphase_phitagsamplingstrategy" />
+            </column>
+
+            <column name="description" type="varchar">
+                <constraints nullable="false" />
+            </column>
+            <column name="task_head" type="varchar">
+                <constraints nullable="true" />
+            </column>
+            <column name="code" type="varchar">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="is_tutorial" type="boolean">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="status" type="varchar">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint
+            baseTableName="phitagphase"
+            baseColumnNames="projectname, ownername"
+            constraintName="FK_phitagphase_phitagproject"
+            referencedTableName="phitagproject"
+            referencedColumnNames="name, ownername" />
+
+    </changeSet>
+</databaseChangeLog>

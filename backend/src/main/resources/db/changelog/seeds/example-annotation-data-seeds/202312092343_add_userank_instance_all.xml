@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="202312092343" author="sachin">
+        <insert tableName="phitaguserankinstance">
+            <column name="instanceid" value="0_ball_nn"/>
+
+            <column name="phasename" value="ALL"/>
+            <column name="projectname" value="Example-Project-Use-Rank"/>
+            <column name="ownername" value="Example-User"/>
+
+            <column name="phitagusage_first_dataid" value="fic_1845_7183.txt-96-4"/>
+            <column name="phitagusage_first_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_first_ownername" value="Example-User"/>
+
+            <column name="phitagusage_second_dataid" value="fic_1835_7064.txt-1770-4"/>
+            <column name="phitagusage_second_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_second_ownername" value="Example-User"/>
+
+            <column name="phitagusage_third_dataid" value="fic_2008_36315.txt-205-3"/>
+            <column name="phitagusage_third_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_third_ownername" value="Example-User"/>
+
+            <column name="phitagusage_fourth_dataid" value="mag_1856_576366.txt-108-8"/>
+            <column name="phitagusage_fourth_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_fourth_ownername" value="Example-User"/>
+
+            <column name="label_set" value="1,2,3,4"/>
+            <column name="non_label" value="-"/>
+        </insert>
+
+        <insert tableName="phitaguserankinstance">
+            <column name="instanceid" value="1_ball_nn"/>
+
+            <column name="phasename" value="ALL"/>
+            <column name="projectname" value="Example-Project-Use-Rank"/>
+            <column name="ownername" value="Example-User"/>
+
+            <column name="phitagusage_first_dataid" value="nf_1855_771880.txt-246-8"/>
+            <column name="phitagusage_first_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_first_ownername" value="Example-User"/>
+
+            <column name="phitagusage_second_dataid" value="mag_1835_554348.txt-508-19"/>
+            <column name="phitagusage_second_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_second_ownername" value="Example-User"/>
+
+            <column name="phitagusage_third_dataid" value="fic_2008_36315.txt-205-3"/>
+            <column name="phitagusage_third_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_third_ownername" value="Example-User"/>
+
+            <column name="phitagusage_fourth_dataid" value="mag_1856_576366.txt-108-8"/>
+            <column name="phitagusage_fourth_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_fourth_ownername" value="Example-User"/>
+
+            <column name="label_set" value="1,2,3,4"/>
+            <column name="non_label" value="-"/>
+        </insert>
+
+        <insert tableName="phitaguserankinstance">
+            <column name="instanceid" value="2_ball_nn"/>
+
+            <column name="phasename" value="ALL"/>
+            <column name="projectname" value="Example-Project-Use-Rank"/>
+            <column name="ownername" value="Example-User"/>
+
+            <column name="phitagusage_first_dataid" value="nf_1855_771880.txt-246-8"/>
+            <column name="phitagusage_first_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_first_ownername" value="Example-User"/>
+
+            <column name="phitagusage_second_dataid" value="mag_1835_554348.txt-508-19"/>
+            <column name="phitagusage_second_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_second_ownername" value="Example-User"/>
+
+            <column name="phitagusage_third_dataid" value="fic_2008_36315.txt-205-3"/>
+            <column name="phitagusage_third_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_third_ownername" value="Example-User"/>
+
+            <column name="phitagusage_fourth_dataid" value="mag_1856_576366.txt-108-8"/>
+            <column name="phitagusage_fourth_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_fourth_ownername" value="Example-User"/>
+
+            <column name="label_set" value="1,2,3,4"/>
+            <column name="non_label" value="-"/>
+        </insert>
+
+        <insert tableName="phitaguserankinstance">
+            <column name="instanceid" value="3_ball_nn"/>
+
+            <column name="phasename" value="ALL"/>
+            <column name="projectname" value="Example-Project-Use-Rank"/>
+            <column name="ownername" value="Example-User"/>
+
+            <column name="phitagusage_first_dataid" value="fic_1966_10470.txt-2474-29"/>
+            <column name="phitagusage_first_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_first_ownername" value="Example-User"/>
+
+            <column name="phitagusage_second_dataid" value="fic_1848_7005.txt-3453-29"/>
+            <column name="phitagusage_second_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_second_ownername" value="Example-User"/>
+
+            <column name="phitagusage_third_dataid" value="fic_2008_36315.txt-205-3"/>
+            <column name="phitagusage_third_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_third_ownername" value="Example-User"/>
+
+            <column name="phitagusage_fourth_dataid" value="mag_1856_576366.txt-108-8"/>
+            <column name="phitagusage_fourth_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_fourth_ownername" value="Example-User"/>
+
+            <column name="label_set" value="1,2,3,4"/>
+            <column name="non_label" value="-"/>
+        </insert>
+
+        <insert tableName="phitaguserankinstance">
+            <column name="instanceid" value="4_ball_nn"/>
+
+            <column name="phasename" value="ALL"/>
+            <column name="projectname" value="Example-Project-Use-Rank"/>
+            <column name="ownername" value="Example-User"/>
+
+            <column name="phitagusage_first_dataid" value="fic_1971_10537.txt-7046-16"/>
+            <column name="phitagusage_first_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_first_ownername" value="Example-User"/>
+
+            <column name="phitagusage_second_dataid" value="fic_1843_7208.txt-4384-11"/>
+            <column name="phitagusage_second_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_second_ownername" value="Example-User"/>
+
+            <column name="phitagusage_third_dataid" value="mag_1999_404416.txt-81-13"/>
+            <column name="phitagusage_third_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_third_ownername" value="Example-User"/>
+
+            <column name="phitagusage_fourth_dataid" value="fic_2006_27868.txt-198-8"/>
+            <column name="phitagusage_fourth_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_fourth_ownername" value="Example-User"/>
+
+            <column name="label_set" value="1,2,3,4"/>
+            <column name="non_label" value="-"/>
+        </insert>
+
+        <insert tableName="phitaguserankinstance">
+            <column name="instanceid" value="5_ball_nn"/>
+
+            <column name="phasename" value="ALL"/>
+            <column name="projectname" value="Example-Project-Use-Rank"/>
+            <column name="ownername" value="Example-User"/>
+
+            <column name="phitagusage_first_dataid" value="mag_1999_404416.txt-81-13"/>
+            <column name="phitagusage_first_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_first_ownername" value="Example-User"/>
+
+            <column name="phitagusage_second_dataid" value="fic_2006_27868.txt-198-8"/>
+            <column name="phitagusage_second_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_second_ownername" value="Example-User"/>
+
+            <column name="phitagusage_third_dataid" value="fic_2007_52171.txt-163-54"/>
+            <column name="phitagusage_third_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_third_ownername" value="Example-User"/>
+
+            <column name="phitagusage_fourth_dataid" value="fic_1843_7208.txt-4384-11"/>
+            <column name="phitagusage_fourth_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_fourth_ownername" value="Example-User"/>
+
+            <column name="label_set" value="1,2,3,4"/>
+            <column name="non_label" value="-"/>
+        </insert>
+
+        <insert tableName="phitaguserankinstance">
+            <column name="instanceid" value="6_ball_nn"/>
+
+            <column name="phasename" value="ALL"/>
+            <column name="projectname" value="Example-Project-Use-Rank"/>
+            <column name="ownername" value="Example-User"/>
+
+            <column name="phitagusage_first_dataid" value="mag_2001_416864.txt-126-1"/>
+            <column name="phitagusage_first_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_first_ownername" value="Example-User"/>
+
+            <column name="phitagusage_second_dataid" value="fic_2006_27868.txt-198-8"/>
+            <column name="phitagusage_second_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_second_ownername" value="Example-User"/>
+
+            <column name="phitagusage_third_dataid" value="fic_2007_52171.txt-163-54"/>
+            <column name="phitagusage_third_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_third_ownername" value="Example-User"/>
+
+            <column name="phitagusage_fourth_dataid" value="fic_1843_7208.txt-4384-11"/>
+            <column name="phitagusage_fourth_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_fourth_ownername" value="Example-User"/>
+
+            <column name="label_set" value="1,2,3,4"/>
+            <column name="non_label" value="-"/>
+        </insert>
+
+        <insert tableName="phitaguserankinstance">
+            <column name="instanceid" value="7_ball_nn"/>
+
+            <column name="phasename" value="ALL"/>
+            <column name="projectname" value="Example-Project-Use-Rank"/>
+            <column name="ownername" value="Example-User"/>
+
+            <column name="phitagusage_first_dataid" value="fic_1971_10537.txt-7046-16"/>
+            <column name="phitagusage_first_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_first_ownername" value="Example-User"/>
+
+            <column name="phitagusage_second_dataid" value="fic_2006_27868.txt-198-8"/>
+            <column name="phitagusage_second_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_second_ownername" value="Example-User"/>
+
+            <column name="phitagusage_third_dataid" value="fic_2007_52171.txt-163-54"/>
+            <column name="phitagusage_third_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_third_ownername" value="Example-User"/>
+
+            <column name="phitagusage_fourth_dataid" value="fic_1843_7208.txt-4384-11"/>
+            <column name="phitagusage_fourth_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_fourth_ownername" value="Example-User"/>
+
+
+            <column name="label_set" value="1,2,3,4"/>
+            <column name="non_label" value="-"/>
+        </insert>
+
+        <insert tableName="phitaguserankinstance">
+            <column name="instanceid" value="8_ball_nn"/>
+
+            <column name="phasename" value="ALL"/>
+            <column name="projectname" value="Example-Project-Use-Rank"/>
+            <column name="ownername" value="Example-User"/>
+
+            <column name="phitagusage_first_dataid" value="fic_1964_780000.txt-1166-5"/>
+            <column name="phitagusage_first_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_first_ownername" value="Example-User"/>
+
+            <column name="phitagusage_second_dataid" value="fic_2006_27868.txt-198-8"/>
+            <column name="phitagusage_second_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_second_ownername" value="Example-User"/>
+
+            <column name="phitagusage_third_dataid" value="mag_1994_352587.txt-5-22"/>
+            <column name="phitagusage_third_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_third_ownername" value="Example-User"/>
+
+            <column name="phitagusage_fourth_dataid" value="mag_1960_92728.txt-98-20"/>
+            <column name="phitagusage_fourth_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_fourth_ownername" value="Example-User"/>
+
+
+            <column name="label_set" value="1,2,3,4"/>
+            <column name="non_label" value="-"/>
+        </insert>
+
+        <insert tableName="phitaguserankinstance">
+            <column name="instanceid" value="9_ball_nn"/>
+
+            <column name="phasename" value="ALL"/>
+            <column name="projectname" value="Example-Project-Use-Rank"/>
+            <column name="ownername" value="Example-User"/>
+
+            <column name="phitagusage_first_dataid" value="fic_1971_10537.txt-7046-16"/>
+            <column name="phitagusage_first_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_first_ownername" value="Example-User"/>
+
+            <column name="phitagusage_second_dataid" value="fic_2006_27868.txt-198-8"/>
+            <column name="phitagusage_second_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_second_ownername" value="Example-User"/>
+
+            <column name="phitagusage_third_dataid" value="mag_1994_352587.txt-5-22"/>
+            <column name="phitagusage_third_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_third_ownername" value="Example-User"/>
+
+            <column name="phitagusage_fourth_dataid" value="mag_1960_92728.txt-98-20"/>
+            <column name="phitagusage_fourth_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_fourth_ownername" value="Example-User"/>
+
+
+            <column name="label_set" value="1,2,3,4"/>
+            <column name="non_label" value="-"/>
+        </insert>
+
+        <insert tableName="phitaguserankinstance">
+            <column name="instanceid" value="10_ball_nn"/>
+
+            <column name="phasename" value="ALL"/>
+            <column name="projectname" value="Example-Project-Use-Rank"/>
+            <column name="ownername" value="Example-User"/>
+
+            <column name="phitagusage_first_dataid" value="mag_1994_352587.txt-5-22"/>
+            <column name="phitagusage_first_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_first_ownername" value="Example-User"/>
+
+
+            <column name="phitagusage_second_dataid" value="fic_2006_27868.txt-198-8"/>
+            <column name="phitagusage_second_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_second_ownername" value="Example-User"/>
+
+            <column name="phitagusage_third_dataid" value="fic_2007_52171.txt-163-54"/>
+            <column name="phitagusage_third_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_third_ownername" value="Example-User"/>
+
+            <column name="phitagusage_fourth_dataid" value="fic_1843_7208.txt-4384-11"/>
+            <column name="phitagusage_fourth_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_fourth_ownername" value="Example-User"/>
+
+            <column name="label_set" value="1,2,3,4"/>
+            <column name="non_label" value="-"/>
+        </insert>
+
+        <insert tableName="phitaguserankinstance">
+            <column name="instanceid" value="11_ball_nn"/>
+
+            <column name="phasename" value="ALL"/>
+            <column name="projectname" value="Example-Project-Use-Rank"/>
+            <column name="ownername" value="Example-User"/>
+
+            <column name="phitagusage_first_dataid" value="fic_1823_7241.txt-6369-39"/>
+            <column name="phitagusage_first_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_first_ownername" value="Example-User"/>
+
+            <column name="phitagusage_second_dataid" value="fic_1846_7527.txt-54-30"/>
+            <column name="phitagusage_second_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_second_ownername" value="Example-User"/>
+
+
+            <column name="phitagusage_third_dataid" value="mag_1994_352587.txt-5-22"/>
+            <column name="phitagusage_third_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_third_ownername" value="Example-User"/>
+
+            <column name="phitagusage_fourth_dataid" value="fic_2006_27868.txt-198-8"/>
+            <column name="phitagusage_fourth_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_fourth_ownername" value="Example-User"/>
+
+            <column name="label_set" value="1,2,3,4"/>
+            <column name="non_label" value="-"/>
+        </insert>
+
+        <insert tableName="phitaguserankinstance">
+            <column name="instanceid" value="12_ball_nn"/>
+
+            <column name="phasename" value="ALL"/>
+            <column name="projectname" value="Example-Project-Use-Rank"/>
+            <column name="ownername" value="Example-User"/>
+
+            <column name="phitagusage_first_dataid" value="fic_1852_69.txt-5049-17"/>
+            <column name="phitagusage_first_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_first_ownername" value="Example-User"/>
+
+            <column name="phitagusage_second_dataid" value="nf_1838_747482.txt-1194-43"/>
+            <column name="phitagusage_second_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_second_ownername" value="Example-User"/>
+
+            <column name="phitagusage_third_dataid" value="fic_2007_52171.txt-163-54"/>
+            <column name="phitagusage_third_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_third_ownername" value="Example-User"/>
+
+            <column name="phitagusage_fourth_dataid" value="fic_1843_7208.txt-4384-11"/>
+            <column name="phitagusage_fourth_projectname" value="Example-Project-Use-Rank"/>
+            <column name="phitagusage_fourth_ownername" value="Example-User"/>
+
+            <column name="label_set" value="1,2,3,4"/>
+            <column name="non_label" value="-"/>
+        </insert>
+
+    </changeSet>
+</databaseChangeLog>

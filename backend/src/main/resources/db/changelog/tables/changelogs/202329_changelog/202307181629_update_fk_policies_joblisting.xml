@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="202307181629" author="serge">
+
+        <preConditions>
+            <foreignKeyConstraintExists foreignKeyName="FK_phitaguser_phitagjoblisting_phitagjoblisting" />
+        </preConditions>
+
+        <!-- Joblisting jointable -->
+
+        <dropForeignKeyConstraint
+            baseTableName="phitagjoblisting_phitaguser"
+            constraintName="FK_phitaguser_phitagjoblisting_phitagjoblisting" />
+
+            <addForeignKeyConstraint
+            baseTableName="phitagjoblisting_phitaguser"
+            baseColumnNames="phitagjoblisting_name, phitagjoblisting_projectname, phitagjoblisting_ownername"
+            constraintName="FK_phitaguser_phitagjoblisting_phitagjoblisting"
+            referencedTableName="phitagjoblisting"
+            referencedColumnNames="name, projectname, ownername"
+            onDelete="CASCADE"
+        />
+
+    </changeSet>
+
+</databaseChangeLog>

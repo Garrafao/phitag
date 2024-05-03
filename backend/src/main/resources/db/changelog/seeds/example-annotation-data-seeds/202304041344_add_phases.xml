@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+
+    <changeSet id="202304041036" author="serge">
+
+        <insert tableName="phitagphase">
+            <column name="name" value="ALL"/>
+            <column name="projectname" value="Example-Project-Use-Pair"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="displayname" value="ALL"/>
+            <column name="phitagannotationtype_name" value="ANNOTATIONTYPE_USEPAIR"/>
+            <column name="phitagsamplingstrategy_name" value="SAMPLING_RANDOM_WITH_REPLACEMENT"/>
+            <column name="description" value="Phase, where all lemmas are considered"/>
+            <column name="task_head" value=""/>
+            <column name="is_tutorial" value="false"/>
+            <column name="status" value="OPEN"/>
+        </insert>
+
+
+        <insert tableName="phitagphase">
+            <column name="name" value="ALL"/>
+            <column name="projectname" value="Example-Project-WSSIM"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="displayname" value="ALL"/>
+            <column name="phitagannotationtype_name" value="ANNOTATIONTYPE_WSSIM"/>
+            <column name="phitagsamplingstrategy_name" value="SAMPLING_RANDOM_WITH_REPLACEMENT"/>
+            <column name="description" value="Phase, where all lemmas are considered"/>
+            <column name="task_head" value=""/>
+            <column name="is_tutorial" value="false"/>
+            <column name="status" value="OPEN"/>
+        </insert>
+
+        <insert tableName="phitagphase">
+            <column name="name" value="ALL"/>
+            <column name="projectname" value="Example-Project-Use-Rank"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="displayname" value="ALL"/>
+            <column name="phitagannotationtype_name" value="ANNOTATIONTYPE_USERANK"/>
+            <column name="phitagsamplingstrategy_name" value="SAMPLING_RANDOM_WITH_REPLACEMENT"/>
+            <column name="description" value="Phase, where all lemmas are considered"/>
+            <column name="task_head" value=""/>
+            <column name="is_tutorial" value="false"/>
+            <column name="status" value="OPEN"/>
+        </insert>
+
+
+    </changeSet>
+
+</databaseChangeLog>

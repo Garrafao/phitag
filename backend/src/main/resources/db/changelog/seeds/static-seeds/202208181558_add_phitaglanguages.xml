@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="202208181558" author="serge">
+        <insert tableName="phitaglanguage">
+            <column name="name" value="German" />
+        </insert>
+
+        <insert tableName="phitaglanguage">
+            <column name="name" value="English" />
+        </insert>
+
+        <insert tableName="phitaglanguage">
+            <column name="name" value="French" />
+        </insert>
+
+        <insert tableName="phitaglanguage">
+            <column name="name" value="Spanish" />
+        </insert>
+
+        <insert tableName="phitaglanguage">
+            <column name="name" value="Italian" />
+        </insert>
+
+        <insert tableName="phitaglanguage">
+            <column name="name" value="Portuguese" />
+        </insert>
+
+        <insert tableName="phitaglanguage">
+            <column name="name" value="Russian" />
+        </insert>
+
+        <insert tableName="phitaglanguage">
+            <column name="name" value="Dutch" />
+        </insert>
+
+        <insert tableName="phitaglanguage">
+            <column name="name" value="Polish" />
+        </insert>
+
+        <insert tableName="phitaglanguage">
+            <column name="name" value="Czech" />
+        </insert>
+
+        <insert tableName="phitaglanguage">
+            <column name="name" value="Swedish" />
+        </insert>
+
+    </changeSet>
+</databaseChangeLog>

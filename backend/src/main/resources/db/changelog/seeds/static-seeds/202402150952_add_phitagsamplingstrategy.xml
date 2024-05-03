@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="202402150952" author="sachin">
+
+        <insert tableName="phitagsamplingstrategy">
+            <column name="name" value="N_SAMPLING_RANDOM_WITH_REPLACEMENT" />
+            <column name="visiblename" value="N Random With Replacement" />
+        </insert>
+
+        <insert tableName="phitagsamplingstrategy">
+            <column name="name" value="N_SAMPLING_RANDOM_WITHOUT_REPLACEMENT" />
+            <column name="visiblename" value="N Random Without Replacement" />
+        </insert>
+
+    </changeSet>
+</databaseChangeLog>

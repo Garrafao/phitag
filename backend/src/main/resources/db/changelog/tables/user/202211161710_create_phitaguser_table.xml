@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="202211161710" author="serge">
+
+        <createTable tableName="phitaguser">
+
+            <column name="username" type="varchar">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+
+            <column name="displayname" type="varchar">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="email" type="varchar">
+                <constraints unique="true" nullable="false" />
+            </column>
+
+            <column name="password" type="varchar(255)">
+                <constraints unique="false" nullable="false" />
+            </column>
+
+            <column name="phitagvisibility_name" type="varchar">
+                <constraints nullable="false" references="phitagvisibility(name)"
+                    foreignKeyName="FK_phitaguser_phitagvisibility" />
+            </column>
+
+            <column name="description" type="varchar">
+                <constraints unique="false" nullable="false" />
+            </column>
+            <column name="prolific_id" type="varchar">
+                <constraints unique="false" nullable="true" />
+            </column>
+
+            <column name="isbot" type="bool" defaultValueBoolean="false">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="enabled" type="bool" defaultValueBoolean="true">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="account_non_expired" type="bool" defaultValueBoolean="true">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="account_non_locked" type="bool" defaultValueBoolean="true">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="credentials_non_expired" type="bool" defaultValueBoolean="true">
+                <constraints nullable="false" />
+            </column>
+
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

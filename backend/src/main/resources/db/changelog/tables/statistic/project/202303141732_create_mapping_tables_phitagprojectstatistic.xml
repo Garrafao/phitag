@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="202303141732" author="serge">
+
+        <createTable tableName="phitag_usages_per_lemma">
+            <column name="username" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitag_usages_per_lemma" />
+            </column>
+
+            <column name="projectname" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitag_usages_per_lemma" />
+            </column>
+
+            <column name="lemma" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitag_usages_per_lemma" />
+            </column>
+
+            <column name="count" type="int">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+
+
+        <addForeignKeyConstraint
+            baseTableName="phitag_usages_per_lemma"
+            baseColumnNames="username, projectname"
+            constraintName="FK_phitagprojectstatistic_userstatistic"
+            referencedTableName="phitagprojectstatistic"
+            referencedColumnNames="username, projectname" />
+
+    </changeSet>
+</databaseChangeLog>

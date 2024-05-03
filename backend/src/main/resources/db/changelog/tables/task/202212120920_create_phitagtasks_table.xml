@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="202212120920" author="serge">
+
+        <createTable tableName="phitagtask">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" unique="true" nullable="false" />
+            </column>
+
+            <column name="bot" type="varchar">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="taskowner" type="varchar">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="target_phasename" type="varchar">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="target_projectname" type="varchar">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="target_ownername" type="varchar">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="task_status" type="varchar">
+                <constraints nullable="false" />
+            </column>
+
+        </createTable>
+
+        <addForeignKeyConstraint
+            baseTableName="phitagtask"
+            baseColumnNames="bot"
+            constraintName="FK_phitagtask_bot"
+            referencedTableName="phitaguser"
+            referencedColumnNames="username"
+        />
+
+        <addForeignKeyConstraint
+            baseTableName="phitagtask"
+            baseColumnNames="taskowner"
+            constraintName="FK_phitagtask_taskowner"
+            referencedTableName="phitaguser"
+            referencedColumnNames="username"
+        />
+
+        <addForeignKeyConstraint
+            baseTableName="phitagtask"
+            baseColumnNames="target_phasename, target_projectname, target_ownername"
+            constraintName="FK_phitagtask_target"
+            referencedTableName="phitagphase"
+            referencedColumnNames="name, projectname, ownername"
+        />
+
+        <addForeignKeyConstraint
+            baseTableName="phitagtask"
+            baseColumnNames="task_status"
+            constraintName="FK_phitagtask_status"
+            referencedTableName="phitagstatus"
+            referencedColumnNames="name"
+        />
+    </changeSet>
+</databaseChangeLog>

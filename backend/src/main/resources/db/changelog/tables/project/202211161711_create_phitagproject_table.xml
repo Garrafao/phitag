@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="202211161711" author="serge">
+
+        <createTable tableName="phitagproject">
+
+            <column name="name" type="varchar">
+                <constraints primaryKey="true" nullable="false" primaryKeyName="PK_phitagproject" />
+            </column>
+
+            <column name="ownername" type="varchar">
+                <constraints primaryKey="true" nullable="false" primaryKeyName="PK_phitagproject" />
+            </column>
+
+            <column name="displayname" type="varchar">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="active" type="boolean">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="phitagvisibility_name" type="varchar">
+                <constraints nullable="false" references="phitagvisibility(name)"
+                    foreignKeyName="FK_phitagproject_phitagvisibility" />
+            </column>
+
+            <column name="phitaglanguage_name" type="varchar">
+                <constraints nullable="false" references="phitaglanguage(name)"
+                    foreignKeyName="FK_phitagproject_phitaglanguage" />
+            </column>
+
+            <column name="description" type="varchar" />
+        </createTable>
+
+        <addForeignKeyConstraint
+            baseTableName="phitagproject"
+            baseColumnNames="ownername"
+            constraintName="FK_phitagproject_phitaguser"
+            referencedTableName="phitaguser"
+            referencedColumnNames="username" />
+    </changeSet>
+</databaseChangeLog>

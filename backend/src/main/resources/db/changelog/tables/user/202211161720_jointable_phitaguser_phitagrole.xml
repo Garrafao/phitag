@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="202211161720" author="serge">
+
+        <createTable tableName="phitaguser_phitagrole">
+            <column name="phitaguser_username" type="varchar" autoIncrement="false">
+                <constraints nullable="false" primaryKey="true"
+                    foreignKeyName="fk_phitaguser_phitagrole_phitaguser_id"
+                    references="phitaguser(username)" />
+            </column>
+            <column name="phitagrole_name" type="varchar" autoIncrement="false">
+                <constraints nullable="false" primaryKey="true"
+                    foreignKeyName="fk_phitaguser_phitagrole_phitagrole_id"
+                    references="phitagrole(name)" />
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

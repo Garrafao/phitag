@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This is the xml schema for phitag dictionaries -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="dictionary">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="info" type="infoType"/>
+                <xs:element name="entries" type="entriesType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="infoType">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="description" type="xs:string"/>
+            <xs:element name="author" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="entriesType">
+        <xs:sequence>
+            <xs:element name="entry" type="entryType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="entryType">
+        <xs:sequence>
+            <xs:element name="headword" type="xs:string"/>
+            <xs:element name="part-of-speech" type="xs:string"/>
+            <xs:element name="senses" type="sensesType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="sensesType">
+        <xs:sequence>
+            <xs:element name="sense" type="senseType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="senseType">
+        <xs:sequence>
+            <xs:element name="definition" type="xs:string"/>
+            <xs:element name="examples" type="examplesType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="examplesType">
+        <xs:sequence>
+            <xs:element name="example" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

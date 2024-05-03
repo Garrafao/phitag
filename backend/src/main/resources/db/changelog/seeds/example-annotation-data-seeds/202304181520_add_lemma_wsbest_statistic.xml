@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="202304181520" author="serge">
+
+        <insert tableName="phitagprojectstatistic">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSBEST" />
+            <column name="lemmacount" value="26" />
+            <column name="usagecount" value="260" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSBEST" />
+            <column name="lemma" value="range.n" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSBEST" />
+            <column name="lemma" value="bright.a" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSBEST" />
+            <column name="lemma" value="new.a" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSBEST" />
+            <column name="lemma" value="scrap.n" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSBEST" />
+            <column name="lemma" value="function.n" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSBEST" />
+            <column name="lemma" value="rich.a" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSBEST" />
+            <column name="lemma" value="rough.a" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSBEST" />
+            <column name="lemma" value="hold.v" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSBEST" />
+            <column name="lemma" value="shed.v" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSBEST" />
+            <column name="lemma" value="soft.a" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSBEST" />
+            <column name="lemma" value="ring.n" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSBEST" />
+            <column name="lemma" value="suffer.v" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSBEST" />
+            <column name="lemma" value="shade.n" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSBEST" />
+            <column name="lemma" value="call.v" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSBEST" />
+            <column name="lemma" value="account.n" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSBEST" />
+            <column name="lemma" value="dismiss.v" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSBEST" />
+            <column name="lemma" value="investigator.n" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSBEST" />
+            <column name="lemma" value="severely.r" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSBEST" />
+            <column name="lemma" value="fire.v" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSBEST" />
+            <column name="lemma" value="fix.v" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSBEST" />
+            <column name="lemma" value="lead.n" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSBEST" />
+            <column name="lemma" value="neat.a" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSBEST" />
+            <column name="lemma" value="stiff.a" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSBEST" />
+            <column name="lemma" value="skip.v" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSBEST" />
+            <column name="lemma" value="coach.n" />
+            <column name="count" value="10" />
+        </insert>
+
+        <insert tableName="phitag_usages_per_lemma">
+            <column name="username" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSBEST" />
+            <column name="lemma" value="order.v" />
+            <column name="count" value="10" />
+        </insert>
+
+    </changeSet>
+</databaseChangeLog>
+    

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="202404104436" author="sachin">
+
+        <insert tableName="phitagannotationtype">
+            <column name="name" value="ANNOTATIONTYPE_SENTIMENT" />
+            <column name="visiblename" value="Text Tag" />
+            <column name="active" value="true" />
+        </insert>
+        <insert tableName="phitagannotationtype">
+            <column name="name" value="ANNOTATIONTYPE_CHOICE" />
+            <column name="visiblename" value="Text Choice" />
+            <column name="active" value="true" />
+        </insert>
+        <update tableName="phitagannotationtype">
+            <column name="visiblename" value="Text Pair" />
+            <where>name = 'ANNOTATIONTYPE_USEPAIR'</where>
+        </update>
+        <update tableName="phitagannotationtype">
+            <column name="visiblename" value="Text Free Substitution" />
+            <where>name = 'ANNOTATIONTYPE_LEXSUB'</where>
+        </update>
+        <update tableName="phitagannotationtype">
+            <column name="visiblename" value="Text Rank" />
+            <where>name = 'ANNOTATIONTYPE_USERANK'</where>
+        </update>
+        <update tableName="phitagannotationtype">
+            <column name="visiblename" value="Text Rank Pair" />
+            <where>name = 'ANNOTATIONTYPE_USERANK_PAIR'</where>
+        </update>
+        <update tableName="phitagannotationtype">
+            <column name="visiblename" value="Text Rank Relative" />
+            <where>name = 'ANNOTATIONTYPE_USERANK_RELATIVE'</where>
+        </update>
+        <update tableName="phitagannotationtype">
+            <column name="visiblename" value="Text label" />
+            <where>name = 'ANNOTATIONTYPE_WSSIM'</where>
+        </update>
+    </changeSet>
+</databaseChangeLog>

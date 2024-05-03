@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="202208201400" author="serge">
+
+        <insert tableName="phitagannotationtype">
+            <column name="name" value="ANNOTATIONTYPE_SINGLEUSE" />
+            <column name="visiblename" value="Single Use Annotation" />
+            <column name="active" value="false" />
+        </insert>
+
+        <insert tableName="phitagannotationtype">
+            <column name="name" value="ANNOTATIONTYPE_USEPAIR" />
+            <column name="visiblename" value="Use Pair Annotation" />
+            <column name="active" value="true" />
+        </insert>
+
+        <insert tableName="phitagannotationtype">
+            <column name="name" value="ANNOTATIONTYPE_USERANK" />
+            <column name="visiblename" value="Use Rank Annotation" />
+            <column name="active" value="true" />
+        </insert>
+
+
+        <insert tableName="phitagannotationtype">
+            <column name="name" value="ANNOTATIONTYPE_WORDREPLACEMENT" />
+            <column name="visiblename" value="Word Replacement" />
+            <column name="active" value="false" />
+        </insert>
+    </changeSet>
+</databaseChangeLog>

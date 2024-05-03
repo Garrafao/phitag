@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="202304041249" author="serge">
+
+        <!-- Public Project -->
+        <insert tableName="phitagusage">
+            <column name="dataid" value="0" />
+            <column name="projectname" value="project-0" />
+            <column name="ownername" value="user-0" />
+
+            <column name="context" value="The ball is red." />
+            <column name="indices_target_token" value="4:8" />
+            <column name="indices_target_sentence" value="0:16" />
+            <column name="lemma" value="ball_nn" />
+            <column name="phitaggroup" value="" />
+        </insert>
+
+        <insert tableName="phitagusage">
+            <column name="dataid" value="1" />
+            <column name="projectname" value="project-0" />
+            <column name="ownername" value="user-0" />
+
+            <column name="context" value="The ball is blue." />
+            <column name="indices_target_token" value="4:8" />
+            <column name="indices_target_sentence" value="0:16" />
+            <column name="lemma" value="ball_nn" />
+            <column name="phitaggroup" value="" />
+        </insert>
+
+        <insert tableName="phitagusage">
+            <column name="dataid" value="2" />
+            <column name="projectname" value="project-0" />
+            <column name="ownername" value="user-0" />
+
+            <column name="context" value="The ball is green." />
+            <column name="indices_target_token" value="4:8" />
+            <column name="indices_target_sentence" value="0:16" />
+            <column name="lemma" value="ball_nn" />
+            <column name="phitaggroup" value="" />
+        </insert>
+        <insert tableName="phitagusage">
+            <column name="dataid" value="3" />
+            <column name="projectname" value="project-0" />
+            <column name="ownername" value="user-0" />
+
+            <column name="context" value="The ball is green and white." />
+            <column name="indices_target_token" value="4:8" />
+            <column name="indices_target_sentence" value="0:16" />
+            <column name="lemma" value="ball_nn" />
+            <column name="phitaggroup" value="" />
+        </insert>
+
+        <insert tableName="phitagusage">
+            <column name="dataid" value="4" />
+            <column name="projectname" value="project-0" />
+            <column name="ownername" value="user-0" />
+
+            <column name="context" value="The ball is round." />
+            <column name="indices_target_token" value="4:8" />
+            <column name="indices_target_sentence" value="0:16" />
+            <column name="lemma" value="ball_nn" />
+            <column name="phitaggroup" value="" />
+        </insert>
+
+        <insert tableName="phitagusage">
+            <column name="dataid" value="5" />
+            <column name="projectname" value="project-0" />
+            <column name="ownername" value="user-0" />
+
+            <column name="context" value="The ball is red." />
+            <column name="indices_target_token" value="4:8" />
+            <column name="indices_target_sentence" value="0:16" />
+            <column name="lemma" value="ball_nn" />
+            <column name="phitaggroup" value="" />
+        </insert>
+
+        <insert tableName="phitagusage">
+            <column name="dataid" value="6" />
+            <column name="projectname" value="project-0" />
+            <column name="ownername" value="user-0" />
+
+            <column name="context" value="The ball is black ." />
+            <column name="indices_target_token" value="4:8" />
+            <column name="indices_target_sentence" value="0:16" />
+            <column name="lemma" value="ball_nn" />
+            <column name="phitaggroup" value="" />
+        </insert>
+
+
+
+
+
+        <!-- Private Project -->
+
+        <insert tableName="phitagusage">
+            <column name="dataid" value="0" />
+            <column name="projectname" value="project-1" />
+            <column name="ownername" value="user-0" />
+
+            <column name="context" value="The ball is red." />
+            <column name="indices_target_token" value="4:8" />
+            <column name="indices_target_sentence" value="0:16" />
+            <column name="lemma" value="ball_nn" />
+            <column name="phitaggroup" value="" />
+        </insert>
+
+        <insert tableName="phitagusage">
+            <column name="dataid" value="1" />
+            <column name="projectname" value="project-1" />
+            <column name="ownername" value="user-0" />
+
+            <column name="context" value="The ball is blue." />
+            <column name="indices_target_token" value="4:8" />
+            <column name="indices_target_sentence" value="0:16" />
+            <column name="lemma" value="ball_nn" />
+            <column name="phitaggroup" value="" />
+        </insert>
+
+
+    </changeSet>
+</databaseChangeLog>

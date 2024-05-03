@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="5" author="serge">
+
+        <insert tableName="phitagusepairjudgement">
+            <column name="uuid" value="0"/>
+            <column name="instance_instanceid" value="0"/>
+            <column name="instance_phasename" value="phase-0"/>
+            <column name="instance_projectname" value="project-0"/>
+            <column name="instance_ownername" value="user-0"/>
+
+            <column name="annotator_username" value="user-0"/>
+            <column name="annotator_projectname" value="project-0"/>
+            <column name="annotator_ownername" value="user-0"/>
+
+            <column name="label" value="1"/>
+            <column name="comment" value="comment-0"/>
+        </insert>
+
+        <insert tableName="phitagusepairjudgement">
+            <column name="uuid" value="1"/>
+            <column name="instance_instanceid" value="1"/>
+            <column name="instance_phasename" value="phase-0"/>
+            <column name="instance_projectname" value="project-0"/>
+            <column name="instance_ownername" value="user-0"/>
+
+            <column name="annotator_username" value="user-0"/>
+            <column name="annotator_projectname" value="project-0"/>
+            <column name="annotator_ownername" value="user-0"/>
+
+            <column name="label" value="2"/>
+            <column name="comment" value="comment-1"/>
+        </insert>
+
+        <!-- user rank  judgment -->
+
+        <insert tableName="phitaguserankjudgement">
+            <column name="uuid" value="1"/>
+            <column name="instance_instanceid" value="0"/>
+            <column name="instance_phasename" value="phase-0"/>
+            <column name="instance_projectname" value="project-0"/>
+            <column name="instance_ownername" value="user-0"/>
+
+            <column name="annotator_username" value="user-1"/>
+            <column name="annotator_projectname" value="project-0"/>
+            <column name="annotator_ownername" value="user-0"/>
+
+            <column name="rank" value="1,2,3,4"/>
+            <column name="comment" value="comment-0"/>
+        </insert>
+        <insert tableName="phitaguserankjudgement">
+            <column name="uuid" value="2"/>
+            <column name="instance_instanceid" value="1"/>
+            <column name="instance_phasename" value="phase-0"/>
+            <column name="instance_projectname" value="project-0"/>
+            <column name="instance_ownername" value="user-0"/>
+
+            <column name="annotator_username" value="user-1"/>
+            <column name="annotator_projectname" value="project-0"/>
+            <column name="annotator_ownername" value="user-0"/>
+
+            <column name="rank" value="1,2,3,4"/>
+            <column name="comment" value="comment-0"/>
+        </insert>
+
+
+        <!-- user rank relative judgment -->
+        <insert tableName="phitaguserankrelativejudgement">
+            <column name="uuid" value="0"/>
+            <column name="instance_instanceid" value="0"/>
+            <column name="instance_phasename" value="phase-0"/>
+            <column name="instance_projectname" value="project-0"/>
+            <column name="instance_ownername" value="user-0"/>
+
+            <column name="annotator_username" value="user-0"/>
+            <column name="annotator_projectname" value="project-0"/>
+            <column name="annotator_ownername" value="user-0"/>
+
+            <column name="rank" value="1,2,3"/>
+            <column name="comment" value="comment-0"/>
+        </insert>
+
+        <insert tableName="phitaguserankrelativejudgement">
+            <column name="uuid" value="1"/>
+            <column name="instance_instanceid" value="1"/>
+            <column name="instance_phasename" value="phase-0"/>
+            <column name="instance_projectname" value="project-0"/>
+            <column name="instance_ownername" value="user-0"/>
+
+            <column name="annotator_username" value="user-0"/>
+            <column name="annotator_projectname" value="project-0"/>
+            <column name="annotator_ownername" value="user-0"/>
+
+            <column name="rank" value="1,2,3"/>
+            <column name="comment" value="comment-1"/>
+        </insert>
+        
+
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="202401311149" author="sachin">
+
+        <createTable tableName="phitagusepairtutorialjudgement">
+
+            <column name="uuid" type="varchar">
+                <constraints primaryKey="true" primaryKeyName="PK_phitagusepairtutorialjudgement" />
+            </column>
+
+            <column name="instance_instanceid" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitagusepairtutorialjudgement" />
+            </column>
+
+            <column name="instance_phasename" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitagusepairtutorialjudgement" />
+            </column>
+
+            <column name="instance_projectname" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitagusepairtutorialjudgement" />
+            </column>
+
+            <column name="instance_ownername" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitagusepairtutorialjudgement" />
+            </column>
+
+            <column name="annotator_username" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitagusepairtutorialjudgement" />
+            </column>
+
+            <column name="annotator_projectname" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitagusepairtutorialjudgement" />
+            </column>
+
+            <column name="annotator_ownername" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitagusepairtutorialjudgement" />
+            </column>
+
+            <column name="label" type="varchar">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="comment" type="varchar">
+                <constraints nullable="false" />
+            </column>
+
+        </createTable>
+
+        <addForeignKeyConstraint
+            baseTableName="phitagusepairtutorialjudgement"
+            baseColumnNames="instance_instanceid, instance_phasename, instance_projectname, instance_ownername"
+            constraintName="FK_phitagusepairtutorialjudgement_phitagusepairinstance"
+            referencedTableName="phitagusepairinstance"
+            referencedColumnNames="instanceid, phasename, projectname, ownername"
+            onDelete="CASCADE"/>
+
+        <addForeignKeyConstraint
+            baseTableName="phitagusepairtutorialjudgement"
+            baseColumnNames="annotator_username, annotator_projectname, annotator_ownername"
+            constraintName="FK_phitagusepairtutorialjudgement_phitagannotator"
+            referencedTableName="phitagannotator"
+            referencedColumnNames="username, projectname, ownername"
+            onDelete="CASCADE"/>
+
+    </changeSet>
+</databaseChangeLog>

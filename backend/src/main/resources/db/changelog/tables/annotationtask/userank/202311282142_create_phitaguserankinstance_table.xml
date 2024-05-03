@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="202311282142" author="sachin">
+
+        <createTable tableName="phitaguserankinstance">
+
+            <column name="instanceid" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitaguserankinstance" />
+            </column>
+
+            <column name="phasename" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitaguserankinstance" />
+            </column>
+
+            <column name="projectname" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitaguserankinstance" />
+            </column>
+
+            <column name="ownername" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitaguserankinstance" />
+            </column>
+
+            <column name="phitagusage_first_dataid" type="varchar">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="phitagusage_first_projectname" type="varchar">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="phitagusage_first_ownername" type="varchar">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="phitagusage_second_dataid" type="varchar">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="phitagusage_second_projectname" type="varchar">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="phitagusage_second_ownername" type="varchar">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="phitagusage_third_dataid" type="varchar">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="phitagusage_third_projectname" type="varchar">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="phitagusage_third_ownername" type="varchar">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="phitagusage_fourth_dataid" type="varchar">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="phitagusage_fourth_projectname" type="varchar">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="phitagusage_fourth_ownername" type="varchar">
+                <constraints nullable="true" />
+            </column>
+            <column name="phitagusage_fifth_dataid" type="varchar">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="phitagusage_fifth_projectname" type="varchar">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="phitagusage_fifth_ownername" type="varchar">
+                <constraints nullable="true" />
+            </column>
+            <column name="phitagusage_sixth_dataid" type="varchar">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="phitagusage_sixth_projectname" type="varchar">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="phitagusage_sixth_ownername" type="varchar">
+                <constraints nullable="true" />
+            </column>
+            <column name="phitagusage_seventh_dataid" type="varchar">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="phitagusage_seventh_projectname" type="varchar">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="phitagusage_seventh_ownername" type="varchar">
+                <constraints nullable="true" />
+            </column>
+            <column name="phitagusage_eight_dataid" type="varchar">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="phitagusage_eight_projectname" type="varchar">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="phitagusage_eight_ownername" type="varchar">
+                <constraints nullable="true" />
+            </column>
+            <column name="phitagusage_ninth_dataid" type="varchar">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="phitagusage_ninth_projectname" type="varchar">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="phitagusage_ninth_ownername" type="varchar">
+                <constraints nullable="true" />
+            </column>
+            <column name="phitagusage_tenth_dataid" type="varchar">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="phitagusage_tenth_projectname" type="varchar">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="phitagusage_tenth_ownername" type="varchar">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="label_set" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="non_label" type="varchar">
+                <constraints nullable="false" />
+            </column>
+
+        </createTable>
+
+        <addForeignKeyConstraint
+            baseTableName="phitaguserankinstance"
+            baseColumnNames="phasename, projectname, ownername"
+            constraintName="FK_phitaguserankinstance_phitagphase"
+            referencedTableName="phitagphase"
+            referencedColumnNames="name, projectname, ownername"
+            onDelete="CASCADE"
+        />
+
+        <addForeignKeyConstraint
+            baseTableName="phitaguserankinstance"
+            baseColumnNames="phitagusage_first_dataid, phitagusage_first_projectname, phitagusage_first_ownername"
+            constraintName="FK_phitaguserankinstance_firstusage"
+            referencedTableName="phitagusage"
+            referencedColumnNames="dataid, projectname, ownername"
+            onDelete="CASCADE"
+        />
+
+        <addForeignKeyConstraint
+            baseTableName="phitaguserankinstance"
+            baseColumnNames="phitagusage_second_dataid, phitagusage_second_projectname, phitagusage_second_ownername"
+            constraintName="FK_phitaguserankinstance_secondusage"
+            referencedTableName="phitagusage"
+            referencedColumnNames="dataid, projectname, ownername"
+            onDelete="CASCADE"
+        />
+        <addForeignKeyConstraint
+                baseTableName="phitaguserankinstance"
+                baseColumnNames="phitagusage_third_dataid, phitagusage_third_projectname, phitagusage_third_ownername"
+                constraintName="FK_phitaguserankinstance_thirdusage"
+                referencedTableName="phitagusage"
+                referencedColumnNames="dataid, projectname, ownername"
+                onDelete="CASCADE"
+        />
+        <addForeignKeyConstraint
+                baseTableName="phitaguserankinstance"
+                baseColumnNames="phitagusage_fourth_dataid, phitagusage_fourth_projectname, phitagusage_fourth_ownername"
+                constraintName="FK_phitaguserankinstance_fourthusage"
+                referencedTableName="phitagusage"
+                referencedColumnNames="dataid, projectname, ownername"
+                onDelete="CASCADE"/>
+    </changeSet>
+</databaseChangeLog>

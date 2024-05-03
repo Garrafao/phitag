@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+
+    <changeSet id="202401171016" author="sachin">
+
+        <insert tableName="phitagproject">
+            <column name="name" value="Example-Project-Use-Rank-Relative"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="displayname" value="Example-Project-Use-Rank-Relative"/>
+            <column name="active" value="true"/>
+            <column name="phitagvisibility_name" value="VISIBILITY_PUBLIC"/>
+            <column name="phitaglanguage_name" value="English"/>
+            <column name="description" value="An example project showing the Use Rank Relative annotation task"/>
+        </insert>
+
+        <insert tableName="phitagannotator">
+            <column name="username" value="Example-User"/>
+            <column name="projectname" value="Example-Project-Use-Rank-Relative"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="phitagentitlement_name" value="ENTITLEMENT_ADMIN"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

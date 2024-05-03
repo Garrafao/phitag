@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="202305231706" author="serge">
+
+        <createTable tableName="phitagdictionaryentry">
+
+            <column name="uname" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitagdictionaryentry" />
+            </column>
+
+            <column name="dname" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitagdictionaryentry" />
+            </column>
+
+            <column name="entryid" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitagdictionaryentry" />
+            </column>
+
+            <column name="headword" type="varchar">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="partofspeech" type="varchar" />
+
+        </createTable>
+
+        <addForeignKeyConstraint
+            baseTableName="phitagdictionaryentry"
+            baseColumnNames="uname,dname"
+            constraintName="FK_phitagdictionaryentry_phitagdictionary"
+            referencedTableName="phitagdictionary"
+            referencedColumnNames="uname,dname"
+            onDelete="CASCADE"
+            onUpdate="CASCADE"
+        />
+
+
+    </changeSet>
+
+</databaseChangeLog>

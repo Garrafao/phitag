@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+
+    <changeSet id="202304041036" author="serge">
+
+        <!-- Add "Example" User -->
+        <insert tableName="phitaguser">
+            <column name="username" value="Example-User"/>
+            <column name="displayname" value="Example-User"/>
+            <column name="email" value="example-user@phitag.com"/>
+            <column name="password" value="$2a$10$/3Zo1CBtWuPye9FtICVjpOWC0zf/n3h5AhY09jbDxK.leP8BPh7a2"/>
+            <column name="phitagvisibility_name" value="VISIBILITY_PUBLIC"/>
+            <column name="description" value="An example user showing of different example projects and annotation tasks, with data from the annotation standardization repository: https://github.com/ChangeIsKey/annotation_standardization"/>
+            <column name="isbot" value="false"/>
+            <column name="enabled" value="true"/>
+            <column name="account_non_expired" value="true"/>
+            <column name="account_non_locked" value="true"/>
+            <column name="credentials_non_expired" value="true"/>
+        </insert>
+
+        <insert tableName="phitaguser_phitagrole">
+            <column name="phitaguser_username" value="Example-User"/>
+            <column name="phitagrole_name" value="ROLE_USER"/>
+        </insert>
+
+        <!-- Add "Example" Projects -->
+        <insert tableName="phitagproject">
+            <column name="name" value="Example-Project-Use-Pair"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="displayname" value="Example-Project-Use-Pair"/>
+            <column name="active" value="true"/>
+            <column name="phitagvisibility_name" value="VISIBILITY_PUBLIC"/>
+            <column name="phitaglanguage_name" value="English"/>
+            <column name="description" value="An example project showing the use pair annotation task, with data from the annotation standardization repository: https://github.com/ChangeIsKey/annotation_standardization"/>
+        </insert>
+
+        <insert tableName="phitagproject">
+            <column name="name" value="Example-Project-WSSIM"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="displayname" value="Example-Project-WSSIM"/>
+            <column name="active" value="true"/>
+            <column name="phitagvisibility_name" value="VISIBILITY_PUBLIC"/>
+            <column name="phitaglanguage_name" value="English"/>
+            <column name="description" value="An example project showing the WSSIM annotation task"/>
+        </insert>
+
+        <insert tableName="phitagproject">
+            <column name="name" value="Example-Project-Use-Rank"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="displayname" value="Example-Project-Use-Rank"/>
+            <column name="active" value="true"/>
+            <column name="phitagvisibility_name" value="VISIBILITY_PUBLIC"/>
+            <column name="phitaglanguage_name" value="English"/>
+            <column name="description" value="An example project showing the Use Rank annotation task"/>
+        </insert>
+
+        <!-- Add user as annotator -->
+
+        <insert tableName="phitagannotator">
+            <column name="username" value="Example-User"/>
+            <column name="projectname" value="Example-Project-Use-Pair"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="phitagentitlement_name" value="ENTITLEMENT_ADMIN"/>
+        </insert>
+
+
+        <insert tableName="phitagannotator">
+            <column name="username" value="Example-User"/>
+            <column name="projectname" value="Example-Project-WSSIM"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="phitagentitlement_name" value="ENTITLEMENT_ADMIN"/>
+        </insert>
+        <insert tableName="phitagannotator">
+            <column name="username" value="Example-User"/>
+            <column name="projectname" value="Example-Project-Use-Rank"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="phitagentitlement_name" value="ENTITLEMENT_ADMIN"/>
+        </insert>
+
+    </changeSet>
+
+</databaseChangeLog>

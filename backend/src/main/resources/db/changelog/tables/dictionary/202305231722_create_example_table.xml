@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="202305231722" author="serge">
+
+        <createTable tableName="phitagdictionaryentrysenseexample">
+
+            <column name="uname" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitagdictionaryentrysenseexample" />
+            </column>
+
+            <column name="dname" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitagdictionaryentrysenseexample" />
+            </column>
+
+            <column name="entryid" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitagdictionaryentrysenseexample" />
+            </column>
+
+            <column name="senseid" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitagdictionaryentrysenseexample" />
+            </column>
+
+            <column name="exampleid" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitagdictionaryentrysenseexample" />
+            </column>
+
+            <column name="example" type="varchar">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="exampleorder" type="int">
+                <constraints nullable="false" />
+            </column>
+
+        </createTable>
+
+        <addForeignKeyConstraint
+            baseTableName="phitagdictionaryentrysenseexample"
+            baseColumnNames="uname,dname,entryid,senseid"
+            constraintName="FK_phitagdictionaryentrysenseexample_phitagdictionaryentrysense"
+            referencedTableName="phitagdictionaryentrysense"
+            referencedColumnNames="uname,dname,entryid,senseid"
+            onDelete="CASCADE"
+            onUpdate="CASCADE"
+        />
+
+
+    </changeSet>
+
+</databaseChangeLog>

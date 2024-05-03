@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+
+    <changeSet id="0" author="serge">
+
+        <!-- Add example users -->
+        <insert tableName="phitaguser">
+            <column name="username" value="user-0"/>
+            <column name="displayname" value="user"/>
+            <column name="email" value="user-0@phitag.com"/>
+            <!-- password: Password1234! -->
+            <column name="password" value="$2a$10$PhIwEzhtx1EdiicLG2KejuL5UrRJU5h9zUqQiS5SykVFnQ.gE0nmq"/> 
+            <column name="phitagvisibility_name" value="VISIBILITY_PUBLIC"/>
+            <column name="phitagusecase_name" value="USECASE_DEFAULT" />
+            <column name="description" value="none"/>
+            <column name="isbot" value="false"/>
+            <column name="enabled" value="true"/>
+            <column name="account_non_expired" value="true"/>
+            <column name="account_non_locked" value="true"/>
+            <column name="credentials_non_expired" value="true"/>
+        </insert>
+
+
+        <insert tableName="phitaguser_phitagrole">
+            <column name="phitaguser_username" value="user-0"/>
+            <column name="phitagrole_name" value="ROLE_ADMIN"/>
+        </insert>
+
+        <insert tableName="phitaguser">
+            <column name="username" value="user-1"/>
+            <column name="displayname" value="user"/>
+            <column name="email" value="user-1@phitag.com"/>
+            <!-- password: Password1234! -->
+            <column name="password" value="$2a$10$PhIwEzhtx1EdiicLG2KejuL5UrRJU5h9zUqQiS5SykVFnQ.gE0nmq"/>
+            <column name="phitagvisibility_name" value="VISIBILITY_PUBLIC"/>
+            <column name="phitagusecase_name" value="USECASE_DEFAULT" />
+            <column name="description" value="none"/>
+            <column name="isbot" value="false"/>
+            <column name="enabled" value="true"/>
+            <column name="account_non_expired" value="true"/>
+            <column name="account_non_locked" value="true"/>
+            <column name="credentials_non_expired" value="true"/>
+        </insert>
+
+
+        <insert tableName="phitaguser_phitagrole">
+            <column name="phitaguser_username" value="user-1"/>
+            <column name="phitagrole_name" value="ROLE_USER"/>
+        </insert>
+        
+        <insert tableName="phitaguser">
+            <column name="username" value="user-2"/>
+            <column name="displayname" value="user"/>
+            <column name="email" value="user-2@phitag.com"/>
+            <!-- password: Password1234! -->
+            <column name="password" value="$2a$10$PhIwEzhtx1EdiicLG2KejuL5UrRJU5h9zUqQiS5SykVFnQ.gE0nmq"/>
+            <column name="phitagvisibility_name" value="VISIBILITY_PUBLIC"/>
+            <column name="phitagusecase_name" value="USECASE_DEFAULT" />
+            <column name="description" value="none"/>
+            <column name="isbot" value="false"/>
+            <column name="enabled" value="true"/>
+            <column name="account_non_expired" value="true"/>
+            <column name="account_non_locked" value="true"/>
+            <column name="credentials_non_expired" value="true"/>
+        </insert>
+
+
+        <insert tableName="phitaguser_phitagrole">
+            <column name="phitaguser_username" value="user-2"/>
+            <column name="phitagrole_name" value="ROLE_USER"/>
+        </insert>       
+
+        <insert tableName="phitaguser">
+            <column name="username" value="user-3"/>
+            <column name="displayname" value="user"/>
+            <column name="email" value="user-3@phitag.com"/>
+            <!-- password: Password1234! -->
+            <column name="password" value="$2a$10$PhIwEzhtx1EdiicLG2KejuL5UrRJU5h9zUqQiS5SykVFnQ.gE0nmq"/>
+            <column name="phitagvisibility_name" value="VISIBILITY_PUBLIC"/>
+            <column name="phitagusecase_name" value="USECASE_DEFAULT" />
+            <column name="description" value="none"/>
+            <column name="isbot" value="false"/>
+            <column name="enabled" value="false"/>
+            <column name="account_non_expired" value="true"/>
+            <column name="account_non_locked" value="true"/>
+            <column name="credentials_non_expired" value="true"/>
+        </insert>
+
+
+        <insert tableName="phitaguser_phitagrole">
+            <column name="phitaguser_username" value="user-3"/>
+            <column name="phitagrole_name" value="ROLE_USER"/>
+        </insert>
+
+        <!-- Bot user -->
+
+        <insert tableName="phitaguser">
+            <column name="username" value="user-bot"/>
+            <column name="displayname" value="user-bot"/>
+            <column name="email" value="user-bot@phitag.com"/>
+            <!-- password: Password1234! -->
+            <column name="password" value="$2a$10$PhIwEzhtx1EdiicLG2KejuL5UrRJU5h9zUqQiS5SykVFnQ.gE0nmq"/>
+            <column name="phitagvisibility_name" value="VISIBILITY_PUBLIC"/>
+            <column name="phitagusecase_name" value="USECASE_DEFAULT" />
+            <column name="description" value="none"/>
+            <column name="isbot" value="true"/>
+            <column name="enabled" value="false"/>
+            <column name="account_non_expired" value="true"/>
+            <column name="account_non_locked" value="true"/>
+            <column name="credentials_non_expired" value="true"/>
+        </insert>
+
+
+        <insert tableName="phitaguser_phitagrole">
+            <column name="phitaguser_username" value="user-bot"/>
+            <column name="phitagrole_name" value="ROLE_BOT"/>
+        </insert>
+
+    </changeSet>
+
+</databaseChangeLog>

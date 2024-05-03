@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+
+    <changeSet id="202304181447" author="serge">
+
+        <!-- UPDATE -->
+        <!-- User Statistic -->
+        <update tableName="phitaguserstatistic">
+            <column name="projectcount" value="4"/>
+            <where>username =
+                'Example-User'</where>
+        </update>
+
+        <update tableName="phitag_projectlanguage_count">
+            <column name="count" value="4"/>
+            <where>username =
+                'Example-User' AND language = 'English'</where>
+        </update>
+
+        <update tableName="phitag_annotationtype_count">
+            <column name="count" value="2"/>
+            <where>username =
+                'Example-User' AND annotationtype = 'ANNOTATIONTYPE_WSSIM'</where>
+        </update>
+
+        <!-- INSERT -->
+
+        <insert tableName="phitag_annotationtype_count">
+            <column name="username" value="Example-User" />
+            <column name="annotationtype" value="ANNOTATIONTYPE_LEXSUB" />
+            <column name="count" value="1" />
+        </insert>
+
+        <!-- Phase Statistic -->
+
+        <insert tableName="phitagphasestatistic">
+            <column name="ownername" value="Example-User" />
+            <column name="projectname" value="Example-Project-LEXSUB" />
+            <column name="phasename" value="ALL" />
+            <column name="annotations" value="0" />
+            <column name="krippendorffalpha" value="0.0" />
+        </insert>
+
+        <insert tableName="phitagphasestatistic">
+            <column name="ownername" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSBEST" />
+            <column name="phasename" value="ALL" />
+            <column name="annotations" value="0" />
+            <column name="krippendorffalpha" value="0.0" />
+        </insert>
+        
+        <!-- Annotator -->
+
+        <insert tableName="phitagannotatorstatistic">
+            <column name="annotatorname" value="Example-User" />
+            <column name="ownername" value="Example-User" />
+            <column name="projectname" value="Example-Project-LEXSUB" />
+            <column name="annotations" value="0" />
+            <column name="krippendorffalpha" value="0.0" />
+        </insert>
+
+        <insert tableName="phitagannotatorstatistic">
+            <column name="annotatorname" value="Example-User" />
+            <column name="ownername" value="Example-User" />
+            <column name="projectname" value="Example-Project-WSBEST" />
+            <column name="annotations" value="0" />
+            <column name="krippendorffalpha" value="0.0" />
+        </insert>
+
+    </changeSet>
+
+</databaseChangeLog>

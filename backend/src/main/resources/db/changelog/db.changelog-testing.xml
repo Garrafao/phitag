@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    
+    <!-- General -->
+    <includeAll path="tables/option/**" relativeToChangelogFile="true" />
+    <includeAll path="tables/user/**" relativeToChangelogFile="true" />
+    <includeAll path="tables/project/**" relativeToChangelogFile="true" />
+
+    <!-- Dictionaries -->
+    <includeAll path="tables/dictionary/**" relativeToChangelogFile="true" />
+
+    <!-- Annotation Tasks -->
+    <includeAll path="tables/annotationtask/**" relativeToChangelogFile="true" />
+
+    <!-- Corpus -->
+    <includeAll path="tables/corpus/**" relativeToChangelogFile="true" />
+
+    <!-- Statistic -->
+    <includeAll path="tables/statistic/**" relativeToChangelogFile="true" />
+
+    <!-- Other  -->
+    <includeAll path="tables/task/**" relativeToChangelogFile="true" />
+    <includeAll path="tables/guideline/**" relativeToChangelogFile="true" />
+    <includeAll path="tables/joblisting/**" relativeToChangelogFile="true" />
+    <includeAll path="tables/notification/**" relativeToChangelogFile="true" />
+    <includeAll path="tables/report/**" relativeToChangelogFile="true" />
+
+    <!-- Changelogs -->
+    <includeAll path="tables/changelogs/**" relativeToChangelogFile="true" />
+
+    <!-- Seeds -->
+    <includeAll path="seeds/static-seeds/**" relativeToChangelogFile="true" />
+    <includeAll path="test-seeds/**" relativeToChangelogFile="true" /> 
+
+</databaseChangeLog>

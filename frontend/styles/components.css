@@ -1,0 +1,315 @@
+
+@layer components {
+
+    /* SVGs */
+
+    .small-svg {
+        @apply h-4 w-4
+    }
+
+    .basic-svg {
+        @apply w-5 h-5
+    }
+
+    .medium-svg {
+        @apply h-6 w-6
+    }
+    
+    .large-svg {
+        @apply h-8 w-8
+    }
+
+    /* Tooltips */
+
+    .tooltip {
+        @apply relative flex items-center
+    }
+
+    .tooltip-container {
+        @apply absolute w-auto left-3 shadow-md overflow-auto
+        bg-base16-gray-700 text-base16-gray-200 font-dm-mono-medium
+        transition-all duration-200 scale-0 origin-left delay-200
+        z-50;
+    }
+
+    .tooltip-resource {
+        @apply relative flex items-center
+    }
+
+    .tooltip-resource-container {
+        @apply absolute w-auto right-16 bottom-8 shadow-md p-2
+        bg-base16-gray-700 text-base16-gray-200 font-dm-mono-medium
+        transition-all duration-200 scale-0 origin-bottom-right delay-200
+        z-50;
+    }
+
+    /* Dropdowns */
+
+
+    .dropdown-menu-uni-button {
+        @apply relative flex items-center
+    }
+
+    .dropdown-menu-uni-container {
+        @apply absolute w-auto top-8 right-0 shadow-md
+        bg-white text-base16-gray-900 font-uni-corporate-bold 
+        transition-all duration-200 scale-0 origin-top-right delay-200
+        z-10;
+    }
+
+    .dropdown-uni-selector {
+        @apply relative flex items-center
+    }
+
+    .dropdown-uni-selector-container {
+        @apply absolute w-full top-8 right-0 shadow-md
+        bg-white text-base16-gray-900 font-uni-corporate-bold
+        transition-all duration-200 scale-0 origin-top-left delay-200
+        z-10;
+    }
+    
+    .dropdown-menu-button {
+        @apply relative flex items-center
+    }
+
+    .dropdown-menu-container {
+        @apply absolute w-auto top-8 right-0 shadow-md
+        bg-white text-base16-gray-900 font-dm-mono-medium 
+        transition-all duration-200 scale-0 origin-top-right delay-200
+        z-10;
+    }
+
+
+    .dropdown-search {
+        @apply relative flex items-center
+    }
+
+    .dropdown-search-container {
+        @apply absolute w-full top-16 right-0 shadow-md
+        bg-white text-base16-gray-900 font-dm-mono-medium 
+        transition-all duration-300 scale-0 origin-top-left delay-100
+        z-10 max-h-32 overflow-auto;
+    }
+    
+    .dropdown-selector {
+        @apply relative flex items-center
+    }
+
+    .dropdown-selector-container {
+        @apply absolute w-full top-8 right-0 shadow-md
+        bg-white text-base16-gray-900 font-dm-mono-medium 
+        transition-all duration-200 scale-0 origin-top-left delay-200
+        z-10;
+    }
+
+    .dropdown-selector-item {
+        @apply mx-4 my-2 cursor-pointer border-l-2 border-base16-gray-200
+    }
+
+    .dropdown-selector-item-selected {
+        @apply mx-4 my-2 cursor-pointer border-l-2 border-base16-green
+    }
+
+    /* Buttons */
+
+    .icon-button {
+        @apply relative flex items-center
+    }
+
+    .icon-button-tooltip {
+        @apply absolute w-auto bottom-6 right-6 shadow-md
+        bg-base16-gray-700 text-base16-gray-200 font-dm-mono-medium
+        transition-all duration-200 scale-0 origin-bottom-right delay-200
+        z-10;
+    }
+
+    .icon-button-tooltip-bottom {
+        @apply absolute w-auto top-6 right-6 shadow-md
+        bg-base16-gray-700 text-base16-gray-200 font-dm-mono-medium
+        transition-all duration-200 scale-0 origin-top-right delay-200
+        z-10;
+    }
+
+    .upload-visible {
+        @apply w-auto transition-all duration-200 origin-right scale-100
+    }
+
+    .upload-hidden {
+        @apply w-auto transition-all duration-200 origin-right scale-0 
+    }
+
+    /* Lists */
+
+    .project-list {
+        @apply my-8 grid grid-cols-1 justify-items-center gap-11
+    }
+
+    .project-grid {
+        @apply my-8 grid grid-cols-1 xl:grid-cols-2 justify-items-center gap-4 xl:gap-11
+    }
+
+    .user-list {
+        @apply my-8 grid grid-cols-1 justify-items-center gap-11 
+    }
+
+    .user-grid {
+        @apply my-8 grid grid-cols-1 xl:grid-cols-2 justify-items-center gap-4 xl:gap-11 
+    }
+
+    .joblist-grid {
+        @apply my-8 grid grid-cols-1 xl:grid-cols-3 justify-items-center gap-4 xl:gap-11
+    }
+
+    .project-tab-selected {
+        @apply font-dm-mono-medium  bg-base16-gray-900 text-base16-gray-100
+
+    }
+
+    .project-tab-unselected {
+        @apply font-dm-mono-medium  text-base16-gray-400 border-b-2 hover:border-base16-gray-800 transition-all duration-300 
+    }
+
+    /* Square Grid */
+
+
+    /* Markdown */
+
+    .markdown-content-box {
+        @apply max-w-none overflow-auto
+
+        prose
+        prose-headings:font-bold prose-headings:text-inherit
+        prose-h1:text-3xl
+        prose-h2:text-2xl 
+        prose-h3:text-xl 
+        prose-h4:text-lg prose-h4:font-medium
+        
+        prose-blockquote:text-base16-gray-500
+        prose-a:underline 
+
+        marker:prose-ul:text-base16-gray-500
+        marker:prose-ol:text-base16-gray-500
+
+        prose-hr:border-t-2 prose-hr:border-base16-gray-400
+
+        prose-img:mx-auto
+
+        prose-strong:font-bold
+    }
+
+    .markdown-page-uni {
+        @apply max-w-none overflow-auto font-uni-corporate-regular text-black break-words
+        prose
+        prose-headings:font-bold prose-headings:font-uni-corporate-bold
+        prose-h1:text-3xl
+        prose-h2:text-2xl 
+        prose-h3:text-xl 
+        prose-h4:text-lg prose-h4:font-medium
+        
+        prose-blockquote:text-base16-gray-500
+
+        marker:prose-ul:text-base16-gray-500
+        marker:prose-ol:text-base16-gray-500
+
+        prose-hr:border-t-2 prose-hr:border-base16-gray-400
+
+        prose-img:mx-auto
+
+        prose-pre:bg-base16-gray-900
+        prose-code:font-dm-mono-medium
+
+        prose-strong:font-bold
+
+        
+    }
+
+    .markdown-preview-uni {
+        @apply max-w-none overflow-auto font-uni-corporate-light text-base16-gray-900 break-words
+        prose font-light text-sm
+        prose-h1:text-lg prose-h1:my-0
+        prose-h2:text-base prose-h2:my-0
+        
+
+        
+    }
+
+    .markdown-legal-notice-table {
+        @apply markdown-page
+        prose
+
+        prose-table:w-1/3
+        prose-table:my-24
+        prose-table:m-auto
+        prose-table:text-base
+        
+
+        prose-thead:hidden
+        prose-tr:border-none
+
+        first-of-type:prose-td:font-dm-mono-medium
+        first-of-type:prose-td:font-black
+        first-of-type:prose-td:text-xl
+        first-of-type:prose-td:text-left
+
+        prose-td:text-right
+    }
+
+
+    .markdown-page {
+        @apply max-w-none overflow-auto font-dm-mono-regular text-base16-gray-900 break-words
+        prose
+        prose-headings:font-black prose-headings:font-dm-mono-medium
+        prose-h1:text-3xl
+        prose-h2:text-2xl 
+        prose-h3:text-xl 
+        prose-h4:text-lg prose-h4:font-medium
+        
+        prose-blockquote:text-base16-gray-500
+
+        marker:prose-ul:text-base16-gray-500
+        marker:prose-ol:text-base16-gray-500
+
+        prose-hr:border-t-2 prose-hr:border-base16-gray-400
+
+        prose-img:mx-auto
+
+        prose-pre:bg-base16-gray-900
+        prose-code:font-dm-mono-medium
+
+        prose-strong:font-black
+
+        
+    }
+
+    .markdown-preview {
+        @apply max-w-none overflow-auto font-dm-mono-light text-base16-gray-900 break-words
+        prose font-light text-sm
+        prose-h1:text-lg prose-h1:my-0
+        prose-h2:text-base prose-h2:my-0
+        
+
+        
+    }
+
+    .markdown-legal-notice-table {
+        @apply markdown-page
+        prose
+
+        prose-table:w-1/3
+        prose-table:my-24
+        prose-table:m-auto
+        prose-table:text-base
+        
+
+        prose-thead:hidden
+        prose-tr:border-none
+
+        first-of-type:prose-td:font-dm-mono-medium
+        first-of-type:prose-td:font-black
+        first-of-type:prose-td:text-xl
+        first-of-type:prose-td:text-left
+
+        prose-td:text-right
+    }
+
+}

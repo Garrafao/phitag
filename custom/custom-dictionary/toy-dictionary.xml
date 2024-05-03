@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This is a toy dictionary example for custom xml dict layout -->
+<dictionary
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="custom-dictionary-schema.xsd">
+    <info>
+        <name>Toy Dictionary</name>
+        <description>Toy Dictionary</description>
+        <author>Toy Dictionary</author>
+    </info>
+
+    <entries>
+        <entry>
+            <headword>Toy</headword>
+            <part-of-speech>noun</part-of-speech>
+            <senses>
+                <sense>
+                    <definition>an object for children to play with</definition>
+                    <examples>
+                        <example>He has a lot of toys.</example>
+                        <example>She bought a toy for her son.</example>
+                    </examples>
+                </sense>
+                <sense>
+                    <definition>an object for an adult to play with</definition>
+                    <examples>
+                        <example>He has a lot of toys.</example>
+                    </examples>
+                </sense>
+            </senses>
+        </entry>
+
+        <entry>
+            <headword>Dictionary</headword>
+            <part-of-speech>noun</part-of-speech>
+            <senses>
+                <sense>
+                    <definition>a book that lists the words of a language in alphabetical order and gives their meaning, or that gives the equivalent words in a different language</definition>
+                    <examples>
+                        <example>an English-Chinese dictionary</example>
+                        <example>an English dictionary</example>
+                    </examples>
+                </sense>
+                <sense>
+                    <definition>a book that explains the words that are used in a particular subject</definition>
+                    <examples>
+                        <example>a dictionary of biology</example>
+                        <example>a dictionary of slang</example>
+                    </examples>
+                </sense>
+            </senses>
+        </entry>
+    </entries>
+</dictionary>

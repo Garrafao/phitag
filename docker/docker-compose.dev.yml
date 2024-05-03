@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+
+  phitag-postgres:
+    image: docker.io/postgres:11.5
+    container_name: phitag-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: dev
+      POSTGRES_PASSWORD: dev
+      POSTGRES_DB: phitag

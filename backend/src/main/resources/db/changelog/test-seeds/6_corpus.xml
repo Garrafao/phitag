@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="6" author="serge">
+
+        <!-- Corpus Info -->
+        <insert tableName="phitagcorpusinformation">
+            <column name="id" value="0" />
+            <column name="title" value="title-0" />
+            <column name="author" value="author-0" />
+            <column name="date" value="2000" />
+            <column name="language" value="English" />
+            <column name="resource" value="https://www.example.com" />
+            <column name="corpusnamefull" value="Corpus-0" />
+            <column name="corpusnameshort" value="C0" />
+        </insert>
+
+        <!-- Corpus Texts -->
+        <insert tableName="phitagcorpustext">
+            <column name="id" value="0" />
+            <column name="text" value="some text" />
+            <column name="orthography" value="some normal text" />
+            <column name="previousid" value="" />
+            <column name="nextid" value="1" />
+            <column name="phitagcorpusinformation_id" value="0" />
+        </insert>
+
+
+        <insert tableName="phitagcorpustext">
+            <column name="id" value="1" />
+            <column name="text" value="another text" />
+            <column name="orthography" value="another normal text" />
+            <column name="previousid" value="0" />
+            <column name="nextid" value="2" />
+            <column name="phitagcorpusinformation_id" value="0" />
+        </insert>
+
+
+        <insert tableName="phitagcorpustext">
+            <column name="id" value="2" />
+            <column name="text" value="final text" />
+            <column name="orthography" value="final normal text" />
+            <column name="previousid" value="1" />
+            <column name="nextid" value="" />
+            <column name="phitagcorpusinformation_id" value="0" />
+        </insert>
+
+        <!-- Corpus Lexicon -->
+        <insert tableName="phitagcorpuslexicon">
+            <column name="id" value="0" />
+            <column name="lemma" value="text" />
+            <column name="token" value="text" />
+            <column name="pos" value="nn" />
+        </insert>
+
+        <!-- Corpus -->
+        <insert tableName="phitagcorpus">
+            <column name="id" value="0" />
+            <column name="phitagcorpustext_id" value="1" />
+            <column name="phitagcorpuslexicon_id" value="0" />
+        </insert>
+
+
+        <insert tableName="phitagcorpus">
+            <column name="id" value="1" />
+            <column name="phitagcorpustext_id" value="1" />
+            <column name="phitagcorpuslexicon_id" value="0" />
+        </insert>
+
+
+        <insert tableName="phitagcorpus">
+            <column name="id" value="2" />
+            <column name="phitagcorpustext_id" value="2" />
+            <column name="phitagcorpuslexicon_id" value="0" />
+        </insert>
+
+    </changeSet>
+</databaseChangeLog>

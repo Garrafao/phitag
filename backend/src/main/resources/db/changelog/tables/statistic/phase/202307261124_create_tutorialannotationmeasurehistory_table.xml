@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="202307261124" author="serge">
+
+        <createTable tableName="tutorialannotationmeasurehistory">
+            <column name="timestamp" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_tutorialannotationmeasurehistory" />
+            </column>
+
+            <!-- Phase ID -->
+            <column name="phase_name" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_tutorialannotationmeasurehistory" />
+            </column>
+
+            <column name="phase_projectname" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_tutorialannotationmeasurehistory" />
+            </column>
+
+            <column name="phase_ownername" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_tutorialannotationmeasurehistory" />
+            </column>
+
+
+            <!-- Annotation ID -->
+            <column name="annotator_username" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitagusepairjudgement" />
+            </column>
+
+            <column name="annotator_projectname" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitagusepairjudgement" />
+            </column>
+
+            <column name="annotator_ownername" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitagusepairjudgement" />
+            </column>
+
+            <!-- Data -->
+            <column name="measure" type="double">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="passed" type="boolean">
+                <constraints nullable="false" />
+            </column>
+
+        </createTable>
+
+        <addForeignKeyConstraint
+            baseTableName="tutorialannotationmeasurehistory"
+            baseColumnNames="phase_name, phase_projectname, phase_ownername"
+            constraintName="FK_tutorialannotationmeasurehistory_phase"
+            referencedTableName="phitagphase"
+            referencedColumnNames="name, projectname, ownername"
+            onDelete="CASCADE"
+            onUpdate="CASCADE" />
+
+        <addForeignKeyConstraint
+            baseTableName="tutorialannotationmeasurehistory"
+            baseColumnNames="annotator_username, annotator_projectname, annotator_ownername"
+            constraintName="FK_tutorialannotationmeasurehistory_annotator"
+            referencedTableName="phitagannotator"
+            referencedColumnNames="username, projectname, ownername"
+            onDelete="CASCADE"
+            onUpdate="CASCADE" />
+
+    </changeSet>
+</databaseChangeLog>

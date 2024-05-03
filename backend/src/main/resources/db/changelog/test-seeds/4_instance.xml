@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="4" author="serge">
+
+        <!-- user pair instances -->
+        <insert tableName="phitagusepairinstance">
+            <column name="instanceid" value="0" />
+
+            <column name="phasename" value="phase-0" />
+            <column name="projectname" value="project-0" />
+            <column name="ownername" value="user-0" />
+
+            <column name="phitagusage_first_dataid" value="0" />
+            <column name="phitagusage_first_projectname" value="project-0" />
+            <column name="phitagusage_first_ownername" value="user-0" />
+
+            <column name="phitagusage_second_dataid" value="1" />
+            <column name="phitagusage_second_projectname" value="project-0" />
+            <column name="phitagusage_second_ownername" value="user-0" />
+
+            <column name="label_set" value="1,2,3,4,5" />
+            <column name="non_label" value="-" />
+        </insert>
+
+        <insert tableName="phitagusepairinstance">
+            <column name="instanceid" value="1" />
+
+            <column name="phasename" value="phase-0" />
+            <column name="projectname" value="project-0" />
+            <column name="ownername" value="user-0" />
+
+            <column name="phitagusage_first_dataid" value="1" />
+            <column name="phitagusage_first_projectname" value="project-0" />
+            <column name="phitagusage_first_ownername" value="user-0" />
+
+            <column name="phitagusage_second_dataid" value="2" />
+            <column name="phitagusage_second_projectname" value="project-0" />
+            <column name="phitagusage_second_ownername" value="user-0" />
+
+            <column name="label_set" value="1,2,3,4,5" />
+            <column name="non_label" value="-" />
+        </insert>
+
+        <insert tableName="phitagusepairinstance">
+            <column name="instanceid" value="2" />
+
+            <column name="phasename" value="phase-0" />
+            <column name="projectname" value="project-0" />
+            <column name="ownername" value="user-0" />
+
+            <column name="phitagusage_first_dataid" value="2" />
+            <column name="phitagusage_first_projectname" value="project-0" />
+            <column name="phitagusage_first_ownername" value="user-0" />
+
+            <column name="phitagusage_second_dataid" value="0" />
+            <column name="phitagusage_second_projectname" value="project-0" />
+            <column name="phitagusage_second_ownername" value="user-0" />
+
+            <column name="label_set" value="1,2,3,4,5" />
+            <column name="non_label" value="-" />
+        </insert>
+
+        <!-- user rank instances -->
+
+        <insert tableName="phitaguserankinstance">
+            <column name="instanceid" value="0" />
+
+            <column name="phasename" value="phase-0" />
+            <column name="projectname" value="project-0" />
+            <column name="ownername" value="user-0" />
+
+            <column name="phitagusage_first_dataid" value="0" />
+            <column name="phitagusage_first_projectname" value="project-0" />
+            <column name="phitagusage_first_ownername" value="user-0" />
+
+            <column name="phitagusage_second_dataid" value="1" />
+            <column name="phitagusage_second_projectname" value="project-0" />
+            <column name="phitagusage_second_ownername" value="user-0" />
+
+            <column name="phitagusage_third_dataid" value="2" />
+            <column name="phitagusage_third_projectname" value="project-0" />
+            <column name="phitagusage_third_ownername" value="user-0" />
+
+            <column name="phitagusage_fourth_dataid" value="1" />
+            <column name="phitagusage_fourth_projectname" value="project-0" />
+            <column name="phitagusage_fourth_ownername" value="user-0" />
+
+
+            <column name="label_set" value="1,2,3,4" />
+            <column name="non_label" value="-" />
+        </insert>
+        <insert tableName="phitaguserankinstance">
+            <column name="instanceid" value="1" />
+
+            <column name="phasename" value="phase-0" />
+            <column name="projectname" value="project-0" />
+            <column name="ownername" value="user-0" />
+
+            <column name="phitagusage_first_dataid" value="1" />
+            <column name="phitagusage_first_projectname" value="project-0" />
+            <column name="phitagusage_first_ownername" value="user-0" />
+
+            <column name="phitagusage_second_dataid" value="2" />
+            <column name="phitagusage_second_projectname" value="project-0" />
+            <column name="phitagusage_second_ownername" value="user-0" />
+
+            <column name="phitagusage_third_dataid" value="3" />
+            <column name="phitagusage_third_projectname" value="project-0" />
+            <column name="phitagusage_third_ownername" value="user-0" />
+
+            <column name="phitagusage_fourth_dataid" value="4" />
+            <column name="phitagusage_fourth_projectname" value="project-0" />
+            <column name="phitagusage_fourth_ownername" value="user-0" />
+
+
+            <column name="label_set" value="1,2,3,4" />
+            <column name="non_label" value="-" />
+        </insert>
+
+        <!-- user rank relative instances -->
+        <insert tableName="phitaguserankrelativeinstance">
+            <column name="instanceid" value="0" />
+
+            <column name="phasename" value="phase-0" />
+            <column name="projectname" value="project-0" />
+            <column name="ownername" value="user-0" />
+
+            <column name="phitagusage_first_dataid" value="0" />
+            <column name="phitagusage_first_projectname" value="project-0" />
+            <column name="phitagusage_first_ownername" value="user-0" />
+
+            <column name="phitagusage_second_dataid" value="1" />
+            <column name="phitagusage_second_projectname" value="project-0" />
+            <column name="phitagusage_second_ownername" value="user-0" />
+
+            <column name="phitagusage_third_dataid" value="1" />
+            <column name="phitagusage_third_projectname" value="project-0" />
+            <column name="phitagusage_third_ownername" value="user-0" />
+
+            <column name="phitagusage_fourth_dataid" value="1" />
+            <column name="phitagusage_fourth_projectname" value="project-0" />
+            <column name="phitagusage_fourth_ownername" value="user-0" />
+
+
+            <column name="label_set" value="1,2,3" />
+            <column name="non_label" value="-" />
+        </insert>
+
+        <insert tableName="phitaguserankrelativeinstance">
+            <column name="instanceid" value="1" />
+
+            <column name="phasename" value="phase-0" />
+            <column name="projectname" value="project-0" />
+            <column name="ownername" value="user-0" />
+
+            <column name="phitagusage_first_dataid" value="1" />
+            <column name="phitagusage_first_projectname" value="project-0" />
+            <column name="phitagusage_first_ownername" value="user-0" />
+
+            <column name="phitagusage_second_dataid" value="1" />
+            <column name="phitagusage_second_projectname" value="project-0" />
+            <column name="phitagusage_second_ownername" value="user-0" />
+
+            <column name="phitagusage_third_dataid" value="1" />
+            <column name="phitagusage_third_projectname" value="project-0" />
+            <column name="phitagusage_third_ownername" value="user-0" />
+
+            <column name="phitagusage_fourth_dataid" value="1" />
+            <column name="phitagusage_fourth_projectname" value="project-0" />
+            <column name="phitagusage_fourth_ownername" value="user-0" />
+
+
+            <column name="label_set" value="1,2,3" />
+            <column name="non_label" value="-" />
+        </insert>
+
+
+
+    </changeSet>
+
+</databaseChangeLog>

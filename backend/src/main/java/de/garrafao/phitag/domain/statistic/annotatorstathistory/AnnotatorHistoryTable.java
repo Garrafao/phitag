@@ -45,7 +45,7 @@ public class AnnotatorHistoryTable {
 
 
 
-     AnnotatorHistoryTable() {
+   public   AnnotatorHistoryTable() {
     }
 
     public AnnotatorHistoryTable(String uuid, String annotatorname, String goldannotator, String ownername, String projectname, String phasename, String annotationMeasure, Double agreement) {

@@ -1,45 +1,43 @@
-import { useState } from "react";
-import { FiFeather } from "react-icons/fi";
 import { toast } from "react-toastify";
-import useStorage from "../../../lib/hook/useStorage";
 
-import { addReport } from "../../../lib/service/report/ReportResource";
 
 const AddReportModal: React.FC<{ isOpen: boolean, closeModalCallback: Function }> = ({ isOpen, closeModalCallback }) => {
 
     // storage hook
-    const storage = useStorage();
 
-    const [modalState, setModalState] = useState({
+    /*const [modalState, setModalState] = useState({
         description: "",
-    });
+    });*/
 
 
-    const onConfirm = () => {
-        addReport(modalState.description, storage.get)
-            .then((res) => {
-                toast.success("Thank you for your report!");
-
-                // close modal
-                setModalState({
-                    description: "",
+    /*     const onConfirm = () => {
+            addReport(modalState.description, storage.get)
+                .then((res) => {
+                    toast.success("Thank you for your report!");
+    
+                    // close modal
+                    setModalState({
+                        description: "",
+                    });
+                    closeModalCallback();
+                }).catch((error) => {
+                    if (error?.response?.status === 500) {
+                        toast.error("Error while adding your report: " + error.response.data.message + "!");
+                    } else {
+                        toast.warning("The system is currently not available, please try again later!");
+                    }
                 });
-                closeModalCallback();
-            }).catch((error) => {
-                if (error?.response?.status === 500) {
-                    toast.error("Error while adding your report: " + error.response.data.message + "!");
-                } else {
-                    toast.warning("The system is currently not available, please try again later!");
-                }
-            });
+        } */
+    const onConfirm = () => {
+        const url = "https://github.com/Garrafao/phitag/issues";
+        window.location.href = url;
     }
+
 
 
     const onCancel = () => {
         toast.info("Canceled creating a new joblisting.");
-        setModalState({
-            description: "",
-        });
+
         closeModalCallback();
     }
 
@@ -59,8 +57,15 @@ const AddReportModal: React.FC<{ isOpen: boolean, closeModalCallback: Function }
                                 <div className="font-black text-xl">
                                     Report a Problem
                                 </div>
-
                                 <div className="flex flex-col items-left my-6">
+                                    <div className="font-light text-lg">
+                                        {/* eslint-disable-next-line react/no-unescaped-entities */}
+                                        To report a problem, please create an issue in GitHub by clicking on "Report Issue" button below. Then, click "New issue" and provide a clear and concise title that summarizes the problem. In the description, detail the issue you're encountering, including any relevant steps to reproduce it and error messages.This will help the project maintainers understand and address the problem efficiently.
+                                    </div>
+
+                                </div>
+
+                                {/* <div className="flex flex-col items-left my-6">
                                     <div className="font-bold text-lg">
                                         Description
                                     </div>
@@ -76,13 +81,13 @@ const AddReportModal: React.FC<{ isOpen: boolean, closeModalCallback: Function }
                                                 description: e.target.value
                                             })} />
                                     </div>
-                                </div>
+                                </div> */}
 
                             </div>
                         </div>
                         <div className="flex flex-row divide-x-8">
                             <button type="button" className="block w-full mt-8 py-2 bg-base16-gray-900 text-base16-gray-100 " onClick={() => onCancel()}>Cancel</button>
-                            <button type="button" className="block w-full mt-8 py-2 bg-base16-gray-900 text-base16-gray-100 " onClick={onConfirm}>Send</button>
+                            <button type="button" className="block w-full mt-8 py-2 bg-base16-gray-900 text-base16-gray-100 " onClick={onConfirm}>Report Issue</button>
                         </div>
                     </div>
                 </div>

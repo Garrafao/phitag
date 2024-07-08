@@ -30,6 +30,8 @@ import UseRankPairJudgementDto from "../../model/judgement/userankpairjudgement/
 import PagedUseRankPairJudgement from "../../model/judgement/userankpairjudgement/model/PagedUseRankPairJudgement";
 import SentimentJudgementDto from "../../model/judgement/sentiment/dto/SentimentJudgementDto";
 import PagedSentimentJudgement from "../../model/judgement/sentiment/model/PagedSentimentJudgement";
+import SpanJudgementDto from "../../model/judgement/spanjudgement/dto/SpanJudgementDto";
+import PagedSpanJudgement from "../../model/judgement/spanjudgement/model/PagedSpanJudgement";
 
 /** 
  * Fetches all judgements of a phase
@@ -266,6 +268,36 @@ export function useFetchPagedLexSubJudgements(owner: string, project: string, ph
 
     return {
         data: data ? PagedLexSubJudgement.fromDto(data) : PagedLexSubJudgement.empty(),
+        isLoading: !error && !data,
+        isError: error,
+        mutate: mutate
+    }
+}
+
+/**
+ * Fetch all sapn judgements of a phase paged
+ * 
+ * @param owner owner of the project
+ * @param project project name
+ * @param phase phase name in the project
+ * @param page page number
+ * @param fetch if data should be fetched
+ * @returns list of all judgements
+ */
+export function useFetchPagedSpanJudgements(owner: string, project: string, phase: string, page: number, fetch: boolean = true) {
+    const { get } = useStorage();
+    const token = get('JWT') ?? '';
+
+    const queryPhaseDataFetcher = (url: string) => axios.get<PagedGenericDto<SpanJudgementDto>>(url, {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    }).then(res => res.data);
+
+    const { data, error, mutate } = useSWR(fetch ? `${BACKENDROUTES.JUDGEMENT}/paged?owner=${owner}&project=${project}&phase=${phase}&page=${page}` : null, queryPhaseDataFetcher)
+
+    return {
+        data: data ? PagedSpanJudgement.fromDto(data) : PagedSpanJudgement.empty(),
         isLoading: !error && !data,
         isError: error,
         mutate: mutate
@@ -833,10 +865,28 @@ export function deleteLexSub(command: IDeleteJudgementCommand, get: Function = (
  * 
  * @returns Promise
  */
-export function deleteSentiment(command: IDeleteJudgementCommand, get: Function = () => { }) {
+export function deleteSpan(command: IDeleteJudgementCommand, get: Function = () => { }) {
     const token = get('JWT') ?? '';
 
-    return axios.post(`${BACKENDROUTES.JUDGEMENT}/delete/sentiment`, command,
+    return axios.post(`${BACKENDROUTES.JUDGEMENT}/delete/span`, command,
+        {
+            headers: { "Authorization": `Bearer ${token}` },
+        }
+    ).then(res => res.data);
+}
+
+/**
+ * Delete judgement
+ * 
+ * @param command command containing the judgement
+ * @param get storage hook
+ * 
+ * @returns Promise
+ */
+export function deleteJudgement(command: IDeleteJudgementCommand, get: Function = () => { }) {
+    const token = get('JWT') ?? '';
+
+    return axios.post(`${BACKENDROUTES.JUDGEMENT}/delete/sentiement`, command,
         {
             headers: { "Authorization": `Bearer ${token}` },
         }
@@ -862,6 +912,22 @@ export function annotateUsepair(command: IAddJudgementCommand, get: Function = (
 
 }
 
+/** 
+ * Add a judgement to the phase (i.e. annotate an instance of a phase)
+ * 
+ * @param command command containing the judgement
+ * @returns Promise
+ */
+export function annotateSpan(command: IAddJudgementCommand, get: Function = () => { }) {
+    const token = get('JWT') ?? '';
+
+    return axios.post(`${BACKENDROUTES.JUDGEMENT}/annotate/span`, command,
+        {
+            headers: { "Authorization": `Bearer ${token}` },
+        }
+    ).then(res => res.data);
+
+}
 /**
  * Add a bulk of judgements to the phase (i.e. annotate instances of a phase)
  */
@@ -1060,6 +1126,24 @@ export function bulkAnnotateLexSub(commands: IAddJudgementCommand[], get: Functi
  * @returns Promise
  */
 export function bulkAnnotateSentiment(commands: IAddJudgementCommand[], get: Function = () => { }) {
+    const token = get('JWT') ?? '';
+
+    return axios.post(`${BACKENDROUTES.JUDGEMENT}/annotate/sentiment/bulk`, commands,
+        {
+            headers: { "Authorization": `Bearer ${token}` },
+        }
+    ).then(res => res.data);
+}
+
+/**
+ * Add a bulk of judgements to phase of task type Sentiment
+ * 
+ * @param commands commands containing the judgements
+ * @param get storage hook
+ * 
+ * @returns Promise
+ */
+export function bulkAnnotateChoice(commands: IAddJudgementCommand[], get: Function = () => { }) {
     const token = get('JWT') ?? '';
 
     return axios.post(`${BACKENDROUTES.JUDGEMENT}/annotate/sentiment/bulk`, commands,

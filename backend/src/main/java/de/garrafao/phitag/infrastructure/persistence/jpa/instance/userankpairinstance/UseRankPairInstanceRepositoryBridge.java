@@ -46,4 +46,8 @@ public class UseRankPairInstanceRepositoryBridge implements UseRankPairRepositor
     public void delete(Iterable<UseRankPairInstance> instanceData) {
         this.useRankPairInstanceRepositoryJpa.deleteInBatch(instanceData);
     }
+    @Override
+    public void delete(UseRankPairInstance instanceData) {
+        this.useRankPairInstanceRepositoryJpa.delete(instanceData);
+    }
 }

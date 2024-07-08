@@ -9,7 +9,7 @@ const BasicFooter: React.FC<{}> = () => {
             <div className="w-full 2xl:w-3/5 self-center">
 
                 <div className="py-2 px-6">
-                    <div className="flex flex-col space-y-2 sm:flex-row justify-between">
+                    <div className="flex flex-col space-y-2 xl:flex-row justify-between">
                         <Link href="/">
                             <a className="flex items-center ">
                                 Homepage
@@ -34,6 +34,12 @@ const BasicFooter: React.FC<{}> = () => {
                             </a>
                         </Link>
 
+                        <Link href="/use-cases">
+                            <a className="flex items-center">
+                                Use Cases
+                            </a>
+                        </Link>
+
                         <Link href="/faq">
                             <a className="flex items-center">
                                 FAQ
@@ -46,13 +52,15 @@ const BasicFooter: React.FC<{}> = () => {
                             </a>
                         </Link>
 
-                        <Link href="/legal-notice">
+                        <Link href="https://www.uni-stuttgart.de/en/legal-notice/">
                             <a className="flex items-center">
                                 Legal Notice
                             </a>
                         </Link>
 
                     </div>
+
+
                 </div>
 
             </div>

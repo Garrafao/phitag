@@ -7,37 +7,59 @@
 
     <changeSet id="202304041549" author="serge">
         <insert tableName="phitagjoblisting">
-            <column name="name" value="Example-Use-Pair-Annotation-Joblisting"/>
-            <column name="projectname" value="Example-Project-Use-Pair"/>
+            <column name="name" value="Example-Text-Pair-Annotation-Joblisting"/>
+            <column name="projectname" value="Example-Project-Text-Pair"/>
             <column name="ownername" value="Example-User"/>
-            <column name="displayname" value="Example-Use-Pair-Annotation-Joblisting"/>
-            <column name="phasename" value="Example-Use-Pair-Annotation-Joblisting"/>
+            <column name="displayname" value="Example-Text-Pair-Annotation-Joblisting"/>
+            <column name="phasename" value="Example-Text-Pair-Annotation-Joblisting"/>
             <column name="open" value="true"/>
             <column name="active" value="true"/>
-            <column name="description" value="This is an example job listing for Use Pair Annotation. It is used to show how the job listing feature works."/>
+            <column name="description" value="This is an example job listing for Text Pair Annotation. It is used to show how the job listing feature works."/>
         </insert>
         
         <insert tableName="phitagjoblisting">
-            <column name="name" value="Example-WSSIM-Annotation-Joblisting"/>
-            <column name="projectname" value="Example-Project-WSSIM"/>
+            <column name="name" value="Example-Text-Label-Annotation-Joblisting"/>
+            <column name="projectname" value="Example-Project-Text-Label"/>
             <column name="ownername" value="Example-User"/>
-            <column name="displayname" value="Example-WSSIM-Annotation-Joblisting"/>
-            <column name="phasename" value="Example-Project-WSSIM"/>
+            <column name="displayname" value="Example-Text-Label-Annotation-Joblisting"/>
+            <column name="phasename" value="Example-Project-Text-Label"/>
             <column name="open" value="true"/>
             <column name="active" value="true"/>
-            <column name="description" value="This is an example job listing for WSSIM Annotation. It is used to show how the job listing feature works."/>
+            <column name="description" value="This is an example job listing for Text Label Annotation. It is used to show how the job listing feature works."/>
         </insert>
         <insert tableName="phitagjoblisting">
-            <column name="name" value="Example-Use-Rank-Annotation-Joblisting"/>
-            <column name="projectname" value="Example-Project-Use-Rank"/>
+            <column name="name" value="Example-Text-Rank-Annotation-Joblisting"/>
+            <column name="projectname" value="Example-Project-Text-Rank"/>
             <column name="ownername" value="Example-User"/>
-            <column name="displayname" value="Example-Use-Rank-Annotation-Joblisting"/>
-            <column name="phasename" value="Example-Use-Rank-Annotation-Joblisting"/>
+            <column name="displayname" value="Example-Text-Rank-Annotation-Joblisting"/>
+            <column name="phasename" value="Example-Text-Rank-Annotation-Joblisting"/>
             <column name="open" value="true"/>
             <column name="active" value="true"/>
-            <column name="description" value="This is an example job listing for Use Rank Annotation. It is used to show how the job listing feature works."/>
+            <column name="description" value="This is an example job listing for Text Rank Annotation. It is used to show how the job listing feature works."/>
         </insert>
-        
+        <insert tableName="phitagjoblisting">
+            <column name="name" value="Example-Text-Sentiment-Annotation-Joblisting"/>
+            <column name="projectname" value="Example-Project-Text-Sentiment"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="displayname" value="Example-Text-Sentiment-Annotation-Joblisting"/>
+            <column name="phasename" value="Example-Text-Sentiment-Annotation-Joblisting"/>
+            <column name="open" value="true"/>
+            <column name="active" value="true"/>
+            <column name="description" value="This is an example job listing for Text Sentiment Annotation. It is used to show how the job listing feature works."/>
+        </insert>
+        <insert tableName="phitagjoblisting">
+            <column name="name" value="Example-Text-Sentiment-Choice-Joblisting"/>
+            <column name="projectname" value="Example-Project-Text-Choice"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="displayname" value="Example-Text-Choice-Annotation-Joblisting"/>
+            <column name="phasename" value="Example-Text-Choice-Annotation-Joblisting"/>
+            <column name="open" value="true"/>
+            <column name="active" value="true"/>
+            <column name="description" value="This is an example job listing for Text Choice Annotation. It is used to show how the job listing feature works."/>
+        </insert>
+
+
+
 
     </changeSet>
 

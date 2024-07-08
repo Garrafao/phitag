@@ -1,6 +1,7 @@
 package de.garrafao.phitag.application.instance.wssiminstance;
 
 import de.garrafao.phitag.application.common.CommonService;
+import de.garrafao.phitag.application.instance.data.DeleteInstanceCommand;
 import de.garrafao.phitag.application.sampling.data.SamplingEnum;
 import de.garrafao.phitag.domain.annotationprocessinformation.AnnotationProcessInformation;
 import de.garrafao.phitag.domain.annotationprocessinformation.error.AnnotationProcessInformationException;
@@ -455,7 +456,6 @@ public class WSSIMInstanceApplicationService {
      * Generate sampling order for random sampling without replacement.
      * 
      * @param phase
-     * @param annotator
      * @return
      */
     private List<String> generateSamplingOrderWithoutReplacement(final Phase phase) {
@@ -473,7 +473,6 @@ public class WSSIMInstanceApplicationService {
      * Generate sampling order for ID-based sampling.
      * 
      * @param phase
-     * @param annotator
      * @return
      */
     private List<String> generateSamplingIDOrder(final Phase phase) {
@@ -504,7 +503,6 @@ public class WSSIMInstanceApplicationService {
      * 
      * @return the a use pair instance
      */
-    @Transactional
     private WSSIMInstance sample(final Phase phase, final Annotator annotator) {
         AnnotationProcessInformation annotationProcessInformation;
 
@@ -547,5 +545,26 @@ public class WSSIMInstanceApplicationService {
         return  annotationProcessInformation.getOrder().size();
 
     }
+
+    /**
+     * Delete a wssim instance.
+     *
+     * @param phase     the phase
+     * @param annotator the annotator
+     * @param command   the command
+     */
+    @Transactional
+    public void delete(final Phase phase, final Annotator annotator, final DeleteInstanceCommand command) {
+        final Query query = new WSSIMInstanceQueryBuilder()
+                .withOwner(command.getOwner())
+                .withProject(command.getProject())
+                .withPhase(command.getPhase())
+                .withInstanceid(command.getInstanceID())
+                .build();
+        final List<WSSIMInstance> instances = this.wssimInstanceRepository.findByQuery(query);
+        this.wssimInstanceRepository.delete(instances.get(0));
+    }
+
+
 
 }

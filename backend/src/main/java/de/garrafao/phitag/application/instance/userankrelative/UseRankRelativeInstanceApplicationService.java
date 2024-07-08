@@ -1,6 +1,7 @@
 package de.garrafao.phitag.application.instance.userankrelative;
 
 import de.garrafao.phitag.application.common.CommonService;
+import de.garrafao.phitag.application.instance.data.DeleteInstanceCommand;
 import de.garrafao.phitag.application.sampling.data.SamplingEnum;
 import de.garrafao.phitag.domain.annotationprocessinformation.AnnotationProcessInformation;
 import de.garrafao.phitag.domain.annotationprocessinformation.error.AnnotationProcessInformationException;
@@ -617,5 +618,25 @@ public class UseRankRelativeInstanceApplicationService {
         return  annotationProcessInformation.getOrder().size();
 
     }
+
+    /**
+     * Delete a use rank relative instance.
+     *
+     * @param phase     the phase
+     * @param annotator the annotator
+     * @param command   the command
+     */
+    @Transactional
+    public void delete(final Phase phase, final Annotator annotator, final DeleteInstanceCommand command) {
+        final Query query = new UseRankRelativeInstanceQueryBuilder()
+                .withOwner(command.getOwner())
+                .withProject(command.getProject())
+                .withPhase(command.getPhase())
+                .withInstanceid(command.getInstanceID())
+                .build();
+        final List<UseRankRelativeInstance> instances = this.useRankRelativeInstanceRepository.findByQuery(query);
+        this.useRankRelativeInstanceRepository.delete(instances.get(0));
+    }
+
 
 }

@@ -43,7 +43,7 @@ const HumanPool: NextPage = () => {
     });
 
     const authenticated = useAuthenticated();
-    const users = useQueryUsers(searchField.fieldQuery, true);
+    const users = useQueryUsers("", true);
 
     // Hooks
 

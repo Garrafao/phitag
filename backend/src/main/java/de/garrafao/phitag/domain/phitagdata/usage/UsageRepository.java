@@ -1,12 +1,11 @@
 package de.garrafao.phitag.domain.phitagdata.usage;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.data.domain.Page;
-
 import de.garrafao.phitag.domain.core.PageRequestWraper;
 import de.garrafao.phitag.domain.core.Query;
+import org.springframework.data.domain.Page;
+
+import java.util.List;
+import java.util.Optional;
 
 public interface UsageRepository {
 
@@ -30,4 +29,5 @@ public interface UsageRepository {
 
     Integer countDistinctLemmaByLemmaAndIdProjectidNameAndIdProjectidOwnername(final String lemma, final String projectname, final String ownername);
 
+    void delete(Usage usage);
 }

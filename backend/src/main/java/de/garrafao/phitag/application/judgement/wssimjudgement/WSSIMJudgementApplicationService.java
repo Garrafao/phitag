@@ -119,6 +119,22 @@ public class WSSIMJudgementApplicationService {
                 .build();
         return this.wssimJudgementRepository.findByQuery(query);
     }
+    /**
+     * Get all WSSIM Judgements for a given phase
+     *
+     * @param phase
+     * @return {@link WSSIMJudgement} list
+     */
+    public List<WSSIMJudgement> findByPhaseAndAnnotator(final Phase phase, final Annotator annotator) {
+        final Query query = new WSSIMJudgementQueryBuilder()
+                .withAnnotator(annotator.getId().getUsername())
+                .withOwner(phase.getId().getProjectid().getOwnername())
+                .withProject(phase.getId().getProjectid().getName())
+                .withPhase(phase.getId().getName())
+                .build();
+        return this.wssimJudgementRepository.findByQuery(query);
+    }
+
 
 
     /**

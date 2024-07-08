@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="202304181446" author="serge">
+        
+        <insert tableName="phitaglexsubinstance">
+            <column name="instanceid" value="0"/>
+
+            <column name="phasename" value="ALL"/>
+            <column name="projectname" value="Example-Project-Text-Instruction"/>
+            <column name="ownername" value="Example-User"/>
+
+            <column name="phitagusage_dataid" value="0"/>
+            <column name="phitagusage_projectname" value="Example-Project-Text-Instruction"/>
+            <column name="phitagusage_ownername" value="Example-User"/>
+
+            <column name="label_set" value=""/>
+            <column name="non_label" value="-"/>
+        </insert>
+    
+        <insert tableName="phitaglexsubinstance">
+            <column name="instanceid" value="1"/>
+
+            <column name="phasename" value="ALL"/>
+            <column name="projectname" value="Example-Project-Text-Instruction"/>
+            <column name="ownername" value="Example-User"/>
+
+            <column name="phitagusage_dataid" value="1"/>
+            <column name="phitagusage_projectname" value="Example-Project-Text-Instruction"/>
+            <column name="phitagusage_ownername" value="Example-User"/>
+
+            <column name="label_set" value=""/>
+            <column name="non_label" value="-"/>
+        </insert>
+    
+        <insert tableName="phitaglexsubinstance">
+            <column name="instanceid" value="2"/>
+
+            <column name="phasename" value="ALL"/>
+            <column name="projectname" value="Example-Project-Text-Instruction"/>
+            <column name="ownername" value="Example-User"/>
+
+            <column name="phitagusage_dataid" value="2"/>
+            <column name="phitagusage_projectname" value="Example-Project-Text-Instruction"/>
+            <column name="phitagusage_ownername" value="Example-User"/>
+
+            <column name="label_set" value=""/>
+            <column name="non_label" value="-"/>
+        </insert>
+    
+        <insert tableName="phitaglexsubinstance">
+            <column name="instanceid" value="3"/>
+
+            <column name="phasename" value="ALL"/>
+            <column name="projectname" value="Example-Project-Text-Instruction"/>
+            <column name="ownername" value="Example-User"/>
+
+            <column name="phitagusage_dataid" value="3"/>
+            <column name="phitagusage_projectname" value="Example-Project-Text-Instruction"/>
+            <column name="phitagusage_ownername" value="Example-User"/>
+
+            <column name="label_set" value=""/>
+            <column name="non_label" value="-"/>
+        </insert>
+    
+        <insert tableName="phitaglexsubinstance">
+            <column name="instanceid" value="4"/>
+
+            <column name="phasename" value="ALL"/>
+            <column name="projectname" value="Example-Project-Text-Instruction"/>
+            <column name="ownername" value="Example-User"/>
+
+            <column name="phitagusage_dataid" value="4"/>
+            <column name="phitagusage_projectname" value="Example-Project-Text-Instruction"/>
+            <column name="phitagusage_ownername" value="Example-User"/>
+
+            <column name="label_set" value=""/>
+            <column name="non_label" value="-"/>
+        </insert>
+    
+        <insert tableName="phitaglexsubinstance">
+            <column name="instanceid" value="5"/>
+
+            <column name="phasename" value="ALL"/>
+            <column name="projectname" value="Example-Project-Text-Instruction"/>
+            <column name="ownername" value="Example-User"/>
+
+            <column name="phitagusage_dataid" value="5"/>
+            <column name="phitagusage_projectname" value="Example-Project-Text-Instruction"/>
+            <column name="phitagusage_ownername" value="Example-User"/>
+
+            <column name="label_set" value=""/>
+            <column name="non_label" value="-"/>
+        </insert>
+    
+        <insert tableName="phitaglexsubinstance">
+            <column name="instanceid" value="6"/>
+
+            <column name="phasename" value="ALL"/>
+            <column name="projectname" value="Example-Project-Text-Instruction"/>
+            <column name="ownername" value="Example-User"/>
+
+            <column name="phitagusage_dataid" value="6"/>
+            <column name="phitagusage_projectname" value="Example-Project-Text-Instruction"/>
+            <column name="phitagusage_ownername" value="Example-User"/>
+
+            <column name="label_set" value=""/>
+            <column name="non_label" value="-"/>
+        </insert>
+    
+        <insert tableName="phitaglexsubinstance">
+            <column name="instanceid" value="7"/>
+
+            <column name="phasename" value="ALL"/>
+            <column name="projectname" value="Example-Project-Text-Instruction"/>
+            <column name="ownername" value="Example-User"/>
+
+            <column name="phitagusage_dataid" value="7"/>
+            <column name="phitagusage_projectname" value="Example-Project-Text-Instruction"/>
+            <column name="phitagusage_ownername" value="Example-User"/>
+
+            <column name="label_set" value=""/>
+            <column name="non_label" value="-"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
+    

@@ -25,7 +25,7 @@ import StartComputationalAnnotationCommand from "../../../lib/model/phase/comman
 import DropdownSelect from "../../generic/dropdown/dropdownselect";
 import { startComputationalAnnotation, useFetchPhases } from "../../../lib/service/phase/PhaseResource";
 import OpenAIModel from "../../../lib/model/computationalannotator/openaimodel/model/OpenAIModel";
-import { chatGptLexsubAnnotation, chatGptUsePairAnnotation, chatLexSubTutorialAnnotation, chatUsePairTutorialAnnotation, chatWSSIMAnnotation, chatWSSIMTutorialAnnotation, useFetchAllOpenAIModel, UseFetchPagedUsePairJudgementsTutorials } from "../../../lib/service/computationalAnnotator/ComputationalAnnotatorResource";
+import { chatGptLexsubAnnotation, chatGptSentimentAnnotation, chatGptUsePairAnnotation, chatLexSubTutorialAnnotation, chatUsePairTutorialAnnotation, chatWSSIMAnnotation, chatWSSIMTutorialAnnotation, tinyAnnotate, useFetchAllOpenAIModel, UseFetchPagedUsePairJudgementsTutorials } from "../../../lib/service/computationalAnnotator/ComputationalAnnotatorResource";
 import BasicCheckbox from "../../generic/checkbox/basiccheckbox";
 import router, { Router, useRouter } from "next/router";
 import ANNOTATIONTYPES from "../../../lib/AnnotationTypes";
@@ -36,6 +36,7 @@ import { useFetchProject } from "../../../lib/service/project/ProjectResource";
 import { useFetchPagedUsePairJudgements } from "../../../lib/service/judgement/JudgementResource";
 import { MdOutlineAutoDelete } from "react-icons/md";
 import Guideline from "../../../lib/model/guideline/model/Guideline";
+import HelpButton from "../../generic/button/helpbutton";
 
 
 
@@ -73,8 +74,12 @@ const ComputationalAnnotationModal: React.FC<{
         const [chatGptModalState, setChatGptModalState] = useState({
             apiKey: "",
             model: null as unknown as OpenAIModel,
+            temperature: null as unknown as number,
+            topP: null as unknown as number,
             otherModel: "",
             prompt: "",
+            system: "",
+            finalMessage: "",
             lemma: ""
         });
 
@@ -94,13 +99,20 @@ const ComputationalAnnotationModal: React.FC<{
 
         const onConfirm = () => {
 
+
             if (!modalState.selectedAnnotator.some(Annotator => Annotator.getVisiblename() === "ChatGpt")) {
-
-
                 computationalAnnotation();
             }
+
+          
+
             if (modalState.selectedAnnotator.some(Annotator => Annotator.getVisiblename() === "ChatGpt")) {
                 chatGptAnnotation()
+                return;
+            }
+
+            if (modalState.selectedAnnotator.some(Annotator => Annotator.getVisiblename() === "TinyLLM")) {
+                tinyLLMAnnotate()
                 return;
             }
             if (
@@ -148,10 +160,10 @@ const ComputationalAnnotationModal: React.FC<{
                         }
                     });
             }
-            if (phase?.getAnnotationType().getName() === ANNOTATIONTYPES.ANNOTATIONTYPE_LEXSUB) {
+            if (phase?.getAnnotationType().getName() === ANNOTATIONTYPES.ANNOTATIONTYPE_SENTIMENT) {
                 closeModalCallback();
                 setLoadingStatus(true);
-                chatGptLexsubAnnotation(command, storage.get)
+                chatGptSentimentAnnotation(command, storage.get)
                     .then(() => {
                         setLoadingStatus(false);
                         resetChatGptModalState();
@@ -170,10 +182,57 @@ const ComputationalAnnotationModal: React.FC<{
                         }
                     });
             }
+
+
             if (phase?.getAnnotationType().getName() === ANNOTATIONTYPES.ANNOTATIONTYPE_WSSIM) {
                 closeModalCallback();
                 setLoadingStatus(true);
                 chatWSSIMAnnotation(command, storage.get)
+                    .then(() => {
+                        setLoadingStatus(false);
+                        resetChatGptModalState();
+                    })
+                    .then(() => {
+                        Router.push(`/phi/${phase.getId().getOwner()}/${phase.getId().getProject()}/${phase.getId().getPhase()}/judgement`);
+                    })
+                    .catch((error) => {
+                        if (error?.response?.status === 500) {
+                            toast.error(error.response.data.message + "!");
+                            resetChatGptModalState();
+                            Router.push(`/phi/${phase.getId().getOwner()}/${phase.getId().getProject()}/${phase.getId().getPhase()}/judgement`);
+
+                        } else {
+                            toast.warning(error.response.data.message);
+                        }
+                    });
+            }
+        }
+
+        const tinyLLMAnnotate = () => {
+
+
+          
+            const username = storage.get('USER');
+
+            if (!username) {
+                toast.warning("This should not happen. Please contact the administrator.");
+                return;
+            }
+
+            if (phase?.getAnnotationType().getName() === ANNOTATIONTYPES.ANNOTATIONTYPE_SENTIMENT) {
+                closeModalCallback();
+                setLoadingStatus(true);
+                tinyAnnotate(new ComputationalAnnotatorCommand(
+                    phase?.getId().getOwner(),
+                    phase?.getId().getProject(),
+                    phase?.getId().getPhase(),
+                    "keydfjsadjlksajdklsadjlksaj",
+                    0.0,
+                    0.0,
+                    "model",
+                    "prompt",
+                    "system",
+                    "finale"), storage.get)
                     .then(() => {
                         setLoadingStatus(false);
                         resetChatGptModalState();
@@ -425,6 +484,66 @@ const ComputationalAnnotationModal: React.FC<{
                                                                 )}
 
                                                         </div>
+                                                        <div className="flex items-center">
+                                                            <div className="font-bold-mono text-m">
+                                                                Temperature
+                                                            </div>
+                                                            <div className="px-12">
+                                                                <HelpButton
+                                                                    title="Help: "
+                                                                    tooltip="Choosing Temperature"
+                                                                    text=""
+                                                                    reference=""
+                                                                    linkage={false}
+                                                                />
+                                                            </div>
+                                                            <div className="py-2 px-3 border-b-2 mt-2 ">
+                                                                <input
+                                                                    id="temperature"
+                                                                    name="temperature"
+                                                                    className="pl-3 flex flex-auto outline-none border-none w-full"
+                                                                    placeholder="temperature"
+                                                                    type={"number"}
+                                                                    min={0.0}
+                                                                    step={0.1}
+                                                                    max={1.0}
+                                                                    value={chatGptModalState.temperature}
+                                                                    onChange={(e: any) => setChatGptModalState({
+                                                                        ...chatGptModalState,
+                                                                        temperature: e.target.value
+                                                                    })} />
+                                                            </div>
+                                                        </div>
+                                                        <div className="flex items-center">
+                                                            <div className="font-bold-mono text-m">
+                                                                topP
+                                                            </div>
+                                                            <div className="px-12">
+                                                                <HelpButton
+                                                                    title="Help: "
+                                                                    tooltip="Choosing topP"
+                                                                    text=""
+                                                                    reference=""
+                                                                    linkage={false}
+                                                                />
+                                                            </div>
+                                                            <div className="py-2 px-3 border-b-2 mt-2 ">
+                                                                <input
+                                                                    id="topP"
+                                                                    name="topP"
+                                                                    className="pl-3 flex flex-auto outline-none border-none w-full"
+                                                                    placeholder="topP"
+                                                                    type={"number"}
+                                                                    min={0.0}
+                                                                    step={0.1}
+                                                                    max={1.0}
+                                                                    value={chatGptModalState.topP}
+                                                                    onChange={(e: any) => setChatGptModalState({
+                                                                        ...chatGptModalState,
+                                                                        topP: e.target.value
+                                                                    })} />
+                                                            </div>
+                                                        </div>
                                                         <div className="py-2 px-3 text-sm">
                                                             <BasicCheckbox
                                                                 selected={tutorial}
@@ -451,6 +570,19 @@ const ComputationalAnnotationModal: React.FC<{
                                                                 }}
                                                             />
                                                         </div>
+                                                        <div className="py-2 px-3 flex items-center border-b-2 mt-2">
+                                                            <TbPrompt className="basic-svg" />
+                                                            <textarea
+                                                                className="w-full h-full  pl-3 flex flex-auto outline-none border-none"
+                                                                name="sytem"
+                                                                placeholder="System Message"
+                                                                value={chatGptModalState.system}
+                                                                onChange={(e: any) => setChatGptModalState({
+                                                                    ...chatGptModalState,
+                                                                    system: e.target.value
+                                                                })} />
+                                                        </div>
+
 
                                                         <div className="py-2 px-3 flex items-center border-b-2 mt-2">
                                                             <TbPrompt className="basic-svg" />
@@ -464,6 +596,20 @@ const ComputationalAnnotationModal: React.FC<{
                                                                     prompt: e.target.value
                                                                 })} />
                                                         </div>
+                                                        <div className="py-2 px-3 flex items-center border-b-2 mt-2">
+                                                            <TbPrompt className="basic-svg" />
+                                                            <textarea
+                                                                className="w-full h-full  pl-3 flex flex-auto outline-none border-none"
+                                                                name="finalMessage"
+                                                                placeholder="Final Message"
+                                                                value={chatGptModalState.finalMessage}
+                                                                onChange={(e: any) => setChatGptModalState({
+                                                                    ...chatGptModalState,
+                                                                    finalMessage: e.target.value
+                                                                })} />
+                                                        </div>
+
+
 
 
                                                         <div className="py-2 px-3 text-sm">
@@ -550,16 +696,16 @@ const ComputationalAnnotationModal: React.FC<{
                                                                                 <IconButtonOnClick
                                                                                     icon={<FiBook className="basic-svg" />}
                                                                                     tooltip={`Use tutorial: ${item.getName()} as a prompt`}
-                                                                                    onClick={async () =>  {
+                                                                                    onClick={async () => {
                                                                                         const prompt = chatGptModalState.prompt;
-                                                                                        const usepairjudgements =  await usepairjudgement(item.getName());
+                                                                                        const usepairjudgements = await usepairjudgement(item.getName());
                                                                                         if (usepairjudgements && usepairjudgements.length > 0) {
                                                                                             const stringData = usepairjudgements.map(item =>
                                                                                                 `Sentence 1: ${item.firstUsage}\nSentence 2: ${item.secondUsage}\nTarget word: ${item.lemma}\nJudgement: ${item.judgement}`
                                                                                             ).join('\n\n');
-                                                                    
+
                                                                                             setTutPrompt(stringData);
-                                                                    
+
                                                                                             setChatGptModalState({
                                                                                                 ...chatGptModalState,
                                                                                                 prompt: prompt + "\n\n" + "Here are the few examples:" + "\n\n" + tutPrompt
@@ -646,8 +792,12 @@ function verifyAndAddCommand(phase: Phase, selectedUsers: Annotator[]): StartCom
 function verifyComputationalAnnotation(chatGptModalState: {
     apiKey: string,
     model: OpenAIModel,
+    temperature: number,
+    topP: number,
     otherModel: string,
     prompt: string,
+    system: string,
+    finalMessage: string
 }, phase: Phase): ComputationalAnnotatorCommand | null {
     if (!chatGptModalState.apiKey) {
         toast.error("Enter api key.");
@@ -674,7 +824,11 @@ function verifyComputationalAnnotation(chatGptModalState: {
         phase?.getId().getProject(),
         phase?.getId().getPhase(),
         chatGptModalState.apiKey,
+        chatGptModalState.temperature,
+        chatGptModalState.topP,
         chatGptModalState.model.getName() === "others" ? chatGptModalState.otherModel : chatGptModalState.model.getVisiblename(),
         chatGptModalState.prompt,
+        chatGptModalState.system,
+        chatGptModalState.finalMessage
     );
 }

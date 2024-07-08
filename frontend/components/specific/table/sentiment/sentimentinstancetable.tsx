@@ -13,7 +13,6 @@ const SentimentInstanceTable: React.FC<{ phase: Phase, modalState: { openData: b
     const [page, setPage] = useState(0);
     const sentimentinstances = useFetchPagedSentimentInstance(phase?.getId().getOwner(), phase?.getId().getProject(), phase?.getId().getPhase(), page, !!phase);
 
-    console.log(sentimentinstances.data)
 
     // Reload the data on reload
     useEffect(() => {
@@ -62,7 +61,7 @@ const SentimentInstanceTable: React.FC<{ phase: Phase, modalState: { openData: b
                                             {instance.getId().getInstanceId()}
                                         </td>
 
-                                        <td className="px-6 py-4 overflow-auto font-dm-mono-light">
+                                        <td className="px-6 py-4 overflow-auto font-dm-mono-bold">
                                             <span key={i} className="tooltip group w-fit">
                                                 {getFormatedUsage(instance.getUsage())}
                                                 <div className="tooltip-container group-hover:scale-100">

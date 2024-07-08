@@ -39,7 +39,7 @@
 
         <insert tableName="phitagphasestatistic">
             <column name="ownername" value="Example-User" />
-            <column name="projectname" value="Example-Project-LEXSUB" />
+            <column name="projectname" value="Example-Project-Text-Free-Subsitution" />
             <column name="phasename" value="ALL" />
             <column name="annotations" value="0" />
             <column name="krippendorffalpha" value="0.0" />
@@ -58,7 +58,7 @@
         <insert tableName="phitagannotatorstatistic">
             <column name="annotatorname" value="Example-User" />
             <column name="ownername" value="Example-User" />
-            <column name="projectname" value="Example-Project-LEXSUB" />
+            <column name="projectname" value="Example-Project-Text-Free-Subsitution" />
             <column name="annotations" value="0" />
             <column name="krippendorffalpha" value="0.0" />
         </insert>

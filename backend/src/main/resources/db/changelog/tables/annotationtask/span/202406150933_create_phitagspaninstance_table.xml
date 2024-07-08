@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="202406150933" author="sachin">
+
+        <createTable tableName="phitagspaninstance">
+
+            <column name="instanceid" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitagspaninstance" />
+            </column>
+
+            <column name="phasename" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitagspaninstance" />
+            </column>
+
+            <column name="projectname" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitagspaninstance" />
+            </column>
+
+            <column name="ownername" type="varchar">
+                <constraints primaryKey="true" nullable="false"
+                    primaryKeyName="PK_phitagspaninstance" />
+            </column>
+
+            <column name="phitagusage_dataid" type="varchar">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="phitagusage_projectname" type="varchar">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="phitagusage_ownername" type="varchar">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="label_set" type="varchar">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="non_label" type="varchar">
+                <constraints nullable="false" />
+            </column>
+
+        </createTable>
+
+        <addForeignKeyConstraint
+            baseTableName="phitagspaninstance"
+            baseColumnNames="phasename, projectname, ownername"
+            constraintName="FK_phitagspaninstance_phitagphase"
+            referencedTableName="phitagphase"
+            referencedColumnNames="name, projectname, ownername"
+            onDelete="CASCADE"/>
+
+        <addForeignKeyConstraint
+            baseTableName="phitagspaninstance"
+            baseColumnNames="phitagusage_dataid, phitagusage_projectname, phitagusage_ownername"
+            constraintName="FK_phitagspaninstance_usage"
+            referencedTableName="phitagusage"
+            referencedColumnNames="dataid, projectname, ownername"
+            onDelete="CASCADE"/>
+    </changeSet>
+</databaseChangeLog>

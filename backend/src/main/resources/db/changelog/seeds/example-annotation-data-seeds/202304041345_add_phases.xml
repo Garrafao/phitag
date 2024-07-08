@@ -9,7 +9,7 @@
 
         <insert tableName="phitagphase">
             <column name="name" value="ALL"/>
-            <column name="projectname" value="Example-Project-Use-Rank-Relative"/>
+            <column name="projectname" value="Example-Project-Text-Rank-Relative"/>
             <column name="ownername" value="Example-User"/>
             <column name="displayname" value="ALL"/>
             <column name="phitagannotationtype_name" value="ANNOTATIONTYPE_USERANK_RELATIVE"/>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { FiArrowLeft, FiArrowRight, FiEdit } from "react-icons/fi";
+import { FiArrowLeft, FiArrowRight, FiDelete, FiEdit, FiTrash } from "react-icons/fi";
 
 // services
 import { useFetchUsages, useFetchUsagesWithPagination } from "../../../lib/service/phitagdata/PhitagDataResource";
@@ -14,6 +14,7 @@ import LoadingComponent from "../../generic/loadingcomponent";
 import AddDataToProjectModal from "../modal/adddatatoprojectmodal";
 import EditUsageModal from "../modal/editusagemodal";
 import IconButtonOnClick from "../../generic/button/iconbuttononclick";
+import DeleteUsageModal from "../modal/deleteusagemodal";
 
 
 const UsageTable: React.FC<{ project: Project, hideEdit: boolean, modalState: { open: boolean, callback: Function } }> = ({ project, hideEdit, modalState }) => {
@@ -23,6 +24,11 @@ const UsageTable: React.FC<{ project: Project, hideEdit: boolean, modalState: { 
     const usages = useFetchUsagesWithPagination(project?.getId().getOwner(), project?.getId().getName(), page, !!project);
 
     const [editModal, setEditModal] = useState({
+        open: false,
+        usage: null as unknown as Usage,
+    });
+
+    const [deleteModal, setDeleteModal] = useState({
         open: false,
         usage: null as unknown as Usage,
     });
@@ -62,7 +68,7 @@ const UsageTable: React.FC<{ project: Project, hideEdit: boolean, modalState: { 
                                 </th>
                                 <th scope="col"
                                     className="px-6 py-3 text-left uppercase tracking-wider">
-                                    Edit
+                                    Action
                                 </th>
                             </tr>
                         </thead>
@@ -96,27 +102,45 @@ const UsageTable: React.FC<{ project: Project, hideEdit: boolean, modalState: { 
                                     </td>
 
                                     <td className="px-6 py-4 whitespace-nowrap">
-                                        <IconButtonOnClick onClick={() => {
-                                            setEditModal({
-                                                open: true,
-                                                usage: usage,
-                                            });
-                                        }}
-                                            icon={<FiEdit className="basic-svg" />}
-                                            tooltip="Edit Usage"
-                                            hide={hideEdit}
-                                        />
+                                        <div style={{ display: 'flex', gap: '8px' }}>
+                                            <IconButtonOnClick
+                                                onClick={() => {
+                                                    setEditModal({
+                                                        open: true,
+                                                        usage: usage,
+                                                    });
+                                                }}
+                                                icon={<FiEdit className="basic-svg" />}
+                                                tooltip="Edit Usage"
+                                                hide={hideEdit}
+                                            />
+                                             <IconButtonOnClick
+                                                onClick={() => {
+                                                    setDeleteModal({
+                                                        open: true,
+                                                        usage: usage,
+                                                    });
+                                                }}
+                                                icon={<FiTrash className="basic-svg" />}
+                                                tooltip="Delete Usage"
+                                                
+                                            /> 
+                                        </div>
+
                                     </td>
+
                                 </tr>
                             ))}
                         </tbody>
                     </table>
                 </div>
             </div>
-            <Pagination page={page} pageChangeCallback={(page: number) => {setPage(page)}} maxPage={usages.data.getTotalPages()} />
+            <Pagination page={page} pageChangeCallback={(page: number) => { setPage(page) }} maxPage={usages.data.getTotalPages()} />
 
             <AddDataToProjectModal isOpen={modalState.open} closeModalCallback={modalState.callback} project={project} mutateCallback={usages.mutate} />
             <EditUsageModal isOpen={editModal.open} closeModalCallback={() => setEditModal({ open: false, usage: null as unknown as Usage })} usage={editModal.usage} mutateCallback={usages.mutate} />
+            <DeleteUsageModal isOpen={deleteModal.open} closeModalCallback={() => setDeleteModal({ open: false, usage: null as unknown as Usage })} usage={deleteModal.usage} mutateCallback={usages.mutate} />
+
         </div>
     );
 

@@ -101,11 +101,11 @@ const EditSentimentJudgementModal: React.FC<EditSentimentJudgementModalProps> = 
                         <div className="mx-4">
                             <div className="flex flex-col items-left mt-6">
                                 <div className="font-black text-xl">
-                                    Edit  Sentiment Judgement
+                                    Edit Judgement
                                 </div>
-                                <div className="font-dm-mono-regular my-2">
-                                    Editing Sentiment judgement.
-                                </div>
+                              {/*   <div className="font-dm-mono-regular my-2">
+                                    Editing judgement.
+                                </div> */}
 
                                 <div className="flex flex-col items-left mt-6">
                                     <div className="font-bold text-lg">

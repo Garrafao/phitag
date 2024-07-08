@@ -26,6 +26,7 @@ import UseRankRelativeAnnotation from "../../../../../components/specific/annota
 import UseRankPairAnnotation from "../../../../../components/specific/annotation/userankpair/usernakpairannotation";
 import SentimentAnnotation from "../../../../../components/specific/annotation/sentiment/sentimentannotation";
 import ChoiceAnnotation from "../../../../../components/specific/annotation/choice/choiceannotation";
+import SpanAnnotation from "../../../../../components/specific/annotation/span/spanannotation";
 
 
 const AnnotatePage: NextPage = () => {
@@ -374,6 +375,45 @@ const AnnotatePage: NextPage = () => {
 
                     <div className="mt-2 xl:mt-10">
                         <ChoiceAnnotation phase={phase.phase} />
+                    </div>
+
+                </SingleContentLayout>
+            </Layout>
+        );
+    }
+
+    if (phase.phase.getAnnotationType().getName() === ANNOTATIONTYPES.ANNOTATIONTYPE_SPAN) {
+        return (
+            <Layout>
+
+                <Head>
+                    <title>PhiTag : {phase.phase.getName()} : Annotate </title>
+                </Head>
+
+                <SingleContentLayout>
+                    <LinkHead icon={<FiEdit3 className="stroke-2" />}
+                        links={[
+                            {
+                                href: `/phi/${username}`,
+                                name: username,
+                            },
+                            {
+                                href: `/phi/${username}/${projectname}`,
+                                name: projectname,
+                            },
+                            {
+                                href: `/phi/${username}/${projectname}/${phasename}`,
+                                name: phasename,
+                            },
+                            {
+                                href: `/phi/${username}/${projectname}/${phasename}/annotate`,
+                                name: "Annotate",
+                            }
+                        ]}
+                    />
+
+                    <div className="mt-2 xl:mt-10">
+                        <SpanAnnotation phase={phase.phase} />
                     </div>
 
                 </SingleContentLayout>

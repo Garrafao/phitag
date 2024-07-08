@@ -1,6 +1,7 @@
 package de.garrafao.phitag.application.instance.usepairinstance;
 
 import de.garrafao.phitag.application.common.CommonService;
+import de.garrafao.phitag.application.instance.data.DeleteInstanceCommand;
 import de.garrafao.phitag.application.sampling.data.SamplingEnum;
 import de.garrafao.phitag.domain.annotationprocessinformation.AnnotationProcessInformation;
 import de.garrafao.phitag.domain.annotationprocessinformation.error.AnnotationProcessInformationException;
@@ -359,7 +360,6 @@ public class UsePairInstanceApplicationService {
      * Generate sampling order for random sampling without replacement.
      * 
      * @param phase
-     * @param annotator
      * @return
      */
     private List<String> generateSamplingOrderWithoutReplacement(final Phase phase) {
@@ -439,7 +439,6 @@ public class UsePairInstanceApplicationService {
      * Generate sampling order for ID-based sampling.
      * 
      * @param phase
-     * @param annotator
      * @return
      */
     private List<String> generateSamplingIDOrder(final Phase phase) {
@@ -470,7 +469,6 @@ public class UsePairInstanceApplicationService {
      * 
      * @return the a use pair instance
      */
-    @Transactional
     private UsePairInstance sample(final Phase phase, final Annotator annotator) {
         AnnotationProcessInformation annotationProcessInformation;
 
@@ -515,5 +513,25 @@ public class UsePairInstanceApplicationService {
         return  annotationProcessInformation.getOrder().size();
 
     }
+
+    /**
+     * Delete a use pair instance.
+     *
+     * @param phase     the phase
+     * @param annotator the annotator
+     * @param command   the command
+     */
+    @Transactional
+    public void delete(final Phase phase, final Annotator annotator, final DeleteInstanceCommand command) {
+        final Query query = new UsePairInstanceQueryBuilder()
+                .withOwner(command.getOwner())
+                .withProject(command.getProject())
+                .withPhase(command.getPhase())
+                .withInstanceid(command.getInstanceID())
+                .build();
+        final List<UsePairInstance> instances = this.usePairInstanceRepository.findByQuery(query);
+        this.usePairInstanceRepository.delete(instances.get(0));
+    }
+
 
 }

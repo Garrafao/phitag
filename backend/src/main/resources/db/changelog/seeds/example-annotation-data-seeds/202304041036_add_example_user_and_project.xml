@@ -14,7 +14,7 @@
             <column name="email" value="example-user@phitag.com"/>
             <column name="password" value="$2a$10$/3Zo1CBtWuPye9FtICVjpOWC0zf/n3h5AhY09jbDxK.leP8BPh7a2"/>
             <column name="phitagvisibility_name" value="VISIBILITY_PUBLIC"/>
-            <column name="description" value="An example user showing of different example projects and annotation tasks, with data from the annotation standardization repository: https://github.com/ChangeIsKey/annotation_standardization"/>
+            <column name="description" value="An example user showing of different example projects and annotation tasks."/>
             <column name="isbot" value="false"/>
             <column name="enabled" value="true"/>
             <column name="account_non_expired" value="true"/>
@@ -29,40 +29,59 @@
 
         <!-- Add "Example" Projects -->
         <insert tableName="phitagproject">
-            <column name="name" value="Example-Project-Use-Pair"/>
+            <column name="name" value="Example-Project-Text-Pair"/>
             <column name="ownername" value="Example-User"/>
-            <column name="displayname" value="Example-Project-Use-Pair"/>
+            <column name="displayname" value="Example-Project-Text-Pair"/>
             <column name="active" value="true"/>
             <column name="phitagvisibility_name" value="VISIBILITY_PUBLIC"/>
             <column name="phitaglanguage_name" value="English"/>
-            <column name="description" value="An example project showing the use pair annotation task, with data from the annotation standardization repository: https://github.com/ChangeIsKey/annotation_standardization"/>
+            <column name="description" value="An example project showing the Text Pair Annotation task."/>
         </insert>
 
         <insert tableName="phitagproject">
-            <column name="name" value="Example-Project-WSSIM"/>
+            <column name="name" value="Example-Project-Text-Label"/>
             <column name="ownername" value="Example-User"/>
-            <column name="displayname" value="Example-Project-WSSIM"/>
+            <column name="displayname" value="Example-Project-Text-Label"/>
             <column name="active" value="true"/>
             <column name="phitagvisibility_name" value="VISIBILITY_PUBLIC"/>
             <column name="phitaglanguage_name" value="English"/>
-            <column name="description" value="An example project showing the WSSIM annotation task"/>
+            <column name="description" value="An example project showing the Text Label annotation task"/>
         </insert>
 
         <insert tableName="phitagproject">
-            <column name="name" value="Example-Project-Use-Rank"/>
+            <column name="name" value="Example-Project-Text-Rank"/>
             <column name="ownername" value="Example-User"/>
-            <column name="displayname" value="Example-Project-Use-Rank"/>
+            <column name="displayname" value="Example-Project-Text-Rank"/>
             <column name="active" value="true"/>
             <column name="phitagvisibility_name" value="VISIBILITY_PUBLIC"/>
             <column name="phitaglanguage_name" value="English"/>
             <column name="description" value="An example project showing the Use Rank annotation task"/>
+        </insert>
+        <insert tableName="phitagproject">
+            <column name="name" value="Example-Project-Text-Sentiment"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="displayname" value="Example-Project-Text-Sentiment"/>
+            <column name="active" value="true"/>
+            <column name="phitagvisibility_name" value="VISIBILITY_PUBLIC"/>
+            <column name="phitaglanguage_name" value="English"/>
+            <column name="description" value="An example project showing the Text Sentiment Annotation  task."/>
+        </insert>
+        <!-- Add "Example" Projects -->
+        <insert tableName="phitagproject">
+            <column name="name" value="Example-Project-Text-Choice"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="displayname" value="Example-Project-Text-Choice"/>
+            <column name="active" value="true"/>
+            <column name="phitagvisibility_name" value="VISIBILITY_PUBLIC"/>
+            <column name="phitaglanguage_name" value="English"/>
+            <column name="description" value="An example project showing the Text Choice Annotation task."/>
         </insert>
 
         <!-- Add user as annotator -->
 
         <insert tableName="phitagannotator">
             <column name="username" value="Example-User"/>
-            <column name="projectname" value="Example-Project-Use-Pair"/>
+            <column name="projectname" value="Example-Project-Text-Pair"/>
             <column name="ownername" value="Example-User"/>
             <column name="phitagentitlement_name" value="ENTITLEMENT_ADMIN"/>
         </insert>
@@ -70,13 +89,25 @@
 
         <insert tableName="phitagannotator">
             <column name="username" value="Example-User"/>
-            <column name="projectname" value="Example-Project-WSSIM"/>
+            <column name="projectname" value="Example-Project-Text-Label"/>
             <column name="ownername" value="Example-User"/>
             <column name="phitagentitlement_name" value="ENTITLEMENT_ADMIN"/>
         </insert>
         <insert tableName="phitagannotator">
             <column name="username" value="Example-User"/>
-            <column name="projectname" value="Example-Project-Use-Rank"/>
+            <column name="projectname" value="Example-Project-Text-Rank"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="phitagentitlement_name" value="ENTITLEMENT_ADMIN"/>
+        </insert>
+        <insert tableName="phitagannotator">
+            <column name="username" value="Example-User"/>
+            <column name="projectname" value="Example-Project-Text-Sentiment"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="phitagentitlement_name" value="ENTITLEMENT_ADMIN"/>
+        </insert>
+        <insert tableName="phitagannotator">
+            <column name="username" value="Example-User"/>
+            <column name="projectname" value="Example-Project-Text-Choice"/>
             <column name="ownername" value="Example-User"/>
             <column name="phitagentitlement_name" value="ENTITLEMENT_ADMIN"/>
         </insert>

@@ -46,4 +46,8 @@ public class UseRankInstanceRepositoryBridge implements UseRankRepository {
     public void delete(Iterable<UseRankInstance> instanceData) {
         this.useRankInstanceRepositoryJpa.deleteInBatch(instanceData);
     }
+    @Override
+    public void delete(UseRankInstance useRankInstance) {
+        this.useRankInstanceRepositoryJpa.delete(useRankInstance);
+    }
 }

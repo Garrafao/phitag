@@ -13,12 +13,27 @@ import { useEffect, useState } from "react";
 import PageChange from "../../../generic/table/pagination";
 import { data } from "autoprefixer";
 import GenerateInstancesForPhaseModal from "../../modal/generateinstancesforphasemodal";
+import IconButtonOnClick from "../../../generic/button/iconbuttononclick";
+import { FiEdit, FiTrash } from "react-icons/fi";
+import DeleteInstanceModal from "../../modal/deleteinstancemodal";
 
 const UsePairInstanceTable: React.FC<{ phase: Phase, modalState: { openData: boolean, callbackData: Function, openGenerate: boolean, callbackGenerate: Function } }> = ({ phase, modalState }) => {
 
     const [page, setPage] = useState(0);
+
+    const [editInstance, setEditInstance] = useState({
+        open: false,
+        usepairinstances: null as unknown as UsePairInstance
+    });
+
+    const [deleteInstance, setDeleteInstance] = useState({
+        open: false,
+        usepairinstances: null as unknown as UsePairInstance
+    });
+
     const usepairinstances = useFetchPagedUsePairInstance(phase?.getId().getOwner(), phase?.getId().getProject(), phase?.getId().getPhase(), page, !!phase);
     // Reload the data on reload
+
     useEffect(() => {
         usepairinstances.mutate();
     }, [phase]);
@@ -58,6 +73,10 @@ const UsePairInstanceTable: React.FC<{ phase: Phase, modalState: { openData: boo
                                     className="px-6 py-3 text-left uppercase tracking-wider whitespace-nowrap">
                                     Non Label
                                 </th>
+                               {/*  <th scope="col"
+                                    className="px-6 py-3 text-left uppercase tracking-wider whitespace-nowrap">
+                                    Action
+                                </th> */}
                             </tr>
                         </thead>
                         <tbody className=" text-base16-gray-700">
@@ -98,6 +117,32 @@ const UsePairInstanceTable: React.FC<{ phase: Phase, modalState: { openData: boo
                                     <td className="px-6 py-4 whitespace-nowrap">
                                         {usepairinstance.getNonLabel()}
                                     </td>
+                                    {/* <td className="px-6 py-4 whitespace-nowrap">
+                                        <div style={{ display: 'flex', gap: '8px' }}>
+                                             <IconButtonOnClick
+                                                onClick={() => {
+                                                    setEditInstance({
+                                                        open: true,
+                                                        usepairinstances: usepairinstance,
+                                                    });
+                                                }}
+                                                icon={<FiEdit className="basic-svg" />}
+                                                tooltip="Edit Instance"
+                                            /> 
+                                            <IconButtonOnClick
+                                                onClick={() => {
+                                                    setDeleteInstance({
+                                                        open: true,
+                                                        usepairinstances: usepairinstance,
+                                                    });
+                                                }}
+                                                icon={<FiTrash className="basic-svg" />}
+                                                tooltip="Delete Instance"
+                                            />
+                                        </div>
+
+                                    </td> */}
+
                                 </tr>
                                 );
                             })}
@@ -110,6 +155,9 @@ const UsePairInstanceTable: React.FC<{ phase: Phase, modalState: { openData: boo
 
             <AddInstanceToPhaseModal isOpen={modalState.openData} closeModalCallback={modalState.callbackData} phase={phase} mutateCallback={usepairinstances.mutate} />
             <GenerateInstancesForPhaseModal isOpen={modalState.openGenerate} closeModalCallback={modalState.callbackGenerate} phase={phase} mutateCallback={usepairinstances.mutate} additional={false} additionalFileName="" />
+{/*              <EditInstanceModal isOpen={editInstance.open} closeModalCallback={() => setEditInstance({ open: false, usepairinstances: null as unknown as UsePairInstance })} usepairinstance={editInstance.usepairinstances} mutateCallback={usepairinstances.mutate} />
+ */}             <DeleteInstanceModal isOpen={deleteInstance.open} closeModalCallback={() => setDeleteInstance({ open: false, usepairinstances: null as unknown as UsePairInstance })} instance={deleteInstance.usepairinstances} mutateCallback={usepairinstances.mutate} />
+
         </div>
     );
 

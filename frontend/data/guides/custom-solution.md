@@ -19,15 +19,25 @@ Currently we offer two ways to select human annotators for your project; either 
 
 ### Computational Annotators
 
-Computational annotators alleviate the need for human annotators, as they are able to annotate data automatically. Currently we offer just a basic computational annotator (a random annotator), but we are working on more advanced computational annotators. If you have a specific computational annotator in mind, please contact us. You can add these annotators from the [Computational Annotators Pool](/pool/annotator/computational) After adding a computational annotator to your project, you can select a phase in your project to run the annotator on. The annotator will then annotate all instances in that phase. 
+Computational annotators alleviate the need for human annotators, as they are able to annotate data automatically. We currently support a GPT based computational annotator and are working on adding more open-source LLMs. If you have a specific computational annotator in mind, please contact us. You can add these annotators from the [Computational Annotators Pool](/pool/annotator/computational) After adding a computational annotator to your project, you can select a phase in your project to run the annotator on. The annotator will then annotate all instances in that phase. 
 
 ## Annotation Tasks
 
 We currently support the following annotation task types:
 
-- [Lexical Substitution](/guide/explained-annotation-task-lexsub)
-- [Usage Relatedness](/guide/explained-annotation-task-urel)
-- [Word Sense Similarity](/guide/explained-annotation-task-wssim)
+- [Text Free](/guide/explained-annotation-task-lexsub)
+- [Text Pair Relatedness](/guide/explained-annotation-task-urel)
+- [Text Label](/guide/explained-annotation-task-wssim)
+- [Text Rank](/guide/explained-annotation-task-userank)
+- [Text Rank Pair](/guide/explained-annotation-task-userankpair)
+- [Text Rank Relative](/guide/explained-annotation-task-userankrelative)
+- [Text Sentiment](/guide/explained-annotation-task-sentiment)
+- [Text Choice](/guide/explained-annotation-task-choice)
+- [Text Span](/guide/explained-annotation-task-span)
+
+
+
+
 
 Note, that the annotation tasks are not limited to their original use case, as the platform was build to be as flexible as possible. If you have a specific annotation task in mind, which is not found above, please contact us.
 

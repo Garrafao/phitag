@@ -122,6 +122,23 @@ public class UseRankJudgementApplicationService {
     }
 
     /**
+     * Get all use rank judgements for a given phase and annnotator.
+     *
+     * @param phase the phase
+     * @param annotator the annotator
+     * @return a {@link UseRankJudgement} list
+     */
+    public List<UseRankJudgement> findByPhaseAndAnnotator(final Phase phase, final  Annotator annotator) {
+        final Query query = new UseRankJudgementQueryBuilder()
+                .withAnnotator(annotator.getId().getUsername())
+                .withOwner(phase.getId().getProjectid().getOwnername())
+                .withProject(phase.getId().getProjectid().getName())
+                .withPhase(phase.getId().getName())
+                .build();
+        return this.useRankJudgementRepository.findByQuery(query);
+    }
+
+    /**
      * Get all use rank judgements for a given phase as a paged list.
      * 
      * @param phase

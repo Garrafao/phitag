@@ -26,7 +26,6 @@ const LexSubTutorialJudgementHistoryTable: React.FC<{ phase: Phase }> = ({ phase
 
     const lexsubjudgements = useFetchPagedHistoryLexSubTutorialJudgements(phase?.getId().getOwner(), phase?.getId().getProject(), phase?.getId().getPhase(), page, !!phase);
 
-    console.log(lexsubjudgements, "lexsub")
   /*   const [editModal, setEditModal] = useState({
         open: false,useFetchPagedHistoryLexSubTutorialJudgements
         judgement: null as unknown as LexSubJudgement,

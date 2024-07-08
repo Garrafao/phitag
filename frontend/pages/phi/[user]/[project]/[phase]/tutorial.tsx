@@ -19,6 +19,8 @@ import LexSubTutorial from "../../../../../components/specific/tutorial/lexsub/l
 import UseRankTutorial from "../../../../../components/specific/tutorial/userank/useranktutorial";
 import UseRankRelativeTutorial from "../../../../../components/specific/tutorial/userankrelative/userankrelativetutorial";
 import UseRankPairTutorial from "../../../../../components/specific/tutorial/userankpair/userankpairtutorial";
+import SentimentTutorial from "../../../../../components/specific/tutorial/sentiment/sentimenttutorial";
+import ChoiceTutorial from "../../../../../components/specific/tutorial/choice/choicetutorial";
 
 // Helper
 
@@ -80,6 +82,13 @@ const TutorialPage: NextPage = () => {
     if (phase.phase.getAnnotationType().getName() === ANNOTATIONTYPES.ANNOTATIONTYPE_USERANK_PAIR) {
         return <UseRankPairTutorial phase={phase.phase} />;
     }
+    if (phase.phase.getAnnotationType().getName() === ANNOTATIONTYPES.ANNOTATIONTYPE_SENTIMENT) {
+        return <SentimentTutorial phase={phase.phase} />;
+    }
+    if (phase.phase.getAnnotationType().getName() === ANNOTATIONTYPES.ANNOTATIONTYPE_CHOICE) {
+        return <ChoiceTutorial phase={phase.phase} />;
+    }
+
 
 
 

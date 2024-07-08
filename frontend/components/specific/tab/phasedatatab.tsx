@@ -16,7 +16,7 @@ const PhaseTabBar: React.FC<{}> = () => {
 
     const router = useRouter();
     const path = router.pathname;
-    const { user: username, project: projectname, phase: phasename } = router.query as { user: string, project: string, phase: string };
+    const { user: username, project: projectname, phase: phasename } = router.query as { user: string, project: string, phase: string }
 
     const isSelectedOverview = path === "/phi/[user]/[project]/[phase]";
     const isSelectedInstance = path == "/phi/[user]/[project]/[phase]/instance";

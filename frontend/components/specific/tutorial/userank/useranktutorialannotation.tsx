@@ -113,7 +113,6 @@ const UseRankTutorialAnnotation: React.FC<IUseRankAnnotationInstance> = ({ insta
     // Filter out null usages
     const filteredUsages = usages.filter(item => item.usage && item.usage.getContext() !== undefined);
 
-    console.log(filteredUsages, "dd")
     return (
         <div className="w-full flex flex-col 2xl:flex-row justify-between 2xl:px-2">
             <div className="w-full flex flex-col justify-center space-y-2">

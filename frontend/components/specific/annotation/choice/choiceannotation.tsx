@@ -3,14 +3,16 @@ import Phase from "../../../../lib/model/phase/model/Phase";
 import useStorage from "../../../../lib/hook/useStorage";
 import { useFetchAnnotationAccess } from "../../../../lib/service/phase/PhaseResource";
 import { toast } from "react-toastify";
-import { annotateSentiment} from "../../../../lib/service/judgement/JudgementResource";
+import { annotateSentiment, useFetchAttemptedJudgement } from "../../../../lib/service/judgement/JudgementResource";
 import Router from "next/router";
-import {  fetchRandomInstance} from "../../../../lib/service/instance/InstanceResource";
+import { fetchRandomInstance, useFetchAllocatedInstanceNumber } from "../../../../lib/service/instance/InstanceResource";
 import LoadingComponent from "../../../generic/loadingcomponent";
 import UsageField from "../usage/usagefield";
 import { FiArrowRight, FiBookmark, FiChevronRight, FiEdit3, FiFeather } from "react-icons/fi";
 import AddSentimentJudgementCommand from "../../../../lib/model/judgement/sentiment/command/AddSentimentJudgementCommand";
 import SentimentInstance, { SentimentInstanceConstructor } from "../../../../lib/model/instance/sentimentinstance/model/SentimentInstance";
+import SubmitStudyComponent from "../../../generic/submitstudy";
+import ProgressBar from "../progressbar/progressbar";
 
 const ChoiceAnnotation: React.FC<{ phase: Phase }> = ({ phase }) => {
 
@@ -22,19 +24,20 @@ const ChoiceAnnotation: React.FC<{ phase: Phase }> = ({ phase }) => {
     });
     const page = 0;
     const storage = useStorage();
-    
-    
+
+
     const annotationAccess = useFetchAnnotationAccess(phase?.getId().getOwner(), phase?.getId().getProject(), phase?.getId().getPhase(), !!phase);
-   /*  const { data: userAnnotationCount, mutate: mutateCountJudgements } = CountAttemptedJudgements(phase?.getId().getOwner(), phase?.getId().getProject(), phase?.getId().getPhase(), !!phase);
+    const { data: userAnnotationCount, mutate: mutateCountJudgements } = useFetchAttemptedJudgement(phase?.getId().getOwner(), phase?.getId().getProject(), phase?.getId().getPhase(), !!phase);
 
-    
-  
-    const { data: userAllocatedInstance, mutate: mutateInstanceCount} = CountAllocatedInstances(phase?.getId().getOwner(), phase?.getId().getProject(), phase?.getId().getPhase(), !!phase);
 
-  */
+
+    const { data: userAllocatedInstance, mutate: mutateInstanceCount } = useFetchAllocatedInstanceNumber(phase?.getId().getOwner(), phase?.getId().getProject(), phase?.getId().getPhase(), !!phase);
+
+
 
     const handleSubmitAnnotation = (judgement: string) => {
 
+        mutateCountJudgements();
         const resultCommand = verifyResultCommand(phase, judgement, annotation);
         setAnnotation({
             ...annotation,
@@ -59,8 +62,8 @@ const ChoiceAnnotation: React.FC<{ phase: Phase }> = ({ phase }) => {
 
 
     const fetchNewAnnotation = () => {
-      
-            fetchRandomInstance<SentimentInstance, SentimentInstanceConstructor>(phase.getId().getOwner(), phase.getId().getProject(), phase.getId().getPhase(), (new SentimentInstanceConstructor()), storage.get)
+        mutateCountJudgements();
+        fetchRandomInstance<SentimentInstance, SentimentInstanceConstructor>(phase.getId().getOwner(), phase.getId().getProject(), phase.getId().getPhase(), (new SentimentInstanceConstructor()), storage.get)
             .then((instance) => {
                 if (instance) {
                     setAnnotation({
@@ -69,128 +72,132 @@ const ChoiceAnnotation: React.FC<{ phase: Phase }> = ({ phase }) => {
                         instance: instance,
                         comment: "",
                     });
-                } /* else if(instance==null && userAllocatedInstance === userAnnotationCount) {
-                Router.push(`/phi/${phase.getId().getOwner()}/${phase.getId().getProject()}/${phase.getName()}/done`);
-            } */
+                }
 
             }).catch((error) => {
                 toast.error("Could not fetch new annotation. Check if instances are provided for annotation.");
                 Router.push(`/phi/${phase.getId().getOwner()}/${phase.getId().getProject()}`);
             });
-        
-      
+
+
     }
 
 
 
- // Hook
-useEffect(() => {
+    // Hook
+    useEffect(() => {
 
-    if (annotationAccess.isError) {
-        Router.push(`/phi/${phase.getId().getOwner()}/${phase.getId().getProject()}`);
-        return;
-    }
-
-   /*  if (!annotationAccess.isError && annotationAccess.hasAccess && userAllocatedInstance === userAnnotationCount) {
-        toast.info("No instances available to annotate!");
-        Router.push(`/phi/${phase.getId().getOwner()}/${phase.getId().getProject()}/${phase.getName()}/done`);
-        return;
-    } */
-
-    if (!annotationAccess.isError && annotationAccess.hasAccess && annotation.initialLoad /* && userAllocatedInstance !== userAnnotationCount */) {
-        fetchRandomInstance<SentimentInstance, SentimentInstanceConstructor>(
-            phase.getId().getOwner(),
-            phase.getId().getProject(),
-            phase.getId().getPhase(),
-            new SentimentInstanceConstructor(),
-            storage.get
-        )
-        .then((instance) => {
-            if (instance) {
-                setAnnotation((prevAnnotation) => ({
-                    ...prevAnnotation,
-                    instance: instance,
-                    comment: "",
-                    initialLoad: false,
-                }));
-            } /* else if(instance==null && userAllocatedInstance === userAnnotationCount) {
-                Router.push(`/phi/${phase.getId().getOwner()}/${phase.getId().getProject()}/${phase.getName()}/done`);
-            } */
-        })
-        .catch((error) => {
-            toast.error("Could not fetch new annotation. Check if instances are provided for annotation.");
+        if (annotationAccess.isError) {
             Router.push(`/phi/${phase.getId().getOwner()}/${phase.getId().getProject()}`);
-        });
-    }
-}, [/* userAllocatedInstance, userAnnotationCount,  */annotationAccess, annotation.initialLoad, storage, phase]);
+            return;
+        }
 
 
-    if (!phase || !annotation.instance || annotation.initialLoad) {
+
+        if (!annotationAccess.isError && annotationAccess.hasAccess && annotation.initialLoad) {
+            mutateCountJudgements();
+            fetchRandomInstance<SentimentInstance, SentimentInstanceConstructor>(
+                phase.getId().getOwner(),
+                phase.getId().getProject(),
+                phase.getId().getPhase(),
+                new SentimentInstanceConstructor(),
+                storage.get
+            )
+                .then((instance) => {
+                    if (instance) {
+                        setAnnotation((prevAnnotation) => ({
+                            ...prevAnnotation,
+                            instance: instance,
+                            comment: "",
+                            initialLoad: false,
+                        }));
+                    }
+                })
+                .catch((error) => {
+                    toast.error("Could not fetch new annotation. Check if instances are provided for annotation.");
+                    Router.push(`/phi/${phase.getId().getOwner()}/${phase.getId().getProject()}`);
+                });
+        }
+    }, [annotationAccess, annotation.initialLoad, storage, phase]);
+
+
+    if ((!phase || !annotation.instance || annotation.initialLoad) && (userAllocatedInstance !== userAnnotationCount)) {
+
         return <LoadingComponent />;
+    }
+
+    if ((!annotation.instance && annotation.initialLoad && (userAllocatedInstance === userAnnotationCount))) {
+        return <SubmitStudyComponent phase={phase} />;
     }
 
     return (
         <div className="w-full flex flex-col justify-between">
-{/*             <ProgressBar minValue={0} maxValue={userAllocatedInstance} currentValue={userAnnotationCount} />
- */}            {(phase.getTaskHead() ?? "") !== "" && (
-                <div className="w-half shadow-md ">
-                    <div className="m-8 flex flex-row">
-                        <div className="my-4">
-                            <FiBookmark className="basic-svg" />
-                        </div>
-                        <div className="border-r-2 mx-4" />
-                        <div className="my-4 font-dm-mono-light text-lg overflow-auto">
-                            {phase.getTaskHead()}
-                        </div>
 
+            {(true && annotation.instance !== null) ?
+                <div className="w-full flex flex-col justify-center space-y-4">
+                    <ProgressBar minValue={0} maxValue={userAllocatedInstance} currentValue={userAnnotationCount} />
+                    {(phase.getTaskHead() ?? "") !== "" && (
+                        <div className="w-half shadow-md ">
+                            <div className="m-8 flex flex-row">
+                                <div className="my-4">
+                                    <FiBookmark className="basic-svg" />
+                                </div>
+                                <div className="border-r-2 mx-4" />
+                                <div className="my-4 font-dm-mono-light text-lg overflow-auto">
+                                    {phase.getTaskHead()}
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                    <div className="w-full flex flex-col justify-center space-y-4 ">
+                        <UsageField usage={annotation?.instance?.getUsage()} />
+                    </div>
+
+                    <div className="w-full flex flex-col my-8 self-center items-left font-dm-mono-regular text-lg">
+                        <div className="font-bold text-lg">
+                            Judgement
+                        </div>
+                        <div className="w-full shadow-md ">
+                            <div className="m-8 flex flex-row">
+                                <div className="my-4 font-dm-mono-light text-sm overflow-auto">
+                                    {annotation?.instance?.getLabelSet().concat(annotation?.instance?.getNonLabel()).map((label) => {
+                                        return (
+                                            <div key={label}
+                                                className="flex shadow-md cursor-pointer hover:bg-base16-gray-900 hover:text-base16-gray-100 transition-all duration-200 font-dm-mono-medium"
+                                                onClick={() => handleSubmitAnnotation(label)}
+                                                style={{ minWidth: "0", overflow: "hidden" }}>
+                                                <div className="w-auto min-w-8 h-4 m-6 text-center text-lg">
+                                                    {label}
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                            <div className="w-full flex flex-col self-center items-left font-dm-mono-regular text-lg">
+
+                                <div className="h-32 flex items-start py-2 px-3 mt-2">
+                                    <FiFeather className='basic-svg' />
+                                    <textarea
+                                        className="w-full h-full resize-none pl-3 flex flex-auto outline-none border-none"
+                                        name="comment"
+                                        placeholder={"comment"}
+                                        value={annotation.comment}
+                                        onChange={(e: any) => setAnnotation({
+                                            ...annotation,
+                                            comment: e.target.value
+                                        })} />
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
-            )}
-            <div className="w-full flex flex-col justify-center space-y-4 ">
-                <UsageField usage={annotation.instance.getUsage()} />
-            </div>
 
-            <div className="w-full flex flex-col my-8 self-center items-left font-dm-mono-regular text-lg">
-                <div className="font-bold text-lg">
-                    Judgement
-                </div>
-                <div className="w-full shadow-md ">
-            <div className="m-8 flex flex-row">
-                <div className="my-4 font-dm-mono-light text-sm overflow-auto">
-                {annotation?.instance?.getLabelSet().concat(annotation?.instance?.getNonLabel()).map((label) => {
-                            return (
-                                <div key={label}
-                                    className="flex shadow-md cursor-pointer hover:bg-base16-gray-900 hover:text-base16-gray-100 transition-all duration-200 font-dm-mono-medium"
-                                   onClick={() => handleSubmitAnnotation(label)}
-                                    style={{ minWidth: "0", overflow: "hidden" }}>
-                                    <div className="w-auto min-w-8 h-4 m-6 text-center text-lg">
-                                        {label}
-                                    </div>
-                                </div>
-                            );
-                        })}
-                </div>
-            </div>
-            <div className="w-full flex flex-col self-center items-left font-dm-mono-regular text-lg">
+                :
+                <SubmitStudyComponent phase={phase} />
+            }
 
-                <div className="h-32 flex items-start py-2 px-3 mt-2">
-                    <FiFeather className='basic-svg' />
-                    <textarea
-                        className="w-full h-full resize-none pl-3 flex flex-auto outline-none border-none"
-                        name="comment"
-                        placeholder={"comment"}
-                        value={annotation.comment}
-                         onChange={(e: any) => setAnnotation({
-                            ...annotation,
-                            comment: e.target.value
-                        })} />
-                </div>
-            </div>
-            
-        </div>
-
-              
-            </div>
         </div>
     );
 

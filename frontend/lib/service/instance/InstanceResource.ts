@@ -32,6 +32,9 @@ import UseRankPairInstanceDto from "../../model/instance/userankpairinstance/dto
 import PagedUseRankPairInstance from "../../model/instance/userankpairinstance/model/PagedUseRankPageInstance";
 import SentimentInstanceDto from "../../model/instance/sentimentinstance/dto/SentimentInstanceDto";
 import PagedSentimentInstance from "../../model/instance/sentimentinstance/model/PagedSentimentInstance";
+import DeleteInstanceCommand from "../../model/instance/command/DeleteInstanceCommand";
+import SpanInstanceDto from "../../model/instance/spaninstance/dto/SentimentInstanceDto";
+import PagedSpanInstance from "../../model/instance/spaninstance/model/PagedSpanInstance";
 
 /**
  * Returns all instances of a phase
@@ -62,6 +65,7 @@ export function useFetchInstances<G extends IInstance, T extends IInstanceConstr
         mutate: mutate
     }
 }
+
 
 /**
  * Returns all use pair instances of a phase as a page.
@@ -323,7 +327,35 @@ export function useFetchPagedSentimentInstance(owner: string, project: string, p
     }
 }
 
+/**
+ * Returns all span instances of a phase as a page.
+ * 
+ * @param owner owner of the project
+ * @param project project name
+ * @param phase phase name in the project
+ * 
+ * @param page page number
+ * @param fetch if data should be fetched
+ */
+export function useFetchPagedSpanInstance(owner: string, project: string, phase: string, page: number = 0, fetch: boolean = true) {
+    const { get } = useStorage();
+    const token = get('JWT') ?? '';
 
+    const queryPhaseDataFetcher = (url: string) => axios.get<PagedGenericDto<SpanInstanceDto>>(url, {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    }).then(res => res.data)
+
+    const { data, error, mutate } = useSWR(fetch ? `${BACKENDROUTES.INSTANCE}/paged?owner=${owner}&project=${project}&phase=${phase}&additional=${false}&page=${page}` : null, queryPhaseDataFetcher)
+
+    return {
+        data: data ? PagedSpanInstance.fromDto(data) : PagedSpanInstance.empty(),
+        isLoading: !error && !data,
+        isError: error,
+        mutate: mutate
+    }
+}
 
 
 /**
@@ -518,3 +550,19 @@ export function useFetchWSSIMTagsOfLemma(owner: string, project: string, phase: 
             mutate: mutate
         }
     }
+
+    /**
+ * Delete Use Pair Instance
+ * 
+ * @param command command containing the judgement
+ * @param get storage hook
+ */
+export function deleteInstance(command: DeleteInstanceCommand, get: Function = () => { }) {
+    const token = get('JWT') ?? '';
+
+    return axios.post(`${BACKENDROUTES.INSTANCE}/delete/usepair`, command,
+        {
+            headers: { "Authorization": `Bearer ${token}` },
+        }
+    ).then(res => res.data);
+}

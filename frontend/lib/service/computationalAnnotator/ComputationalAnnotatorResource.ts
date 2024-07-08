@@ -36,6 +36,37 @@ export async function chatGptLexsubAnnotation(command: ComputationalAnnotatorCom
     return res.data;
 }
 
+
+
+export async function chatGptSentimentAnnotation(command: ComputationalAnnotatorCommand, get: Function = () => {}) {
+
+    const token = get('JWT') ?? '';
+    
+    const res = await axios.post(`${BACKENDROUTES.COMPUTATIONALANNOTATOR}/sentiment-annotate`,
+        command,
+        {
+            headers: { "Authorization": `Bearer ${token}` },
+        }
+    );
+    return res.data;
+}
+
+
+export async function tinyAnnotate(command: ComputationalAnnotatorCommand, get: Function = () => {}) {
+
+    const token = get('JWT') ?? '';
+    
+    const res = await axios.post(`${BACKENDROUTES.COMPUTATIONALANNOTATOR}/tiny-annotate`,
+        command,
+        {
+            headers: { "Authorization": `Bearer ${token}` },
+        }
+    );
+    return res.data;
+}
+
+
+
 export async function chatWSSIMAnnotation(command: ComputationalAnnotatorCommand, get: Function = () => {}) {
 
     const token = get('JWT') ?? '';

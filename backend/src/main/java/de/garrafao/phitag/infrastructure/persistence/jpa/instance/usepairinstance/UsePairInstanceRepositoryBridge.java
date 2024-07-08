@@ -1,17 +1,16 @@
 package de.garrafao.phitag.infrastructure.persistence.jpa.instance.usepairinstance;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.stereotype.Repository;
-
 import de.garrafao.phitag.domain.core.PageRequestWraper;
 import de.garrafao.phitag.domain.core.Query;
 import de.garrafao.phitag.domain.instance.usepairinstance.UsePairInstance;
 import de.garrafao.phitag.domain.instance.usepairinstance.UsePairInstanceRepository;
 import de.garrafao.phitag.infrastructure.persistence.jpa.instance.usepairinstance.query.UsePairInstanceQueryJpa;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class UsePairInstanceRepositoryBridge implements UsePairInstanceRepository {
@@ -48,6 +47,10 @@ public class UsePairInstanceRepositoryBridge implements UsePairInstanceRepositor
     @Override
     public void delete(Iterable<UsePairInstance> instances) {
         this.usePairInstanceRepositoryJpa.deleteInBatch(instances);
+    }
+    @Override
+    public void delete(UsePairInstance usePairInstance){
+        this.usePairInstanceRepositoryJpa.delete(usePairInstance);
     }
 
 }

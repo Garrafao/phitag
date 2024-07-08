@@ -4,8 +4,7 @@ import Router, { useRouter } from "next/router";
 import useStorage from "../../../../lib/hook/useStorage";
 import { useFetchAnnotationAccess } from "../../../../lib/service/phase/PhaseResource";
 import { useFetchInstances } from "../../../../lib/service/instance/InstanceResource";
-import LexSubInstance, { LexSubInstanceConstructor } from "../../../../lib/model/instance/lexsubinstance/model/LexSubInstance";
-import { bulkAnnotateLexSub, bulkAnnotateSentiment } from "../../../../lib/service/judgement/JudgementResource";
+import {  bulkAnnotateSentiment } from "../../../../lib/service/judgement/JudgementResource";
 import { toast } from "react-toastify";
 import FullLoadingPage from "../../../pages/fullloadingpage";
 import Layout from "../../../generic/layout/layout";
@@ -32,6 +31,7 @@ const SentimentTutorial: React.FC<{ phase: Phase }> = ({ phase }) => {
 
     const storage = useStorage();
     const annotationAccess = useFetchAnnotationAccess(phase?.getId().getOwner(), phase?.getId().getProject(), phase?.getId().getPhase(), !!phase);
+
     const instances = useFetchInstances<SentimentInstance, SentimentInstanceConstructor>(phase?.getId().getOwner(), phase?.getId().getProject(), phase?.getId().getPhase(), new SentimentInstanceConstructor, false, !annotationAccess.isError && annotationAccess.hasAccess && !!phase);
 
     const handleSubmitAnnotation = (judgement: string, comment: string) => {

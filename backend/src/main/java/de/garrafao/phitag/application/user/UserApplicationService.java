@@ -88,6 +88,7 @@ public class UserApplicationService {
                 .withVisibility(VisibilityEnum.VISIBILITY_PUBLIC.name()).enabled(true).build();
         List<User> users = this.userRepository.findByQuery(query);
 
+
         if (users.size() != 1) {
             throw new UserNotExistsException();
         }

@@ -1,13 +1,13 @@
 ---
 id: 'explained-annotation-task-userank-pair'
-title: 'Explained: Annotation Task - Usage Rank Pair (URANK PAIR)'
+title: 'Explained: Annotation Task - Text Rank Pair'
 priority: 20
-description: 'Explanation of the Usage Rank Pair (URANK PAIR) Annotation Task.'
+description: 'Explanation of the Text Rank Pair Annotation Task.'
 ---
 
-# Usage Rank Pair (URANK Pair) Annotation Task
+# Text Rank Pair Annotation Task
 
-The usage rank pair annotation task asks annotator to rank a set of usages according to the refrence sentence and property. This property should be specified in the guidelines and could be e.g. ambiguity or sentiment.
+The text rank pair annotation task asks annotator to rank a set of usages according to the refrence sentence and property. This property should be specified in the guidelines and could be e.g. ambiguity or sentiment.
 
 ## Data Format
 

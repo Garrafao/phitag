@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+
+    <changeSet id="202304041036" author="serge">
+
+        <insert tableName="phitagphase">
+            <column name="name" value="ALL"/>
+            <column name="projectname" value="Example-Project-Text-Span"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="displayname" value="ALL"/>
+            <column name="phitagannotationtype_name" value="ANNOTATIONTYPE_SPAN"/>
+            <column name="phitagsamplingstrategy_name" value="SAMPLING_RANDOM_WITH_REPLACEMENT"/>
+            <column name="description" value="Phase, where all lemmas are considered"/>
+            <column name="task_head" value=""/>
+            <column name="is_tutorial" value="false"/>
+            <column name="status" value="OPEN"/>
+        </insert>
+        <insert tableName="phitagphase">
+            <column name="name" value="ALL"/>
+            <column name="projectname" value="Example-Project-Text-Instruction"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="displayname" value="ALL"/>
+            <column name="phitagannotationtype_name" value="ANNOTATIONTYPE_LEXSUB"/>
+            <column name="phitagsamplingstrategy_name" value="SAMPLING_RANDOM_WITH_REPLACEMENT"/>
+            <column name="description" value="Phase, where all lemmas are considered"/>
+            <column name="task_head" value="In this task, you're given passages that contain mentions of names of people, places, or things. Some of these mentions refer to the same person, place, or thing. Your job is to write questions that evaluate one's understanding of such references. Good questions are expected to link pronouns (she, her, him, his, their, etc.) or other mentions to people, places, or things to which they may refer. Do not ask questions that can be answered correctly without understanding the paragraph or having multiple answers. Avoid questions that do not link phrases referring to the same entity. For each of your questions, the answer should be one or more phrases in the paragraph, and it should be unambiguous."/>
+            <column name="is_tutorial" value="false"/>
+            <column name="status" value="OPEN"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

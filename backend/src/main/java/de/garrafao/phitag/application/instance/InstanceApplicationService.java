@@ -2,12 +2,14 @@ package de.garrafao.phitag.application.instance;
 
 import de.garrafao.phitag.application.annotationtype.data.AnnotationTypeEnum;
 import de.garrafao.phitag.application.common.CommonService;
+import de.garrafao.phitag.application.instance.data.DeleteInstanceCommand;
 import de.garrafao.phitag.application.instance.data.IInstanceDto;
 import de.garrafao.phitag.application.instance.data.PagedInstanceDto;
 import de.garrafao.phitag.application.instance.lexsubinstance.LexSubInstanceApplicationService;
 import de.garrafao.phitag.application.instance.lexsubinstance.data.LexSubInstanceDto;
 import de.garrafao.phitag.application.instance.sentimentandchoice.SentimentAndChoiceInstanceApplicationService;
 import de.garrafao.phitag.application.instance.sentimentandchoice.data.SentimentAndChoiceInstanceDto;
+import de.garrafao.phitag.application.instance.spaninstance.SpanInstanceApplicationService;
 import de.garrafao.phitag.application.instance.usepairinstance.UsePairInstanceApplicationService;
 import de.garrafao.phitag.application.instance.usepairinstance.data.UsePairInstanceDto;
 import de.garrafao.phitag.application.instance.userankinstance.UseRankInstanceApplicationService;
@@ -72,6 +74,8 @@ public class InstanceApplicationService {
 
     private final SentimentAndChoiceInstanceApplicationService sentimentAndChoiceInstanceApplicationService;
 
+    private final SpanInstanceApplicationService spanInstanceApplicationService;
+
     // Other
 
     @Autowired
@@ -86,7 +90,8 @@ public class InstanceApplicationService {
             final WSSIMInstanceApplicationService wssimInstanceApplicationService,
             final WSSIMTagApplicationService wssimTagApplicationService,
             final LexSubInstanceApplicationService lexSubInstanceApplicationService,
-            final SentimentAndChoiceInstanceApplicationService sentimentAndChoiceInstanceApplicationService) {
+            final SentimentAndChoiceInstanceApplicationService sentimentAndChoiceInstanceApplicationService,
+            final SpanInstanceApplicationService spanInstanceApplicationService) {
         this.commonService = commonService;
         this.validationService = validationService;
 
@@ -98,6 +103,7 @@ public class InstanceApplicationService {
         this.wssimTagApplicationService = wssimTagApplicationService;
         this.lexSubInstanceApplicationService = lexSubInstanceApplicationService;
         this.sentimentAndChoiceInstanceApplicationService = sentimentAndChoiceInstanceApplicationService;
+        this.spanInstanceApplicationService = spanInstanceApplicationService;
     }
 
     // Getters
@@ -156,6 +162,10 @@ public class InstanceApplicationService {
                     .forEach(sentimentInstance -> instanceDtos.add(SentimentAndChoiceInstanceDto.from(sentimentInstance)));
         }
         if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_CHOICE.name())) {
+            this.sentimentAndChoiceInstanceApplicationService.findByPhase(phaseEntity)
+                    .forEach(sentimentInstance -> instanceDtos.add(SentimentAndChoiceInstanceDto.from(sentimentInstance)));
+        }
+        if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SPAN.name())) {
             this.sentimentAndChoiceInstanceApplicationService.findByPhase(phaseEntity)
                     .forEach(sentimentInstance -> instanceDtos.add(SentimentAndChoiceInstanceDto.from(sentimentInstance)));
         }
@@ -259,7 +269,9 @@ public class InstanceApplicationService {
                     pagedInstance.getTotalElements(),
                     pagedInstance.getTotalPages());
         }
-        else if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SENTIMENT.name()) || phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_CHOICE.name())) {
+        else if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SENTIMENT.name()) ||
+                phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_CHOICE.name())
+        || phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SPAN.name())) {
             Page<SentimentAndChoiceInstance> pagedInstance = this.sentimentAndChoiceInstanceApplicationService.findByPhasePaged(phaseEntity,
                     size, page, order);
 
@@ -270,6 +282,7 @@ public class InstanceApplicationService {
                     pagedInstance.getTotalElements(),
                     pagedInstance.getTotalPages());
         }
+
         else {
             pagedInstanceDto = new PagedInstanceDto();
         }
@@ -339,7 +352,13 @@ public class InstanceApplicationService {
             return LexSubInstanceDto
                     .from(this.lexSubInstanceApplicationService.getAnnotationInstance(phaseEntity, annotator));
         }
-        if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SENTIMENT.name()) || phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_CHOICE.name())) {
+        if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SENTIMENT.name())
+                || phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_CHOICE.name())) {
+            return SentimentAndChoiceInstanceDto
+                    .from(this.sentimentAndChoiceInstanceApplicationService.getAnnotationInstance(phaseEntity, annotator));
+        }
+
+        if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SPAN.name())) {
             return SentimentAndChoiceInstanceDto
                     .from(this.sentimentAndChoiceInstanceApplicationService.getAnnotationInstance(phaseEntity, annotator));
         }
@@ -394,6 +413,10 @@ public class InstanceApplicationService {
 
         if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SENTIMENT.name())
         || phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_CHOICE.name())) {
+            return this.sentimentAndChoiceInstanceApplicationService.exportInstance(phaseEntity);
+        }
+
+        if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SPAN.name())) {
             return this.sentimentAndChoiceInstanceApplicationService.exportInstance(phaseEntity);
         }
 
@@ -462,7 +485,10 @@ public class InstanceApplicationService {
             this.sentimentAndChoiceInstanceApplicationService.save(phaseEntity, file);
             return;
         }
-
+        if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SPAN.name())) {
+            this.sentimentAndChoiceInstanceApplicationService.save(phaseEntity, file);
+            return;
+        }
         throw new AnnotationTypeNotFoundException();
 
     }
@@ -526,6 +552,10 @@ public class InstanceApplicationService {
             this.sentimentAndChoiceInstanceApplicationService.generateInstances(phaseEntity);
             return;
         }
+        if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SPAN.name())) {
+            this.sentimentAndChoiceInstanceApplicationService.generateInstances(phaseEntity);
+            return;
+        }
 
         throw new AnnotationTypeNotFoundException();
     }
@@ -561,5 +591,99 @@ public class InstanceApplicationService {
 
     }
 
+    /**
+     * Delete a instance.
+     *
+     * @param authenticationToken
+     * @param command
+     */
+    @Transactional
+    public void delete(String authenticationToken, DeleteInstanceCommand command) {
+        // Retrieve requester and phaseEntity based on authentication token and command
+        User requester = this.commonService.getUserByAuthenticationToken(authenticationToken);
+        Phase phaseEntity = this.commonService.getPhase(command.getOwner(), command.getProject(), command.getPhase());
+
+        // Validate project annotator access
+        this.validationService.projectAnnotatorAccess(requester, phaseEntity.getProject());
+
+        // Retrieve annotator
+        Annotator annotator = this.commonService.getAnnotator(command.getOwner(), command.getProject(), requester.getUsername());
+
+        // Handle deletion based on annotation type
+        if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_USEPAIR.name())) {
+            // Ensure command is of type DeleteUsepairInstanceCommand before casting
+            if (command instanceof DeleteInstanceCommand) {
+                this.usePairInstanceApplicationService.delete(phaseEntity, annotator, command);
+            } else {
+                throw new IllegalArgumentException("Command is not of type DeleteUsepairInstanceCommand");
+            }
+            return;
+        } else if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_LEXSUB.name())) {
+            if (command instanceof DeleteInstanceCommand) {
+                this.lexSubInstanceApplicationService.delete(phaseEntity, annotator, command);
+            } else {
+                throw new IllegalArgumentException("Internal server error");
+            }
+            return;
+        }
+        else if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_USERANK.name())) {
+            if (command instanceof DeleteInstanceCommand) {
+                this.useRankInstanceApplicationService.delete(phaseEntity, annotator, command);
+            } else {
+                throw new IllegalArgumentException("Internal server error");
+            }
+            return;
+        }
+        else if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_USERANK_PAIR.name())) {
+            if (command instanceof DeleteInstanceCommand) {
+                this.useRankPairInstanceApplicationService.delete(phaseEntity, annotator, command);
+            } else {
+                throw new IllegalArgumentException("Internal server error");
+            }
+            return;
+        }
+        else if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_USERANK_RELATIVE.name())) {
+            if (command instanceof DeleteInstanceCommand) {
+                this.useRankRelativeInstanceApplicationService.delete(phaseEntity, annotator, command);
+            } else {
+                throw new IllegalArgumentException("Internal server error");
+            }
+            return;
+        }
+        else if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_WSSIM.name())) {
+            if (command instanceof DeleteInstanceCommand) {
+                this.wssimInstanceApplicationService.delete(phaseEntity, annotator, command);
+            } else {
+                throw new IllegalArgumentException("Internal server error");
+            }
+            return;
+        }
+        else if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SENTIMENT.name())) {
+            if (command instanceof DeleteInstanceCommand) {
+                this.sentimentAndChoiceInstanceApplicationService.delete(phaseEntity, annotator, command);
+            } else {
+                throw new IllegalArgumentException("Internal server error");
+            }
+            return;
+        }
+        else if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_CHOICE.name())) {
+            if (command instanceof DeleteInstanceCommand) {
+                this.sentimentAndChoiceInstanceApplicationService.delete(phaseEntity, annotator, command);
+            } else {
+                throw new IllegalArgumentException("Internal server error");
+            }
+            return;
+        }
+        else if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SPAN.name())) {
+            if (command instanceof DeleteInstanceCommand) {
+                this.sentimentAndChoiceInstanceApplicationService.delete(phaseEntity, annotator, command);
+            } else {
+                throw new IllegalArgumentException("Internal server error");
+            }
+            return;
+        }
+
+        throw new AnnotationTypeNotFoundException();
+    }
 
 }

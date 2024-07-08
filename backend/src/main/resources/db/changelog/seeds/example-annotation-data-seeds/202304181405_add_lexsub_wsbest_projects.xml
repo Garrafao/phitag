@@ -10,13 +10,13 @@
         
         <!-- Add "Example" Projects -->
         <insert tableName="phitagproject">
-            <column name="name" value="Example-Project-LEXSUB"/>
+            <column name="name" value="Example-Project-Text-Free-Subsitution"/>
             <column name="ownername" value="Example-User"/>
-            <column name="displayname" value="Example-Project-LEXSUB"/>
+            <column name="displayname" value="Example-Project-Text-Free-Subsitution"/>
             <column name="active" value="true"/>
             <column name="phitagvisibility_name" value="VISIBILITY_PUBLIC"/>
             <column name="phitaglanguage_name" value="English"/>
-            <column name="description" value="An example project showing the lexical substitution annotation task, with data from the annotation standardization repository: https://github.com/ChangeIsKey/annotation_standardization"/>
+            <column name="description" value="An example project showing the Text Free Substitution annotation task."/>
         </insert>
 
         <insert tableName="phitagproject">
@@ -26,14 +26,14 @@
             <column name="active" value="true"/>
             <column name="phitagvisibility_name" value="VISIBILITY_PUBLIC"/>
             <column name="phitaglanguage_name" value="English"/>
-            <column name="description" value="An example project showing the WSBEST annotation task, with data from the annotation standardization repository: https://github.com/ChangeIsKey/annotation_standardization"/>
+            <column name="description" value="An example project showing the WSBEST annotation task."/>
         </insert>
 
         <!-- Add user as annotator -->
 
         <insert tableName="phitagannotator">
             <column name="username" value="Example-User"/>
-            <column name="projectname" value="Example-Project-LEXSUB"/>
+            <column name="projectname" value="Example-Project-Text-Free-Subsitution"/>
             <column name="ownername" value="Example-User"/>
             <column name="phitagentitlement_name" value="ENTITLEMENT_ADMIN"/>
         </insert>
@@ -50,7 +50,7 @@
 
         <insert tableName="phitagphase">
             <column name="name" value="ALL"/>
-            <column name="projectname" value="Example-Project-LEXSUB"/>
+            <column name="projectname" value="Example-Project-Text-Free-Subsitution"/>
             <column name="ownername" value="Example-User"/>
             <column name="displayname" value="ALL"/>
             <column name="phitagannotationtype_name" value="ANNOTATIONTYPE_LEXSUB"/>
@@ -76,11 +76,11 @@
         <!-- Joblisting -->
 
         <insert tableName="phitagjoblisting">
-            <column name="name" value="Example-LEXSUB-Annotation-Joblisting"/>
-            <column name="projectname" value="Example-Project-LEXSUB"/>
+            <column name="name" value="Example-Text-Free-Subsitution-Annotation-Joblisting"/>
+            <column name="projectname" value="Example-Project-Text-Free-Subsitution"/>
             <column name="ownername" value="Example-User"/>
-            <column name="displayname" value="Example-LEXSUB-Annotation-Joblisting"/>
-            <column name="phasename" value="Example-LEXSUB-Annotation-Joblisting"/>
+            <column name="displayname" value="Example-Text-Free-Subsitution-Annotation-Joblisting"/>
+            <column name="phasename" value="Example-Text-Free-Subsitution-Annotation-Joblisting"/>
             <column name="open" value="true"/>
             <column name="active" value="true"/>
             <column name="description" value="This is an example job listing for lexical substitution annotation. It is used to show how the job listing feature works."/>
@@ -91,7 +91,7 @@
             <column name="projectname" value="Example-Project-WSBEST"/>
             <column name="ownername" value="Example-User"/>
             <column name="displayname" value="Example-WSBEST-Annotation-Joblisting"/>
-            <column name="phasename" value="Example-LEXSUB-Annotation-Joblisting"/>
+            <column name="phasename" value="Example-Text-Free-Subsitution-Annotation-Joblisting"/>
             <column name="open" value="true"/>
             <column name="active" value="true"/>
             <column name="description" value="This is an example job listing for WSBEST annotation. It is used to show how the job listing feature works."/>

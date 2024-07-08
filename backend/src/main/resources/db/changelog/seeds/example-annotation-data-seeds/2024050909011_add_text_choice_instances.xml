@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="202409050901" author="sachin">
+
+        <insert tableName="phitagsentimentandchoiceinstance">
+            <column name="instanceid" value="1"/>
+            <column name="phasename" value="ALL"/>
+            <column name="projectname" value="Example-Project-Text-Choice"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="phitagusage_dataid" value="0"/>
+            <column name="phitagusage_projectname" value="Example-Project-Text-Choice"/>
+            <column name="phitagusage_ownername" value="Example-User"/>
+            <column name="label_set" value="Very Dissatisfied,Somewhat Dissatisfied,Neutral,Somewhat Satisfied,Very Satisfied"/>
+            <column name="non_label" value="-"/>
+        </insert>
+
+        <insert tableName="phitagsentimentandchoiceinstance">
+            <column name="instanceid" value="2"/>
+            <column name="phasename" value="ALL"/>
+            <column name="projectname" value="Example-Project-Text-Choice"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="phitagusage_dataid" value="1"/>
+            <column name="phitagusage_projectname" value="Example-Project-Text-Choice"/>
+            <column name="phitagusage_ownername" value="Example-User"/>
+            <column name="label_set" value="Experience,Power,Courage,Knowledge"/>
+            <column name="non_label" value="-"/>
+        </insert>
+
+        <insert tableName="phitagsentimentandchoiceinstance">
+            <column name="instanceid" value="3"/>
+            <column name="phasename" value="ALL"/>
+            <column name="projectname" value="Example-Project-Text-Choice"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="phitagusage_dataid" value="2"/>
+            <column name="phitagusage_projectname" value="Example-Project-Text-Choice"/>
+            <column name="phitagusage_ownername" value="Example-User"/>
+            <column name="label_set" value="Word,Chorus,Musician,Tymbal"/>
+            <column name="non_label" value="-"/>
+        </insert>
+
+        <insert tableName="phitagsentimentandchoiceinstance">
+            <column name="instanceid" value="4"/>
+            <column name="phasename" value="ALL"/>
+            <column name="projectname" value="Example-Project-Text-Choice"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="phitagusage_dataid" value="3"/>
+            <column name="phitagusage_projectname" value="Example-Project-Text-Choice"/>
+            <column name="phitagusage_ownername" value="Example-User"/>
+            <column name="label_set" value="Always,Never,Often,Sometimes"/>
+            <column name="non_label" value="-"/>
+        </insert>
+
+        <insert tableName="phitagsentimentandchoiceinstance">
+            <column name="instanceid" value="5"/>
+            <column name="phasename" value="ALL"/>
+            <column name="projectname" value="Example-Project-Text-Choice"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="phitagusage_dataid" value="4"/>
+            <column name="phitagusage_projectname" value="Example-Project-Text-Choice"/>
+            <column name="phitagusage_ownername" value="Example-User"/>
+            <column name="label_set" value="Cream,Curd,Water,Whiteness"/>
+            <column name="non_label" value="-"/>
+        </insert>
+
+        <insert tableName="phitagsentimentandchoiceinstance">
+            <column name="instanceid" value="6"/>
+            <column name="phasename" value="ALL"/>
+            <column name="projectname" value="Example-Project-Text-Choice"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="phitagusage_dataid" value="5"/>
+            <column name="phitagusage_projectname" value="Example-Project-Text-Choice"/>
+            <column name="phitagusage_ownername" value="Example-User"/>
+            <column name="label_set" value="Actors,Story,Director,Sets"/>
+            <column name="non_label" value="-"/>
+        </insert>
+
+        <insert tableName="phitagsentimentandchoiceinstance">
+            <column name="instanceid" value="7"/>
+            <column name="phasename" value="ALL"/>
+            <column name="projectname" value="Example-Project-Text-Choice"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="phitagusage_dataid" value="6"/>
+            <column name="phitagusage_projectname" value="Example-Project-Text-Choice"/>
+            <column name="phitagusage_ownername" value="Example-User"/>
+            <column name="label_set" value="Agents,Display,Expositions,Secrets"/>
+            <column name="non_label" value="-"/>
+        </insert>
+
+        <insert tableName="phitagsentimentandchoiceinstance">
+            <column name="instanceid" value="8"/>
+            <column name="phasename" value="ALL"/>
+            <column name="projectname" value="Example-Project-Text-Choice"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="phitagusage_dataid" value="7"/>
+            <column name="phitagusage_projectname" value="Example-Project-Text-Choice"/>
+            <column name="phitagusage_ownername" value="Example-User"/>
+            <column name="label_set" value="Punishment,Remedy,Fault,Scolding"/>
+            <column name="non_label" value="-"/>
+        </insert>
+
+        <insert tableName="phitagsentimentandchoiceinstance">
+            <column name="instanceid" value="9"/>
+            <column name="phasename" value="ALL"/>
+            <column name="projectname" value="Example-Project-Text-Choice"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="phitagusage_dataid" value="8"/>
+            <column name="phitagusage_projectname" value="Example-Project-Text-Choice"/>
+            <column name="phitagusage_ownername" value="Example-User"/>
+            <column name="label_set" value="Driver,Wheels,Bonnet,Bumper"/>
+            <column name="non_label" value="-"/>
+        </insert>
+
+        <insert tableName="phitagsentimentandchoiceinstance">
+            <column name="instanceid" value="10"/>
+            <column name="phasename" value="ALL"/>
+            <column name="projectname" value="Example-Project-Text-Choice"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="phitagusage_dataid" value="9"/>
+            <column name="phitagusage_projectname" value="Example-Project-Text-Choice"/>
+            <column name="phitagusage_ownername" value="Example-User"/>
+            <column name="label_set" value="Nomenclature,Manifestation,Pictorial effect,Glossary"/>
+            <column name="non_label" value="-"/>
+        </insert>
+
+    </changeSet>
+</databaseChangeLog>

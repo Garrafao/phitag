@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+
+    <changeSet id="202304041549" author="serge">
+        <insert tableName="phitagjoblisting">
+            <column name="name" value="Example-Text-Pair-Annotation-Joblisting"/>
+            <column name="projectname" value="Example-Project-Text-Span"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="displayname" value="Example-Text-Span-Annotation-Joblisting"/>
+            <column name="phasename" value="Example-Text-Span-Annotation-Joblisting"/>
+            <column name="open" value="true"/>
+            <column name="active" value="true"/>
+            <column name="description" value="This is an example job listing for Text Span Annotation. It is used to show how the job listing feature works."/>
+        </insert>
+
+        <insert tableName="phitagjoblisting">
+            <column name="name" value="Example-Text-Instruction-Annotation-Joblisting"/>
+            <column name="projectname" value="Example-Project-Text-Instruction"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="displayname" value="Example-Text-Instruction-Annotation-Joblisting"/>
+            <column name="phasename" value="Example-Text-Instruction-Annotation-Joblisting"/>
+            <column name="open" value="true"/>
+            <column name="active" value="true"/>
+            <column name="description" value="This is an example job listing for Text Instruction Annotation. It is used to show how the job listing feature works."/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

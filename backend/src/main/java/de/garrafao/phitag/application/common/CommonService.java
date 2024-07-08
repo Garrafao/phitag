@@ -3,7 +3,7 @@ package de.garrafao.phitag.application.common;
 import de.garrafao.phitag.application.annotationtype.data.AnnotationTypeEnum;
 import de.garrafao.phitag.application.authentication.AuthenticationApplicationService;
 import de.garrafao.phitag.application.judgement.lexsubjudgement.LexSubJudgementApplicationService;
-import de.garrafao.phitag.application.judgement.sentimentandchoice.SentimentJudgementApplicationService;
+import de.garrafao.phitag.application.judgement.sentimentandchoice.SentimentAndChoiceJudgementApplicationService;
 import de.garrafao.phitag.application.judgement.usepairjudgement.UsePairJudgementApplicationService;
 import de.garrafao.phitag.application.judgement.userankjudgement.UseRankJudgementApplicationService;
 import de.garrafao.phitag.application.judgement.userankpairjudgement.UseRankPairJudgementApplicationService;
@@ -48,6 +48,9 @@ import de.garrafao.phitag.domain.instance.lexsub.query.LexSubInstanceQueryBuilde
 import de.garrafao.phitag.domain.instance.sentimentandchoice.SentimentAndChoiceInstance;
 import de.garrafao.phitag.domain.instance.sentimentandchoice.SentimentInstanceAndChoiceRepository;
 import de.garrafao.phitag.domain.instance.sentimentandchoice.query.SentimentAndChoiceInstanceQueryBuilder;
+import de.garrafao.phitag.domain.instance.spaninstance.SpanInstance;
+import de.garrafao.phitag.domain.instance.spaninstance.SpanInstanceRepository;
+import de.garrafao.phitag.domain.instance.spaninstance.query.SpanInstanceQueryBuilder;
 import de.garrafao.phitag.domain.instance.usepairinstance.UsePairInstance;
 import de.garrafao.phitag.domain.instance.usepairinstance.UsePairInstanceRepository;
 import de.garrafao.phitag.domain.instance.usepairinstance.query.UsePairInstanceQueryBuilder;
@@ -184,6 +187,8 @@ public class CommonService {
 
     private final SentimentInstanceAndChoiceRepository sentimentInstanceAndChoiceRepository;
 
+    private final SpanInstanceRepository spanInstanceRepository;
+
     //Judgement Repository
     private final UsePairJudgementRepository usePairJudgementRepository;
 
@@ -211,7 +216,7 @@ public class CommonService {
 
     private final LexSubJudgementApplicationService lexSubJudgementApplicationService;
 
-    private final SentimentJudgementApplicationService sentimentJudgementApplicationService;
+    private final SentimentAndChoiceJudgementApplicationService sentimentAndChoiceJudgementApplicationService;
 
     // Authentication application service
 
@@ -252,7 +257,7 @@ public class CommonService {
 
 
             final SentimentInstanceAndChoiceRepository sentimentInstanceAndChoiceRepository,
-            final AnnotationProcessInformationRepository annotationProcessInformationRepository,
+            final SpanInstanceRepository spanInstanceRepository, final AnnotationProcessInformationRepository annotationProcessInformationRepository,
 
             final UsePairJudgementApplicationService usePairJudgementApplicationService,
             final WSSIMJudgementApplicationService wssimJudgementApplicationService,
@@ -267,7 +272,7 @@ public class CommonService {
             final UseRankJudgementApplicationService useRankJudgementApplicationService,
             final UseRankRelativeJudgementApplicationService useRankRelativeJudgementApplicationService,
             final UseRankPairJudgementApplicationService useRankPairJudgementApplicationService,
-            final SentimentJudgementApplicationService sentimentJudgementApplicationService) {
+            final SentimentAndChoiceJudgementApplicationService sentimentAndChoiceJudgementApplicationService) {
         this.userRepository = userRepository;
         this.projectRepository = projectRepository;
         this.annotatorRepository = annotatorRepository;
@@ -297,6 +302,7 @@ public class CommonService {
         this.wssimInstanceRepository = wssimInstanceRepository;
         this.lexSubInstanceRepository = lexSubInstanceRepository;
         this.sentimentInstanceAndChoiceRepository = sentimentInstanceAndChoiceRepository;
+        this.spanInstanceRepository = spanInstanceRepository;
 
         this.annotationProcessInformationRepository = annotationProcessInformationRepository;
 
@@ -313,7 +319,7 @@ public class CommonService {
         this.useRankJudgementApplicationService = useRankJudgementApplicationService;
         this.useRankRelativeJudgementApplicationService = useRankRelativeJudgementApplicationService;
         this.useRankPairJudgementApplicationService = useRankPairJudgementApplicationService;
-        this.sentimentJudgementApplicationService = sentimentJudgementApplicationService;
+        this.sentimentAndChoiceJudgementApplicationService = sentimentAndChoiceJudgementApplicationService;
     }
 
     // Methods
@@ -587,6 +593,10 @@ public class CommonService {
             return this.findSentimentInstanceByPhase(phase).stream()
                     .map(IInstance.class::cast).collect(Collectors.toList());
         }
+        if (phase.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SPAN.name())) {
+            return this.findSentimentInstanceByPhase(phase).stream()
+                    .map(IInstance.class::cast).collect(Collectors.toList());
+        }
 
         return new ArrayList<>();
     }
@@ -625,6 +635,9 @@ public class CommonService {
             return this.countSentimentInstanceByPhase(phase);
         }
         if (phase.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_CHOICE.name())) {
+            return this.countSentimentInstanceByPhase(phase);
+        }
+        if (phase.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SPAN.name())) {
             return this.countSentimentInstanceByPhase(phase);
         }
 
@@ -886,6 +899,22 @@ public class CommonService {
     }
 
     /**
+     * Get all spane instances for a given phase.
+     *
+     * @param phase The phase.
+     * @return A list of all {@link LexSubInstance} for the given phase.
+     */
+    public List<SpanInstance> findSpanInstanceByPhase(final Phase phase) {
+        final Query query = new SpanInstanceQueryBuilder()
+                .withOwner(phase.getId().getProjectid().getOwnername())
+                .withProject(phase.getId().getProjectid().getName())
+                .withPhase(phase.getId().getName())
+                .build();
+        return this.spanInstanceRepository.findByQuery(query);
+    }
+
+
+    /**
      * Get number of LexSub instances for a given phase.
      * 
      * @param phase The phase.
@@ -918,6 +947,23 @@ public class CommonService {
         return this.sentimentInstanceAndChoiceRepository.findByQueryPaged(query, new PageRequestWraper(1, 0, null))
                 .getTotalElements();
     }
+    /**
+     * Get number of Span instances for a given phase.
+     *
+     * @param phase The phase.
+     * @return The number of {@link SpanInstance} for the given phase.
+     */
+    public long countSpanInstanceByPhase(final Phase phase) {
+        final Query query = new SpanInstanceQueryBuilder()
+                .withOwner(phase.getId().getProjectid().getOwnername())
+                .withProject(phase.getId().getProjectid().getName())
+                .withPhase(phase.getId().getName())
+                .build();
+
+        return this.spanInstanceRepository.findByQueryPaged(query, new PageRequestWraper(1, 0, null))
+                .getTotalElements();
+    }
+
 
 
 
@@ -941,6 +987,14 @@ public class CommonService {
         }
         if (phase.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_LEXSUB.name())) {
             return this.lexSubJudgementApplicationService.findByPhase(phase).stream()
+                    .map(IJudgement.class::cast).collect(Collectors.toList());
+        }
+        if (phase.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_USERANK_PAIR.name())) {
+            return this.useRankPairJudgementApplicationService.findByPhase(phase).stream()
+                    .map(IJudgement.class::cast).collect(Collectors.toList());
+        }
+        if (phase.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_USERANK_RELATIVE.name())) {
+            return this.useRankRelativeJudgementApplicationService.findByPhase(phase).stream()
                     .map(IJudgement.class::cast).collect(Collectors.toList());
         }
 
@@ -1005,13 +1059,16 @@ public class CommonService {
             return this.wssimJudgementApplicationService.findByPhase(phase, 1, 0, null).getTotalElements();
         }
         if (phase.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_LEXSUB.name())) {
-            return this.lexSubJudgementApplicationService.findByPhase(phase, 0, 0, null).getTotalElements();
+            return this.lexSubJudgementApplicationService.findByPhase(phase, 1, 0, null).getTotalElements();
         }
         if (phase.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SENTIMENT.name())) {
-            return this.sentimentJudgementApplicationService.findByPhase(phase, 0, 0, null).getTotalElements();
+            return this.sentimentAndChoiceJudgementApplicationService.findByPhase(phase, 1, 0, null).getTotalElements();
         }
         if (phase.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_CHOICE.name())) {
-            return this.sentimentJudgementApplicationService.findByPhase(phase, 0, 0, null).getTotalElements();
+            return this.sentimentAndChoiceJudgementApplicationService.findByPhase(phase, 1, 0, null).getTotalElements();
+        }
+        if (phase.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SPAN.name())) {
+            return this.sentimentAndChoiceJudgementApplicationService.findByPhase(phase, 1, 0, null).getTotalElements();
         }
 
 

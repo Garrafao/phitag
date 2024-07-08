@@ -1,16 +1,5 @@
 package de.garrafao.phitag.infrastructure.rest;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
 import de.garrafao.phitag.application.user.UserApplicationService;
 import de.garrafao.phitag.application.user.data.CreateUserCommand;
 import de.garrafao.phitag.application.user.data.UpdateUserCommand;
@@ -20,6 +9,10 @@ import de.garrafao.phitag.application.visibility.data.VisibilityEnum;
 import de.garrafao.phitag.domain.core.Query;
 import de.garrafao.phitag.domain.user.query.UserQueryBuilder;
 import de.garrafao.phitag.domain.visibility.Visibility;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/v1/user")

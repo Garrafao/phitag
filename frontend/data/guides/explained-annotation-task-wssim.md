@@ -1,20 +1,20 @@
 ---
 id: 'explained-annotation-task-wssim'
-title: 'Explained: Annotation Task - Word Sense Similarity (WSSIM)'
+title: 'Explained: Annotation Task - Text Label'
 priority: 20
-description: 'Explanation of the Word Sense Similarity (WSSIM) Annotation Task.'
+description: 'Explanation of the Text Label Annotation Task.'
 ---
 
-# Word Sense Similarity (WSSIM) Annotation Task
+# Text Label Annotation Task
 
-In the WSSIM annotation task, users are shown a target lemma in context as well as a sense which may or may not apply to the target lemma. Annotators must rate the sense on how well it matches the meaning of the target lemma in its given context.
+In the Text Label annotation task, users are shown a target lemma in context as well as a sense which may or may not apply to the target lemma. Annotators must rate the sense on how well it matches the meaning of the target lemma in its given context.
 
 
 ## Data Format
 
 ### Usage File
 
-Please provide uses.tsv files in the general format outlined in the [Supported Tasks](/guides/supported-tasks) guide.
+Please provide uses.tsv files in the general format outlined in the [Supported Tasks](/guide/supported-tasks) guide.
 
 ### Instance File
 
@@ -65,7 +65,8 @@ The following example shows a sense annotated with a scale of 1-5.
 
 #### Example 2
 
-The following example shows a sense annotated with a binary scale, also called WSBest (Word Sense Best)
+The following example shows a sense annotated with a binary scale, also called WSBest (Word Sense Best).
+
 |The **bank** was closed. |
 |-------------------------|
 |Sense: **financial institution**|

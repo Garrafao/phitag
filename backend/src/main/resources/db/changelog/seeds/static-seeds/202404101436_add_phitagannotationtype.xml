@@ -8,7 +8,7 @@
 
         <insert tableName="phitagannotationtype">
             <column name="name" value="ANNOTATIONTYPE_SENTIMENT" />
-            <column name="visiblename" value="Text Tag" />
+            <column name="visiblename" value="Text Sentiment" />
             <column name="active" value="true" />
         </insert>
         <insert tableName="phitagannotationtype">
@@ -21,7 +21,7 @@
             <where>name = 'ANNOTATIONTYPE_USEPAIR'</where>
         </update>
         <update tableName="phitagannotationtype">
-            <column name="visiblename" value="Text Free Substitution" />
+            <column name="visiblename" value="Text Free" />
             <where>name = 'ANNOTATIONTYPE_LEXSUB'</where>
         </update>
         <update tableName="phitagannotationtype">
@@ -37,7 +37,7 @@
             <where>name = 'ANNOTATIONTYPE_USERANK_RELATIVE'</where>
         </update>
         <update tableName="phitagannotationtype">
-            <column name="visiblename" value="Text label" />
+            <column name="visiblename" value="Text Label" />
             <where>name = 'ANNOTATIONTYPE_WSSIM'</where>
         </update>
     </changeSet>

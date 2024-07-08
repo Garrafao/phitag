@@ -1,10 +1,9 @@
 package de.garrafao.phitag.domain.statistic.annotatorstatistic;
 
-import java.util.Map;
+import lombok.Data;
 
 import javax.persistence.*;
-
-import lombok.Data;
+import java.util.Map;
 
 @Entity
 @Table(name = "phitagannotatorstatistic")
@@ -64,8 +63,4 @@ public class AnnotatorStatistic {
         annotations = 0;
         phaseAnnotationCountMap = null;
     }
-
-   
-    
-
 }

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { FiAlignLeft, FiBookmark, FiFeather } from "react-icons/fi";
 
 // Serrvice
-import { fetchRandomInstance, useFetchPagedUseRankInstance, useFetchPagedUseRankRelativeInstance } from "../../../../lib/service/instance/InstanceResource";
+import { fetchRandomInstance, useFetchAllocatedInstanceNumber, useFetchPagedUseRankInstance, useFetchPagedUseRankRelativeInstance } from "../../../../lib/service/instance/InstanceResource";
 import useStorage from "../../../../lib/hook/useStorage";
 
 // model
@@ -16,7 +16,7 @@ import UsageField from "../usage/usagefield";
 import { toast } from "react-toastify";
 import Router from "next/router";
 import AddUseRankJudgementCommand from "../../../../lib/model/judgement/userankjudgement/command/AddUseRankJudgementCommand";
-import { annotateUserank, annotateUserankrelative, useFetchPagedUseRankJudgements } from "../../../../lib/service/judgement/JudgementResource";
+import { annotateUserank, annotateUserankrelative, useFetchAttemptedJudgement, useFetchPagedUseRankJudgements } from "../../../../lib/service/judgement/JudgementResource";
 import LoadingComponent from "../../../generic/loadingcomponent";
 import ProgressBar from "../progressbar/progressbar";
 import React from "react";
@@ -26,6 +26,7 @@ import UseRankRelativeInstance, { UseRankRelativeInstanceConstructor } from "../
 import { usageContextBuilder } from "../usage/userank/sortableussage";
 import IconButtonOnClick from "../../../generic/button/iconbuttononclick";
 import { MdFullscreen } from "react-icons/md";
+import SubmitStudyComponent from "../../../generic/submitstudy";
 
 
 
@@ -48,11 +49,13 @@ const UseRankRelativeAnnotation: React.FC<{ phase: Phase }> = ({ phase }) => {
     const page: number = 0;
     const userankrelatveinstances = useFetchPagedUseRankRelativeInstance(phase?.getId().getOwner(), phase?.getId().getProject(), phase?.getId().getPhase(), page, !!phase);
 
-    /* 
-        const { data: userAnnotationCount, mutate: mutateCountJudgements } = CountAttemptedJudgements(phase?.getId().getOwner(), phase?.getId().getProject(), phase?.getId().getPhase(), !!phase);
-    
-        const { data: userAllocatedInstance, mutate: mutateInstanceCount} = CountAllocatedInstances(phase?.getId().getOwner(), phase?.getId().getProject(), phase?.getId().getPhase(), !!phase);
-     */
+    const { data: userAnnotationCount, mutate: mutateCountJudgements } = useFetchAttemptedJudgement(phase?.getId().getOwner(), phase?.getId().getProject(), phase?.getId().getPhase(), !!phase);
+
+
+
+    const { data: userAllocatedInstance, mutate: mutateInstanceCount } = useFetchAllocatedInstanceNumber(phase?.getId().getOwner(), phase?.getId().getProject(), phase?.getId().getPhase(), !!phase);
+
+
 
     const labelArray = annotation.instance ? annotation.instance.getLabelSet() : null;
     const noLabel = annotation.instance ? annotation.instance.getNonLabel() : null;
@@ -131,6 +134,7 @@ const UseRankRelativeAnnotation: React.FC<{ phase: Phase }> = ({ phase }) => {
 
 
     const handleSubmitAnnotation = () => {
+        mutateCountJudgements();
         const judgement: string = judgementData;
         if (!judgement) {
             toast.info("Please rank first or choose non label")
@@ -161,6 +165,7 @@ const UseRankRelativeAnnotation: React.FC<{ phase: Phase }> = ({ phase }) => {
 
     const handleSkip = () => {
 
+        mutateCountJudgements();
         const judgement: string = annotation.instance.getNonLabel().toString();
 
         const resultCommand = verifyResultCommand(phase, judgement, annotation);
@@ -197,9 +202,7 @@ const UseRankRelativeAnnotation: React.FC<{ phase: Phase }> = ({ phase }) => {
                         instance: instance,
                         comment: "",
                     });
-                }/*  else if(instance==null && userAllocatedInstance === userAnnotationCount) {
-                    Router.push(`/phi/${phase.getId().getOwner()}/${phase.getId().getProject()}/${phase.getName()}/done`);
-                } */
+                }
             })
             .catch((error) => {
                 toast.error("Could not fetch new annotation. Check if instances are provided for annotation.");
@@ -229,13 +232,6 @@ const UseRankRelativeAnnotation: React.FC<{ phase: Phase }> = ({ phase }) => {
             Router.push(`/phi/${phase.getId().getOwner()}/${phase.getId().getProject()}`);
             return;
         }
-
-   /*      if (!annotationAccess.isError && annotationAccess.hasAccess && userAllocatedInstance === userAnnotationCount) {
-            toast.info("No instances available to annotate!");
-            Router.push(`/phi/${phase.getId().getOwner()}/${phase.getId().getProject()}/${phase.getName()}/done`);
-            return;
-        }
- */
         if (!annotationAccess.isError && annotationAccess.hasAccess && annotation.initialLoad) {
             fetchRandomInstance<UseRankRelativeInstance, UseRankRelativeInstanceConstructor>(
                 phase.getId().getOwner(),
@@ -264,20 +260,24 @@ const UseRankRelativeAnnotation: React.FC<{ phase: Phase }> = ({ phase }) => {
     }, [annotationAccess, annotation.initialLoad, storage, phase]);
 
 
+    if ((!phase || !annotation.instance || annotation.initialLoad) && (userAllocatedInstance !== userAnnotationCount)) {
 
-    if (!phase || !annotation.instance || annotation.initialLoad) {
         return <LoadingComponent />;
+    }
+    
+    if ((!annotation.instance && annotation.initialLoad && (userAllocatedInstance === userAnnotationCount))) {
+        return <SubmitStudyComponent phase={phase} />;
     }
 
     return (
 
         <div className="w-full flex flex-col justify-between">
             <div className="relative w-full">
-                {/*   <ProgressBar
+                   <ProgressBar
                     currentValue={userAnnotationCount}
                     minValue={0}
                     maxValue={userankrelatveinstances.data.getTotalElements()}
-                /> */}
+                /> 
                 <div className="absolute bottom-10 right-0">
                     <div >
                         <IconButtonOnClick icon={<MdFullscreen onClick={() => { handleScreenSize() }} className="text-3xl" />} tooltip={"Click here to increase the size"} />

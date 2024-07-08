@@ -19,4 +19,6 @@ public interface UseRankPairRepository {
 
     void delete(Iterable<UseRankPairInstance> instanceData);
 
+    void delete(UseRankPairInstance instanceData);
+
 }

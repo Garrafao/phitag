@@ -1,19 +1,19 @@
 ---
-id: 'explained-annotation-task-lexsub'
-title: 'Explained: Annotation Task - Lexical Substitution (LEXSUB)'
+id: 'explained-annotation-task-textfree'
+title: 'Explained: Annotation Task - Text Free Substitution'
 priority: 20
-description: 'Explanation of the Lexical Substitution (LEXSUB) Annotation Task.'
+description: 'Explanation of the Text Free Substitution Annotation Task.'
 ---
 
-# Lexical Substitution (LEXSUB) Annotation Task
+# Text Free Subsitution Annotation Task
 
-In the LEXSUB annotation task, annotators are presented a series of sentences, each containing a target lemma. Users are asked to provide a synonym to replace the target lemma in the context of the sentence in which it appears. The substitute word should preserve the meaning of the target as closely as possible.
+In the Text Free Subsitution annotation task, annotators are presented a series of sentences, each containing a target lemma. Users are asked to provide a synonym to replace the target lemma in the context of the sentence in which it appears. The substitute word should preserve the meaning of the target as closely as possible.
 
 ## Data Format
 
 ### Usage File
 
-Please provide uses.tsv files in the general format outlined in the [Supported Tasks](/guides/supported-tasks) guide.
+Please provide uses.tsv files in the general format outlined in the [Supported Tasks](/guide/supported-tasks) guide.
 
 ### Instance File
 The instance file is a tab-separated file with the following columns:

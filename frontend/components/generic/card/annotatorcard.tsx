@@ -12,11 +12,11 @@ import ENTITLEMENTS from "../../../lib/model/entitlement/Entitlements";
 interface IAnnotatorCardProps {
     annotator: Annotator;
     onClickEdit: Function;
-
+    onClickRemove: Function;
     entitlement: string;
 }
 
-const AnnotatorCard: React.FC<IAnnotatorCardProps> = ({ annotator, onClickEdit, entitlement }) => {
+const AnnotatorCard: React.FC<IAnnotatorCardProps> = ({ annotator, onClickEdit, onClickRemove, entitlement }) => {
 
     const hidden = entitlement !== ENTITLEMENTS.ADMIN ? " hidden" : "";
 
@@ -58,6 +58,8 @@ const AnnotatorCard: React.FC<IAnnotatorCardProps> = ({ annotator, onClickEdit, 
 
                         <div className="flex flex-row mt-auto space-x-8 xl:w-1/2 xl:self-start" onClick={(e: any) => e.stopPropagation()}>
                             <button type="button" className={"block w-full mt-8 py-2 font-dm-mono-medium bg-base16-gray-900 text-base16-gray-100 " + hidden} onClick={(e: any) => onClickEdit(e)}>Edit</button>
+                            <button type="button" className={"block w-full mt-8 py-2 font-dm-mono-medium bg-base16-gray-900 text-base16-gray-100 " + hidden} onClick={(e: any) => onClickRemove(e)}>Remove</button>
+
                         </div>
 
                     </div>

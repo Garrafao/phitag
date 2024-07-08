@@ -1,19 +1,19 @@
 ---
 id: 'explained-annotation-task-urel'
-title: 'Explained: Annotation Task - Usage Relatedness (UREL)'
+title: 'Explained: Annotation Task - Text Pair Relatedness'
 priority: 20
-description: 'Explanation of the Usage Relatedness (UREL) Annotation Task.'
+description: 'Explanation of the Text Relatedness Annotation Task.'
 ---
 
-# Usage Relatedness (UREL) Annotation Task
+# Text Pair Relatedness  Annotation Task
 
-The usage relatedness annotation tasks asks annotators to rate the degree of semantic relatedness between two uses of a word.
+The text pair relatedness annotation tasks asks annotators to rate the degree of semantic relatedness between two uses of a word.
 
 ## Data Format
 
 ### Usage File
 
-Please provide uses.tsv files in the general format outlined in the [Supported Tasks](/guides/supported-tasks) guide.
+Please provide uses.tsv files in the general format outlined in the [Supported Tasks](/guide/supported-tasks) guide.
 
 ### Instance File
 The instance file is a tab-separated file with the following columns:

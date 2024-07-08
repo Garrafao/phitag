@@ -1,17 +1,18 @@
 package de.garrafao.phitag.application.instance.lexsubinstance;
 
 import de.garrafao.phitag.application.common.CommonService;
+import de.garrafao.phitag.application.instance.data.DeleteInstanceCommand;
 import de.garrafao.phitag.application.sampling.data.SamplingEnum;
 import de.garrafao.phitag.domain.annotationprocessinformation.AnnotationProcessInformation;
 import de.garrafao.phitag.domain.annotationprocessinformation.error.AnnotationProcessInformationException;
 import de.garrafao.phitag.domain.annotator.Annotator;
-import de.garrafao.phitag.domain.core.PageRequestWraper;
 import de.garrafao.phitag.domain.core.Query;
 import de.garrafao.phitag.domain.error.CsvParseException;
 import de.garrafao.phitag.domain.instance.lexsub.LexSubInstance;
 import de.garrafao.phitag.domain.instance.lexsub.LexSubInstanceFactory;
 import de.garrafao.phitag.domain.instance.lexsub.LexSubInstanceRepository;
 import de.garrafao.phitag.domain.instance.lexsub.error.LexSubInstanceException;
+import de.garrafao.phitag.domain.instance.lexsub.page.LexSubInstancePageBuilder;
 import de.garrafao.phitag.domain.instance.lexsub.query.LexSubInstanceQueryBuilder;
 import de.garrafao.phitag.domain.phase.Phase;
 import de.garrafao.phitag.domain.phitagdata.usage.Usage;
@@ -95,7 +96,11 @@ public class LexSubInstanceApplicationService {
                 .build();
 
         return this.lexSubInstanceRepository.findByQueryPaged(query,
-                new PageRequestWraper(pagesize, pagenumber, orderBy));
+                new LexSubInstancePageBuilder()
+                        .withPageSize(pagesize)
+                        .withPageNumber(pagenumber)
+                        .withOrderBy(orderBy)
+                        .build());
     }
 
     /**
@@ -487,6 +492,26 @@ public class LexSubInstanceApplicationService {
 
         return instances.get(0);
     }
+
+    /**
+     * Delete a lexsub instance.
+     *
+     * @param phase     the phase
+     * @param annotator the annotator
+     * @param command   the command
+     */
+    @Transactional
+    public void delete(final Phase phase, final Annotator annotator, final DeleteInstanceCommand command) {
+        final Query query = new LexSubInstanceQueryBuilder()
+                .withOwner(command.getOwner())
+                .withProject(command.getProject())
+                .withPhase(command.getPhase())
+                .withInstanceid(command.getInstanceID())
+                .build();
+        final List<LexSubInstance> instances = this.lexSubInstanceRepository.findByQuery(query);
+        this.lexSubInstanceRepository.delete(instances.get(0));
+    }
+
 
 
 }

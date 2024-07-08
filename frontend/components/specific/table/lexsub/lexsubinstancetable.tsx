@@ -6,12 +6,20 @@ import AddInstanceToPhaseModal from "../../modal/addinstancetophasemodal";
 import PageChange from "../../../generic/table/pagination";
 import Usage from "../../../../lib/model/phitagdata/usage/model/Usage";
 import GenerateInstancesForPhaseModal from "../../modal/generateinstancesforphasemodal";
+import IconButtonOnClick from "../../../generic/button/iconbuttononclick";
+import { FiTrash } from "react-icons/fi";
+import LexSubInstance from "../../../../lib/model/instance/lexsubinstance/model/LexSubInstance";
+import DeleteInstanceModal from "../../modal/deleteinstancemodal";
 
 const LexSubInstanceTable: React.FC<{ phase: Phase, modalState: { openData: boolean, callbackData: Function, openGenerate: boolean, callbackGenerate: Function } }> = ({ phase, modalState }) => {
 
     const [page, setPage] = useState(0);
     const lexsubinstances = useFetchPagedLexSubInstance(phase?.getId().getOwner(), phase?.getId().getProject(), phase?.getId().getPhase(), page, !!phase);
 
+    const [deleteInstance, setDeleteInstance] = useState({
+        open: false,
+        instances: null as unknown as LexSubInstance
+    });
     // Reload the data on reload
     useEffect(() => {
         lexsubinstances.mutate();
@@ -48,10 +56,15 @@ const LexSubInstanceTable: React.FC<{ phase: Phase, modalState: { openData: bool
                                     className="px-6 py-3 text-left uppercase tracking-wider whitespace-nowrap">
                                     Non Label
                                 </th>
+                                {/* <th scope="col"
+                                    className="px-6 py-3 text-left uppercase tracking-wider whitespace-nowrap">
+                                    Action
+                                </th> */}
                             </tr>
                         </thead>
                         <tbody className=" text-base16-gray-700">
                             {lexsubinstances.data.getContent().map((instance, i) => {
+                                let instances: LexSubInstance = instance;
                                 return (
                                     <tr key={instance.getId().getInstanceId()}>
 
@@ -77,6 +90,31 @@ const LexSubInstanceTable: React.FC<{ phase: Phase, modalState: { openData: bool
                                         <td className="px-6 py-4 whitespace-nowrap">
                                             {instance.getNonLabel()}
                                         </td>
+                                      {/*   <td className="px-6 py-4 whitespace-nowrap">
+                                        <div style={{ display: 'flex', gap: '8px' }}>
+                                             <IconButtonOnClick
+                                                onClick={() => {
+                                                    setEditInstance({
+                                                        open: true,
+                                                        usepairinstances: usepairinstance,
+                                                    });
+                                                }}
+                                                icon={<FiEdit className="basic-svg" />}
+                                                tooltip="Edit Instance"
+                                            /> 
+                                            <IconButtonOnClick
+                                                onClick={() => {
+                                                    setDeleteInstance({
+                                                        open: true,
+                                                        instances: instances
+                                                    });
+                                                }}
+                                                icon={<FiTrash className="basic-svg" />}
+                                                tooltip="Delete Instance"
+                                            />
+                                        </div>
+
+                                    </td> */}
                                     </tr>
                                 );
                             })}
@@ -89,7 +127,8 @@ const LexSubInstanceTable: React.FC<{ phase: Phase, modalState: { openData: bool
 
             <AddInstanceToPhaseModal isOpen={modalState.openData} closeModalCallback={modalState.callbackData} phase={phase} mutateCallback={lexsubinstances.mutate} />
             <GenerateInstancesForPhaseModal isOpen={modalState.openGenerate} closeModalCallback={modalState.callbackGenerate} phase={phase} mutateCallback={lexsubinstances.mutate} additional={false} additionalFileName="" />
-    
+            <DeleteInstanceModal isOpen={deleteInstance.open} closeModalCallback={() => setDeleteInstance({ open: false, instances: null as unknown as LexSubInstance })} instance={deleteInstance.instances} mutateCallback={lexsubinstances.mutate} />
+
         </div>
     );
 }

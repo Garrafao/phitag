@@ -2,7 +2,7 @@ package de.garrafao.phitag.infrastructure.persistence.jpa.judgement.sentimentand
 
 import de.garrafao.phitag.domain.core.Query;
 import de.garrafao.phitag.domain.core.QueryComponent;
-import de.garrafao.phitag.domain.judgement.lexsubjudgement.query.*;
+import de.garrafao.phitag.domain.judgement.sentimentandchoice.query.*;
 import de.garrafao.phitag.domain.judgement.sentimentandchoice.SentimentAndChoiceJudgement;
 import de.garrafao.phitag.infrastructure.persistence.jpa.core.SpecificationCombiner;
 import org.springframework.data.jpa.domain.Specification;

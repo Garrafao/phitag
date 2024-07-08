@@ -105,6 +105,23 @@ public class UseRankPairJudgementApplicationService {
                 .build();
         return this.useRankPairJudgementRepository.findByQuery(query);
     }
+
+    /**
+     * Get all use rank pair judgements for a given phase and annotator.
+     *
+     * @param phase the phase
+     */
+    public List<UseRankPairJudgement> findByPhaseAndAnnotator(final Phase phase, final  Annotator annotator) {
+        final Query query = new UseRankPairJudgementQueryBuilder()
+                .withAnnotator(annotator.getId().getUsername())
+                .withOwner(phase.getId().getProjectid().getOwnername())
+                .withProject(phase.getId().getProjectid().getName())
+                .withPhase(phase.getId().getName())
+                .build();
+        return this.useRankPairJudgementRepository.findByQuery(query);
+    }
+
+
     /**
      * Get all use rank pair judgements for a given phase.
      *

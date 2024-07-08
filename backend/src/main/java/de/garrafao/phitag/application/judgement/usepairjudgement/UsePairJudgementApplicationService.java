@@ -108,6 +108,22 @@ public class UsePairJudgementApplicationService {
                 .build();
         return this.usePairJudgementRepository.findByQuery(query);
     }
+    /**
+     * Get all use pair judgements for a given phase and annotator.
+     *
+     * @param phase the phase
+     * @param annotator the annotator
+     * @return a {@link UsePairJudgement} list
+     */
+    public List<UsePairJudgement> findByPhaseAndAnnotator(final Phase phase, final  Annotator annotator) {
+        final Query query = new UsePairJudgementQueryBuilder()
+                .withOwner(phase.getProject().getOwner().getUsername())
+                .withProject(phase.getId().getProjectid().getName())
+                .withPhase(phase.getId().getName())
+                .withAnnotator(annotator.getId().getUsername())
+                .build();
+        return this.usePairJudgementRepository.findByQuery(query);
+    }
 
     /**
      * Get all use pair judgements for a given phase as a paged list.
@@ -375,6 +391,7 @@ public class UsePairJudgementApplicationService {
         String ownerName = phase.getProject().getOwner().getDisplayname();
         String projectName = phase.getProject().getId().getName();
         String annotatorName = annotator.getId().getUsername();
+
         return (int) this.usePairJudgementRepository.findByQueryPaged(
                 new UsePairJudgementQueryBuilder()
                         .withProject(projectName)

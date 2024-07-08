@@ -1,11 +1,11 @@
 ---
 id: 'explained-annotation-task-userank-relative'
-title: 'Explained: Annotation Task - Usage Rank Relative (URANK)'
+title: 'Explained: Annotation Task - Text Rank Relative'
 priority: 20
-description: 'Explanation of the Usage Rank Relative (URANK Relative) Annotation Task.'
+description: 'Explanation of the Text Rank Relative Annotation Task.'
 ---
 
-# Usage Rank Relative (URANK Relative) Annotation Task
+# Text Rank Relative Annotation Task
 
 The usage rank relative annotation task asks annotator to rank a set of usages according to the refrence sentence and property. This property should be specified in the guidelines and could be e.g. ambiguity or sentiment.
 

@@ -18,4 +18,6 @@ public interface SentimentInstanceAndChoiceRepository {
     SentimentAndChoiceInstance save(SentimentAndChoiceInstance instanceData);
 
     void delete(Iterable<SentimentAndChoiceInstance> instanceData);
+
+    void delete(SentimentAndChoiceInstance instanceData);
 }

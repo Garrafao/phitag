@@ -1,18 +1,20 @@
 package de.garrafao.phitag.application.instance.sentimentandchoice;
 
 import de.garrafao.phitag.application.common.CommonService;
+import de.garrafao.phitag.application.instance.data.DeleteInstanceCommand;
 import de.garrafao.phitag.application.sampling.data.SamplingEnum;
 import de.garrafao.phitag.domain.annotationprocessinformation.AnnotationProcessInformation;
 import de.garrafao.phitag.domain.annotationprocessinformation.error.AnnotationProcessInformationException;
 import de.garrafao.phitag.domain.annotator.Annotator;
-import de.garrafao.phitag.domain.core.PageRequestWraper;
 import de.garrafao.phitag.domain.core.Query;
 import de.garrafao.phitag.domain.error.CsvParseException;
 import de.garrafao.phitag.domain.instance.sentimentandchoice.SentimentAndChoiceInstance;
 import de.garrafao.phitag.domain.instance.sentimentandchoice.SentimentAndChoiceInstanceFactory;
 import de.garrafao.phitag.domain.instance.sentimentandchoice.SentimentInstanceAndChoiceRepository;
 import de.garrafao.phitag.domain.instance.sentimentandchoice.error.SentimentAndChoiceInstanceException;
+import de.garrafao.phitag.domain.instance.sentimentandchoice.page.SentimentAndChoicePageBuilder;
 import de.garrafao.phitag.domain.instance.sentimentandchoice.query.SentimentAndChoiceInstanceQueryBuilder;
+import de.garrafao.phitag.domain.judgement.sentimentandchoice.query.SentimentAndChoiceJudgementQueryBuilder;
 import de.garrafao.phitag.domain.phase.Phase;
 import de.garrafao.phitag.domain.phitagdata.usage.Usage;
 import de.garrafao.phitag.domain.phitagdata.usage.UsageRepository;
@@ -69,7 +71,6 @@ public class SentimentAndChoiceInstanceApplicationService {
                 .withProject(phase.getId().getProjectid().getName())
                 .withPhase(phase.getId().getName())
                 .build();
-
         return this.sentimentInstanceAndChoiceRepository.findByQuery(query);
     }
 
@@ -87,7 +88,6 @@ public class SentimentAndChoiceInstanceApplicationService {
             final int pagesize,
             final int pagenumber,
             final String orderBy) {
-
         final Query query = new SentimentAndChoiceInstanceQueryBuilder()
                 .withOwner(phase.getId().getProjectid().getOwnername())
                 .withProject(phase.getId().getProjectid().getName())
@@ -95,8 +95,14 @@ public class SentimentAndChoiceInstanceApplicationService {
                 .build();
 
         return this.sentimentInstanceAndChoiceRepository.findByQueryPaged(query,
-                new PageRequestWraper(pagesize, pagenumber, orderBy));
+                new SentimentAndChoicePageBuilder()
+                        .withPageSize(pagesize)
+                        .withPageNumber(pagenumber)
+                        .withOrderBy(orderBy)
+                        .build());
     }
+
+
 
     /**
      * Sample a instance for a given phase and corresponding annotator
@@ -485,6 +491,25 @@ public class SentimentAndChoiceInstanceApplicationService {
 
         return instances.get(0);
     }
+    /**
+     * Delete a sentiment and choice instance.
+     *
+     * @param phase     the phase
+     * @param annotator the annotator
+     * @param command   the command
+     */
+    @Transactional
+    public void delete(final Phase phase, final Annotator annotator, final DeleteInstanceCommand command) {
+        final Query query = new SentimentAndChoiceJudgementQueryBuilder()
+                .withOwner(command.getOwner())
+                .withProject(command.getProject())
+                .withPhase(command.getPhase())
+                .withInstanceid(command.getInstanceID())
+                .build();
+        final List<SentimentAndChoiceInstance> instances = this.sentimentInstanceAndChoiceRepository.findByQuery(query);
+        this.sentimentInstanceAndChoiceRepository.delete(instances.get(0));
+    }
+
 
 
 }

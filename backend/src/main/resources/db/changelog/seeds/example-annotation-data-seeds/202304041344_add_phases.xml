@@ -9,7 +9,7 @@
 
         <insert tableName="phitagphase">
             <column name="name" value="ALL"/>
-            <column name="projectname" value="Example-Project-Use-Pair"/>
+            <column name="projectname" value="Example-Project-Text-Pair"/>
             <column name="ownername" value="Example-User"/>
             <column name="displayname" value="ALL"/>
             <column name="phitagannotationtype_name" value="ANNOTATIONTYPE_USEPAIR"/>
@@ -23,7 +23,7 @@
 
         <insert tableName="phitagphase">
             <column name="name" value="ALL"/>
-            <column name="projectname" value="Example-Project-WSSIM"/>
+            <column name="projectname" value="Example-Project-Text-Label"/>
             <column name="ownername" value="Example-User"/>
             <column name="displayname" value="ALL"/>
             <column name="phitagannotationtype_name" value="ANNOTATIONTYPE_WSSIM"/>
@@ -36,10 +36,36 @@
 
         <insert tableName="phitagphase">
             <column name="name" value="ALL"/>
-            <column name="projectname" value="Example-Project-Use-Rank"/>
+            <column name="projectname" value="Example-Project-Text-Rank"/>
             <column name="ownername" value="Example-User"/>
             <column name="displayname" value="ALL"/>
             <column name="phitagannotationtype_name" value="ANNOTATIONTYPE_USERANK"/>
+            <column name="phitagsamplingstrategy_name" value="SAMPLING_RANDOM_WITH_REPLACEMENT"/>
+            <column name="description" value="Phase, where all lemmas are considered"/>
+            <column name="task_head" value=""/>
+            <column name="is_tutorial" value="false"/>
+            <column name="status" value="OPEN"/>
+        </insert>
+
+        <insert tableName="phitagphase">
+            <column name="name" value="ALL"/>
+            <column name="projectname" value="Example-Project-Text-Sentiment"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="displayname" value="ALL"/>
+            <column name="phitagannotationtype_name" value="ANNOTATIONTYPE_SENTIMENT"/>
+            <column name="phitagsamplingstrategy_name" value="SAMPLING_RANDOM_WITH_REPLACEMENT"/>
+            <column name="description" value="Phase, where all lemmas are considered"/>
+            <column name="task_head" value=""/>
+            <column name="is_tutorial" value="false"/>
+            <column name="status" value="OPEN"/>
+        </insert>
+
+        <insert tableName="phitagphase">
+            <column name="name" value="ALL"/>
+            <column name="projectname" value="Example-Project-Text-Choice"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="displayname" value="ALL"/>
+            <column name="phitagannotationtype_name" value="ANNOTATIONTYPE_CHOICE"/>
             <column name="phitagsamplingstrategy_name" value="SAMPLING_RANDOM_WITH_REPLACEMENT"/>
             <column name="description" value="Phase, where all lemmas are considered"/>
             <column name="task_head" value=""/>

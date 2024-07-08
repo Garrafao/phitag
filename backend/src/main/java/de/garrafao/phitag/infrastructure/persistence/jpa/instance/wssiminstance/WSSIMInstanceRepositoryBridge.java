@@ -1,17 +1,16 @@
 package de.garrafao.phitag.infrastructure.persistence.jpa.instance.wssiminstance;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.stereotype.Repository;
-
 import de.garrafao.phitag.domain.core.PageRequestWraper;
 import de.garrafao.phitag.domain.core.Query;
 import de.garrafao.phitag.domain.instance.wssiminstance.WSSIMInstance;
 import de.garrafao.phitag.domain.instance.wssiminstance.WSSIMInstanceRepository;
 import de.garrafao.phitag.infrastructure.persistence.jpa.instance.wssiminstance.query.WSSIMInstanceQueryJpa;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class WSSIMInstanceRepositoryBridge implements WSSIMInstanceRepository {
@@ -42,5 +41,10 @@ public class WSSIMInstanceRepositoryBridge implements WSSIMInstanceRepository {
     @Override
     public WSSIMInstance save(WSSIMInstance instanceData) {
         return this.wssimInstanceRepositoryJpa.save(instanceData);
+    }
+
+    @Override
+    public void delete(WSSIMInstance instanceData) {
+        this.wssimInstanceRepositoryJpa.delete(instanceData);
     }
 }

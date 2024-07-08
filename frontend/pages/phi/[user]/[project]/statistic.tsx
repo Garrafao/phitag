@@ -116,8 +116,8 @@ const ProjectStatisticComponent = () => {
         <div className="w-full flex flex-col xl:flex-row xl:mx-auto xl:justify-center xl:space-x-16">
             <div className="flex flex-col space-y-8 self-center sm:flex-row sm:space-y-0 justify-between my-8 xl:justify-center xl:flex-col xl:space-y-8">
                 <CountUpComponent count={projectstatistic.statistic.getUsagecount()} label="Usages: " />
-                <CountUpComponent count={projectstatistic.statistic.getLemmacount()} label="Lemmas: " />
-            </div>
+{/*                 <CountUpComponent count={projectstatistic.statistic.getLemmacount()} label="Lemmas: " />
+ */}            </div>
             <UsagesPerLemma statistic={projectstatistic.statistic} />
 
         </div>
@@ -194,8 +194,8 @@ const AnnotatorStatisticStatisticComponent = ({ annotator }: { annotator: string
         <div className="w-full flex flex-col xl:flex-row xl:mx-auto xl:justify-center xl:space-x-16">
             <div className="flex flex-col space-y-8 self-center sm:flex-row sm:space-y-0 justify-between my-8 xl:justify-center xl:flex-col xl:space-y-8">
                 <CountUpComponent count={annotatorStatistic.statistic.getAnnotations()} label="Annotations: " />
-                <NumberComponent count={annotatorStatistic.statistic.getKrippendorffalpha()} label="Mean Krippendorf: " />
-            </div>
+{/*                 <NumberComponent count={annotatorStatistic.statistic.getKrippendorffalpha()} label="Mean Krippendorf: " />
+ */}            </div>
             <AnnotationsPerPhases statistic={annotatorStatistic.statistic} />
         </div>
     );

@@ -10,6 +10,7 @@ description: "Current overview of Phitag's supported annotation tasks."
 PhiTag is an extensible, flexible and modular annotation tool for text annotation. It supports a variety of annotation tasks, which can be combined to create complex annotation projects. This page provides an overview of the currently supported tasks and their corresponding data formats.
 
 ## Data Formats
+
 The following sections will describe the currently supported data formats.
 
 ## Usage (text snippets)
@@ -30,6 +31,7 @@ The columns are as follows:
 - `lemma`: The lemma of the target token. This is used to preselect the target token in the annotation task.
 - `group`: An optional colum, currently not used.
 
+**Note**: The attributes **dataId** and **context** are mandatory, while the remaining attributes are optional.
 ## Instance
 
 Instances represent a selection of usages (and possibly other instances) for a given annotation task/phase. Each instance, as the name suggests, is an instance of an annotation task and hence the structure depends heavily on the annotation task. Please refer to the annotation task type down below for more information.
@@ -54,11 +56,19 @@ The columns are as follows:
 
 In the following we will describe the currently supported annotation tasks. Note, that even though the implemented tasks here are described in a specific way, the annotation tool is flexible enough to support variations of these tasks. If you have a specific task in mind, which is not achievable with the current implementation, please contact us!
 
-## Use Pair
+## Text Pair
 
-The use pair annotation type is used to annotate the relation between two usages. It is used to annotate the relation between two usages. We currently support the annotation task "Usage Relatedness" which asks annotators to rate the degree of semantic relatedness between two uses of a lemma. For further information please refer to the ['Explained: Annotation Task - Usage Relatedness (UREL)' guide](/guide/explained-annotation-task-urel).
+The text pair annotation type is used to annotate the relation between two usages. It is used to annotate the relation between two usages. We currently support the annotation task "Text Pair Relatedness" which asks annotators to rate the degree of semantic relatedness between two uses of a lemma. For further information please refer to the ['Explained: Annotation Task - Text Pair Relatedness' guide](/guide/explained-annotation-task-urel).
 
-## Use Single
+## Text Single
 
-The use single annotation type is the counterpart to the use pair annotation type. It is used to annotate a single usage. We currently support to tasks for this annotation type; "Word Sense Similarity (WSSIM)" and "Lexical Substitution (LEXSUB)". WSSIM asks annotators to rate the degree of a sense, which may or may not apply to the target lemma, on a given scale (e.g. 1-5). LEXSUB asks annotators to provide a substitution for the target lemma. For further information please refer to the ['Explained: Annotation Task - Word Sense Similarity (WSSIM)' guide](/guide/explained-annotation-task-wssim) and the ['Explained: Annotation Task - Lexical Substitution (LEXSUB)' guide](/guide/explained-annotation-task-lexsub).
+The text single annotation type is the counterpart to the text pair annotation type. It is used to annotate a single usage. We currently support to tasks for this annotation type; "Text Label", "Text Free", "Text Sentiment" and "Text Choice". Text Label asks annotators to rate the degree of a sense, which may or may not apply to the target lemma, on a given scale (e.g. 1-5). Text Free asks annotators to provide a substitution for the target lemma. Text Sentiment ask annotators asks annotator to rate the emotional sentiment as "positive", "neutral", and "negative". For further information please refer to the ['Explained: Annotation Task - Text Label' guide](/guide/explained-annotation-task-wssim), the ['Explained: Annotation Task - Text Free Subsitution' guide](/guide/explained-annotation-task-lexsub) and the ['Explained: Annotation Task - Text Sentiment' guide](/guide/explained-annotation-task-sentiment).
+## Text Rank
+
+The text rank annotation task asks annotator to rank a set of usages according to some property. This property should be specified in the guidelines and could be e.g. ambiguity or sentiment. We currently support to tasks for this annotation type; "Text Rank", "Text Rank Pair" and "Text Rank Relative". For further information please refer to the ['Explained: Annotation Task - Text Rank' guide](/guide/explained-annotation-task-userank), ['Explained: Annotation Task - Text Rank Relative' guide](/guide/explained-annotation-task-userankrelative) and the ['Explained: Annotation Task - Text Rank Pair' guide](/guide/explained-annotation-task-userankpair).
+
+## Text Span
+The text span task is to annotate the part of speech of each word in a text snippet by marking the word and selecting the right tag from the given set.
+Please refer this guideline for further information. ['Explained: Annotation Task - Text Span' guide](/guide/explained-annotation-task-span) 
+
 

@@ -17,4 +17,6 @@ public interface UseRankRelativeInstanceRepository {
 
     UseRankRelativeInstance save(UseRankRelativeInstance instanceData);
 
+    void delete(UseRankRelativeInstance instanceData);
+
 }

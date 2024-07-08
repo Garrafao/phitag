@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="202304181445" author="serge">
+        
+        <insert tableName="phitagusage">
+            <column name="dataid" value="0"/>
+            <column name="projectname" value="Example-Project-Text-Instruction"/>
+            <column name="ownername" value="Example-User"/>
+
+            <column name="context" value=" Passage: Nearing London, Oliver encounters Jack Dawkins, a pickpocket more commonly known by the nickname the Artful Dodger, and his sidekick, a boy of a humorous nature named Charley Bates, but Oliver's innocent and trusting nature fails to see any dishonesty in their actions. The Dodger provides Oliver with a free meal and tells him of a gentleman in London who will ''give him lodgings for nothing, and never ask for change''. Grateful for the unexpected assistance, Oliver follows the Dodger to the old gentleman's residence. In this way Oliver unwittingly falls in with an infamous Jewish criminal known as Fagin, the gentleman of whom the Artful Dodger spoke. Ensnared, Oliver lives with Fagin and his gang of juvenile pickpockets in their lair at Saffron Hill for some time, unaware of their criminal occupations. He believes they make wallets and handkerchiefs. Question: Who believes Fagin's gang make wallets and handkerchiefs?"/>
+            <column name="indices_target_token" value="0:0"/>
+            <column name="indices_target_sentence" value="0:0"/>
+            <column name="lemma" value=""/>
+            <column name="phitaggroup" value=""/>
+        </insert>
+    
+        <insert tableName="phitagusage">
+            <column name="dataid" value="1"/>
+            <column name="projectname" value="Example-Project-Text-Instruction"/>
+            <column name="ownername" value="Example-User"/>
+
+            <column name="context" value="Passage: Nearing London, Oliver encounters Jack Dawkins, a pickpocket more commonly known by the nickname the Artful Dodger, and his sidekick, a boy of a humorous nature named Charley Bates, but Oliver's innocent and trusting nature fails to see any dishonesty in their actions. The Dodger provides Oliver with a free meal and tells him of a gentleman in London who will ''give him lodgings for nothing, and never ask for change''. Grateful for the unexpected assistance, Oliver follows the Dodger to the ''old gentleman's'' residence. In this way Oliver unwittingly falls in with an infamous Jewish criminal known as Fagin, the gentleman of whom the Artful Dodger spoke. Ensnared, Oliver lives with Fagin and his gang of juvenile pickpockets in their lair at Saffron Hill for some time, unaware of their criminal occupations. He believes they make wallets and handkerchiefs. Question: What is the alias of the person whose sidekick had a humorous nature?"/>
+            <column name="indices_target_token" value="0:0"/>
+            <column name="indices_target_sentence" value="0:0"/>
+            <column name="lemma" value=""/>
+            <column name="phitaggroup" value=""/>
+        </insert>
+    
+        <insert tableName="phitagusage">
+            <column name="dataid" value="2"/>
+            <column name="projectname" value="Example-Project-Text-Instruction"/>
+            <column name="ownername" value="Example-User"/>
+
+            <column name="context" value="Passage: Nearing London, Oliver encounters Jack Dawkins, a pickpocket more commonly known by the nickname the ''Artful Dodger'', and his sidekick, a boy of a humorous nature named Charley Bates, but Oliver's innocent and trusting nature fails to see any dishonesty in their actions. The Dodger provides Oliver with a free meal and tells him of a gentleman in London who will ''give him lodgings for nothing, and never ask for change''. Grateful for the unexpected assistance, Oliver follows the Dodger to the ''old gentleman's'' residence. In this way Oliver unwittingly falls in with an infamous Jewish criminal known as Fagin, the gentleman of whom the Artful Dodger spoke. Ensnared, Oliver lives with Fagin and his gang of juvenile pickpockets in their lair at Saffron Hill for some time, unaware of their criminal occupations. He believes they make wallets and handkerchiefs. Question: What are the names of the people whose dishonesty Oliver failed to see?"/>
+             <column name="indices_target_token" value="0:0"/>
+            <column name="indices_target_sentence" value="0:0"/>
+            <column name="lemma" value=""/>
+            <column name="phitaggroup" value=""/>
+        </insert>
+    
+        <insert tableName="phitagusage">
+            <column name="dataid" value="3"/>
+            <column name="projectname" value="Example-Project-Text-Instruction"/>
+            <column name="ownername" value="Example-User"/>
+
+            <column name="context" value="Passage: Nearing London, Oliver encounters Jack Dawkins, a pickpocket more commonly known by the nickname the ''Artful Dodger'', and his sidekick, a boy of a humorous nature named Charley Bates, but Oliver's innocent and trusting nature fails to see any dishonesty in their actions. The Dodger provides Oliver with a free meal and tells him of a gentleman in London who will ''give him lodgings for nothing, and never ask for change''. Grateful for the unexpected assistance, Oliver follows the Dodger to the ''old gentleman's'' residence. In this way Oliver unwittingly falls in with an infamous Jewish criminal known as Fagin, the gentleman of whom the Artful Dodger spoke. Ensnared, Oliver lives with Fagin and his gang of juvenile pickpockets in their lair at Saffron Hill for some time, unaware of their criminal occupations. He believes they make wallets and handkerchiefs. Question: What is the Dodger's real name?''"/>
+            <column name="indices_target_token" value="0:0"/>
+            <column name="indices_target_sentence" value="0:0"/>
+            <column name="lemma" value=""/>
+            <column name="phitaggroup" value=""/>
+        </insert>
+    
+        <insert tableName="phitagusage">
+            <column name="dataid" value="4" />
+            <column name="projectname" value="Example-Project-Text-Instruction"/>
+            <column name="ownername" value="Example-User"/>
+
+            <column name="context" value=" Passage: Nearing London, Oliver encounters Jack Dawkins, a pickpocket more commonly known by the nickname the ''Artful Dodger'', and his sidekick, a boy of a humorous nature named Charley Bates, but Oliver's innocent and trusting nature fails to see any dishonesty in their actions. The Dodger provides Oliver with a free meal and tells him of a gentleman in London who will ''give him lodgings for nothing, and never ask for change''. Grateful for the unexpected assistance, Oliver follows the Dodger to the ''old gentleman's'' residence. In this way Oliver unwittingly falls in with an infamous Jewish criminal known as Fagin, the gentleman of whom the Artful Dodger spoke. Ensnared, Oliver lives with Fagin and his gang of juvenile pickpockets in their lair at Saffron Hill for some time, unaware of their criminal occupations. He believes they make wallets and handkerchiefs. Question: What is the real name of the person who provided Oliver with a free meal?"/>
+             <column name="indices_target_token" value="0:0"/>
+            <column name="indices_target_sentence" value="0:0"/>
+            <column name="lemma" value=""/>
+            <column name="phitaggroup" value=""/>
+        </insert>
+    
+        <insert tableName="phitagusage">
+            <column name="dataid" value="5"/>
+            <column name="projectname" value="Example-Project-Text-Instruction"/>
+            <column name="ownername" value="Example-User"/>
+
+            <column name="context" value="Passage: Nearing London, Oliver encounters Jack Dawkins, a pickpocket more commonly known by the nickname the ''Artful Dodger'', and his sidekick, a boy of a humorous nature named Charley Bates, but Oliver's innocent and trusting nature fails to see any dishonesty in their actions. The Dodger provides Oliver with a free meal and tells him of a gentleman in London who will ''give him lodgings for nothing, and never ask for change''. Grateful for the unexpected assistance, Oliver follows the Dodger to the ''old gentleman's'' residence. In this way Oliver unwittingly falls in with an infamous Jewish criminal known as Fagin, the gentleman of whom the Artful Dodger spoke. Ensnared, Oliver lives with Fagin and his gang of juvenile pickpockets in their lair at Saffron Hill for some time, unaware of their criminal occupations. He believes they make wallets and handkerchiefs. Question: Which place served as Fagin and his gang's lair?"/>
+            <column name="indices_target_token" value="0:0"/>
+            <column name="indices_target_sentence" value="0:0"/>
+            <column name="lemma" value=""/>
+            <column name="phitaggroup" value=""/>
+        </insert>
+    
+        <insert tableName="phitagusage">
+            <column name="dataid" value="6"/>
+            <column name="projectname" value="Example-Project-Text-Instruction"/>
+            <column name="ownername" value="Example-User"/>
+
+            <column name="context" value="Passage: Nearing London, Oliver encounters Jack Dawkins, a pickpocket more commonly known by the nickname the ''Artful Dodger'', and his sidekick, a boy of a humorous nature named Charley Bates, but Oliver's innocent and trusting nature fails to see any dishonesty in their actions. The Dodger provides Oliver with a free meal and tells him of a gentleman in London who will ''give him lodgings for nothing, and never ask for change''. Grateful for the unexpected assistance, Oliver follows the Dodger to the ''old gentleman's'' residence. In this way Oliver unwittingly falls in with an infamous Jewish criminal known as Fagin, the gentleman of whom the Artful Dodger spoke. Ensnared, Oliver lives with Fagin and his gang of juvenile pickpockets in their lair at Saffron Hill for some time, unaware of their criminal occupations. He believes they make wallets and handkerchiefs. Question: Where is the old gentleman's residence?"/>
+            <column name="indices_target_token" value="0:0"/>
+            <column name="indices_target_sentence" value="0:0"/>
+            <column name="lemma" value=""/>
+            <column name="phitaggroup" value=""/>
+        </insert>
+    
+        <insert tableName="phitagusage">
+            <column name="dataid" value="7"/>
+            <column name="projectname" value="Example-Project-Text-Instruction"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="context" value="The earthquake swarm was noted on October 12, 2007 in the Prince George Citizen by citizen staff, three days after the earthquakes began. Scientists mentioned in the report were seismologist John Cassidy of Natural Resources Canada and volcanologist Catherine Hickson, who was part of the Geological Survey of Canada at the time. At the time of the report, scientists did not know the origin of the swarm. Seismologist John Cassidy stated, ''the depth is enough to rule out hydrothermal but it's up in the air as to whether the cause is tectonic shifts or volcanic activity. If it is volcanic there are certain characteristics that we would expect, there's a tremor-like character to it. And so we'll be looking for the types of events that we see beneath volcanoes and we'll be looking to see if they're getting closer to the surface or if they're migrating at all.''Even if the Nazko swarm were a warning of a volcanic eruption, Hickson doubted it would turn out to be a highly explosive eruption like those that can occur in subduction-zone volcanoes. ''We're not talking about an injection of tonnes of ash many kilometers into the air like the 1980 Mount St. Helens eruption or the 1991 Mount Pinatubo eruption. We're talking about something very small, relatively localized that should have a fairly limited impact... but it'll be extremely exciting'', Hickson said. If an eruption were to occur, Hickson suggested that it would be characterized by a lava fountain that sends globs of lava 100 m (330 ft) into the air. This is similar to those that occur in Hawaii. Hickson said that a Nazko eruption could be a tourist attraction, but warned that noxious gases such as carbon dioxide and sulfur dioxide would be released during the event. Question: What is the first name of the person who doubted it would turn out to be a highly explosive eruption like those that can occur in subduction-zone volcanoes?"/>
+            <column name="indices_target_token" value="0:0"/>
+            <column name="indices_target_sentence" value="0:0"/>
+            <column name="lemma" value=""/>
+            <column name="phitaggroup" value=""/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
+    

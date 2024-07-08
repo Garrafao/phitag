@@ -1,6 +1,7 @@
 package de.garrafao.phitag.application.instance.userankinstance;
 
 import de.garrafao.phitag.application.common.CommonService;
+import de.garrafao.phitag.application.instance.data.DeleteInstanceCommand;
 import de.garrafao.phitag.application.sampling.data.SamplingEnum;
 import de.garrafao.phitag.domain.annotationprocessinformation.AnnotationProcessInformation;
 import de.garrafao.phitag.domain.annotationprocessinformation.error.AnnotationProcessInformationException;
@@ -530,7 +531,6 @@ public class UseRankInstanceApplicationService {
      * Generate sampling order for random sampling without replacement.
      *
      * @param phase
-     * @param annotator
      * @return
      */
     private List<String> generateSamplingOrderWithoutReplacement(final Phase phase) {
@@ -570,8 +570,6 @@ public class UseRankInstanceApplicationService {
     }
 
 
-
-    @Transactional
     private UseRankInstance sample(final Phase phase, final Annotator annotator) {
         AnnotationProcessInformation annotationProcessInformation;
 
@@ -614,6 +612,25 @@ public class UseRankInstanceApplicationService {
         return  annotationProcessInformation.getOrder().size();
 
     }
+    /**
+     * Delete a use rank instance.
+     *
+     * @param phase     the phase
+     * @param annotator the annotator
+     * @param command   the command
+     */
+    @Transactional
+    public void delete(final Phase phase, final Annotator annotator, final DeleteInstanceCommand command) {
+        final Query query = new UseRankInstanceQueryBuilder()
+                .withOwner(command.getOwner())
+                .withProject(command.getProject())
+                .withPhase(command.getPhase())
+                .withInstanceid(command.getInstanceID())
+                .build();
+        final List<UseRankInstance> instances = this.useRankRepository.findByQuery(query);
+        this.useRankRepository.delete(instances.get(0));
+    }
+
 
 
 }

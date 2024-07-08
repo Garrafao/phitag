@@ -37,6 +37,8 @@ import LexSubJudgementTable from "../../../../../components/specific/table/lexsu
 import UseRankRelativeJudgementTable from "../../../../../components/specific/table/userankrelative/userankrelativejudgementtable";
 import UseRankPairJudgementTable from "../../../../../components/specific/table/userankpair/userankpairjudgementtable";
 import SentimentJudgementTable from "../../../../../components/specific/table/sentiment/sentimentjudgementtable";
+import ChoiceJudgementTable from "../../../../../components/specific/table/choice/choicejudgementtable";
+import SpanJudgementTable from "../../../../../components/specific/table/span/spanjudgementtable";
 
 const JudgementPage: NextPage = () => {
 
@@ -602,6 +604,153 @@ const JudgementPage: NextPage = () => {
 
         );
     }
+
+    if (phase.phase.getAnnotationType().getName() === ANNOTATIONTYPES.ANNOTATIONTYPE_CHOICE) {
+        return (
+            <Layout>
+
+                <Head>
+                    <title>PhiTag : {phase.phase.getName()} : Judgements </title>
+                </Head>
+
+
+                <SingleContentLayout>
+
+
+                    <LinkHead icon={<FiLayers className="stroke-2" />}
+                        links={[
+                            {
+                                href: `/phi/${username}`,
+                                name: username,
+                            },
+                            {
+                                href: `/phi/${username}/${projectname}`,
+                                name: projectname,
+                            },
+                            {
+                                href: `/phi/${username}/${projectname}/${phasename}`,
+                                name: phasename,
+                            },
+                            {
+                                href: `/phi/${username}/${projectname}/${phasename}/judgement`,
+                                name: "Judgements",
+                            }
+                        ]}
+                    />
+
+
+                    <div className="w-full flex flex-col 2xl:flex-row justify-between">
+                        <PhaseTabBar />
+
+                        <div className="flex mt-8 2xl:mt-0 mx-4 space-x-4 justify-end">
+                            <IconButtonOnClick
+                                icon={<FiFilePlus className="basic-svg" />}
+                                tooltip="Add Data"
+                                onClick={() => setModalState({
+                                    ...modalState,
+                                    isOpenAddDataModal: true,
+                                })}
+                                hide={entitlement.entitlement !== ENTITLEMENTS.ADMIN} />
+                            <IconButtonOnClick
+                                icon={<FiDownload className="basic-svg " />}
+                                tooltip="Download Judgement Data"
+                                onClick={() => handleExport()}
+                                hide={entitlement.entitlement !== ENTITLEMENTS.ADMIN} />
+                        </div>
+                    </div>
+
+                    <div className="m-8">
+                        {/* @ts-ignore */}
+                        <ChoiceJudgementTable phase={phase.phase} modalState={
+                            {
+                                open: modalState.isOpenAddDataModal,
+                                callback: () => setModalState({
+                                    ...modalState,
+                                    isOpenAddDataModal: false,
+                                })
+                            }
+                        } />
+                    </div>
+
+                </SingleContentLayout>
+            </Layout>
+
+        );
+    }
+
+    if (phase.phase.getAnnotationType().getName() === ANNOTATIONTYPES.ANNOTATIONTYPE_SPAN) {
+        return (
+            <Layout>
+
+                <Head>
+                    <title>PhiTag : {phase.phase.getName()} : Judgements </title>
+                </Head>
+
+
+                <SingleContentLayout>
+
+
+                    <LinkHead icon={<FiLayers className="stroke-2" />}
+                        links={[
+                            {
+                                href: `/phi/${username}`,
+                                name: username,
+                            },
+                            {
+                                href: `/phi/${username}/${projectname}`,
+                                name: projectname,
+                            },
+                            {
+                                href: `/phi/${username}/${projectname}/${phasename}`,
+                                name: phasename,
+                            },
+                            {
+                                href: `/phi/${username}/${projectname}/${phasename}/judgement`,
+                                name: "Judgements",
+                            }
+                        ]}
+                    />
+
+
+                    <div className="w-full flex flex-col 2xl:flex-row justify-between">
+                        <PhaseTabBar />
+
+                        <div className="flex mt-8 2xl:mt-0 mx-4 space-x-4 justify-end">
+                            <IconButtonOnClick
+                                icon={<FiFilePlus className="basic-svg" />}
+                                tooltip="Add Data"
+                                onClick={() => setModalState({
+                                    ...modalState,
+                                    isOpenAddDataModal: true,
+                                })}
+                                hide={entitlement.entitlement !== ENTITLEMENTS.ADMIN} />
+                            <IconButtonOnClick
+                                icon={<FiDownload className="basic-svg " />}
+                                tooltip="Download Judgement Data"
+                                onClick={() => handleExport()}
+                                hide={entitlement.entitlement !== ENTITLEMENTS.ADMIN} />
+                        </div>
+                    </div>
+
+                    <div className="m-8">
+                        {/* @ts-ignore */}
+                        <SpanJudgementTable phase={phase.phase} modalState={
+                            {
+                                open: modalState.isOpenAddDataModal,
+                                callback: () => setModalState({
+                                    ...modalState,
+                                    isOpenAddDataModal: false,
+                                })
+                            }
+                        } />
+                    </div>
+
+                </SingleContentLayout>
+            </Layout>
+
+        );
+    }
+
 
     return (
         <FullLoadingPage headtitle="Annotate" />

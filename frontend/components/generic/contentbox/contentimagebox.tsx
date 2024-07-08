@@ -8,7 +8,7 @@ interface IProps {
 const ContentImageBox: React.FC<IProps> = ({ data }) => {
     return (
         <div className='shadow-md my-6'>
-            <div className={"flex justify-center " + (data.imagereversed ? 'flex-row-reverse' : 'flex-row')}>
+            <div className={"flex justify-end " + (data.imagereversed ? 'flex-row-reverse' : 'flex-row')}>
                 <div className="flex flex-col my-8 mx-8 ">
                     <div className={"font-dm-mono-medium font-black text-lg ml-4"}>
                         {data.title}

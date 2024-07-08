@@ -1,12 +1,11 @@
 package de.garrafao.phitag.domain.instance.lexsub;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.data.domain.Page;
-
 import de.garrafao.phitag.domain.core.PageRequestWraper;
 import de.garrafao.phitag.domain.core.Query;
+import org.springframework.data.domain.Page;
+
+import java.util.List;
+import java.util.Optional;
 
 public interface LexSubInstanceRepository {
 
@@ -19,4 +18,6 @@ public interface LexSubInstanceRepository {
     LexSubInstance save(LexSubInstance instanceData);
 
     void delete(Iterable<LexSubInstance> instanceData);
+
+    void delete(LexSubInstance instanceData);
 }

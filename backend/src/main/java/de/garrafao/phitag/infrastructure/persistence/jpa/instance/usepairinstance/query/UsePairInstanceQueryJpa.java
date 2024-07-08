@@ -1,21 +1,22 @@
 package de.garrafao.phitag.infrastructure.persistence.jpa.instance.usepairinstance.query;
 
 
-import java.util.ArrayList;
-import java.util.List;
+import de.garrafao.phitag.domain.core.Query;
+import de.garrafao.phitag.domain.core.QueryComponent;
+import de.garrafao.phitag.domain.instance.usepairinstance.UsePairInstance;
+import de.garrafao.phitag.domain.instance.usepairinstance.query.InstanceidQueryComponent;
+import de.garrafao.phitag.domain.instance.usepairinstance.query.OwnerQueryComponent;
+import de.garrafao.phitag.domain.instance.usepairinstance.query.PhaseQueryComponent;
+import de.garrafao.phitag.domain.instance.userankpairinstances.query.ProjectQueryComponent;
+import de.garrafao.phitag.infrastructure.persistence.jpa.core.SpecificationCombiner;
+import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-
-import org.springframework.data.jpa.domain.Specification;
-
-import de.garrafao.phitag.domain.core.Query;
-import de.garrafao.phitag.domain.core.QueryComponent;
-import de.garrafao.phitag.domain.instance.usepairinstance.UsePairInstance;
-import de.garrafao.phitag.domain.instance.usepairinstance.query.*;
-import de.garrafao.phitag.infrastructure.persistence.jpa.core.SpecificationCombiner;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UsePairInstanceQueryJpa implements Specification<UsePairInstance> {
 

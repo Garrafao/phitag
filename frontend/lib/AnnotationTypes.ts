@@ -7,6 +7,7 @@ export default class ANNOTATIONTYPES {
     public static readonly ANNOTATIONTYPE_LEXSUB = "ANNOTATIONTYPE_LEXSUB";
     public static readonly ANNOTATIONTYPE_SENTIMENT = "ANNOTATIONTYPE_SENTIMENT";
     public static readonly ANNOTATIONTYPE_CHOICE = "ANNOTATIONTYPE_CHOICE";
+    public static readonly ANNOTATIONTYPE_SPAN = "ANNOTATIONTYPE_SPAN";
 
 
 }

@@ -14,6 +14,7 @@ import Usage from "../../model/phitagdata/usage/model/Usage";
 import EditUsageCommand from "../../model/phitagdata/usage/command/EditUsageCommand";
 import PagedUsageDto from "../../model/phitagdata/usage/dto/PagedUsageDto";
 import PagedUsage from "../../model/phitagdata/usage/model/PagedUsage";
+import DeleteUsageCommand from "../../model/phitagdata/usage/command/DeleteUsageCommand";
 
 
 /**
@@ -143,6 +144,27 @@ export function editUsage(command: EditUsageCommand, get: Function = () => { }) 
     const token = get('JWT') ?? '';
 
     return axios.post(`${BACKENDROUTES.PHITAGDATA}/usage/edit`,
+        command,
+        {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        }
+    ).then(res => res.data);
+}
+
+/**
+ * Delete usage
+ * 
+ * @param command command containing the edit
+ * @param get the get function from useStorage
+ * @returns
+ * 
+ */
+export function deleteUsage(command: DeleteUsageCommand, get: Function = () => { }) {
+    const token = get('JWT') ?? '';
+
+    return axios.post(`${BACKENDROUTES.PHITAGDATA}/usage/delete`,
         command,
         {
             headers: {

@@ -4,7 +4,7 @@ import Head from "next/head";
 import Router, { useRouter } from "next/router";
 
 // React Modules
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 // Toast
 import { toast } from "react-toastify";
@@ -27,6 +27,9 @@ import { Doughnut } from "react-chartjs-2";
 import StatisticComponent from "../../../../../components/generic/other/StatisticComponent";
 import Phase from "../../../../../lib/model/phase/model/Phase";
 import { useFetchPhase, useFetchTutorialMeasurementHistory } from "../../../../../lib/service/phase/PhaseResource";
+import CheckAgreementModal from "../../../../../components/specific/annotationhistory/checkagreementmodal";
+import CheckHistoryModal from "../../../../../components/specific/annotationhistory/checkhisotymodal";
+import useStorage from "../../../../../lib/hook/useStorage";
 
 
 const Statistic: NextPage = () => {
@@ -100,11 +103,43 @@ export default Statistic;
 const PhaseStatisticComponent: NextPage = () => {
 
     const router = useRouter();
+    const storage = useStorage();
+    const user = storage.get("USER")
+
+
+
     const { user: username, project: projectname, phase: phasename } = router.query as { user: string, project: string, phase: string };
 
     const phaseStatistic = useFetchPhaseStatistic(username, projectname, phasename, router.isReady);
     const phase = useFetchPhase(username, projectname, phasename, router.isReady);
 
+    const owner = phase.phase?.getId().getOwner();
+    const userIsOwner = user === owner;
+
+    const [agreementModal, setAgreementModal] = useState({
+        isOpen: false
+    })
+    const [historyModal, setHistoryModal] = useState({
+        isOpen: false
+    })
+
+
+    const openAgreementModal = () => {
+        setHistoryModal({ isOpen: false });
+        setAgreementModal({ isOpen: true });
+
+    };
+
+
+
+    const openHistoryModal = () => {
+        setAgreementModal({ isOpen: false });
+        setHistoryModal({ isOpen: true });
+    };
+
+    const onCancel = () => {
+        setAgreementModal({ isOpen: false });
+    }
     if (!router.isReady || phaseStatistic.isLoading) {
         return <LoadingComponent />
     }
@@ -114,18 +149,44 @@ const PhaseStatisticComponent: NextPage = () => {
     }
 
     return (
-        <div className="w-full flex flex-col xl:mx-auto ">
+        <div className="w-full flex flex-col xl:mx-auto">
             <div className="flex flex-col xl:flex-row mx-16 justify-between xl:space-x-16">
                 <div className="flex flex-col space-y-8 self-center sm:flex-row sm:space-y-0 justify-between my-8 xl:justify-center xl:flex-col xl:space-y-8">
                     <CountUpComponent count={phaseStatistic.statistic.getAnnotations()} label="Annotations: " />
-                    <NumberComponent count={phaseStatistic.statistic.getKrippendorffalpha()} label="Krippendorff's Alpha: " />
+{/*                     <NumberComponent count={phaseStatistic.statistic.getKrippendorffalpha()} label="Krippendorff's Alpha: " />
+ */}                    {userIsOwner && (
+                        <div className="w-full flex flex-row justify-center space-x-4">
+                            <button
+                                className="bg-base16-gray-900 text-base16-gray-100 hover:bg-base16-gray-900 font-bold py-2 px-4 rounded"
+                                onClick={openAgreementModal} // Open modal on button click
+                            >
+                                Check Agreement
+                            </button>
+                            <button
+                                className="bg-base16-gray-900 text-base16-gray-100 hover:bg-base16-gray-900 font-bold py-2 px-4 rounded"
+                                onClick={openHistoryModal}
+                            >
+                                History
+                            </button>
+                        </div>
+                    )}
                 </div>
                 <AnnotationsPerAnnotator statistic={phaseStatistic.statistic} />
             </div>
 
-            {
-                phase?.phase?.isTutorial() && <TutorialMeasurementsHistory phase={phase.phase} />
-            }
+            <CheckAgreementModal
+                isOpen={agreementModal.isOpen}
+                ownername={phase.phase?.getId()?.getOwner() || ""}
+                projectname={phase.phase?.getId()?.getProject() || ""}
+                phasename={phase.phase?.getName() || ""} />
+
+            <CheckHistoryModal isOpen={historyModal.isOpen}
+                ownername={phase.phase?.getId()?.getOwner() || ""}
+                projectname={phase.phase?.getId()?.getProject() || ""}
+                phasename={phase.phase?.getName() || ""} />
+
+
+            {phase?.phase?.isTutorial() && <TutorialMeasurementsHistory phase={phase.phase} />}
         </div>
     );
 
@@ -205,9 +266,8 @@ const TutorialMeasurementsHistory = ({ phase }: { phase: Phase }) => {
         if (timestamp === 0) {
             return 'No deadline';
         }
-    
         const date = new Date(timestamp);
-        return date.toLocaleDateString('en-GB', {day: 'numeric', month: '2-digit', year: 'numeric' }) + ' ' + date.toLocaleTimeString('en-GB', { hour: 'numeric', minute: 'numeric' });
+        return date.toLocaleDateString('en-GB', { day: 'numeric', month: '2-digit', year: 'numeric' }) + ' ' + date.toLocaleTimeString('en-GB', { hour: 'numeric', minute: 'numeric' });
     }
 
     // 
@@ -245,19 +305,15 @@ const TutorialMeasurementsHistory = ({ phase }: { phase: Phase }) => {
                                             {/* Convert to date */}
                                             {convertDate(Number.parseInt(measurement.getTimestamp()))}
                                         </td>
-
                                         <td className="px-6 py-4 whitespace-nowrap">
                                             {measurement.getAnnotatorId().getUser()}
                                         </td>
-
                                         <td className="px-6 py-4 whitespace-nowrap">
                                             {measurement.getMeasure()}
                                         </td>
-
                                         <td className="px-6 py-4 whitespace-nowrap">
                                             {measurement.isPassed() ? "Passed" : "Failed"}
                                         </td>
-
                                     </tr>
                                 )
 

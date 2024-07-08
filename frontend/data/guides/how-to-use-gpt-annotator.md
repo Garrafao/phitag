@@ -17,7 +17,7 @@ Initiating GPT as an annotator begins with data preparation.
 
 ### Usage File
 
-Please provide uses.tsv files in the general format outlined in the [Supported Tasks](/guides/supported-tasks) guide.
+Please provide uses.tsv files in the general format outlined in the [Supported Tasks](/guide/supported-tasks) guide.
 
 ### Instance File
 The instance file is a tab-separated file with the following columns:
@@ -37,7 +37,7 @@ Follow this guideline [Explained: Project](/guide/explained-project) to create a
 ## Step 3: Phase Create
 Follow this guideline [Explained: Phase](/guide/explained-phase) to create a project in PhiTag.
 
-## Step 4: Add ChatGPT as a computaional annotator to your project
+## Step 4: Add ChatGPT as a computational annotator to your project
 
 | ![](/gif/guide/add-comp-annotator.gif) |
 | :---------------------------------: |
@@ -52,7 +52,7 @@ Here's a visual representation of how to utilize GPT as an annotator. You have t
 |    Annotate Phase using GPT      |
 
 
-## Test model with tutorail Phase
+## Test model with tutorial Phase
 To evaluate the model's accuracy using the tutorial phase, you need to first create a tutorial phase. Follow the guidelines provided in
     [Explained: Create Tutorial Phase](/guide/explained-how-to-create-tutorial)
 

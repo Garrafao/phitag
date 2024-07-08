@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="202405060756" author="sachin">
+
+        <insert tableName="phitagusage">
+            <column name="dataid" value="0"/>
+            <column name="projectname" value="Example-Project-Text-Choice"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="context" value="On a scale of 1 to 5, how satisfied are you with your recent shopping experience?" />
+            <column name="indices_target_token" value="0:0"/>
+            <column name="indices_target_sentence" value="0:0"/>
+            <column name="lemma" value=""/>
+            <column name="phitaggroup" value=""/>
+        </insert>
+
+        <insert tableName="phitagusage">
+            <column name="dataid" value="1"/>
+            <column name="projectname" value="Example-Project-Text-Choice"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="context" value="Which one of the following is always found in 'Bravery'?"/>
+            <column name="indices_target_token" value="0:0"/>
+            <column name="indices_target_sentence" value="0:0"/>
+            <column name="lemma" value=""/>
+            <column name="phitaggroup" value=""/>
+        </insert>
+
+        <insert tableName="phitagusage">
+            <column name="dataid" value="2"/>
+            <column name="projectname" value="Example-Project-Text-Choice"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="context" value="A song always has"/>
+            <column name="indices_target_token" value="0:0"/>
+            <column name="indices_target_sentence" value="0:0"/>
+            <column name="lemma" value=""/>
+            <column name="phitaggroup" value=""/>
+        </insert>
+
+        <insert tableName="phitagusage">
+            <column name="dataid" value="3"/>
+            <column name="projectname" value="Example-Project-Text-Choice"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="context" value="Yesterday I saw an ice cube which had already melted due to heat of a nearby furnace."/>
+            <column name="indices_target_token" value="0:0"/>
+            <column name="indices_target_sentence" value="0:0"/>
+            <column name="lemma" value=""/>
+            <column name="phitaggroup" value=""/>
+        </insert>
+
+        <insert tableName="phitagusage">
+            <column name="dataid" value="4"/>
+            <column name="projectname" value="Example-Project-Text-Choice"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="context" value="What is found necessarily in milk?"/>
+            <column name="indices_target_token" value="0:0"/>
+            <column name="indices_target_sentence" value="0:0"/>
+            <column name="lemma" value=""/>
+            <column name="phitaggroup" value=""/>
+        </insert>
+
+        <insert tableName="phitagusage">
+            <column name="dataid" value="5"/>
+            <column name="projectname" value="Example-Project-Text-Choice"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="context" value="Which one of the following a 'Drama' must have?"/>
+            <column name="indices_target_token" value="0:0"/>
+            <column name="indices_target_sentence" value="0:0"/>
+            <column name="lemma" value=""/>
+            <column name="phitaggroup" value=""/>
+        </insert>
+
+        <insert tableName="phitagusage">
+            <column name="dataid" value="6"/>
+            <column name="projectname" value="Example-Project-Text-Choice"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="context" value="Disclosure always involves"/>
+            <column name="indices_target_token" value="0:0"/>
+            <column name="indices_target_sentence" value="0:0"/>
+            <column name="lemma" value=""/>
+            <column name="phitaggroup" value=""/>
+        </insert>
+
+        <insert tableName="phitagusage">
+            <column name="dataid" value="7"/>
+            <column name="projectname" value="Example-Project-Text-Choice"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="context" value="Which one of the following is always found in 'Remedy of fault'?"/>
+            <column name="indices_target_token" value="0:0"/>
+            <column name="indices_target_sentence" value="0:0"/>
+            <column name="lemma" value=""/>
+            <column name="phitaggroup" value=""/>
+        </insert>
+
+        <insert tableName="phitagusage">
+            <column name="dataid" value="8"/>
+            <column name="projectname" value="Example-Project-Text-Choice"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="context" value="A car always has"/>
+            <column name="indices_target_token" value="0:0"/>
+            <column name="indices_target_sentence" value="0:0"/>
+            <column name="lemma" value=""/>
+            <column name="phitaggroup" value=""/>
+        </insert>
+
+        <insert tableName="phitagusage">
+            <column name="dataid" value="9"/>
+            <column name="projectname" value="Example-Project-Text-Choice"/>
+            <column name="ownername" value="Example-User"/>
+            <column name="context" value="Which one of the following is always found in 'Phrase'?"/>
+            <column name="indices_target_token" value="0:0"/>
+            <column name="indices_target_sentence" value="0:0"/>
+            <column name="lemma" value=""/>
+            <column name="phitaggroup" value=""/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

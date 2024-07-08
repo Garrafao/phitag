@@ -42,4 +42,9 @@ public class UseRankRelativeInstanceRepositoryBridge implements UseRankRelativeI
         return this.useRankRelativeInstanceRepositoryJpa.save(instanceData);
     }
 
+    @Override
+    public void delete(UseRankRelativeInstance instanceData) {
+        this.useRankRelativeInstanceRepositoryJpa.delete(instanceData);
+    }
+
 }

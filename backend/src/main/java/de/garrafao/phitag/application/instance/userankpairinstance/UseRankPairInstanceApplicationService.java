@@ -1,6 +1,7 @@
 package de.garrafao.phitag.application.instance.userankpairinstance;
 
 import de.garrafao.phitag.application.common.CommonService;
+import de.garrafao.phitag.application.instance.data.DeleteInstanceCommand;
 import de.garrafao.phitag.application.sampling.data.SamplingEnum;
 import de.garrafao.phitag.domain.annotationprocessinformation.AnnotationProcessInformation;
 import de.garrafao.phitag.domain.annotationprocessinformation.error.AnnotationProcessInformationException;
@@ -618,6 +619,26 @@ public class UseRankPairInstanceApplicationService {
         return  annotationProcessInformation.getOrder().size();
 
     }
+
+    /**
+     * Delete a use rank pair instance.
+     *
+     * @param phase     the phase
+     * @param annotator the annotator
+     * @param command   the command
+     */
+    @Transactional
+    public void delete(final Phase phase, final Annotator annotator, final DeleteInstanceCommand command) {
+        final Query query = new UseRankPairInstanceQueryBuilder()
+                .withOwner(command.getOwner())
+                .withProject(command.getProject())
+                .withPhase(command.getPhase())
+                .withInstanceid(command.getInstanceID())
+                .build();
+        final List<UseRankPairInstance> instances = this.useRankPairInstanceRepository.findByQuery(query);
+        this.useRankPairInstanceRepository.delete(instances.get(0));
+    }
+
 
 
 }

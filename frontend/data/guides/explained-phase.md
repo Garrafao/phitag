@@ -19,7 +19,7 @@ Currently, the overview tab of a phase is empty.
 
 ## Tab: Instance
 
-The instance tab shows all instances of the phase. An instance describes annotation instances to be judged by the annotators. Depending on the annotation type, instances to be uploaded have different formats. If you are an admin of the project, you can upload and download instances through this tab.
+The instance tab shows all instances of the phase. An instance describes annotation instances to be judged by the annotators. Depending on the annotation type, instances to be uploaded have different formats.
 
 | ![](/gif/guide/add-instance.gif) | ![](/gif/guide/download-instance.gif) | ![](/gif/guide/com-instances.gif) |
 | :------------------------------: | :-----------------------------------: | :-------------------------------: |

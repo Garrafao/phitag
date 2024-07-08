@@ -34,9 +34,13 @@ After selecting a suitable phase, you can start working on the phase. Do this by
 
 | ![](/gif/guide/annotate-usepair.gif) | ![](/gif/guide/annotate-wssim.gif) | ![](/gif/guide/annotate-lexsub.gif) |
 | :----------------------------------: | :--------------------------------: | :---------------------------------: |
-|               Use-Pair               |               WSSim                |               LexSub                |
+|               Text-Pair               |               Text Label                |               Text Free               |
 
 Note that the annotation process only moves forward. Hence, if you want to change your annotation, you have to navigate to the phase "judgement" or "history" tab and click on the "Edit" button for the annotation you want to change. From there, you can change your annotation.
+
+## Taking a Break During Annotation
+
+If you can't finish the annotation in one sitting, you can always take a break and come back to it later. To resume your annotation, simply go to the phase where you were last working and click on the pencil icon. This will allow you to continue exactly from where you left off.
 
 ## Judgement
 
@@ -48,5 +52,5 @@ After you finished annotating, you can see the results of your annotation under 
 
 ## Conclusion
 
-This guide showed you how to use the web app as an annotator. If you are looking for a guide on how to use the platform for your personal annotation project, see the [How to: Annotation Project](/guide/how-to-annotation-project) guide.
+This guide showed you how to use the web app as an annotator. If you are looking for a guide on how to use the platform for your personal annotation project, see the [How to: Annotation Project](/guide/how-to-annotation-manager) guide.
 

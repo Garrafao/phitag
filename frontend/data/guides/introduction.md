@@ -34,7 +34,7 @@ In cases where the annotation process is too time consuming or expensive, PhiTag
 
 ## Use Case Specialization
 
-PhiTag is designed to be modular and extensible, so that it can be adapted to a variety of annotation tasks. However, this also means that it is not specialized for any specific use case. To solve this problem, the platform implements an abstraction layer, which allows us to specialize the platform for specific use cases. This abstraction layer abstracts heavily over the underlying data structures, tasks and types to provide meta level functionality, which can then be used to solve specific use cases. See the [How to: Lexicography](/guide/how-to-lexicography) guide for an example of how this abstraction layer can be used to solve the use case of lexicography. If you are interested in using PhiTag for your specific use case, please reach out to [us](https://www.ims.uni-stuttgart.de/en/institute/team/Schlechtweg/).
+PhiTag is designed to be modular and extensible, so that it can be adapted to a variety of annotation tasks. However, this also means that it is not specialized for any specific use case. To solve this problem, the platform implements an abstraction layer, which allows us to specialize the platform for specific use cases. This abstraction layer abstracts heavily over the underlying data structures, tasks and types to provide meta level functionality, which can then be used to solve specific use cases. If you are interested in using PhiTag for your specific use case, please reach out to [us](https://www.ims.uni-stuttgart.de/en/institute/team/Schlechtweg/).
 
 ## Introduction by Example
 

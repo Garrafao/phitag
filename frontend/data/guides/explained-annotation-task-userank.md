@@ -1,19 +1,19 @@
 ---
 id: 'explained-annotation-task-userank'
-title: 'Explained: Annotation Task - Usage Rank (URANK)'
+title: 'Explained: Annotation Task - Text Rank'
 priority: 20
-description: 'Explanation of the Usage Rank (URANK) Annotation Task.'
+description: 'Explanation of the Text Rank Annotation Task.'
 ---
 
-# Usage Rank Annotation (URANK) Annotation Task
+# Text Rank Annotation Task
 
-The usage rank annotation task asks annotator to rank a set of usages according to some property. This property should be specified in the guidelines and could be e.g. ambiguity or sentiment.
+The text rank annotation task asks annotator to rank a set of usages according to some property. This property should be specified in the guidelines and could be e.g. ambiguity or sentiment.
 
 ## Data Format
 
 ### Usage File
 
-Please provide uses.tsv files in the general format outlined in the [Supported Tasks](/guides/supported-tasks) guide.
+Please provide uses.tsv files in the general format outlined in the [Supported Tasks](/guide/supported-tasks) guide.
 
 ### Instance File
 The instance file is a tab-separated file with the following columns:

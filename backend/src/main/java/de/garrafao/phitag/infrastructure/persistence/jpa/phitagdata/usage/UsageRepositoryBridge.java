@@ -1,19 +1,16 @@
 package de.garrafao.phitag.infrastructure.persistence.jpa.phitagdata.usage;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.stereotype.Repository;
-
 import de.garrafao.phitag.domain.core.PageRequestWraper;
 import de.garrafao.phitag.domain.core.Query;
 import de.garrafao.phitag.domain.phitagdata.usage.Usage;
 import de.garrafao.phitag.domain.phitagdata.usage.UsageRepository;
 import de.garrafao.phitag.infrastructure.persistence.jpa.phitagdata.usage.query.UsageQueryJpa;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class UsageRepositoryBridge implements UsageRepository {
@@ -76,6 +73,10 @@ public class UsageRepositoryBridge implements UsageRepository {
             String ownername) {
         return usageRepositoryJpa.countDistinctLemmaByLemmaAndIdProjectidNameAndIdProjectidOwnername(lemma, projectname,
                 ownername);
+    }
+    @Override
+    public void delete(Usage usage){
+        this.usageRepositoryJpa.delete(usage);
     }
 
 }

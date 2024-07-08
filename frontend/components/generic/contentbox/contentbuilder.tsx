@@ -14,7 +14,7 @@ const ContentBuilder: React.FC<IProps> = ({ data }) => {
                 {
                     data.map((item, index) => {
                         return (
-                            <div key={index} className="w-full lg:w-1/2">
+                            <div key={index} className="w-full lg:w-full">
                                 <MultiContentBox data={item} />
                             </div>
                         );
@@ -26,14 +26,14 @@ const ContentBuilder: React.FC<IProps> = ({ data }) => {
 
     if (data.imagepath !== "") {
         return (
-            <div className="mt-8 w-full lg:w-1/2">
+            <div className="mt-8 w-full lg:w-full">
                 <ContentImageBox data={data} />
             </div>
         )
     }
 
     return (
-        <div className="mt-8 w-full lg:w-1/2">
+        <div className="mt-8 w-full lg:w-full">
             <MultiContentBox data={data} />
         </div>
     );

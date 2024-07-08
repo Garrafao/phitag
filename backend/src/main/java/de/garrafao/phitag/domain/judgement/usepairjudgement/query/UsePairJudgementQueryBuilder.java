@@ -1,11 +1,15 @@
 package de.garrafao.phitag.domain.judgement.usepairjudgement.query;
 
-import java.util.ArrayList;
-import java.util.List;
-import de.garrafao.phitag.domain.judgement.common.query.*;
-
 import de.garrafao.phitag.domain.core.Query;
 import de.garrafao.phitag.domain.core.QueryComponent;
+import de.garrafao.phitag.domain.judgement.common.query.AnnotatorQueryComponent;
+import de.garrafao.phitag.domain.judgement.common.query.InstanceidQueryComponent;
+import de.garrafao.phitag.domain.judgement.common.query.OwnerQueryComponent;
+import de.garrafao.phitag.domain.judgement.common.query.PhaseQueryComponent;
+import de.garrafao.phitag.domain.judgement.common.query.ProjectQueryComponent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class UsePairJudgementQueryBuilder {
 
@@ -29,7 +33,7 @@ public class UsePairJudgementQueryBuilder {
             return this;
         }
 
-        this.queryComponents.add(new AnnotatorQueryComponent(annotator));
+        this.queryComponents.add(new de.garrafao.phitag.domain.judgement.common.query.AnnotatorQueryComponent(annotator));
         return this;
     }
     public UsePairJudgementQueryBuilder withAnnotatorProjectName( final String projectname) {

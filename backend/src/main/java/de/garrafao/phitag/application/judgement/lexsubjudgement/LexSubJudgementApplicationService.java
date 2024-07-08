@@ -18,7 +18,9 @@ import de.garrafao.phitag.domain.instance.lexsub.query.LexSubInstanceQueryBuilde
 import de.garrafao.phitag.domain.judgement.lexsubjudgement.LexSubJudgement;
 import de.garrafao.phitag.domain.judgement.lexsubjudgement.LexSubJudgementRepository;
 import de.garrafao.phitag.domain.judgement.lexsubjudgement.error.LexSubJudgementException;
+import de.garrafao.phitag.domain.judgement.lexsubjudgement.page.LexSubJudgementPageBuilder;
 import de.garrafao.phitag.domain.judgement.lexsubjudgement.query.LexSubJudgementQueryBuilder;
+import de.garrafao.phitag.domain.judgement.usepairjudgement.query.UsePairJudgementQueryBuilder;
 import de.garrafao.phitag.domain.phase.Phase;
 import de.garrafao.phitag.domain.phase.error.TutorialException;
 import de.garrafao.phitag.domain.statistic.statisticannotationmeasure.StatisticAnnotationMeasureEnum;
@@ -108,6 +110,23 @@ public class LexSubJudgementApplicationService {
     }
 
     /**
+     * Get all judgements for a specific phase and annotator
+     *
+     * @param phase
+     * @return List of judgements
+     */
+    public List<LexSubJudgement> findByPhaseAndAnnotator(final Phase phase, final Annotator annotator) {
+        final Query query = new LexSubJudgementQueryBuilder()
+                .withAnnotator(annotator.getId().getUsername())
+                .withOwner(phase.getId().getProjectid().getOwnername())
+                .withProject(phase.getId().getProjectid().getName())
+                .withPhase(phase.getId().getName())
+                .build();
+
+        return this.lexSubJudgementRepository.findByQuery(query);
+    }
+
+    /**
      * Get all judgements for a specific phase
      *
      * @param phase
@@ -132,19 +151,22 @@ public class LexSubJudgementApplicationService {
      * @param orderBy
      * @return
      */
+
     public Page<LexSubJudgement> findByPhase(
             final Phase phase,
             final int pagesize,
             final int pagenumber,
             final String orderBy) {
-        final Query query = new LexSubJudgementQueryBuilder()
+        final Query query = new UsePairJudgementQueryBuilder()
                 .withOwner(phase.getId().getProjectid().getOwnername())
                 .withProject(phase.getId().getProjectid().getName())
                 .withPhase(phase.getId().getName())
                 .build();
-
-        return this.lexSubJudgementRepository.findByQueryPaged(query,
-                new PageRequestWraper(pagesize, pagenumber, orderBy));
+        return this.lexSubJudgementRepository.findByQueryPaged(query, new LexSubJudgementPageBuilder()
+                .withPageSize(pagesize)
+                .withPageNumber(pagenumber)
+                .withOrderBy(orderBy)
+                .build());
     }
 
     /**

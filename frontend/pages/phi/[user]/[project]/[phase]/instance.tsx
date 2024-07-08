@@ -39,6 +39,8 @@ import UseRankInstanceTable from "../../../../../components/specific/table/usera
 import UseRankRelativeInstanceTable from "../../../../../components/specific/table/userankrelative/userankrelativeinstancetable";
 import UseRankPairInstanceTable from "../../../../../components/specific/table/userankpair/userankpairinstancetable";
 import SentimentInstanceTable from "../../../../../components/specific/table/sentiment/sentimentinstancetable";
+import ChoiceInstanceTable from "../../../../../components/specific/table/choice/choiceinstancetable";
+import SpanInstanceTable from "../../../../../components/specific/table/span/spaninstancetable";
 
 const InstancePage: NextPage = () => {
 
@@ -866,7 +868,7 @@ const InstancePage: NextPage = () => {
 
                     <div className="m-8">
                         {/* @ts-ignore */}
-                        <SentimentInstanceTable phase={phase.phase}
+                        <ChoiceInstanceTable phase={phase.phase}
                             modalState={{
                                 openData: modalState.isOpenAddDataModal,
                                 openGenerate: modalState.isOpenGenerateInstancesModal,
@@ -894,6 +896,102 @@ const InstancePage: NextPage = () => {
 
         );
     }
+
+    if (phase.phase.getAnnotationType().getName() === ANNOTATIONTYPES.ANNOTATIONTYPE_SPAN) {
+
+        return (
+            <Layout>
+
+                <Head>
+                    <title>PhiTag : {phase.phase.getName()} : Instances </title>
+                </Head>
+
+
+                <SingleContentLayout>
+
+
+                    <LinkHead icon={<FiLayers className="stroke-2" />}
+                        links={[
+                            {
+                                href: `/phi/${username}`,
+                                name: username,
+                            },
+                            {
+                                href: `/phi/${username}/${projectname}`,
+                                name: projectname,
+                            },
+                            {
+                                href: `/phi/${username}/${projectname}/${phasename}`,
+                                name: phasename,
+                            },
+                            {
+                                href: `/phi/${username}/${projectname}/${phasename}/instance`,
+                                name: "Instances",
+                            }
+                        ]}
+                    />
+
+
+                    <div className="w-full flex flex-col 2xl:flex-row justify-between">
+                        <PhaseTabBar />
+
+                        <div className="flex mt-8 2xl:mt-0 mx-4 space-x-4 justify-end">
+                           {/*  <IconButtonOnClick
+                                icon={<FiCpu className="basic-svg" />}
+                                tooltip="Generate Instances"
+                                onClick={() => setModalState({
+                                    ...modalState,
+                                    isOpenGenerateInstancesModal: true,
+                                })}
+                                hide={entitlement.entitlement !== ENTITLEMENTS.ADMIN} /> */}
+                            <IconButtonOnClick
+                                icon={<FiFilePlus className="basic-svg" />}
+                                tooltip="Add Data"
+                                onClick={() => setModalState({
+                                    ...modalState,
+                                    isOpenAddDataModal: true,
+                                })}
+                                hide={entitlement.entitlement !== ENTITLEMENTS.ADMIN} />
+                            <IconButtonOnClick
+                                icon={<FiDownload className="basic-svg " />}
+                                tooltip="Download Instance Data"
+                                onClick={() => handleExport()}
+                                hide={entitlement.entitlement !== ENTITLEMENTS.ADMIN} />
+                        </div>
+                    </div>
+
+
+                    <div className="m-8">
+                        {/* @ts-ignore */}
+                        <SpanInstanceTable phase={phase.phase}
+                            modalState={{
+                                openData: modalState.isOpenAddDataModal,
+                                openGenerate: modalState.isOpenGenerateInstancesModal,
+
+                                callbackData: () => {
+                                    setModalState({
+                                        ...modalState,
+                                        isOpenAddDataModal: false,
+                                    })
+                                },
+
+                                callbackGenerate: () => {
+                                    setModalState({
+                                        ...modalState,
+                                        isOpenGenerateInstancesModal: false,
+
+                                    })
+                                }
+                            }}
+                        />
+                    </div>
+
+                </SingleContentLayout>
+            </Layout>
+
+        );
+    }
+
 
 
 

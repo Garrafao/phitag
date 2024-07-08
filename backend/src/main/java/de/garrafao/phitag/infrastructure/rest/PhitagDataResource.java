@@ -1,26 +1,20 @@
 package de.garrafao.phitag.infrastructure.rest;
 
-import java.util.List;
-
+import de.garrafao.phitag.application.phitagdata.PhitagDataApplicationService;
+import de.garrafao.phitag.application.phitagdata.usage.data.DeleteUsageCommand;
+import de.garrafao.phitag.application.phitagdata.usage.data.EditUsageCommand;
+import de.garrafao.phitag.application.phitagdata.usage.data.PagedUsageDto;
+import de.garrafao.phitag.application.phitagdata.usage.data.UsageDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import de.garrafao.phitag.application.phitagdata.PhitagDataApplicationService;
-import de.garrafao.phitag.application.phitagdata.usage.data.EditUsageCommand;
-import de.garrafao.phitag.application.phitagdata.usage.data.PagedUsageDto;
-import de.garrafao.phitag.application.phitagdata.usage.data.UsageDto;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/v1/phitagdata")
@@ -154,6 +148,25 @@ public class PhitagDataResource {
             @RequestHeader("Authorization") final String authenticationToken,
             @RequestBody() final EditUsageCommand command) {
         this.phitagDataApplicationService.editUsage(authenticationToken, command);
+    }
+
+    /**
+     * Delete a usage.
+     *
+     * The requesting user must fulfill the following conditions:
+     * - Be the owner of the project or an admin
+     * - Project has to be active
+     *
+     * @param authenticationToken
+     *                           The authentication token of the requesting user
+     * @param command
+     *                          The command to edit the usage
+     */
+    @PostMapping(value = "/usage/delete")
+    public void deleteUsage(
+            @RequestHeader("Authorization") final String authenticationToken,
+            @RequestBody() final DeleteUsageCommand command) {
+        this.phitagDataApplicationService.deleteUsage(authenticationToken, command);
     }
 
 }

@@ -47,6 +47,9 @@ import UseRankPairTutorialJudgementHistoryTable from "../../../../../components/
 import { exportTutorialJudgement } from "../../../../../lib/service/tutorial/tutorialresources";
 import WSSIMTutorialJudgementHistoryTable from "../../../../../components/specific/tutorial/wssim/wssimjudgementhistorytable";
 import SentimentJudgementHistoryTable from "../../../../../components/specific/table/sentiment/sentimentjudgementhistorytable";
+import ChoiceJudgementHistoryTable from "../../../../../components/specific/table/choice/choicejudgementhistorytable";
+import SentimentTutorialJudgementHistoryTable from "../../../../../components/specific/tutorial/sentiment/sentimenttutorialjudgementhistorytable";
+import ChoiceTutorialJudgementHistoryTable from "../../../../../components/specific/tutorial/choice/choicetutorialjudgementhistorytable";
 
 
 const AnnotationHistory: NextPage = () => {
@@ -171,61 +174,6 @@ const AnnotationHistory: NextPage = () => {
             );
         }
         
-        if (phase.phase.isTutorial() &&  phase.phase.getAnnotationType().getName() === ANNOTATIONTYPES.ANNOTATIONTYPE_LEXSUB) {
-
-            return (
-                <Layout>
-    
-                    <Head>
-                        <title>PhiTag : {phase.phase.getName()} : History </title>
-                    </Head>
-    
-    
-                    <SingleContentLayout>
-                        <LinkHead icon={<FiLayers className="stroke-2" />}
-                            links={[
-                                {
-                                    href: `/phi/${username}`,
-                                    name: username,
-                                },
-                                {
-                                    href: `/phi/${username}/${projectname}`,
-                                    name: projectname,
-                                },
-                                {
-                                    href: `/phi/${username}/${projectname}/${phasename}`,
-                                    name: phasename,
-                                },
-                                {
-                                    href: `/phi/${username}/${projectname}/${phasename}/history`,
-                                    name: "History",
-                                }
-                            ]}
-                        />
-    
-                       
-                    <div className="w-full flex flex-col 2xl:flex-row justify-between">
-                        <PhaseTabBar />
-
-                        <div className="flex mt-8 2xl:mt-0 mx-4 space-x-4 justify-end">
-                            <IconButtonOnClick
-                                icon={<FiDownload className="basic-svg " />}
-                                tooltip="Download Tutorial Annotated Data"
-                                onClick={() => handleExportTutorial()}
-                                hide={entitlement.entitlement !== ENTITLEMENTS.ADMIN} />
-                        </div>
-                    </div>
-    
-                        <div className="m-8">
-                         
-                       <LexSubTutorialJudgementHistoryTable phase={phase.phase}/> 
-                        </div>
-    
-                    </SingleContentLayout>
-                </Layout>
-    
-            );
-        }
 
         if (phase.phase.isTutorial() &&  phase.phase.getAnnotationType().getName() === ANNOTATIONTYPES.ANNOTATIONTYPE_LEXSUB) {
 
@@ -495,6 +443,116 @@ const AnnotationHistory: NextPage = () => {
                         <div className="m-8">
                          
                        <WSSIMTutorialJudgementHistoryTable phase={phase.phase}/> 
+                        </div>
+    
+                    </SingleContentLayout>
+                </Layout>
+    
+            );
+        }
+        if (phase.phase.isTutorial() &&  phase.phase.getAnnotationType().getName() === ANNOTATIONTYPES.ANNOTATIONTYPE_SENTIMENT) {
+
+            return (
+                <Layout>
+    
+                    <Head>
+                        <title>PhiTag : {phase.phase.getName()} : History </title>
+                    </Head>
+    
+    
+                    <SingleContentLayout>
+                        <LinkHead icon={<FiLayers className="stroke-2" />}
+                            links={[
+                                {
+                                    href: `/phi/${username}`,
+                                    name: username,
+                                },
+                                {
+                                    href: `/phi/${username}/${projectname}`,
+                                    name: projectname,
+                                },
+                                {
+                                    href: `/phi/${username}/${projectname}/${phasename}`,
+                                    name: phasename,
+                                },
+                                {
+                                    href: `/phi/${username}/${projectname}/${phasename}/history`,
+                                    name: "History",
+                                }
+                            ]}
+                        />
+    
+                       
+                    <div className="w-full flex flex-col 2xl:flex-row justify-between">
+                        <PhaseTabBar />
+
+                        <div className="flex mt-8 2xl:mt-0 mx-4 space-x-4 justify-end">
+                            <IconButtonOnClick
+                                icon={<FiDownload className="basic-svg " />}
+                                tooltip="Download Tutorial Annotated Data"
+                                onClick={() => handleExportTutorial()}
+                                hide={entitlement.entitlement !== ENTITLEMENTS.ADMIN} />
+                        </div>
+                    </div>
+    
+                        <div className="m-8">
+                         
+                       <SentimentTutorialJudgementHistoryTable phase={phase.phase}/> 
+                        </div>
+    
+                    </SingleContentLayout>
+                </Layout>
+    
+            );
+        }
+        if (phase.phase.isTutorial() &&  phase.phase.getAnnotationType().getName() === ANNOTATIONTYPES.ANNOTATIONTYPE_SENTIMENT) {
+
+            return (
+                <Layout>
+    
+                    <Head>
+                        <title>PhiTag : {phase.phase.getName()} : History </title>
+                    </Head>
+    
+    
+                    <SingleContentLayout>
+                        <LinkHead icon={<FiLayers className="stroke-2" />}
+                            links={[
+                                {
+                                    href: `/phi/${username}`,
+                                    name: username,
+                                },
+                                {
+                                    href: `/phi/${username}/${projectname}`,
+                                    name: projectname,
+                                },
+                                {
+                                    href: `/phi/${username}/${projectname}/${phasename}`,
+                                    name: phasename,
+                                },
+                                {
+                                    href: `/phi/${username}/${projectname}/${phasename}/history`,
+                                    name: "History",
+                                }
+                            ]}
+                        />
+    
+                       
+                    <div className="w-full flex flex-col 2xl:flex-row justify-between">
+                        <PhaseTabBar />
+
+                        <div className="flex mt-8 2xl:mt-0 mx-4 space-x-4 justify-end">
+                            <IconButtonOnClick
+                                icon={<FiDownload className="basic-svg " />}
+                                tooltip="Download Tutorial Annotated Data"
+                                onClick={() => handleExportTutorial()}
+                                hide={entitlement.entitlement !== ENTITLEMENTS.ADMIN} />
+                        </div>
+                    </div>
+    
+                        <div className="m-8">
+                         
+                       <ChoiceTutorialJudgementHistoryTable phase={phase.phase}/> 
                         </div>
     
                     </SingleContentLayout>
@@ -836,6 +894,54 @@ const AnnotationHistory: NextPage = () => {
                     <div className="m-8">
                         {/* @ts-ignore */}
                         <SentimentJudgementHistoryTable phase={phase.phase} />
+                    </div>
+
+                </SingleContentLayout>
+            </Layout>
+        );
+    }
+
+    if (phase.phase.getAnnotationType().getName() === ANNOTATIONTYPES.ANNOTATIONTYPE_CHOICE) {
+        return (
+            <Layout>
+
+                <Head>
+
+                    <title>PhiTag : {phase.phase.getName()} : History </title>
+                </Head>
+
+
+                <SingleContentLayout>
+                    <LinkHead icon={<FiLayers className="stroke-2" />}
+                        links={[
+                            {
+                                href: `/phi/${username}`,
+                                name: username,
+                            },
+                            {
+                                href: `/phi/${username}/${projectname}`,
+                                name: projectname,
+                            },
+                            {
+                                href: `/phi/${username}/${projectname}/${phasename}`,
+                                name: phasename,
+                            },
+                            {
+                                href: `/phi/${username}/${projectname}/${phasename}/history`,
+                                name: "History",
+                            }
+                        ]}
+                    />
+
+
+                    <div className="w-full flex flex-col 2xl:flex-row justify-between">
+                        <PhaseTabBar />
+                        <div />
+                    </div>
+
+                    <div className="m-8">
+                        {/* @ts-ignore */}
+                        <ChoiceJudgementHistoryTable phase={phase.phase} />
                     </div>
 
                 </SingleContentLayout>

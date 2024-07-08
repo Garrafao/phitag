@@ -4,7 +4,7 @@ import de.garrafao.phitag.application.phase.data.TutorialHistoryDto;
 import de.garrafao.phitag.computationalannotator.common.command.ComputationalAnnotatorCommand;
 import de.garrafao.phitag.computationalannotator.common.command.UsePairTutorialData;
 import de.garrafao.phitag.computationalannotator.common.function.GetTutorialData;
-import de.garrafao.phitag.computationalannotator.lexsub.service.LexsubComputationalAnnotatorService;
+import de.garrafao.phitag.computationalannotator.sentiment.service.SentimentComputationalAnnotatorService;
 import de.garrafao.phitag.computationalannotator.usepair.service.UsePairComputationalAnnotatorService;
 import de.garrafao.phitag.computationalannotator.wssim.service.WSSIMComputationalAnnotatorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,17 +17,18 @@ import java.util.List;
 public class ComputationalAnnotatorResource {
 
     private final UsePairComputationalAnnotatorService usePairComputationalAnnotatorService;
-    private final LexsubComputationalAnnotatorService lexsubComputationalAnnotatorService;
 
     private final WSSIMComputationalAnnotatorService wssimComputationalAnnotatorService;
 
+    private final SentimentComputationalAnnotatorService sentimentComputationalAnnotatorService;
     private final GetTutorialData getTutorialData;
 
     @Autowired
-    public ComputationalAnnotatorResource(final UsePairComputationalAnnotatorService usePairComputationalAnnotatorService, LexsubComputationalAnnotatorService lexsubComputationalAnnotatorService, WSSIMComputationalAnnotatorService wssimComputationalAnnotatorService, GetTutorialData getTutorialData) {
+    public ComputationalAnnotatorResource(final UsePairComputationalAnnotatorService usePairComputationalAnnotatorService,
+                                          WSSIMComputationalAnnotatorService wssimComputationalAnnotatorService, SentimentComputationalAnnotatorService sentimentComputationalAnnotatorService, GetTutorialData getTutorialData) {
         this.usePairComputationalAnnotatorService = usePairComputationalAnnotatorService;
-        this.lexsubComputationalAnnotatorService = lexsubComputationalAnnotatorService;
         this.wssimComputationalAnnotatorService = wssimComputationalAnnotatorService;
+        this.sentimentComputationalAnnotatorService = sentimentComputationalAnnotatorService;
         this.getTutorialData = getTutorialData;
     }
 
@@ -38,13 +39,24 @@ public class ComputationalAnnotatorResource {
 
         this.usePairComputationalAnnotatorService.usePairChatGptAnnotation(authenticationToken, command);
     }
-    @PostMapping("/lexsub-annotate")
-    public void lexsubChatGpt(
+
+    @PostMapping("/sentiment-annotate")
+    public void sentimentChatGpt(
             @RequestHeader(value = "Authorization") final String authenticationToken,
             @RequestBody ComputationalAnnotatorCommand command) {
 
-        this.lexsubComputationalAnnotatorService.lexsubChatGptAnnotation(authenticationToken, command);
+        this.sentimentComputationalAnnotatorService.sentimentGptAnnotation(authenticationToken, command);
     }
+
+    @PostMapping("/tiny-annotate")
+    public void tinyLLM(
+            @RequestHeader(value = "Authorization") final String authenticationToken,
+            @RequestBody ComputationalAnnotatorCommand command) {
+
+        this.sentimentComputationalAnnotatorService.tinyLLMAnnotate(authenticationToken, command);
+    }
+
+
 
     @PostMapping("/wssim-annotate")
     public void wssimChatGpt(
@@ -67,13 +79,6 @@ public class ComputationalAnnotatorResource {
             @RequestBody ComputationalAnnotatorCommand command) {
 
         return this.wssimComputationalAnnotatorService.wssimChatGptTutorial(authenticationToken, command);
-    }
-    @PostMapping("/lexsum-tutorial-annotation")
-    public List<TutorialHistoryDto> lexsubChatGptTutorial(
-            @RequestHeader(value = "Authorization") final String authenticationToken,
-            @RequestBody ComputationalAnnotatorCommand command) {
-
-        return this.lexsubComputationalAnnotatorService.lexsubChatGptTutorial(authenticationToken, command);
     }
 
     @GetMapping("/usepair-tutorial-data")

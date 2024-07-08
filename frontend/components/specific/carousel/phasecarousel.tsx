@@ -34,7 +34,6 @@ import ChatGptProcssingModal from "../modal/chatgptprocessingmodal";
 import { data } from "autoprefixer";
 import LoadingComponentCard from "../../generic/loadinganimation/loadingcomponent";
 import TutorialHistory from "../../../lib/model/tutorialhistory/model/TutorialHistory";
-import FineTunigModal from "../modal/finetuningmodal";
 import { useFetchGuidelines } from "../../../lib/service/guideline/GuidelineResource";
 
 
@@ -56,7 +55,6 @@ const PhaseCarousel: React.FC<{ project: Project }> = ({ project }) => {
     const entitlement = useFetchSelfEntitlement(project?.getId().getOwner(), project?.getId().getName(), !!project);
     const annotationTypes = useFetchAllAnnotationTypes();
 
-    //console.log(phases.phases)
 
     const refreshCallback = async() =>{
         

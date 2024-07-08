@@ -9,13 +9,13 @@
 
         <insert tableName="phitagjoblisting">
             <column name="name" value="Example-Use-Rank-Relative-Annotation-Joblisting"/>
-            <column name="projectname" value="Example-Project-Use-Rank-Relative"/>
+            <column name="projectname" value="Example-Project-Text-Rank-Relative"/>
             <column name="ownername" value="Example-User"/>
-            <column name="displayname" value="Example-Use-Rank-Relative-Annotation-Joblisting"/>
-            <column name="phasename" value="Example-Use-Rank-Relative-Annotation-Joblisting"/>
+            <column name="displayname" value="Example-Text-Rank-Relative-Annotation-Joblisting"/>
+            <column name="phasename" value="Example-Text-Rank-Relative-Annotation-Joblisting"/>
             <column name="open" value="true"/>
             <column name="active" value="true"/>
-            <column name="description" value="This is an example job listing for Use Rank Relative Annotation. It is used to show how the job listing feature works."/>
+            <column name="description" value="This is an example job listing for Text Rank Relative Annotation. It is used to show how the job listing feature works."/>
         </insert>
 
     </changeSet>

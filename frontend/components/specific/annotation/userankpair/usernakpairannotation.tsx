@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { FiBookmark, FiFeather } from "react-icons/fi";
 
 // Serrvice
-import { fetchRandomInstance, useFetchPagedUseRankPairInstance } from "../../../../lib/service/instance/InstanceResource";
+import { fetchRandomInstance, useFetchAllocatedInstanceNumber, useFetchPagedUseRankPairInstance } from "../../../../lib/service/instance/InstanceResource";
 import useStorage from "../../../../lib/hook/useStorage";
 
 // model
@@ -13,7 +13,7 @@ import Phase from "../../../../lib/model/phase/model/Phase";
 import { useFetchAnnotationAccess } from "../../../../lib/service/phase/PhaseResource";
 import { toast } from "react-toastify";
 import Router from "next/router";
-import { annotateUserankpair, useFetchPagedUseRankPairJudgements } from "../../../../lib/service/judgement/JudgementResource";
+import { annotateUserankpair, useFetchAttemptedJudgement, useFetchPagedUseRankPairJudgements } from "../../../../lib/service/judgement/JudgementResource";
 import LoadingComponent from "../../../generic/loadingcomponent";
 import ProgressBar from "../progressbar/progressbar";
 import React from "react";
@@ -24,6 +24,7 @@ import AddUseRankPairJudgementCommand from "../../../../lib/model/judgement/user
 import DraggableUseRankPairUsage from "../usage/userankpair/dragabbleuserankpairusage";
 import IconButtonOnClick from "../../../generic/button/iconbuttononclick";
 import { MdFullscreen } from "react-icons/md";
+import SubmitStudyComponent from "../../../generic/submitstudy";
 
 
 
@@ -47,11 +48,13 @@ const UseRankPairAnnotation: React.FC<{ phase: Phase }> = ({ phase }) => {
     const userankinstances = useFetchPagedUseRankPairInstance(phase?.getId().getOwner(), phase?.getId().getProject(), phase?.getId().getPhase(), page, !!phase);
 
 
-  /*   const { data: userAnnotationCount, mutate: mutateCountJudgements } = CountAttemptedJudgements(phase?.getId().getOwner(), phase?.getId().getProject(), phase?.getId().getPhase(), !!phase);
+    const { data: userAnnotationCount, mutate: mutateCountJudgements } = useFetchAttemptedJudgement(phase?.getId().getOwner(), phase?.getId().getProject(), phase?.getId().getPhase(), !!phase);
 
-    const { data: userAllocatedInstance, mutate: mutateInstanceCount} = CountAllocatedInstances(phase?.getId().getOwner(), phase?.getId().getProject(), phase?.getId().getPhase(), !!phase);
 
- */
+
+    const { data: userAllocatedInstance, mutate: mutateInstanceCount } = useFetchAllocatedInstanceNumber(phase?.getId().getOwner(), phase?.getId().getProject(), phase?.getId().getPhase(), !!phase);
+
+
 
 
     const labelArray = annotation.instance ? annotation.instance.getLabelSet() : null;
@@ -118,18 +121,13 @@ const UseRankPairAnnotation: React.FC<{ phase: Phase }> = ({ phase }) => {
 
 
     const handleSubmitAnnotation = () => {
-  /*       mutateCountJudgements(); */
+       mutateCountJudgements(); 
         const judgement: string = judgementData;
         if (!judgement) {
             toast.info("Please rank first or choose non label")
             return;
         }
 
-      /*   if (userankinstances.data.getTotalElements() === userAnnotationCount) {
-            toast.success("Congrats!!! You finished it all");
-            Router.push(`/phi/${phase.getId().getOwner()}/${phase.getId().getProject()}/${phase.getName()}/done`);
-            return
-        } */
         if (userankinstances.data.getTotalElements()) {
             const resultCommand = verifyResultCommand(phase, judgement, annotation);
             setAnnotation({
@@ -157,14 +155,10 @@ const UseRankPairAnnotation: React.FC<{ phase: Phase }> = ({ phase }) => {
     }
 
     const handleSkip = () => {
-      /*   mutateCountJudgements();
- */
+        mutateCountJudgements();
+ 
         const judgement: string = annotation.instance.getNonLabel().toString();
-        /* if (userankinstances.data.getTotalElements() === userAnnotationCount) {
-            toast.success("Congrats!!! You finished it all");
-            Router.push(`/phi/${phase.getId().getOwner()}/${phase.getId().getProject()}/${phase.getName()}/done`);
-            return
-        } */
+       
             const resultCommand = verifyResultCommand(phase, judgement, annotation);
             setAnnotation({
                 ...annotation,
@@ -190,12 +184,8 @@ const UseRankPairAnnotation: React.FC<{ phase: Phase }> = ({ phase }) => {
 
 
     const fetchNewAnnotation = () => {
-        /* mutateCountJudgements();
-        if (userankinstances.data.getTotalElements() === userAnnotationCount) {
-            Router.push(`/phi/${phase.getId().getOwner()}/${phase.getId().getProject()}/${phase.getName()}/done`);
-            return;
-        }
-        else { */
+        
+        mutateCountJudgements();
             fetchRandomInstance<UseRankPairInstance, UseRankPairInstanceConstructor>(phase.getId().getOwner(), phase.getId().getProject(), phase.getId().getPhase(), (new UseRankPairInstanceConstructor()), storage.get)
                 .then((instance) => {
                     if (instance) {
@@ -205,9 +195,7 @@ const UseRankPairAnnotation: React.FC<{ phase: Phase }> = ({ phase }) => {
                             instance: instance,
                             comment: "",
                         });
-                    }/*  else if(instance==null && userAllocatedInstance === userAnnotationCount) {
-                        Router.push(`/phi/${phase.getId().getOwner()}/${phase.getId().getProject()}/${phase.getName()}/done`);
-                    } */
+                    }
                 })
                 .catch((error) => {
                     toast.error("Could not fetch new annotation. Check if instances are provided for annotation.");
@@ -234,12 +222,6 @@ const UseRankPairAnnotation: React.FC<{ phase: Phase }> = ({ phase }) => {
             return;
         }
     
-        /* if (!annotationAccess.isError && annotationAccess.hasAccess && userAllocatedInstance === userAnnotationCount) {
-            toast.info("No instances available to annotate!");
-            Router.push(`/phi/${phase.getId().getOwner()}/${phase.getId().getProject()}/${phase.getName()}/done`);
-            return;
-        }
-     */
         if (!annotationAccess.isError && annotationAccess.hasAccess && annotation.initialLoad ) {
             fetchRandomInstance<UseRankPairInstance, UseRankPairInstanceConstructor>(
                 phase.getId().getOwner(),
@@ -256,9 +238,7 @@ const UseRankPairAnnotation: React.FC<{ phase: Phase }> = ({ phase }) => {
                         comment: "",
                         initialLoad: false,
                     }));
-                }/*  else if(instance==null && userAllocatedInstance === userAnnotationCount) {
-                    Router.push(`/phi/${phase.getId().getOwner()}/${phase.getId().getProject()}/${phase.getName()}/done`);
-                } */
+                }
             })
             .catch((error) => {
                 toast.error("Could not fetch new annotation. Check if instances are provided for annotation.");
@@ -268,20 +248,23 @@ const UseRankPairAnnotation: React.FC<{ phase: Phase }> = ({ phase }) => {
     }, [annotationAccess, annotation.initialLoad, storage, phase]);
     
 
+    if ((!phase || !annotation.instance || annotation.initialLoad) && (userAllocatedInstance !== userAnnotationCount)) {
 
-    if (!phase || !annotation.instance || annotation.initialLoad) {
         return <LoadingComponent />;
     }
-
+    
+    if ((!annotation.instance && annotation.initialLoad && (userAllocatedInstance === userAnnotationCount))) {
+        return <SubmitStudyComponent phase={phase} />;
+    }
     return (
 
         <div className="w-full flex flex-col justify-between">
            <div className="relative w-full">
-               {/*  <ProgressBar
+              <ProgressBar
                     currentValue={userAnnotationCount}
                     minValue={0}
                     maxValue={userAllocatedInstance}
-                /> */}
+                /> 
                 <div className="absolute bottom-10 right-0">
                     <div > {/* Adjust the size as needed */}
                         <IconButtonOnClick icon={<MdFullscreen onClick={() => { handleScreenSize() }} className="text-3xl" />} tooltip={"Click here to increase the size"} />

@@ -10,12 +10,13 @@ import de.garrafao.phitag.application.judgement.lexsubjudgement.data.DeleteLexSu
 import de.garrafao.phitag.application.judgement.lexsubjudgement.data.EditLexSubJudgementCommand;
 import de.garrafao.phitag.application.judgement.lexsubjudgement.data.LexJudgementDto;
 import de.garrafao.phitag.application.judgement.lexsubjudgement.data.tutorial.LexSubTutorialJudgementDto;
-import de.garrafao.phitag.application.judgement.sentimentandchoice.SentimentJudgementApplicationService;
+import de.garrafao.phitag.application.judgement.sentimentandchoice.SentimentAndChoiceJudgementApplicationService;
 import de.garrafao.phitag.application.judgement.sentimentandchoice.data.AddSentimentAndChoiceJudgementCommand;
 import de.garrafao.phitag.application.judgement.sentimentandchoice.data.DeleteSentimentAndChoiceJudgementCommand;
 import de.garrafao.phitag.application.judgement.sentimentandchoice.data.EditSentimentAndChoiceJudgementCommand;
 import de.garrafao.phitag.application.judgement.sentimentandchoice.data.SentimentAndChoiceJudgementDto;
 import de.garrafao.phitag.application.judgement.sentimentandchoice.data.tutorial.SentimentAndChoiceTutorialJudgementDto;
+import de.garrafao.phitag.application.judgement.spanjudgement.SpanJudgementApplicationService;
 import de.garrafao.phitag.application.judgement.usepairjudgement.UsePairJudgementApplicationService;
 import de.garrafao.phitag.application.judgement.usepairjudgement.data.AddUsePairJudgementCommand;
 import de.garrafao.phitag.application.judgement.usepairjudgement.data.DeleteUsePairJudgementCommand;
@@ -96,13 +97,15 @@ public class JudgementApplicationService {
 
     private final UseRankPairJudgementApplicationService useRankPairJudgementApplicationService;
 
+    private final SpanJudgementApplicationService spanJudgementApplicationService;
+
 
 
     private final WSSIMJudgementApplicationService wssimJudgementApplicationService;
 
     private final LexSubJudgementApplicationService lexSubJudgementApplicationService;
 
-    private final SentimentJudgementApplicationService sentimentJudgementApplicationService;
+    private final SentimentAndChoiceJudgementApplicationService sentimentAndChoiceJudgementApplicationService;
 
     // Other
 
@@ -115,9 +118,10 @@ public class JudgementApplicationService {
             final UseRankJudgementApplicationService useRankJudgementApplicationService,
             final UseRankRelativeJudgementApplicationService useRankRelativeJudgementApplicationService,
             final UseRankPairJudgementApplicationService useRankPairJudgementApplicationService,
+            final SpanJudgementApplicationService spanJudgementApplicationService,
             final WSSIMJudgementApplicationService wssimJudgementApplicationService,
             final LexSubJudgementApplicationService lexSubJudgementApplicationService,
-            final SentimentJudgementApplicationService sentimentJudgementApplicationService) {
+            final SentimentAndChoiceJudgementApplicationService sentimentAndChoiceJudgementApplicationService) {
         this.commonService = commonService;
         this.validationService = validationService;
 
@@ -125,9 +129,10 @@ public class JudgementApplicationService {
         this.useRankJudgementApplicationService = useRankJudgementApplicationService;
         this.useRankRelativeJudgementApplicationService = useRankRelativeJudgementApplicationService;
         this.useRankPairJudgementApplicationService = useRankPairJudgementApplicationService;
+        this.spanJudgementApplicationService = spanJudgementApplicationService;
         this.wssimJudgementApplicationService = wssimJudgementApplicationService;
         this.lexSubJudgementApplicationService = lexSubJudgementApplicationService;
-        this.sentimentJudgementApplicationService = sentimentJudgementApplicationService;
+        this.sentimentAndChoiceJudgementApplicationService = sentimentAndChoiceJudgementApplicationService;
     }
 
     // Getters
@@ -186,10 +191,13 @@ public class JudgementApplicationService {
         }
         else if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SENTIMENT.name()) ||
                 phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_CHOICE.name())) {
-            this.sentimentJudgementApplicationService.findByPhase(phaseEntity).forEach(
+            this.sentimentAndChoiceJudgementApplicationService.findByPhase(phaseEntity).forEach(
                     sentimentJudgement -> judgementDtos.add(SentimentAndChoiceJudgementDto.from(sentimentJudgement)));
         }
-
+     else if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SPAN.name())) {
+            this.sentimentAndChoiceJudgementApplicationService.findByPhase(phaseEntity).forEach(
+                    sentimentJudgement -> judgementDtos.add(SentimentAndChoiceJudgementDto.from(sentimentJudgement)));
+    }
         return judgementDtos;
     }
 
@@ -300,7 +308,18 @@ public class JudgementApplicationService {
                     lexSubJudgements.getTotalPages());
         }else if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SENTIMENT.name()) ||
                 phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_CHOICE.name())) {
-            Page<SentimentAndChoiceJudgement> sentimentJudgements = this.sentimentJudgementApplicationService.findByPhase(phaseEntity,
+            Page<SentimentAndChoiceJudgement> sentimentJudgements = this.sentimentAndChoiceJudgementApplicationService.findByPhase(phaseEntity,
+                    size, page, sort);
+
+            pagedJudgementDto = new PagedJudgementDto(
+                    sentimentJudgements.getContent().stream().map(SentimentAndChoiceJudgementDto::from).collect(Collectors.toList()),
+                    sentimentJudgements.getNumber(),
+                    sentimentJudgements.getSize(),
+                    sentimentJudgements.getTotalElements(),
+                    sentimentJudgements.getTotalPages());
+        }
+        else if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SPAN.name())) {
+            Page<SentimentAndChoiceJudgement> sentimentJudgements = this.sentimentAndChoiceJudgementApplicationService.findByPhase(phaseEntity,
                     size, page, sort);
 
             pagedJudgementDto = new PagedJudgementDto(
@@ -364,7 +383,11 @@ public class JudgementApplicationService {
         }
         else if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SENTIMENT.name()) ||
                 phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_CHOICE.name())) {
-            this.sentimentJudgementApplicationService.getHistory(phaseEntity, annotator)
+            this.sentimentAndChoiceJudgementApplicationService.getHistory(phaseEntity, annotator)
+                    .forEach(sentimentJudgement -> judgementDtos.add(SentimentAndChoiceJudgementDto.from(sentimentJudgement)));
+        }
+        else if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SPAN.name())) {
+            this.sentimentAndChoiceJudgementApplicationService.getHistory(phaseEntity, annotator)
                     .forEach(sentimentJudgement -> judgementDtos.add(SentimentAndChoiceJudgementDto.from(sentimentJudgement)));
         }
 
@@ -474,7 +497,18 @@ public class JudgementApplicationService {
         }
         else if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SENTIMENT.name()) ||
                 phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_CHOICE.name())) {
-            Page<SentimentAndChoiceJudgement> sentimentJudgements = this.sentimentJudgementApplicationService.getHistory(
+            Page<SentimentAndChoiceJudgement> sentimentJudgements = this.sentimentAndChoiceJudgementApplicationService.getHistory(
+                    phaseEntity, annotator, size, page, sort);
+
+            pagedJudgementDto = new PagedJudgementDto(
+                    sentimentJudgements.getContent().stream().map(SentimentAndChoiceJudgementDto::from).collect(Collectors.toList()),
+                    sentimentJudgements.getNumber(),
+                    sentimentJudgements.getSize(),
+                    sentimentJudgements.getTotalElements(),
+                    sentimentJudgements.getTotalPages());
+        }
+        else if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SPAN.name())) {
+            Page<SentimentAndChoiceJudgement> sentimentJudgements = this.sentimentAndChoiceJudgementApplicationService.getHistory(
                     phaseEntity, annotator, size, page, sort);
 
             pagedJudgementDto = new PagedJudgementDto(
@@ -526,8 +560,12 @@ public class JudgementApplicationService {
         }
         else if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SENTIMENT.name()) ||
                 phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_CHOICE.name())) {
-            return this.sentimentJudgementApplicationService.exportJudgement(phaseEntity);
+            return this.sentimentAndChoiceJudgementApplicationService.exportJudgement(phaseEntity);
         }
+        else if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SPAN.name())) {
+            return this.sentimentAndChoiceJudgementApplicationService.exportJudgement(phaseEntity);
+        }
+
 
         throw new AnnotationTypeNotFoundException();
     }
@@ -600,7 +638,11 @@ public class JudgementApplicationService {
         }
         else if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SENTIMENT.name()) ||
                 phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_CHOICE.name())) {
-            this.sentimentJudgementApplicationService.save(phaseEntity, annotator, file);
+            this.sentimentAndChoiceJudgementApplicationService.save(phaseEntity, annotator, file);
+            return;
+        }
+        else if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SPAN.name())) {
+            this.sentimentAndChoiceJudgementApplicationService.save(phaseEntity, annotator, file);
             return;
         }
 
@@ -647,7 +689,11 @@ public class JudgementApplicationService {
         }
         else if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SENTIMENT.name()) ||
                 phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_CHOICE.name())) {
-            this.sentimentJudgementApplicationService.edit(phaseEntity, annotator, (EditSentimentAndChoiceJudgementCommand) command);
+            this.sentimentAndChoiceJudgementApplicationService.edit(phaseEntity, annotator, (EditSentimentAndChoiceJudgementCommand) command);
+            return;
+        }
+        else if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SPAN.name())) {
+            this.sentimentAndChoiceJudgementApplicationService.edit(phaseEntity, annotator, (EditSentimentAndChoiceJudgementCommand) command);
             return;
         }
 
@@ -698,9 +744,18 @@ public class JudgementApplicationService {
                     (DeleteLexSubJudgementCommand) command);
             return;
         }
-        else if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SENTIMENT.name()) ||
-                phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_CHOICE.name())) {
-            this.sentimentJudgementApplicationService.delete(phaseEntity, annotator,
+        else if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SENTIMENT.name())) {
+            this.sentimentAndChoiceJudgementApplicationService.delete(phaseEntity, annotator,
+                    (DeleteSentimentAndChoiceJudgementCommand) command);
+            return;
+        }
+        else if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_CHOICE.name())) {
+            this.sentimentAndChoiceJudgementApplicationService.delete(phaseEntity, annotator,
+                    (DeleteSentimentAndChoiceJudgementCommand) command);
+            return;
+        }
+        else if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SPAN.name())) {
+            this.sentimentAndChoiceJudgementApplicationService.delete(phaseEntity, annotator,
                     (DeleteSentimentAndChoiceJudgementCommand) command);
             return;
         }
@@ -794,7 +849,18 @@ public class JudgementApplicationService {
         else if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SENTIMENT.name()) ||
                 phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_CHOICE.name())) {
             try {
-                this.sentimentJudgementApplicationService.annotate(phaseEntity, annotator,
+                this.sentimentAndChoiceJudgementApplicationService.annotate(phaseEntity, annotator,
+                        (AddSentimentAndChoiceJudgementCommand) command);
+                annotationProcessInformation.setIndex(annotationProcessInformation.getIndex() + 1);
+
+            } catch (ClassCastException e) {
+                throw new AnnotationTypeNotFoundException();
+            }
+            return;
+        }
+        else if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SPAN.name())) {
+            try {
+                this.sentimentAndChoiceJudgementApplicationService.annotate(phaseEntity, annotator,
                         (AddSentimentAndChoiceJudgementCommand) command);
                 annotationProcessInformation.setIndex(annotationProcessInformation.getIndex() + 1);
 
@@ -884,9 +950,10 @@ public class JudgementApplicationService {
             return;
         }
         else if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SENTIMENT.name()) ||
-                phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_CHOICE.name())) {
+                phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_CHOICE.name())
+        || phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SPAN.name())) {
             try {
-                this.sentimentJudgementApplicationService.annotateBulk(phaseEntity, annotator,
+                this.sentimentAndChoiceJudgementApplicationService.annotateBulk(phaseEntity, annotator,
                         commands.stream().map(AddSentimentAndChoiceJudgementCommand.class::cast).collect(Collectors.toList()));
             } catch (ClassCastException e) {
                 throw new AnnotationTypeNotFoundException();
@@ -998,7 +1065,15 @@ public class JudgementApplicationService {
         else if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SENTIMENT.name()) ||
                 phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_CHOICE.name())) {
             try {
-                count = this.sentimentJudgementApplicationService.countAttemptedJudgements(phaseEntity, annotator);
+                count = this.sentimentAndChoiceJudgementApplicationService.countAttemptedJudgements(phaseEntity, annotator);
+            } catch (ClassCastException e) {
+                throw new AnnotationTypeNotFoundException();
+            }
+            return count;
+        }
+        else if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SPAN.name())) {
+            try {
+                count = this.sentimentAndChoiceJudgementApplicationService.countAttemptedJudgements(phaseEntity, annotator);
             } catch (ClassCastException e) {
                 throw new AnnotationTypeNotFoundException();
             }
@@ -1197,8 +1272,9 @@ public class JudgementApplicationService {
                     lexSubJudgements.getTotalPages());
         }
         else if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SENTIMENT.name()) ||
-                phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_CHOICE.name())) {
-            Page<SentimentAndChoiceTutorialJudgement> judgements = this.sentimentJudgementApplicationService.getTutorialHistory(
+                phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_CHOICE.name())
+                || phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SPAN.name())) {
+            Page<SentimentAndChoiceTutorialJudgement> judgements = this.sentimentAndChoiceJudgementApplicationService.getTutorialHistory(
                     phaseEntity, annotator, size, page, sort);
 
             pagedJudgementDto = new PagedJudgementDto(
@@ -1295,8 +1371,9 @@ public class JudgementApplicationService {
             return this.lexSubJudgementApplicationService.exportTutorialJudgement(phaseEntity);
         }
         else if (phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SENTIMENT.name()) ||
-                phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_CHOICE.name())) {
-            return this.sentimentJudgementApplicationService.exportTutorialJudgement(phaseEntity);
+                phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_CHOICE.name())
+                || phaseEntity.getAnnotationType().getName().equals(AnnotationTypeEnum.ANNOTATIONTYPE_SPAN.name())) {
+            return this.sentimentAndChoiceJudgementApplicationService.exportTutorialJudgement(phaseEntity);
         }
         throw new AnnotationTypeNotFoundException();
     }

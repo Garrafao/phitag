@@ -10,7 +10,7 @@ description: 'This guide will help you through the steps of publishing your stud
 This guide provides detailed steps on seamlessly integrating Prolific with PhiTag to streamline the process of publishing your study and hiring annotators. Below, you'll find essential details to successfully publish your project on the Prolific platform and engage annotators efficiently.
 
 ## Requirement 
-You must have an acount in both Prolifc and PhiTag. If you don't have [researcher account](https://app.prolific.com/register/researcher/email) in prolific, please  [create](https://app.prolific.com/register/researcher/email) first. Please read the ["Setting up a study on Prolific guide"](https://researcher-help.prolific.com/hc/en-gb/articles/360009220953-Setting-up-a-study-on-Prolific-step-by-step-guide?_gl=1*1tt5vbb*_gcl_au*MTg4NTM2NzUzNS4xNjk2MTQ4ODM0).
+You must have an account in both Prolific and PhiTag. If you don't have [researcher account](https://app.prolific.com/register/researcher/email) in prolific, please  [create](https://app.prolific.com/register/researcher/email) first. Please read the ["Setting up a study on Prolific guide"](https://researcher-help.prolific.com/hc/en-gb/articles/360009220953-Setting-up-a-study-on-Prolific-step-by-step-guide?_gl=1*1tt5vbb*_gcl_au*MTg4NTM2NzUzNS4xNjk2MTQ4ODM0).
 ## Step 1: Create Project
 
 Refer to this [guide on creating a project](/guide/explained-project) in Phitag to initiate the first step of integrating Prolific.
@@ -22,7 +22,7 @@ Follow this [guide on creating a phase](/guide/explained-phase) in Phitag to set
 
 
 ## Step 3: Create Joblisiting
-Once your [project](/guide/explained-project) and [phase](/guide/explained-phase) are set up, proceed to create a job listing associated with the corresponding project and phase. After job listing creation, locate the copy link icon on the top right of the card. This link is crucial and needs to be pasted in your Prolific project creation page.
+Once your [project](/guide/explained-project) and [phase](/guide/explained-phase) are set up, proceed to create a joblisting associated with the corresponding project and phase. After job listing creation, locate the copy link icon on the top right of the card. This link is crucial and needs to be pasted in your Prolific project creation page.
 
 | ![](/gif/guide/create-joblisting.gif) | 
 | :-----------------------------------: | 

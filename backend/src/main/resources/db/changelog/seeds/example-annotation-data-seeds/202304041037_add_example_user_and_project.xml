@@ -8,9 +8,9 @@
     <changeSet id="202401171016" author="sachin">
 
         <insert tableName="phitagproject">
-            <column name="name" value="Example-Project-Use-Rank-Relative"/>
+            <column name="name" value="Example-Project-Text-Rank-Relative"/>
             <column name="ownername" value="Example-User"/>
-            <column name="displayname" value="Example-Project-Use-Rank-Relative"/>
+            <column name="displayname" value="Example-Project-Text-Rank-Relative"/>
             <column name="active" value="true"/>
             <column name="phitagvisibility_name" value="VISIBILITY_PUBLIC"/>
             <column name="phitaglanguage_name" value="English"/>
@@ -19,7 +19,7 @@
 
         <insert tableName="phitagannotator">
             <column name="username" value="Example-User"/>
-            <column name="projectname" value="Example-Project-Use-Rank-Relative"/>
+            <column name="projectname" value="Example-Project-Text-Rank-Relative"/>
             <column name="ownername" value="Example-User"/>
             <column name="phitagentitlement_name" value="ENTITLEMENT_ADMIN"/>
         </insert>

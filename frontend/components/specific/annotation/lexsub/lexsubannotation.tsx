@@ -5,13 +5,14 @@ import useStorage from "../../../../lib/hook/useStorage";
 import { useFetchAnnotationAccess } from "../../../../lib/service/phase/PhaseResource";
 import { toast } from "react-toastify";
 import AddLexSubJudgementCommand from "../../../../lib/model/judgement/lexsubjudgement/command/AddLexSubJudgementCommand";
-import {  annotateLexSub} from "../../../../lib/service/judgement/JudgementResource";
+import {  annotateLexSub, useFetchAttemptedJudgement} from "../../../../lib/service/judgement/JudgementResource";
 import Router, { useRouter } from "next/router";
-import {  fetchRandomInstance} from "../../../../lib/service/instance/InstanceResource";
+import {  fetchRandomInstance, useFetchAllocatedInstanceNumber} from "../../../../lib/service/instance/InstanceResource";
 import LoadingComponent from "../../../generic/loadingcomponent";
 import UsageField from "../usage/usagefield";
 import { FiArrowRight, FiBookmark, FiChevronRight, FiEdit3, FiFeather } from "react-icons/fi";
 import ProgressBar from "../progressbar/progressbar";
+import SubmitStudyComponent from "../../../generic/submitstudy";
 
 const LexSubAnnotation: React.FC<{ phase: Phase }> = ({ phase }) => {
 
@@ -28,21 +29,18 @@ const LexSubAnnotation: React.FC<{ phase: Phase }> = ({ phase }) => {
     
     
     const annotationAccess = useFetchAnnotationAccess(phase?.getId().getOwner(), phase?.getId().getProject(), phase?.getId().getPhase(), !!phase);
-   /*  const { data: userAnnotationCount, mutate: mutateCountJudgements } = CountAttemptedJudgements(phase?.getId().getOwner(), phase?.getId().getProject(), phase?.getId().getPhase(), !!phase);
 
-    
-  
-    const { data: userAllocatedInstance, mutate: mutateInstanceCount} = CountAllocatedInstances(phase?.getId().getOwner(), phase?.getId().getProject(), phase?.getId().getPhase(), !!phase);
+    const { data: userAnnotationCount, mutate: mutateCountJudgements } = useFetchAttemptedJudgement(phase?.getId().getOwner(), phase?.getId().getProject(), phase?.getId().getPhase(), !!phase);
 
-  */
+
+
+    const { data: userAllocatedInstance, mutate: mutateInstanceCount } = useFetchAllocatedInstanceNumber(phase?.getId().getOwner(), phase?.getId().getProject(), phase?.getId().getPhase(), !!phase);
+
+
+
 
     const handleSubmitAnnotation = () => {
-        /* mutateCountJudgements();
-        if(userAllocatedInstance === userAnnotationCount){ 
-            Router.push(`/phi/${phase.getId().getOwner()}/${phase.getId().getProject()}/${phase.getName()}/done`);
-            toast.info("Congrats!!! You finished all the instances");
-        } */
-
+         mutateCountJudgements();
         if (annotation.instance === null) {
             toast.warning("This should not happen. Please try again.");
             return;
@@ -81,7 +79,7 @@ const LexSubAnnotation: React.FC<{ phase: Phase }> = ({ phase }) => {
     }
 
     const fetchNewAnnotation = () => {
-      
+        mutateCountJudgements();
             fetchRandomInstance<LexSubInstance, LexSubInstanceConstructor>(phase.getId().getOwner(), phase.getId().getProject(), phase.getId().getPhase(), (new LexSubInstanceConstructor()), storage.get)
             .then((instance) => {
                 if (instance) {
@@ -92,9 +90,9 @@ const LexSubAnnotation: React.FC<{ phase: Phase }> = ({ phase }) => {
                         judgement: "",
                         comment: "",
                     });
-                } /* else if(instance==null && userAllocatedInstance === userAnnotationCount) {
+                }  else if(instance==null && userAllocatedInstance === userAnnotationCount) {
                 Router.push(`/phi/${phase.getId().getOwner()}/${phase.getId().getProject()}/${phase.getName()}/done`);
-            } */
+            } 
 
             }).catch((error) => {
                 toast.error("Could not fetch new annotation. Check if instances are provided for annotation.");
@@ -114,13 +112,7 @@ useEffect(() => {
         return;
     }
 
-   /*  if (!annotationAccess.isError && annotationAccess.hasAccess && userAllocatedInstance === userAnnotationCount) {
-        toast.info("No instances available to annotate!");
-        Router.push(`/phi/${phase.getId().getOwner()}/${phase.getId().getProject()}/${phase.getName()}/done`);
-        return;
-    } */
-
-    if (!annotationAccess.isError && annotationAccess.hasAccess && annotation.initialLoad /* && userAllocatedInstance !== userAnnotationCount */) {
+    if (!annotationAccess.isError && annotationAccess.hasAccess && annotation.initialLoad ) {
         fetchRandomInstance<LexSubInstance, LexSubInstanceConstructor>(
             phase.getId().getOwner(),
             phase.getId().getProject(),
@@ -136,26 +128,27 @@ useEffect(() => {
                     comment: "",
                     initialLoad: false,
                 }));
-            } /* else if(instance==null && userAllocatedInstance === userAnnotationCount) {
-                Router.push(`/phi/${phase.getId().getOwner()}/${phase.getId().getProject()}/${phase.getName()}/done`);
-            } */
+            } 
         })
         .catch((error) => {
             toast.error("Could not fetch new annotation. Check if instances are provided for annotation.");
             Router.push(`/phi/${phase.getId().getOwner()}/${phase.getId().getProject()}`);
         });
     }
-}, [/* userAllocatedInstance, userAnnotationCount,  */annotationAccess, annotation.initialLoad, storage, phase]);
+}, [annotationAccess, annotation.initialLoad, storage, phase]);
 
+if ((!phase || !annotation.instance || annotation.initialLoad) && (userAllocatedInstance !== userAnnotationCount)) {
 
-    if (!phase || !annotation.instance || annotation.initialLoad) {
-        return <LoadingComponent />;
-    }
+    return <LoadingComponent />;
+}
 
+if ((!annotation.instance && annotation.initialLoad && (userAllocatedInstance === userAnnotationCount))) {
+    return <SubmitStudyComponent phase={phase} />;
+}
     return (
         <div className="w-full flex flex-col justify-between">
-{/*             <ProgressBar minValue={0} maxValue={userAllocatedInstance} currentValue={userAnnotationCount} />
- */}            {(phase.getTaskHead() ?? "") !== "" && (
+             <ProgressBar minValue={0} maxValue={userAllocatedInstance} currentValue={userAnnotationCount} />
+            {(phase.getTaskHead() ?? "") !== "" && (
                 <div className="w-half shadow-md ">
                     <div className="m-8 flex flex-row">
                         <div className="my-4">
@@ -223,3 +216,7 @@ useEffect(() => {
 }
 
 export default LexSubAnnotation;
+
+function CountAttemptedJudgements(arg0: string, arg1: string, arg2: string, arg3: boolean): { data: any; mutate: any; } {
+    throw new Error("Function not implemented.");
+}

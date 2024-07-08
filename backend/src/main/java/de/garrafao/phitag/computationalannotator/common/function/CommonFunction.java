@@ -8,9 +8,9 @@ import java.util.regex.Pattern;
 @Service
 public class CommonFunction {
 
-    public  int extractInteger(String input) {
-        // Define a pattern to match integers in the string
-        Pattern pattern = Pattern.compile("\\b\\d+\\b");
+    public int extractInteger(String input) {
+        // Define a pattern to match integers in the string, including negative integers
+        Pattern pattern = Pattern.compile("\\b-?\\d+\\b");
 
         // Create a matcher
         Matcher matcher = pattern.matcher(input);

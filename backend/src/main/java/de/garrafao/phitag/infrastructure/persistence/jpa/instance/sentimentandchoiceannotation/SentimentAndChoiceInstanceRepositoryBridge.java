@@ -50,4 +50,8 @@ public class SentimentAndChoiceInstanceRepositoryBridge implements SentimentInst
         this.sentimentAndChoiceAnnotationInstanceRepositoryJpa.deleteInBatch(instanceData);
     }
 
+    @Override
+    public void delete(SentimentAndChoiceInstance instanceData) {
+        this.sentimentAndChoiceAnnotationInstanceRepositoryJpa.delete(instanceData);
+    }
 }

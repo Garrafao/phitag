@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import useStorage from "../../../../lib/hook/useStorage";
 import Phase from "../../../../lib/model/phase/model/Phase";
 import { useEffect, useState } from "react";
-import { deleteLexSub, deleteSentiment, useFetchPagedHistoryLexSubJudgements, useFetchPagedHistorySentimentJudgements } from "../../../../lib/service/judgement/JudgementResource";
+import {  deleteJudgement, useFetchPagedHistorySentimentJudgements } from "../../../../lib/service/judgement/JudgementResource";
 import { toast } from "react-toastify";
 import LoadingComponent from "../../../generic/loadingcomponent";
 import Usage from "../../../../lib/model/phitagdata/usage/model/Usage";
@@ -10,9 +10,9 @@ import Link from "next/link";
 import IconButtonOnClick from "../../../generic/button/iconbuttononclick";
 import PageChange from "../../../generic/table/pagination";
 import { FiTool, FiTrash } from "react-icons/fi";
-import DeleteSentimentJudgementCommand from "../../../../lib/model/judgement/sentiment/command/DeleteSentimentJudgementCommand";
 import SentimentJudgement from "../../../../lib/model/judgement/sentiment/model/SentimentJudgement";
 import EditSentimentJudgementModal from "../../modal/editsentimentjudgementmodal";
+import DeleteSentimentAndChoiceJudgementCommand from "../../../../lib/model/judgement/sentiment/command/DeleteSentimentAndChoiceJudgementCommand";
 
 const SentimentJudgementHistoryTable: React.FC<{ phase: Phase, modalState: { open: boolean, callback: Function } }> = ({ phase, modalState }) => {
 
@@ -29,8 +29,8 @@ const SentimentJudgementHistoryTable: React.FC<{ phase: Phase, modalState: { ope
     });
 
     const deleteCallback = (judgement: SentimentJudgement) => {
-        deleteSentiment(
-            new DeleteSentimentJudgementCommand(
+        deleteJudgement(
+            new DeleteSentimentAndChoiceJudgementCommand(
                 judgement.getId().getOwner(),
                 judgement.getId().getProject(),
                 judgement.getId().getPhase(),
@@ -107,7 +107,7 @@ const SentimentJudgementHistoryTable: React.FC<{ phase: Phase, modalState: { ope
                                             {judgement.getId().getInstanceId()}
                                         </td>
 
-                                        <td className="px-6 py-4 overflow-auto font-dm-mono-light">
+                                        <td className="px-6 py-4 overflow-auto font-dm-mono-bold">
                                             <span key={judgement.getId().getId()} className="tooltip group w-fit">
                                                 {getFormatedShortUsage(judgement.getInstance().getUsage())}
                                                 <div className="tooltip-container group-hover:scale-100">

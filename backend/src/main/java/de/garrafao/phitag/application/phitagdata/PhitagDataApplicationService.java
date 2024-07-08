@@ -1,23 +1,22 @@
 package de.garrafao.phitag.application.phitagdata;
 
-import java.util.List;
-
-import javax.transaction.Transactional;
-
+import de.garrafao.phitag.application.common.CommonService;
+import de.garrafao.phitag.application.phitagdata.usage.UsageApplicationService;
+import de.garrafao.phitag.application.phitagdata.usage.data.DeleteUsageCommand;
+import de.garrafao.phitag.application.phitagdata.usage.data.EditUsageCommand;
+import de.garrafao.phitag.application.phitagdata.usage.data.PagedUsageDto;
+import de.garrafao.phitag.application.phitagdata.usage.data.UsageDto;
+import de.garrafao.phitag.application.statistics.projectstatic.ProjectStatisticApplicationService;
+import de.garrafao.phitag.application.validation.ValidationService;
+import de.garrafao.phitag.domain.project.Project;
+import de.garrafao.phitag.domain.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import de.garrafao.phitag.application.statistics.projectstatic.ProjectStatisticApplicationService;
-import de.garrafao.phitag.application.common.CommonService;
-import de.garrafao.phitag.application.phitagdata.usage.UsageApplicationService;
-import de.garrafao.phitag.application.phitagdata.usage.data.EditUsageCommand;
-import de.garrafao.phitag.application.phitagdata.usage.data.PagedUsageDto;
-import de.garrafao.phitag.application.phitagdata.usage.data.UsageDto;
-import de.garrafao.phitag.application.validation.ValidationService;
-import de.garrafao.phitag.domain.project.Project;
-import de.garrafao.phitag.domain.user.User;
+import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class PhitagDataApplicationService {
@@ -55,7 +54,7 @@ public class PhitagDataApplicationService {
 
     /**
      * Get all usages for a given project.
-     * 
+     *
      * @param authenticationToken the authentication token of the requesting user
      * @param owner               the owner of the project
      * @param project             the project
@@ -72,7 +71,7 @@ public class PhitagDataApplicationService {
 
     /**
      * Get all usages for a given project in a paged way.
-     * 
+     *
      * @param authenticationToken the authentication token of the requesting user
      * @param owner               the owner of the project
      * @param project             the project
@@ -82,7 +81,7 @@ public class PhitagDataApplicationService {
      * @return a paged list of all {@Usage} for the given project
      */
     public PagedUsageDto getPagedUsageDto(final String authenticationToken, final String owner, final String project,
-            final int pagesize, final int pagenumber, final String orderBy) {
+                                          final int pagesize, final int pagenumber, final String orderBy) {
         final User requester = this.commonService.getUserByAuthenticationToken(authenticationToken);
         final Project projectEntity = this.commonService.getProject(owner, project);
 
@@ -94,14 +93,14 @@ public class PhitagDataApplicationService {
 
     /**
      * Export all usages for a given project.
-     * 
+     *
      * @param authenticationToken the authentication token of the requesting user
      * @param owner               the owner of the project
      * @param project             the project
      * @return a InputStreamResource of the exported usages
      */
     public InputStreamResource exportUsages(final String authenticationToken, final String owner,
-            final String project) {
+                                            final String project) {
         final User requester = this.commonService.getUserByAuthenticationToken(authenticationToken);
         final Project projectEntity = this.commonService.getProject(owner, project);
 
@@ -114,7 +113,7 @@ public class PhitagDataApplicationService {
 
     /**
      * Import usages for a given project from a file.
-     * 
+     *
      * @param authenticationToken the authentication token of the requesting user
      * @param owner               the owner of the project
      * @param project             the project
@@ -122,7 +121,7 @@ public class PhitagDataApplicationService {
      */
     @Transactional
     public void addUsages(final String authenticationToken, final String owner, final String project,
-            final MultipartFile file) {
+                          final MultipartFile file) {
         final User requester = this.commonService.getUserByAuthenticationToken(authenticationToken);
         final Project projectEntity = this.commonService.getProject(owner, project);
 
@@ -136,7 +135,7 @@ public class PhitagDataApplicationService {
 
     /**
      * Edit a usage.
-     * 
+     *
      * @param authenticationToken the authentication token of the requesting user
      * @param command             the command to edit the usage
      */
@@ -148,6 +147,20 @@ public class PhitagDataApplicationService {
         this.validationService.projectAdminAccess(requester, projectEntity);
 
         this.usageApplicationService.edit(projectEntity, command);
+    }
+
+    /**
+     * Delete a usage.
+     *
+     * @param authenticationToken the authentication token of the requesting user
+     * @param command             the command to edit the usage
+     */
+    @Transactional
+    public void deleteUsage(final String authenticationToken, final DeleteUsageCommand command) {
+        final User requester = this.commonService.getUserByAuthenticationToken(authenticationToken);
+        final Project projectEntity = this.commonService.getProject(command.getOwner(), command.getProject());
+        this.validationService.projectAdminAccess(requester, projectEntity);
+        this.usageApplicationService.delete(projectEntity, command);
     }
 
 }

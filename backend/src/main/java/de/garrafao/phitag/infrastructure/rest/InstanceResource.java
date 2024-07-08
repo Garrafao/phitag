@@ -3,6 +3,7 @@ package de.garrafao.phitag.infrastructure.rest;
 import de.garrafao.phitag.application.instance.InstanceApplicationService;
 import de.garrafao.phitag.application.instance.data.IInstanceDto;
 import de.garrafao.phitag.application.instance.data.PagedInstanceDto;
+import de.garrafao.phitag.application.instance.data.DeleteInstanceCommand;
 import de.garrafao.phitag.application.instance.wssimtag.data.WSSIMTagDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
@@ -271,6 +272,20 @@ public class InstanceResource {
             @RequestParam(value = "project") final String project,
             @RequestParam(value = "phase") final String phase){
         return this.instanceApplicationService.countALlocatedInstance(authenticationToken, owner, project, phase);
+    }
+
+    /**
+     * Delete UsePairInstance data
+     *
+     * @param authenticationToken
+     * @param command
+     */
+    @PostMapping(value = "/delete/usepair")
+    public void deleteUsePairInstance(
+            @RequestHeader("Authorization") String authenticationToken,
+            @RequestBody final DeleteInstanceCommand command) {
+        this.instanceApplicationService.delete(authenticationToken, 
+                command);
     }
 
 }

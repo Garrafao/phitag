@@ -1,5 +1,6 @@
 package de.garrafao.phitag.application.phitagdata.usage;
 
+import de.garrafao.phitag.application.phitagdata.usage.data.DeleteUsageCommand;
 import de.garrafao.phitag.application.phitagdata.usage.data.EditUsageCommand;
 import de.garrafao.phitag.application.phitagdata.usage.data.UsageHeaderEnum;
 import de.garrafao.phitag.domain.core.Query;
@@ -339,4 +340,17 @@ public class UsageApplicationService {
             }
         }
         }
+
+
+    /**
+     * Delete a usage.
+     * @param project the project
+     * @param command the command
+     */
+    @Transactional
+    public void delete(final Project project, final DeleteUsageCommand command) {
+        final Usage usage = this.usageRepository.findByIdDataidAndIdProjectidNameAndIdProjectidOwnername(
+                command.getDataid(), command.getProject(), command.getOwner()).orElseThrow(UsageNotFoundException::new);
+        this.usageRepository.delete(usage);
+    }
 }

@@ -49,7 +49,7 @@ Note, the text is either normalized or original and with or without context, dep
 
 ## Exporting texts
 
-After you have selected the texts you want to export, you can click on the export button in the bottom right corner. This will open a modal, which allows you to select the project you want to export the texts to. After you have selected the project, you can click on the export button to export the texts. The texts will be added to the project as usages (i.e. text annotations), see [Supported Tasks](/guides/supported-tasks) for more information.
+After you have selected the texts you want to export, you can click on the export button in the bottom right corner. This will open a modal, which allows you to select the project you want to export the texts to. After you have selected the project, you can click on the export button to export the texts. The texts will be added to the project as usages (i.e. text annotations), see [Supported Tasks](/guide/supported-tasks) for more information.
 
 | ![](/gif/guide/corpus-usages.gif) |
 | :-------------------------------: |

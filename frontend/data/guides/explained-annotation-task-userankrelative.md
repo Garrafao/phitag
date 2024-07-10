@@ -1,5 +1,5 @@
 ---
-id: 'explained-annotation-task-userank-relative'
+id: 'explained-annotation-task-textrank-relative'
 title: 'Explained: Annotation Task - Text Rank Relative'
 priority: 20
 description: 'Explanation of the Text Rank Relative Annotation Task.'
@@ -7,7 +7,7 @@ description: 'Explanation of the Text Rank Relative Annotation Task.'
 
 # Text Rank Relative Annotation Task
 
-The usage rank relative annotation task asks annotator to rank a set of usages according to the refrence sentence and property. This property should be specified in the guidelines and could be e.g. ambiguity or sentiment.
+The text rank relative annotation task asks annotator to rank a set of usages according to the reference sentence and property. This property should be specified in the guidelines and could be e.g. ambiguity or sentiment.
 
 ## Data Format
 
@@ -20,7 +20,7 @@ The instance file is a tab-separated file with the following columns:
 
 **instanceID**: A unique ID for the instance.
 
-**dataIDs**: A maximum of 10 datIDs, corresponding to the dataID column in the uses.tsv file, for which the lemma is the same. For example: dataID1, dataID2, ..., dataID10. By default, dataID1 is configured as a reference sentence.
+**dataIDs**: A maximum of 10 dataIDs, corresponding to the dataID column in the uses.tsv file, for which the lemma is the same. For example: dataID1, dataID2, ..., dataID10. By default, dataID1 is configured as a reference sentence.
 
 
 **label_set**: An ordered set for ranking tasks, e.g., (1, 2, 3, 4,.....10), (First Usage, Second Usage, Third Usage, Fourth Usage,...., Tenth Usage), (Rank 1, Rank 2, Rank 3, Rank 4,......., Rank10), etc. By default, the first label is assigned to Usage 1, the second label to Usage 2, the third to Usage 3, and the fourth label to Usage 4.
@@ -35,7 +35,7 @@ Your task involves arranging these sentences. For instance, you are presented wi
 
 | ![](/gif/guide/use-rank-realtive-annotate.gif) | 
 | :-----------------------------------: | 
-|    Annotating use rank relative task           |  
+|    Annotating text rank relative task           |  
 
 
 Rest of the procedure is same as Use Rank Task. You can refer this [guide](./explained-annotation-task-userank).

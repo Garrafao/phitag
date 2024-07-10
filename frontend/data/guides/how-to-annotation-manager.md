@@ -38,7 +38,7 @@ Now that you have added some data, you will need to add some annotators. To do t
 
 ### Using The Job Pool to find Annotators
 
-If you do not want to manually add annotators to your project, you can create a job listing for your project. For this you have to navigate to the [jobs pool](/pool/joblisting) and click on the "Create Job" button. Here you can enter the name of your job, select the project and the if the job has a waitinglist. You can also add a short description of the goal for your job.
+If you do not want to manually add annotators to your project, you can create a job listing for your project. For this you have to navigate to the [jobs pool](/pool/joblisting) and click on the "Create Job" button. Here you can enter the name of your job, select the project and if the job has a waitinglist, you can also add a short description of the goal for your job.
 
 | ![](/gif/guide/joblisting-create.gif) | ![](/gif/guide/project-join.gif) |
 | :-----------------------------------: | :------------------------------: |
@@ -66,7 +66,7 @@ Note, to see the tutorials of a project, you have to switch to the tutorial caro
 
 ### Adding Annotation Instances
 
-After creating a phase, you will need to add some annotation instances to your phase. To do this, click on the phase and navigate to the "instances" tab. Here you can add annotation instances by uploading instance files. Note, that the required format of the instance file depends on the annotation task type of the phase.
+After creating a phase, you will need to add some annotation instances to your phase. To do this, click on the phase and navigate to the "instances" tab. Here you can add annotation instances by uploading instance files. Note, that the required format of the instance file depends on the annotation task type of the phase. For more information on the required format of the instance file, see the [Annotation Standardization Repository](https://github.com/ChangeIsKey/annotation_standardization).
 
 | ![](/gif/guide/add-instance.gif) | ![](/gif/guide/com-instances.gif) |
 | :------------------------------: | :-------------------------------: |

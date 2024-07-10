@@ -6,14 +6,14 @@ description: 'Explanation of the Text Choice Annotation Task.'
 ---
 ## Introduction
 
-In text choice annotation tasks, annotators are asked to select the correct option from a set of given choices based on a specific property. This property should be given in the guidelines or the task head.
+In text choice annotation task, annotators are asked to select the correct option from a set of given choices based on a specific property. This property should be given in the guidelines or the task head.
 
 ## Data Format
-Please provide uses.tsv files in the general format outlined in the [Supported Tasks](/guide/supported-tasks) guide.
+Please provide uses.tsv file in the general format outlined in the [Supported Tasks](/guide/supported-tasks) guide.
 ### instances.tsv
 **instanceID**: A unique ID for the instance.
 
-**dataIDs**: A dataID, corresponding to a text to be annotated. 
+**dataIDs**: A dataID corresponding to a text to be annotated. 
 
 **label_set**: A set of choices such as Option 1, Option 2, Option 3, Option 4, etc.
 
@@ -37,4 +37,4 @@ For example, consider the following text:
 - \- Can't decide
 
 
-Choose your desired options. If you want to change your selection, you can always edit your choices in the phase judgement tab.
+Choose your desired option. If you want to change your selection, you can always edit your choice in the phase judgement tab.

@@ -14,7 +14,7 @@ PhiTag is an web-based annotation tool for text annotation. It is designed to be
 
 ## Text Annotation
 
-This platform supports a variety of text annotation tasks, which can be combined to create complex annotation projects. See the [Supported Tasks](/guide/supported-tasks) guide for an overview of the currently supported tasks and their corresponding data formats.
+This platform supports a variety of text annotation tasks, which can be combined to create complex annotation projects. See the [Supported Tasks](/guide/supported-tasks) guide for an overview of the currently supported tasks and their corresponding data formats. As we have the "open source" idea in mind, we use a standardized data format for all tasks, which is also open source and can be found [here](https://github.com/ChangeIsKey/annotation_standardization). This allows us to easily add new tasks to the platform, as long as they are supported by the data format. By using a standardized data format, we also allow users to define their own tasks, which then can be added to the platform. Consider contributing to the [standardization repository](https://github.com/ChangeIsKey/annotation_standardization) if you have any ideas for new tasks or data formats.
 
 ## Annotation Process
 
@@ -34,7 +34,7 @@ In cases where the annotation process is too time consuming or expensive, PhiTag
 
 ## Use Case Specialization
 
-PhiTag is designed to be modular and extensible, so that it can be adapted to a variety of annotation tasks. However, this also means that it is not specialized for any specific use case. To solve this problem, the platform implements an abstraction layer, which allows us to specialize the platform for specific use cases. This abstraction layer abstracts heavily over the underlying data structures, tasks and types to provide meta level functionality, which can then be used to solve specific use cases. If you are interested in using PhiTag for your specific use case, please reach out to [us](https://www.ims.uni-stuttgart.de/en/institute/team/Schlechtweg/).
+PhiTag is designed to be modular and extensible, so that it can be adapted to a variety of annotation tasks. However, this also means that it is not specialized for any specific use case. To solve this problem, the platform implements an abstraction layer, which allows us to specialize the platform for specific use cases. This abstraction layer abstracts heavily over the underlying data structures, tasks and types to provide meta level functionality, which can then be used to solve specific use cases. See the [How to: Lexicography](/guide/how-to-lexicography) guide for an example of how this abstraction layer can be used to solve the use case of lexicography. If you are interested in using PhiTag for your specific use case, please reach out to [us](https://www.ims.uni-stuttgart.de/en/institute/team/Schlechtweg/).
 
 ## Introduction by Example
 

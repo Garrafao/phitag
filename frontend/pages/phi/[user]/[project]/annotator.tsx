@@ -32,8 +32,6 @@ import Layout from "../../../../components/generic/layout/layout";
 import SingleContentLayout from "../../../../components/generic/layout/singlecontentlayout";
 import Link from "next/link";
 import LinkHead from "../../../../components/generic/linker/linkhead";
-import RemoveAnnotatorModal from "../../../../components/specific/modal/removeannotatormodal";
-
 
 const AnnotatorPage: NextPage = () => {
 
@@ -48,7 +46,6 @@ const AnnotatorPage: NextPage = () => {
     // Modal State
     const [modalState, setModalState] = useState({
         editAnnotatorModal: false,
-        removeAnnotatorModal: false,
         selectedAnnotator: null as unknown as Annotator,
     });
 
@@ -130,14 +127,7 @@ const AnnotatorPage: NextPage = () => {
                                     onClickEdit={() => setModalState({
                                         selectedAnnotator: annotator,
                                         editAnnotatorModal: true,
-                                        removeAnnotatorModal: false
-                                    })} onClickRemove={() => {
-                                        setModalState({
-                                            selectedAnnotator: annotator,
-                                            editAnnotatorModal: false,
-                                            removeAnnotatorModal: true
-                                        })
-                                    }} />
+                                    })} />
                             )
                         })
                         }
@@ -153,14 +143,6 @@ const AnnotatorPage: NextPage = () => {
                     setModalState({
                         ...modalState,
                         editAnnotatorModal: false,
-                    });
-                }
-            } annotator={modalState.selectedAnnotator} mutateCallback={annotators.mutate} />
-            <RemoveAnnotatorModal isOpen={modalState.removeAnnotatorModal} closeModalCallback={
-                () => {
-                    setModalState({
-                        ...modalState,
-                        removeAnnotatorModal: false,
                     });
                 }
             } annotator={modalState.selectedAnnotator} mutateCallback={annotators.mutate} />

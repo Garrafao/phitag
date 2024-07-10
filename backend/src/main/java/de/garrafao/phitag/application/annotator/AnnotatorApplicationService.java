@@ -1,17 +1,25 @@
 package de.garrafao.phitag.application.annotator;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import de.garrafao.phitag.application.statistics.annotatostatistic.AnnotatorStatisticApplicationService;
 import de.garrafao.phitag.application.annotator.data.command.CreateAnnotatorCommand;
 import de.garrafao.phitag.application.annotator.data.command.EditAnnotatorCommand;
 import de.garrafao.phitag.application.annotator.data.command.RemoveAnnotatorCommand;
 import de.garrafao.phitag.application.annotator.data.dto.AnnotatorDto;
 import de.garrafao.phitag.application.common.CommonService;
 import de.garrafao.phitag.application.entitlement.data.EntitlementEnum;
-import de.garrafao.phitag.application.statistics.annotatostatistic.AnnotatorStatisticApplicationService;
 import de.garrafao.phitag.application.validation.ValidationService;
 import de.garrafao.phitag.domain.annotator.Annotator;
 import de.garrafao.phitag.domain.annotator.AnnotatorRepository;
 import de.garrafao.phitag.domain.annotator.error.AnnotatorExistException;
-import de.garrafao.phitag.domain.annotator.error.NotAllowedException;
 import de.garrafao.phitag.domain.annotator.query.AnnotatorQueryBuilder;
 import de.garrafao.phitag.domain.core.Query;
 import de.garrafao.phitag.domain.entitlement.Entitlement;
@@ -19,13 +27,6 @@ import de.garrafao.phitag.domain.entitlement.error.InvalidEntitlementException;
 import de.garrafao.phitag.domain.phase.Phase;
 import de.garrafao.phitag.domain.project.Project;
 import de.garrafao.phitag.domain.user.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class AnnotatorApplicationService {
@@ -175,23 +176,7 @@ public class AnnotatorApplicationService {
      */
     @Transactional
     public void delete(final String authenticationToken, final RemoveAnnotatorCommand command) {
-
-        final User requester = this.commonService.getUserByAuthenticationToken(authenticationToken);
-        final Project projectEntity = this.commonService.getProject(command.getOwner(),
-                command.getProject());
-
-        //check project access
-        this.validationService.projectAdminAccess(requester, projectEntity);
-
-        //Annotator
-        final Annotator removeAnnotator =  this.commonService.getAnnotator(command.getOwner(),
-                command.getProject(), command.getAnnotator());
-
-        if(removeAnnotator.getUser() == requester) {
-        throw new NotAllowedException();
-        } else {
-            this.annotatorRepository.delete(removeAnnotator);
-        }
+        throw new UnsupportedOperationException("Not implemented yet");
     }
 
     /**

@@ -22,7 +22,7 @@ Follow this [guide on creating a phase](/guide/explained-phase) in Phitag to set
 
 
 ## Step 3: Create Joblisiting
-Once your [project](/guide/explained-project) and [phase](/guide/explained-phase) are set up, proceed to create a joblisting associated with the corresponding project and phase. After job listing creation, locate the copy link icon on the top right of the card. This link is crucial and needs to be pasted in your Prolific project creation page.
+Once your [project](/guide/explained-project) and [phase](/guide/explained-phase) are set up, proceed to create a job listing associated with the corresponding project and phase. After job listing creation, locate the copy link icon on the top right of the card. This link is crucial and needs to be pasted in your Prolific project creation page.
 
 | ![](/gif/guide/create-joblisting.gif) | 
 | :-----------------------------------: | 

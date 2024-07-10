@@ -1,11 +1,11 @@
 ---
 id: 'explained-annotation-task-urel'
-title: 'Explained: Annotation Task - Text Pair Relatedness'
+title: 'Explained: Annotation Task - Text Relatedness'
 priority: 20
-description: 'Explanation of the Text Relatedness Annotation Task.'
+description: 'Explanation of the Text Piar Relatedness Annotation Task.'
 ---
 
-# Text Pair Relatedness  Annotation Task
+# Text Relatedness Annotation Task
 
 The text pair relatedness annotation tasks asks annotators to rate the degree of semantic relatedness between two uses of a word.
 
@@ -13,7 +13,7 @@ The text pair relatedness annotation tasks asks annotators to rate the degree of
 
 ### Usage File
 
-Please provide uses.tsv files in the general format outlined in the [Supported Tasks](/guide/supported-tasks) guide.
+Please provide uses.tsv file in the general format outlined in the [Supported Tasks](/guides/supported-tasks) guide.
 
 ### Instance File
 The instance file is a tab-separated file with the following columns:
@@ -68,7 +68,7 @@ In contrast, the two uses of child in **Example B** are judged closely related b
 Example B: Judgment 3 (Closely Related)
 
 ***
-In **Example C**, the two uses of the word crossroad art related, but more distantly (rating: 2): Unlike the child example above, the two uses of crossroad in this example have different meanings, which are yet related by a figurative similarity, on the level that both involve some kind of decision.
+In **Example C**, the two uses of the word crossroad are related, but more distantly (rating: 2): Unlike the child example above, the two uses of crossroad in this example have different meanings, which are yet related by a figurative similarity, on the level that both involve some kind of decision.
 
 |Usage 1 | Usage 2 |
 |--------|---------|

@@ -8,7 +8,7 @@ description: 'Learn how to use the dashboard.'
 # Explained: Dashboard
 
 The dashboard is the first page you see when you log in to the platform and selected the default use case. If a different use case is selected, a specialized dashboard is shown.
-It is a collection of all important functionality of the platform. The dashboard is divided into three sections: the project overview, the pool overview and the guide overview.
+It is a collection of all important functionalities of the platform. The dashboard is divided into three sections: the project overview, the pool overview and the guide overview.
 
 ## Section: Project
 

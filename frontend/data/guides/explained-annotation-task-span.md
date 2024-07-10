@@ -18,8 +18,9 @@ Your task is to annotate the part of speech of each word in a text snippet by ma
 ## Data Format
 Please provide uses.tsv files in the general format outlined in the [Supported Tasks](/guide/supported-tasks) guide.
 ### instances.tsv
-**dataIDs**: A dataID, corresponding to a text to be annotated.
-**label_set**: A set of labels fo ex:(Noun, Pronoun, Verb, Adjective).
+**instanceIDs**:  A unique ID for the instance.\
+**dataIDs**: A dataID corresponding to a text to be annotated.\
+**label_set**: A set of labels for ex:(Noun, Pronoun, Verb, Adjective).
 
 ### judgments.tsv
 **label**: A single value from the **label_set** or '-' for non-label.
@@ -27,7 +28,7 @@ Please provide uses.tsv files in the general format outlined in the [Supported T
 ## Annotation Process
 
 
-Consider the following text
+Consider the following text:
 
 |Text |
 |--------|

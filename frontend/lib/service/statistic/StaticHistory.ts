@@ -9,7 +9,7 @@ import AnnotationHistoryTable from "../../model/stataticsistory/model/AnnotatorH
 export function saveAnnotation(command: AddStaticHistoryCommand, get: Function = () => { }) {
     const token = get('JWT') ?? '';
 
-    return axios.post(`${BACKENDROUTES.STATSHISTORY}/save`, command,
+    return axios.post(`${BACKENDROUTES.STATHISTORY}/save`, command,
         {
             headers: { "Authorization": `Bearer ${token}` },
         }
@@ -28,7 +28,7 @@ export function useFetchStatHistory(annotatorname: string, ownername: string, pr
         }
     }).then(res => res.data)
 
-    const { data, error, mutate } = useSWR(fetch ? `${BACKENDROUTES.STATSHISTORY}/getAll?annotatorname=${annotatorname}&ownername=${ownername}&projectname=${projectname}&phasename=${phasename}` : null, queryPhaseFetcher)
+    const { data, error, mutate } = useSWR(fetch ? `${BACKENDROUTES.STATHISTORY}/getAll?annotatorname=${annotatorname}&ownername=${ownername}&projectname=${projectname}&phasename=${phasename}` : null, queryPhaseFetcher)
 
     return {
         res: data ? data.map(AnnotationHistoryTable.fromDto) : [] as AnnotationHistoryTable[],

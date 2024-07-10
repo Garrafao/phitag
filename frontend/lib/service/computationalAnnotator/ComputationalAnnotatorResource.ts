@@ -7,6 +7,7 @@ import OpenAIModel from "../../model/computationalannotator/openaimodel/model/Op
 import ComputationalAnnotatorCommand from "../../model/computationalannotator/ComputationalAnnotatorCommand";
 import { data } from "autoprefixer";
 import UsePairTutorialData from "../../model/computationalannotator/UsePairTutorailData";
+import fileDownload from "js-file-download";
 
 
 export async function chatGptUsePairAnnotation(command: ComputationalAnnotatorCommand, get: Function = () => {}) {
@@ -161,4 +162,17 @@ export async function UseFetchPagedUsePairJudgementsTutorials(owner: string, pro
         console.error("Error fetching data:", error);
         return null;
     }
+}
+
+export function exportParameter(key: string, model: string, temperature: string,topP: string,system: string,prompt: string,finalmessage: string, get: Function = () => { }) {
+    const token = get('JWT') ?? '';
+
+    return axios.get(`${BACKENDROUTES.COMPUTATIONALANNOTATOR}/export-parameter?key=${key}&model-name=${model}&temperature=${temperature}&topP=${topP}&system=${system}&prompt=${prompt}&finalmessage=${finalmessage}`, {
+        responseType: 'blob',
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    }).then(res => {
+        fileDownload(res.data, 'parameter.csv');
+    });
 }

@@ -1,5 +1,5 @@
 ---
-id: 'explained-annotation-task-userank-pair'
+id: 'explained-annotation-task-textrank-pair'
 title: 'Explained: Annotation Task - Text Rank Pair'
 priority: 20
 description: 'Explanation of the Text Rank Pair Annotation Task.'
@@ -7,7 +7,7 @@ description: 'Explanation of the Text Rank Pair Annotation Task.'
 
 # Text Rank Pair Annotation Task
 
-The text rank pair annotation task asks annotator to rank a set of usages according to the refrence sentence and property. This property should be specified in the guidelines and could be e.g. ambiguity or sentiment.
+The text rank pair annotation task asks annotator to rank a set of usages according to the reference sentence and property. This property should be specified in the guidelines and could be e.g. ambiguity or sentiment.
 
 ## Data Format
 
@@ -31,12 +31,12 @@ Note: The number of labels should be equivalent to the number of pairs used in i
 
 ## Annotation Process
 
-Your task involves arranging these pair of sentences. For instance, you are presented with several pair sentences. You are asked to arrange these sentences based on the guidelines and the reference sentence, which will be displayed at the top. Utilize a drag-and-drop feature to position them in the correct order. Once you finish placing them, you can click on save to save the judgment.
+Your task involves arranging these pair of sentences. For instance, you are presented with several pairs sentences. You are asked to arrange these sentences based on the guidelines and the reference sentence, which will be displayed at the top. Utilize a drag-and-drop feature to position them in the correct order. Once you finish placing them, you can click on save to save the judgment.
 
 
 | ![](/gif/guide/use-rank-pair-annotate.gif) | 
 | :-----------------------------------: | 
-|    Annotating use rank pair task           |  
+|    Annotating Text rank pair task           |  
 
 
-Rest of the procedure is same as Use Rank Task. You can refer this [guide](./explained-annotation-task-userank).
+Rest of the procedure is same as Text Rank Task. You can refer this [guide](./explained-annotation-task-userank).

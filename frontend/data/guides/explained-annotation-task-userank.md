@@ -1,11 +1,11 @@
 ---
-id: 'explained-annotation-task-userank'
+id: 'explained-annotation-task-textrank'
 title: 'Explained: Annotation Task - Text Rank'
 priority: 20
 description: 'Explanation of the Text Rank Annotation Task.'
 ---
 
-# Text Rank Annotation Task
+# Text Rank Annotation  Annotation Task
 
 The text rank annotation task asks annotator to rank a set of usages according to some property. This property should be specified in the guidelines and could be e.g. ambiguity or sentiment.
 
@@ -13,7 +13,7 @@ The text rank annotation task asks annotator to rank a set of usages according t
 
 ### Usage File
 
-Please provide uses.tsv files in the general format outlined in the [Supported Tasks](/guide/supported-tasks) guide.
+Please provide uses.tsv files in the general format outlined in the [Supported Tasks](/guides/supported-tasks) guide.
 
 ### Instance File
 The instance file is a tab-separated file with the following columns:
@@ -32,7 +32,7 @@ Your task involves arranging these sentences. For instance, you are presented wi
 
 | ![](/gif/guide/annotate-use-rank.gif) | 
 | :-----------------------------------: | 
-|    Annotating use rank task           |  
+|    Annotating text rank task           |  
 
 
 

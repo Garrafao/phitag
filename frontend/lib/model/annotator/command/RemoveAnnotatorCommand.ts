@@ -1,18 +1,10 @@
 export default class RemoveAnnotatorCommand {
     private readonly username: string;
-    private readonly project: string;
-    private readonly owner: string;
-    private readonly annotator: string;
-    private readonly entitlement: string;
+    private readonly usernameProjectname: string;
 
-
-
-    constructor(username: string, project: string, owner: string, annotator: string, entitlement: string) {
+    constructor(username: string, usernameProjectname: string) {
         this.username = username;
-        this.project= project;
-        this.owner = owner;
-        this.annotator = annotator;
-        this.entitlement = entitlement;
+        this.usernameProjectname = usernameProjectname;
     }
     
 }

@@ -3,11 +3,17 @@ package de.garrafao.phitag.computationalannotator.rest;
 import de.garrafao.phitag.application.phase.data.TutorialHistoryDto;
 import de.garrafao.phitag.computationalannotator.common.command.ComputationalAnnotatorCommand;
 import de.garrafao.phitag.computationalannotator.common.command.UsePairTutorialData;
+import de.garrafao.phitag.computationalannotator.common.function.ExportCompuationalAnnotatorParameter;
 import de.garrafao.phitag.computationalannotator.common.function.GetTutorialData;
 import de.garrafao.phitag.computationalannotator.sentiment.service.SentimentComputationalAnnotatorService;
 import de.garrafao.phitag.computationalannotator.usepair.service.UsePairComputationalAnnotatorService;
 import de.garrafao.phitag.computationalannotator.wssim.service.WSSIMComputationalAnnotatorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,16 +27,21 @@ public class ComputationalAnnotatorResource {
     private final WSSIMComputationalAnnotatorService wssimComputationalAnnotatorService;
 
     private final SentimentComputationalAnnotatorService sentimentComputationalAnnotatorService;
+
+    private final ExportCompuationalAnnotatorParameter exportCompuationalAnnotatorParameter;
+
     private final GetTutorialData getTutorialData;
 
     @Autowired
     public ComputationalAnnotatorResource(final UsePairComputationalAnnotatorService usePairComputationalAnnotatorService,
-                                          WSSIMComputationalAnnotatorService wssimComputationalAnnotatorService, SentimentComputationalAnnotatorService sentimentComputationalAnnotatorService, GetTutorialData getTutorialData) {
+                                          WSSIMComputationalAnnotatorService wssimComputationalAnnotatorService, SentimentComputationalAnnotatorService sentimentComputationalAnnotatorService, ExportCompuationalAnnotatorParameter exportCompuationalAnnotatorParameter, GetTutorialData getTutorialData) {
         this.usePairComputationalAnnotatorService = usePairComputationalAnnotatorService;
         this.wssimComputationalAnnotatorService = wssimComputationalAnnotatorService;
         this.sentimentComputationalAnnotatorService = sentimentComputationalAnnotatorService;
+        this.exportCompuationalAnnotatorParameter = exportCompuationalAnnotatorParameter;
         this.getTutorialData = getTutorialData;
     }
+    private static final String TEXT_CSV = "text/csv";
 
     @PostMapping("/use-pair-annotate")
     public void usepairChatGpt(
@@ -47,6 +58,29 @@ public class ComputationalAnnotatorResource {
 
         this.sentimentComputationalAnnotatorService.sentimentGptAnnotation(authenticationToken, command);
     }
+
+    @GetMapping(value = "/export-parameter", produces = TEXT_CSV)
+    public ResponseEntity<Resource> exportParameter(
+            @RequestParam(value = "key") final String key,
+            @RequestParam(value = "model-name") final String model,
+            @RequestParam(value = "temperature") final String temperature,
+            @RequestParam(value = "topP") final String topP,
+            @RequestParam(value = "system") final String system,
+            @RequestParam(value = "prompt") final String prompt,
+            @RequestParam(value = "finalmessage") final String finalmessage) {
+        InputStreamResource streamResource = this.exportCompuationalAnnotatorParameter.exportParmeter(
+                key, model,temperature, topP, system, prompt, finalmessage);
+        HttpHeaders headers = new HttpHeaders();
+        headers.set(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=results.csv");
+        // defining the custom Content-Type
+        headers.set(HttpHeaders.CONTENT_TYPE, TEXT_CSV);
+
+        return new ResponseEntity<>(
+                streamResource,
+                headers,
+                HttpStatus.OK);
+    }
+
 
     @PostMapping("/tiny-annotate")
     public void tinyLLM(

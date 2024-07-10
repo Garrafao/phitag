@@ -7,19 +7,19 @@ description: 'Explanation of the Text Sentiment Annotation Task.'
 
 # Sentiment Analysis
 ## Introduction
-The sentiment analysis annotation tasks asks annotators to label the emotional valence of a text.
+The sentiment analysis annotation task asks annotators to label the emotional valence of a text.
 
 ## Data Format
-Please provide uses.tsv files in the general format outlined in the [Supported Tasks](/guide/supported-tasks) guide.
+Please provide uses.tsv file in the general format outlined in the [Supported Tasks](/guide/supported-tasks) guide.
 ### instances.tsv
-**dataIDs**: A dataID, corresponding to a text to be annotated.
+**dataIDs**: A dataID corresponding to a text to be annotated. \
 **label_set**: A set of labels corresponding to emotional valence (Positive,Negative,Neutral).
 
 ### judgments.tsv
 **label**: A single value from the **label_set** or '-' for non-label.
 
 # Sentiment Annotation
-In the Sentiment Annotation task, annotators are shown a single text and are asked to rate the emotional sentiment as "positive", "neutral", and "negative".  The non-label "-" is used when the annotator is unable to make a judgment.
+In the Sentiment Annotation task, annotators are shown a single text and are asked to rate the emotional sentiment as "positive", "neutral", and "negative".  The non-label ('-') is used when the annotator is unable to make a judgment.
 
 For example, consider the following text:
 

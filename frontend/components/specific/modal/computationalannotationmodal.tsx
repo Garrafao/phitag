@@ -25,7 +25,7 @@ import StartComputationalAnnotationCommand from "../../../lib/model/phase/comman
 import DropdownSelect from "../../generic/dropdown/dropdownselect";
 import { startComputationalAnnotation, useFetchPhases } from "../../../lib/service/phase/PhaseResource";
 import OpenAIModel from "../../../lib/model/computationalannotator/openaimodel/model/OpenAIModel";
-import { chatGptLexsubAnnotation, chatGptSentimentAnnotation, chatGptUsePairAnnotation, chatLexSubTutorialAnnotation, chatUsePairTutorialAnnotation, chatWSSIMAnnotation, chatWSSIMTutorialAnnotation, tinyAnnotate, useFetchAllOpenAIModel, UseFetchPagedUsePairJudgementsTutorials } from "../../../lib/service/computationalAnnotator/ComputationalAnnotatorResource";
+import { chatGptLexsubAnnotation, chatGptSentimentAnnotation, chatGptUsePairAnnotation, chatLexSubTutorialAnnotation, chatUsePairTutorialAnnotation, chatWSSIMAnnotation, chatWSSIMTutorialAnnotation, exportParameter, tinyAnnotate, useFetchAllOpenAIModel, UseFetchPagedUsePairJudgementsTutorials } from "../../../lib/service/computationalAnnotator/ComputationalAnnotatorResource";
 import BasicCheckbox from "../../generic/checkbox/basiccheckbox";
 import router, { Router, useRouter } from "next/router";
 import ANNOTATIONTYPES from "../../../lib/AnnotationTypes";
@@ -83,6 +83,22 @@ const ComputationalAnnotationModal: React.FC<{
             lemma: ""
         });
 
+
+/*     const handleExport = () => {
+       
+            .then((response) => {
+                toast.success("Exported data");
+            })
+            .catch((error) => {
+                if (error?.response?.status === 500) {
+                    toast.error("Error while exporting data: " + error.response.data.message + "!");
+                } else {
+                    toast.warning("The system is currently not available, please try again later!");
+                }
+            });
+    } */
+
+
         const usepairjudgement = (pname: string) => UseFetchPagedUsePairJudgementsTutorials(phase?.getId().getOwner(), phase?.getId().getProject(), pname, 0, !!phase);
 
         const [tutPrompt, setTutPrompt] = useState("");
@@ -138,6 +154,17 @@ const ComputationalAnnotationModal: React.FC<{
                 toast.warning("This should not happen. Please contact the administrator.");
                 return;
             }
+            exportParameter(
+                chatGptModalState.apiKey, 
+                chatGptModalState.model.getName(), 
+                chatGptModalState.temperature.toString(), 
+                chatGptModalState.topP.toString(),
+                chatGptModalState.system,
+                chatGptModalState.prompt,
+                chatGptModalState.finalMessage
+            ).then(() => {
+                toast.info("Parameter file downloaded.");
+            });            
 
             if (phase?.getAnnotationType().getName() === ANNOTATIONTYPES.ANNOTATIONTYPE_USEPAIR) {
                 closeModalCallback();

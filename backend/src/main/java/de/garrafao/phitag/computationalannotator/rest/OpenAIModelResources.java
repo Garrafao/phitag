@@ -20,7 +20,6 @@ public class OpenAIModelResources {
         this.openAIModelApplicationService = openAIModelApplicationService;
     }
 
-
     @GetMapping("/model")
     public Set<OpenAIModelDto> all() {
         return this.openAIModelApplicationService.getOpenAIModelDtos();

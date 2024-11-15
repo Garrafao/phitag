@@ -15,7 +15,7 @@ Initiating GPT as an annotator begins with data preparation.
 
 ## Data Format
 
-### Usage File
+### Text File
 
 Please provide uses.tsv files in the general format outlined in the [Supported Tasks](/guide/supported-tasks) guide.
 

@@ -130,7 +130,7 @@ const Index = () => {
                     prolific_id: e.target.value
                   })} />
               </div>
-              <div className="flex items-center border-b-2 py-2 px-3 my-6">
+              {/* <div className="flex items-center border-b-2 py-2 px-3 my-6">
                 <FiUser className="basic-svg" />
 
                 <input
@@ -144,7 +144,7 @@ const Index = () => {
                     ...registerState,
                     username: e.target.value
                   })} />
-              </div>
+              </div> */}
 
               <div className="flex items-center border-b-2 py-2 px-3 my-6">
                 <FiMail className="basic-svg" />
@@ -278,7 +278,7 @@ function verifySignUp(registerState: {
   terms: boolean;
   age: boolean;
 }): null | CreateProlificUserCommand {
-  if (!registerState.prolific_id || !registerState.username || !registerState.email || !registerState.password || !registerState.passwordConfirm) {
+  if (!registerState.prolific_id || !registerState.email || !registerState.password || !registerState.passwordConfirm) {
     toast.error("Please fill out all the fields");
     return null;
   }
@@ -304,7 +304,7 @@ function verifySignUp(registerState: {
   }
 
   return new CreateProlificUserCommand(
-    registerState.username,
+    registerState.prolific_id,
     registerState.email,
     registerState.password,
     registerState.usecase.getName(),
@@ -316,6 +316,4 @@ function verifySignUp(registerState: {
 }
 
 function verifyJoblistingCommnad() {
-
-
 }

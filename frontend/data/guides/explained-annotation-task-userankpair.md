@@ -11,7 +11,7 @@ The text rank pair annotation task asks annotator to rank a set of usages accord
 
 ## Data Format
 
-### Usage File
+### Text File
 
 Please provide uses.tsv files in the general format outlined in the [Supported Tasks](./supported-tasks) guide.
 
@@ -36,7 +36,7 @@ Your task involves arranging these pair of sentences. For instance, you are pres
 
 | ![](/gif/guide/use-rank-pair-annotate.gif) | 
 | :-----------------------------------: | 
-|    Annotating Text rank pair task           |  
+|    Annotating text rank pair task           |  
 
 
 Rest of the procedure is same as Text Rank Task. You can refer this [guide](./explained-annotation-task-userank).

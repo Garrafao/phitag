@@ -11,7 +11,7 @@ The text rank relative annotation task asks annotator to rank a set of usages ac
 
 ## Data Format
 
-### Usage File
+### Text File
 
 Please provide uses.tsv files in the general format outlined in the [Supported Tasks](./supported-tasks) guide.
 

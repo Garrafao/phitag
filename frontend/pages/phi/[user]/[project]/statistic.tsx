@@ -115,7 +115,7 @@ const ProjectStatisticComponent = () => {
     return (
         <div className="w-full flex flex-col xl:flex-row xl:mx-auto xl:justify-center xl:space-x-16">
             <div className="flex flex-col space-y-8 self-center sm:flex-row sm:space-y-0 justify-between my-8 xl:justify-center xl:flex-col xl:space-y-8">
-                <CountUpComponent count={projectstatistic.statistic.getUsagecount()} label="Usages: " />
+                <CountUpComponent count={projectstatistic.statistic.getUsagecount()} label="Texts: " />
 {/*                 <CountUpComponent count={projectstatistic.statistic.getLemmacount()} label="Lemmas: " />
  */}            </div>
             <UsagesPerLemma statistic={projectstatistic.statistic} />
@@ -251,7 +251,7 @@ const UsagesPerLemma = ({ statistic }: { statistic: ProjectStatistic }) => {
     return (
         <div className="flex flex-col">
             <div className="font-dm-mono-medium text-2xl sm:text-4xl">
-                Usages per Lemma:
+                Texts per Lemma:
             </div>
             <div className="flex flex-col justify-center items-center mx-auto max-w-sm pl-16">
                 <Doughnut {...config} options={options} />

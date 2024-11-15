@@ -11,7 +11,7 @@ The text rank annotation task asks annotator to rank a set of usages according t
 
 ## Data Format
 
-### Usage File
+### Text File
 
 Please provide uses.tsv files in the general format outlined in the [Supported Tasks](/guides/supported-tasks) guide.
 

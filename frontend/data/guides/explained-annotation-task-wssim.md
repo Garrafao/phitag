@@ -12,7 +12,7 @@ In the WSSIM annotation task, users are shown a target lemma in context as well 
 
 ## Data Format
 
-### Usage File
+### Text File
 
 Please provide uses.tsv file in the general format outlined in the [Supported Tasks](/guides/supported-tasks) guide.
 
@@ -65,7 +65,7 @@ The following example shows a sense annotated with a scale of 1-5.
 
 #### Example 2
 
-The following example shows a sense annotated with a binary scale, also called WSBest (Word Sense Best) (for more information, see the [Annotation Standardization Repository](https://github.com/ChangeIsKey/annotation_standardization)).
+The following example shows a sense annotated with a binary scale, also called WSBest (Word Sense Best).
 
 |The **bank** was closed. |
 |-------------------------|

@@ -11,7 +11,7 @@ In the Text Free annotation task, annotators are presented a series of sentences
 
 ## Data Format
 
-### Usage File
+### Text File
 
 Please provide uses.tsv file in the general format outlined in the [Supported Tasks](/guides/supported-tasks) guide.
 

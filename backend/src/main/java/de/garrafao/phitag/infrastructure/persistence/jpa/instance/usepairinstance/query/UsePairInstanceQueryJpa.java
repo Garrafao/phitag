@@ -7,7 +7,7 @@ import de.garrafao.phitag.domain.instance.usepairinstance.UsePairInstance;
 import de.garrafao.phitag.domain.instance.usepairinstance.query.InstanceidQueryComponent;
 import de.garrafao.phitag.domain.instance.usepairinstance.query.OwnerQueryComponent;
 import de.garrafao.phitag.domain.instance.usepairinstance.query.PhaseQueryComponent;
-import de.garrafao.phitag.domain.instance.userankpairinstances.query.ProjectQueryComponent;
+import de.garrafao.phitag.domain.instance.usepairinstance.query.ProjectQueryComponent;
 import de.garrafao.phitag.infrastructure.persistence.jpa.core.SpecificationCombiner;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -44,6 +44,4 @@ public class UsePairInstanceQueryJpa implements Specification<UsePairInstance> {
 
         return SpecificationCombiner.and(specifications).toPredicate(root, criteriaQuery, criteriaBuilder);
     }
-
-    
 }

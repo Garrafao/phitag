@@ -8,7 +8,7 @@ description: 'Here you find out all the necessary details how to create tutorial
 ## Data Preparation
 
 The most important step of creating a tutorial phase is data preparation. Below, you'll find detailed instructions for preparing the data.
-### Usage File
+### Text File
 
 Please provide uses.tsv files in the general format outlined in the [Supported Tasks](./supported-tasks) guide.
 

@@ -34,9 +34,13 @@ After selecting a suitable phase, you can start working on the phase. Do this by
 
 | ![](/gif/guide/annotate-usepair.gif) | ![](/gif/guide/annotate-wssim.gif) | ![](/gif/guide/annotate-lexsub.gif) |
 | :----------------------------------: | :--------------------------------: | :---------------------------------: |
-|               Use-Pair               |               WSSim                |               LexSub                |
+|               Text-Pair               |               WSSim             |               Text Free           |
 
 Note that the annotation process only moves forward. Hence, if you want to change your annotation, you have to navigate to the phase "judgement" or "history" tab and click on the "Edit" button for the annotation you want to change. From there, you can change your annotation.
+
+## Need a Break While Annotating?
+
+In phiTag, you can pause your annotation at any time. To do this, simply leave the annotation page and return later by clicking the pencil icon in the phase tab. Your annotation will resume from where you left off.
 
 ## Judgement
 

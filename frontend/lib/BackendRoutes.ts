@@ -1,7 +1,7 @@
 class BACKENDROUTES {
-     private static BASE_URL = `http://localhost:8080`;
+    private static BASE_URL = `http://localhost:8080`;
 
- private static API_VERSION = `/api/v1`;
+private static API_VERSION = `/api/v1`;
 
     public static AUTHENTICATION = `${BACKENDROUTES.BASE_URL}${BACKENDROUTES.API_VERSION}/authentication`;
 
@@ -9,7 +9,7 @@ class BACKENDROUTES {
     public static PROJECT = `${BACKENDROUTES.BASE_URL}${BACKENDROUTES.API_VERSION}/project`;
     public static ANNOTATOR = `${BACKENDROUTES.BASE_URL}${BACKENDROUTES.API_VERSION}/annotator`;
     public static PHASE = `${BACKENDROUTES.BASE_URL}${BACKENDROUTES.API_VERSION}/phase`;
-    
+
     public static PHITAGDATA = `${BACKENDROUTES.BASE_URL}${BACKENDROUTES.API_VERSION}/phitagdata`;
     public static INSTANCE = `${BACKENDROUTES.BASE_URL}${BACKENDROUTES.API_VERSION}/instance`;
     public static JUDGEMENT = `${BACKENDROUTES.BASE_URL}${BACKENDROUTES.API_VERSION}/judgement`;
@@ -24,14 +24,14 @@ class BACKENDROUTES {
     public static NOTIFICATION = `${BACKENDROUTES.BASE_URL}${BACKENDROUTES.API_VERSION}/notification`;
 
     public static STATISTIC = `${BACKENDROUTES.BASE_URL}${BACKENDROUTES.API_VERSION}/statistic`;
-    public static STATHISTORY = `${BACKENDROUTES.BASE_URL}${BACKENDROUTES.API_VERSION}/statistic/history"`;
+    public static STATHISTORY = `${BACKENDROUTES.BASE_URL}${BACKENDROUTES.API_VERSION}/statistics/history`;
 
     public static USERSTATISTIC = `${BACKENDROUTES.STATISTIC}/user`;
     public static PROJECTSTATISTIC = `${BACKENDROUTES.STATISTIC}/project`;
     public static ANNOTATORSTATISTIC = `${BACKENDROUTES.STATISTIC}/annotator`;
     public static PHASESTATISTIC = `${BACKENDROUTES.STATISTIC}/phase`;
 
-    // API only containing static data for correct ID mapping 
+    // API only containing static data for correct ID mapping
     public static LANGUAGE = `${BACKENDROUTES.BASE_URL}${BACKENDROUTES.API_VERSION}/language`;
     public static ANNOTATIONTYPE = `${BACKENDROUTES.BASE_URL}${BACKENDROUTES.API_VERSION}/annotationtype`;
     public static VISIBILITY = `${BACKENDROUTES.BASE_URL}${BACKENDROUTES.API_VERSION}/visibility`;
@@ -40,7 +40,6 @@ class BACKENDROUTES {
     public static GUIDELINE = `${BACKENDROUTES.BASE_URL}${BACKENDROUTES.API_VERSION}/guideline`;
     public static SAMPLING = `${BACKENDROUTES.BASE_URL}${BACKENDROUTES.API_VERSION}/sampling`;
     public static USECASE = `${BACKENDROUTES.BASE_URL}${BACKENDROUTES.API_VERSION}/usecase`;
-
     public static COMPUTATIONALANNOTATOR = `${BACKENDROUTES.BASE_URL}${BACKENDROUTES.API_VERSION}/computationalannotator`;
     public static  OPENAIMODEL = `${BACKENDROUTES.BASE_URL}${BACKENDROUTES.API_VERSION}/computationalannotator/model`;
 }

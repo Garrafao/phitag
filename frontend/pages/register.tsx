@@ -100,7 +100,7 @@ const Register: NextPage = () => {
             <CenteredLayout>
                 <div className="flex justify-around items-center">
                     <form className="shadow-md">
-                        <div className="my-8 mx-8 font-dm-mono-bolf font-bold">
+                        <div className="my-8 mx-8 font-uni-corporate-bold font-bold">
                             <h1 className="font-bold text-xl">
                                 Sign Up to the PhiTag-System!
                             </h1>
@@ -206,7 +206,7 @@ const Register: NextPage = () => {
                                         age: !registerState.age
                                     })} />
                             </div>
-                            <button type="button" className="block w-full mt-8 py-2 font-dm-mono-bolf bg-uni-corporate-mittelblau text-white " onClick={() => handleSignUp()}>Register</button>
+                            <button type="button" className="block w-full mt-8 py-2 font-uni-corporate-bold bg-uni-corporate-mittelblau text-white " onClick={() => handleSignUp()}>Register</button>
 
                         </div>
                     </form>

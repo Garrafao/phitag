@@ -82,7 +82,7 @@ const Index = () => {
     createProlificUser(user).then(async () => {
       toast.success("Successfully registered");
       // triggerd login  
-      const res = await login(registerState.username, registerState.password);
+      const res = await login(registerState.prolific_id, registerState.password);
       // Store the authentication token and user in storage
       storage.set('JWT', res.authenticationToken);
       storage.set('USER', registerState.username);

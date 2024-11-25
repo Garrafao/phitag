@@ -33,6 +33,9 @@ const RemoveAnnotatorModal: React.FC<{ isOpen: boolean, closeModalCallback: Func
         selectedEntitlement: [] as unknown as Entitlement[],
     })
 
+    const annotatorName = annotator?.getId()?.getUser();
+    const projectName = annotator?.getId()?.getProject();
+    const ownerName =  annotator?.getId()?.getOwner();
 
     const onConfirm = () => {
         if (annotator == null) {
@@ -40,8 +43,7 @@ const RemoveAnnotatorModal: React.FC<{ isOpen: boolean, closeModalCallback: Func
             return;
         }
 
-        const command: RemoveAnnotatorCommand = new RemoveAnnotatorCommand(username, annotator.getId().getProject(), annotator.getId().getOwner(),  annotator.getId().getUser(), annotator.getEntitlement().getName());
-       
+        const command: RemoveAnnotatorCommand = new RemoveAnnotatorCommand(annotatorName, projectName, ownerName);
         removeAnnotator(command, storage.get).then(() => {
             toast.success("Annotator removed");
             mutateCallback();

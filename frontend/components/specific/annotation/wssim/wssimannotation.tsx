@@ -11,7 +11,7 @@ import { FiBookmark, FiFeather } from "react-icons/fi";
 import { toast } from "react-toastify";
 
 // Service
-import { fetchRandomInstance, useFetchPagedWSSIMInstance } from "../../../../lib/service/instance/InstanceResource";
+import { fetchRandomInstance, useFetchAllocatedInstanceNumber, useFetchPagedWSSIMInstance } from "../../../../lib/service/instance/InstanceResource";
 import { useFetchAnnotationAccess } from "../../../../lib/service/phase/PhaseResource";
 import useStorage from "../../../../lib/hook/useStorage";
 
@@ -23,12 +23,13 @@ import WSSIMInstance, { WSSIMInstanceConstructor } from "../../../../lib/model/i
 import UsageField from "../usage/usagefield";
 import LoadingComponent from "../../../generic/loadingcomponent";
 
-import { annotateWSSIM,  useFetchPagedWSSIMJudgements } from "../../../../lib/service/judgement/JudgementResource";
+import { annotateWSSIM,  useFetchAttemptedJudgement,  useFetchPagedWSSIMJudgements } from "../../../../lib/service/judgement/JudgementResource";
 import WSSIMTagField from "../wssimtag/wssimtagfield";
 import AddWSSIMJudmentCommand from "../../../../lib/model/judgement/wssimjudgement/command/AddWSSIMJudgementCommand";
 import WSSIMTagLemmasField from "../wssimtag/wssimtaglemmasfield";
 import ProgressBar from "../progressbar/progressbar";
 import { useFetchPhaseStatistic } from "../../../../lib/service/statistic/StatisticResource";
+import SubmitStudyComponent from "../../../generic/submitstudy";
 
 
 const WSSIMAnnotation: React.FC<{ phase: Phase }> = ({ phase }) => {
@@ -55,12 +56,20 @@ const WSSIMAnnotation: React.FC<{ phase: Phase }> = ({ phase }) => {
         !!phase
     );
 
+    const { data: userAnnotationCount, mutate: mutateCountJudgements } = useFetchAttemptedJudgement(phase?.getId().getOwner(), phase?.getId().getProject(), phase?.getId().getPhase(), !!phase);
+
+
+
+    const { data: userAllocatedInstance, mutate: mutateInstanceCount } = useFetchAllocatedInstanceNumber(phase?.getId().getOwner(), phase?.getId().getProject(), phase?.getId().getPhase(), !!phase);
+
+
 
 
     // Handlers
 
     const handleSubmitAnnotation = (judgement: string) => {
 
+        mutateCountJudgements();
 
      
         if (annotation.instance === null) {
@@ -93,7 +102,10 @@ const WSSIMAnnotation: React.FC<{ phase: Phase }> = ({ phase }) => {
 
     }
 
+
     const fetchNewAnnotation = () => {
+        mutateCountJudgements();
+
         fetchRandomInstance<WSSIMInstance, WSSIMInstanceConstructor>(phase.getId().getOwner(), phase.getId().getProject(), phase.getId().getPhase(), (new WSSIMInstanceConstructor()), storage.get)
             .then((instance) => {
                 if (instance) {
@@ -143,34 +155,41 @@ const WSSIMAnnotation: React.FC<{ phase: Phase }> = ({ phase }) => {
         }
     }, [ annotationAccess, annotation.initialLoad, storage, phase]);
 
-    if (!phase || !annotation.instance || annotation.initialLoad) {
+    if ((!phase || !annotation.instance || annotation.initialLoad) && (userAllocatedInstance !== userAnnotationCount)) {
+
         return <LoadingComponent />;
     }
 
+    if ((!annotation.instance && annotation.initialLoad && (userAllocatedInstance === userAnnotationCount))) {
+        return <SubmitStudyComponent phase={phase} />;
+    }
     return (
         <div className="w-full flex flex-col justify-between ">
 
-            {(phase.getTaskHead() ?? "") !== "" && (
-                <div className="w-half shadow-md ">
-                    <div className="m-8 flex flex-row">
-                        <div className="my-4">
-                            <FiBookmark className="basic-svg" />
-                        </div>
-                        <div className="border-r-2 mx-4" />
-                        <div className="my-4 font-dm-mono-light text-lg overflow-auto">
-                            {phase.getTaskHead()}
-                        </div>
+            {(true && annotation.instance !== null) ?
+                            <div className="w-full flex flex-col justify-center space-y-4">
+                                <ProgressBar minValue={0} maxValue={userAllocatedInstance} currentValue={userAnnotationCount} />
+                                {(phase.getTaskHead() ?? "") !== "" && (
+                                    <div className="w-half shadow-md ">
+                                        <div className="m-8 flex flex-row">
+                                            <div className="my-4">
+                                                <FiBookmark className="basic-svg" />
+                                            </div>
+                                            <div className="border-r-2 mx-4" />
+                                            <div className="my-4 font-dm-mono-light text-lg overflow-auto">
+                                                {phase.getTaskHead()}
+                                            </div>
 
-                    </div>
-                </div>
-            )}
+                                        </div>
+                                    </div>
+                                )}
             <div className="w-full flex flex-col justify-center space-y-4 ">
-                <UsageField key={0} usage={annotation.instance.getUsage()} />
-                <WSSIMTagField key={1} tag={annotation.instance.getTag()} />
+                <UsageField key={0} usage={annotation?.instance?.getUsage()} />
+                <WSSIMTagField key={1} tag={annotation?.instance?.getTag()} />
             </div>
 
             <div className="w-full flex flex-row my-8 items-center justify-between xl:justify-center xl:space-x-6">
-                {annotation.instance.getLabelSet().concat(annotation.instance.getNonLabel()).map((label) => {
+                {annotation?.instance?.getLabelSet().concat(annotation?.instance?.getNonLabel()).map((label) => {
                     return (
                         <div key={label}
                             className="flex shadow-md cursor-pointer hover:bg-base16-gray-900 hover:text-base16-gray-100 transition-all duration-200 font-dm-mono-medium"
@@ -206,12 +225,15 @@ const WSSIMAnnotation: React.FC<{ phase: Phase }> = ({ phase }) => {
             <h1 className="font-dm-mono-medium text-3xl font-black">
                 Other Tags with lemma&nbsp;
                 <span className="">
-                    {annotation.instance.getTag().getLemma()}:
+                    {annotation?.instance?.getTag().getLemma()}:
                 </span>
             </h1>
 
-            <WSSIMTagLemmasField tag={annotation.instance.getTag()} />
-
+            <WSSIMTagLemmasField tag={annotation?.instance?.getTag()} />
+            </div>
+            : (
+                <SubmitStudyComponent phase={phase} />
+            )}
         </div>
     );
 

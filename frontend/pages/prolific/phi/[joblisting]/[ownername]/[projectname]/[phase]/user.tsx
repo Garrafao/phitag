@@ -66,7 +66,7 @@ const ConfirmUser = () => {
                     <div className='flex shadow-md p-8 justify-center cursor-pointer hover:scale-105 transform transition-all duration-500'
                         onClick={existingUser}>
                         <div className='font-uni-corporate-bold font-bold text-2xl'>
-                            I have registerd before
+                            I have registered before
                         </div>
                     </div>
                 </div>

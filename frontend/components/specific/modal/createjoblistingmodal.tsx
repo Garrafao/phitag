@@ -134,7 +134,7 @@ const CreateJoblistingModal: React.FC<{ isOpen: boolean, closeModalCallback: Fun
                                     <div className="font-bold text-lg">
                                         Project
                                     </div>
-                                    <div className="flex items-center border-b-2 py-2 px-3 mt-2">
+                                    <div className="flex items-center border-b-2 py-2 px-3 mt-2 ">
                                         <DropdownSelect
                                             icon={<FiFolder className="basic-svg" />}
                                             items={projects.projects}

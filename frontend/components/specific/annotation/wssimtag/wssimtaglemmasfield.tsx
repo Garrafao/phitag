@@ -8,14 +8,14 @@ import { useFetchWSSIMTagsOfLemma } from "../../../../lib/service/instance/Insta
 
 const WSSIMTagLemmasField: React.FC<{ tag: WSSIMTag }> = ({ tag }) => {
 
-    const wssimtags = useFetchWSSIMTagsOfLemma(tag.getId().getOwner(), tag.getId().getProject(), tag.getId().getPhase(), tag.getLemma(), !!tag);
+    const wssimtags = useFetchWSSIMTagsOfLemma(tag?.getId()?.getOwner(), tag?.getId()?.getProject(), tag?.getId()?.getPhase(), tag?.getLemma(), !!tag);
 
     return (
         <div className="flex flex-col">
             {
                 wssimtags.data.map((wssimtag, index) => {
                     return (
-                        <div key={wssimtag.getId().getInstanceId()} className="w-full shadow-md my-2 ">
+                        <div key={wssimtag?.getId()?.getInstanceId()} className="w-full shadow-md my-2 ">
                             <div className="m-8 flex flex-row">
 
                                 <div className="my-4">
@@ -28,7 +28,7 @@ const WSSIMTagLemmasField: React.FC<{ tag: WSSIMTag }> = ({ tag }) => {
                                     <p className="my-4 font-dm-mono-light text-lg overflow-auto">
                                         Definition:&nbsp;
                                         <span className="font-dm-mono-medium">
-                                            {wssimtag.getDefinition()}
+                                            {wssimtag?.getDefinition()}
                                         </span>
                                     </p>
                                 </div>

@@ -19,16 +19,16 @@ const WSSIMTagField: React.FC<{ tag: WSSIMTag }> = ({ tag }) => {
 
                 <div className="flex-col">
                     <p className="my-4 font-dm-mono-light text-lg overflow-auto">
-                        Lemma:&nbsp;
+                        {/* Lemma:&nbsp; */}
                         <span className="font-dm-mono-medium">
-                            {tag.getLemma()}
+                            {tag?.getLemma()}
                         </span>
                     </p>
 
                     <p className="my-4 font-dm-mono-light text-lg overflow-auto">
-                        Definition:&nbsp;
+                        {/* Definition:&nbsp; */}
                         <span className="font-dm-mono-medium">
-                            {tag.getDefinition()}
+                            {tag?.getDefinition()}
                         </span>
                     </p>
                 </div>

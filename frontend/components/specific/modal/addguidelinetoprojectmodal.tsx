@@ -82,7 +82,7 @@ const AddGuidelineToProjectModal: React.FC<{ isOpen: boolean, closeModalCallback
 
                                 <div className="flex flex-col items-left my-6">
                                     <div className="font-bold text-lg">
-                                        Mardown-File
+                                        Markdown-File
                                     </div>
                                     <div className="flex items-center border-b-2 py-2 px-3 mt-2">
                                         <FiFileText className='basic-svg' />

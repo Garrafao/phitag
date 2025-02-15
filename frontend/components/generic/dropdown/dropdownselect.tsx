@@ -20,7 +20,7 @@ const DropdownSelect = <T extends SelectableItem>({ icon, items, selected, onSel
                     {message}
                 </div>
             </div>
-            <div className="dropdown-selector-container group-hover:scale-100">
+            <div className="dropdown-selector-container group-hover:scale-100 overflow-y-auto min-h-30 max-h-60">
                 <ul>
                     {items.map((item, index: number) => {
                         return (
